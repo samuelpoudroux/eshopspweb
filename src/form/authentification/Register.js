@@ -4,12 +4,13 @@ import Validator from 'validator';
 import Axios from 'axios';
 import { Form, Input, Button, Checkbox, Row, Col, notification } from 'antd';
 import { SmileOutlined } from '@ant-design/icons';
-
+import {setValuesLocalStorage, getDefaultValueLocalStorage, getInitialValue} from '../../repository/localStorage'
 const {
   REACT_APP_API_DOMAIN,
   REACT_APP_API_AUTH,
   REACT_APP_API_AUTH_REGISTER
 } = process.env;
+
 const Register = ({ history }) => {
   const onFinish = async (values) => {
     const { data } = await Axios.post(
@@ -35,11 +36,14 @@ const Register = ({ history }) => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
+  const itemKey = 'userData'
+
   return (
     <Row
       justify="center"
       align="middle"
-      style={{ padding: '2%', minHeight:'70vh'}}
+      style={{ padding: '2%', height: '70vh' }}
     >
       <Row
         justify="center"
@@ -54,7 +58,7 @@ const Register = ({ history }) => {
           padding: '2%'
         }}
       >
-        <Form name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed}>
+        <Form name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed} initialValues={getInitialValue(itemKey)}>
           <Col>
             <Form.Item
               label="Nom"
@@ -66,11 +70,9 @@ const Register = ({ history }) => {
                   message: 'Nom oligatoire avec minimum 4 caractéres'
                 }
               ]}
-              onChange = {(e) => localStorage.setItem(e.target.name, e.target.value)}      
               hasFeedback
             >
-              <Input name='lastName'  defaultValue = {localStorage.getItem('lastName')}
-              />
+              <Input   name='lastName'  onChange={(e) => setValuesLocalStorage(e.target.target, {itemKey})}  name='lastName' defaultValue = {getDefaultValueLocalStorage('lastName', {itemKey})}  />
             </Form.Item>
             <Form.Item
               label="Prénom"
@@ -82,10 +84,9 @@ const Register = ({ history }) => {
                   message: 'Prénom oligatoire avec minimum 4 caractéres'
                 }
               ]}
-              onChange = {(e) => localStorage.setItem(e.target.name, e.target.value)}      
               hasFeedback
             >
-              <Input name='firstName'   defaultValue = {localStorage.getItem('firstName')}    />
+            <Input onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='firstName' defaultValue = {getDefaultValueLocalStorage('firstName', {itemKey})}/>
             </Form.Item>
             <Form.Item
               label="Email"
@@ -105,9 +106,8 @@ const Register = ({ history }) => {
                   }
                 })
               ]}
-              onChange = {(e) => localStorage.setItem(e.target.name, e.target.value)}      
             >
-              <Input name='email'  defaultValue = {localStorage.getItem('email')} />
+            <Input onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='email' defaultValue = {getDefaultValueLocalStorage('email', {itemKey})}/>
             </Form.Item>
             <Form.Item
               label="mot de passe"
@@ -156,11 +156,9 @@ const Register = ({ history }) => {
                     'Merci de renseigner votre adresse de facturation minimum 8 caractéres!'
                 }
               ]}
-              onChange = {(e) => localStorage.setItem(e.target.name, e.target.value)}      
               hasFeedback
             >
-              <Input name="billsAddress"   defaultValue = {localStorage.getItem('billsAddress')} 
-              />
+            <Input onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='billsAddress' defaultValue = {getDefaultValueLocalStorage('billsAddress', {itemKey})}/>
             </Form.Item>
             <Form.Item
               label="Adresse de Livraison"
@@ -173,10 +171,9 @@ const Register = ({ history }) => {
                     'Merci de renseigner votre adresse de livraison minimum 8 caractéres!'
                 }
               ]}
-              onChange = {(e) => localStorage.setItem(e.target.name, e.target.value)}      
               hasFeedback
             >
-              <Input  name='dropAddress'  defaultValue = {localStorage.getItem('dropAddress')}   />
+            <Input onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='dropAddress' defaultValue = {getDefaultValueLocalStorage('dropAddress', {itemKey})}/>
             </Form.Item>
             <Form.Item
               label="Numéro de téléphone"
@@ -190,11 +187,9 @@ const Register = ({ history }) => {
                   )
                 }
               ]}
-              onChange = {(e) => localStorage.setItem(e.target.name, e.target.value)}      
               hasFeedback
             >
-              <Input name="phoneNumber"   defaultValue = {localStorage.getItem('phoneNumber')} 
-              />
+            <Input onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='phoneNumber' defaultValue = {getDefaultValueLocalStorage('phoneNumber', {itemKey})}/>
             </Form.Item>
 
             <Form.Item>

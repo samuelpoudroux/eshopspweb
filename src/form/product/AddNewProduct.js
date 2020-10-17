@@ -11,6 +11,7 @@ import {
   Select,
   Upload
 } from 'antd';
+import {setValuesLocalStorage, getDefaultValueLocalStorage, getInitialValue} from '../../repository/localStorage'
 import {
   SmileOutlined,
   UploadOutlined,
@@ -18,7 +19,9 @@ import {
 } from '@ant-design/icons';
 import TextArea from 'antd/lib/input/TextArea';
 
+
 const { Option } = Select;
+const itemKey='product'
 
 const {
   REACT_APP_API_DOMAIN,
@@ -102,6 +105,7 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                 name="basic"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
+                initialValues={getInitialValue(itemKey)}
               >
                 <Col>
                   <Form.Item
@@ -116,7 +120,7 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                     ]}
                     hasFeedback
                   >
-                    <Input />
+                  <Input  onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='name' defaultValue = {getDefaultValueLocalStorage('name', {itemKey})}  />
                   </Form.Item>
                   <Form.Item
                     label=" Prix du produit"
@@ -129,7 +133,7 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                     ]}
                     hasFeedback
                   >
-                    <Input type="number" />
+                  <Input type='number' onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='productPrice' defaultValue = {getDefaultValueLocalStorage('productPrice', {itemKey})}  />
                   </Form.Item>
                   <Form.Item
                   label="Longue description"
@@ -142,7 +146,7 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                   ]}
                   hasFeedback
                 >
-                  <TextArea  name='longDescription' onChange= {(e) => localStorage.setItem(e.target.name, e.target.value)} defaultValue={localStorage.getItem('longDescription')}/>
+                  <TextArea  onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='longDescription' defaultValue = {getDefaultValueLocalStorage('longDescription', {itemKey})} />
                   </Form.Item>
 
                   <Form.Item
@@ -156,8 +160,8 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                   ]}
                   hasFeedback
                 >
-                  <TextArea name='shortDescription' onChange= {(e) => localStorage.setItem(e.target.name, e.target.value)} defaultValue={localStorage.getItem('longDescription')} />
-                  </Form.Item>
+                <TextArea  onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='shortDescription' defaultValue = {getDefaultValueLocalStorage('shortDescription', {itemKey})} />
+                </Form.Item>
 
                   <Form.Item
                     label="En stock"
