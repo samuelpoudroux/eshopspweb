@@ -72,7 +72,7 @@ const Register = ({ history }) => {
               ]}
               hasFeedback
             >
-              <Input   name='lastName'  onChange={(e) => setValuesLocalStorage(e.target.target, {itemKey})}  name='lastName' defaultValue = {getDefaultValueLocalStorage('lastName', {itemKey})}  />
+              <Input onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='lastName' defaultValue = {getDefaultValueLocalStorage('lastName', {itemKey})}  />
             </Form.Item>
             <Form.Item
               label="Prénom"
