@@ -29,9 +29,9 @@ const ProductDetail = ({ match }) => {
     <Row justify="center" align='middle' style={{ minHeight:'50vh', padding:15}}>
       <Col lg={14} sm={24} xs={24}>
           <img
-          alt="example"
-          src={`/productImage/${product.fileName}`}
-          style={{maxHeight:'250px', maxWidth:'400px'}}
+          alt="Image du produit"
+          src={`${product.imageUrl}`}
+          style={{maxHeight:'250px', maxWidth:'100%'}}
           />
       </Col>
       <Col lg={10} sm={24} xs={24} style={{boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
@@ -44,10 +44,7 @@ const ProductDetail = ({ match }) => {
       <Tag  color="#89ba17" style={{marginLeft:'2%'}}>
         {product.category}
       </Tag>
-      
-      
       </Row>
-      
       </Col>
       </Row>
       <Row>
