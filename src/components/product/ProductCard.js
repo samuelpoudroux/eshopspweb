@@ -21,9 +21,9 @@ const Productcard = ({ product, history }) => {
     shortDescription,
     category,
     notation,
-    productPrice
+    productPrice,
+    imageUrl
   } = product;
-
   const priceStyle = {
     color: '#878888',
     fontSize: '1em',
@@ -31,12 +31,10 @@ const Productcard = ({ product, history }) => {
   };
 
   const goToProductDetails = (e) => {
-    //we set back the search value lenght to
-    //0 in order to remove global search result when we go to product detail because when we click on card with histoty push it not updateProduct global search
-    // and blocking our wishes to go check product detail
     search('');
     history.push(`/productDetails/${id}`);
   };
+
   return (
     <Col
       xs={24}
@@ -85,21 +83,21 @@ const Productcard = ({ product, history }) => {
           {productPrice}€
         </p>
       </Row>
-      
+    
       <div onClick={(e) => goToProductDetails(e)}>
         <Row>
           <img
             alt="Image du produit"
-            src={`/productImage/${product.fileName}`}
-            style={{ width: '100%', height: '150px' }}
-          />
+            src={`${product.imageUrl}`}
+            style={{maxHeight:'250px', minWidth: '100%'}}
+            />
         </Row>
 
         <b style={{ color: priceStyle.color }}>{name}</b>
         <div
           style={{ marginTop: '20px', wordWwrap: 'break-word', padding: '2%' }}
         >
-          <p style={{ color: priceStyle.color }}>{shortDescription !== 'null' && shortDescription}</p>
+          <p style={{ color: priceStyle.color }}>{shortDescription !== 'null' ||shortDescription !== 'undefined'  && shortDescription}</p>
         </div>
         <ProductNumber product={product} />
         <div onClick={(e) => e.stopPropagation()}>

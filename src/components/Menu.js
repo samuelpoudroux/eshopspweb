@@ -65,10 +65,13 @@ const NavBar = ({ setMenuIsOpened, history }) => {
             margin: 0
           }}
         >
-          <CloseCircleOutlined
-            onClick={() => setMenuIsOpened(false)}
-            style={{ color: 'white', fontSize: '28px' }}
-          />
+        <Row justify='center'>
+        <CloseCircleOutlined
+          onClick={() => setMenuIsOpened(false)}
+          style={{ color: 'white', fontSize: '28px' }}
+        />
+        
+        </Row>
         </Col>
       </Row>
     </Row>

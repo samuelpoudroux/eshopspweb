@@ -7,13 +7,13 @@ const ProductDetailsTabs = ({description}) => (
   <Tabs defaultActiveKey="1" >
     <TabPane  tab="Description" key="1">
 <p>
-{description}
+{description !== "undefined" && description}
 </p>    </TabPane>
     <TabPane tab="Livraison" key="2">
-      Content of Tab Pane 2
+      Contenu relatif à la livraison
     </TabPane>
     <TabPane tab="Retour" key="3">
-      Content of Tab Pane 3
+      Content relatif au retour
     </TabPane>
   </Tabs>
 );

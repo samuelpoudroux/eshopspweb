@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect, } from 'react';
 import { Button, Col, Row } from 'antd'
-import { Redirect, withRouter } from 'react-router';
 
 const ChatFeedComponent = ({messages, socket, history}) => {
   const [messageEnd, setMessageEnd] = useState()
@@ -23,17 +22,16 @@ return <Col lg={24} style={{position:'relative', overflow: 'scroll', maxHeight:'
   messages.length > 0 && messages.map(value => {
       const {id, message, type,choice, redirect} = value
         return <Row style={{marginTop: 25}} justify={id === 0 ? 'start': 'end'}>
-        <Col lg={18} style={{background: id ===0 ? '#89ba17' : "grey",  padding:20, borderRadius:50}}>
+        <Col lg={18} style={{background: id ===0 ? '#89ba17' : "grey",  padding:20, borderRadius:50, width:'60%'}}>
         {redirect  && redirect !== "products" &&  history.push(`/${redirect}`)}
         {redirect  && redirect === "products" &&  history.push(`/`)}
-         <Row>
-         <p style={{color:'white', fontSize:"1.2em"}}>
+         <Row justify='center' >
+         <p style={{color:'white', fontSize:"1.2em", textAlign:'center'}}>
          {message}
          </p>
          </Row>         
          <Row justify='center'>
          {type && type === 'choice' && choice && choice.map(value => <input type='button' style={{background:value === 'oui' ? 'white' : 'grey', border:"none"}} value={value} onClick={(e) => sendResponseToBot(e.target.value, message)} />)}
-
          </Row>         
          </Col>
         </Row>
