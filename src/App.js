@@ -59,7 +59,9 @@ function App() {
 
           {basketIsActive && <Basket setBasketActive={setBasketActive} />}
           {chatActive && (
-            <Chat setChatActive={setChatActive} history={history} />
+            <Row style={{ padding: 15 }}>
+              <Chat setChatActive={setChatActive} history={history} />
+            </Row>
           )}
         </Router>
       </div>
