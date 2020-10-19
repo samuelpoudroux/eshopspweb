@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from "lodash";
 
 // sort product from higher to lowest  price
 const sortProductsByHigher = (state) => {
@@ -45,7 +45,6 @@ const getNumberOfProducts = (basketList) => {
 };
 
 const getTotalPrice = (basketList) => {
-  console.log('toto', basketList);
   const copy = basketList !== null ? _.cloneDeep(basketList) : [];
   let num = 0;
   const totalPrice =
@@ -61,5 +60,5 @@ export {
   sortProductsByLowest,
   sortProductsByCategories,
   getNumberOfProducts,
-  getTotalPrice
+  getTotalPrice,
 };

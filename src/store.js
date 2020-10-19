@@ -1,9 +1,9 @@
-import React from 'react';
-import useBasket from './customHooks/basketHook';
-import useProductList from './customHooks/productListHook';
-import useGlobalSearchResult from './customHooks/globalSearchHook';
-import { AppContext } from './context/context';
-import useAuth from './customHooks/authHook';
+import React from "react";
+import useBasket from "./customHooks/basketHook";
+import useProductList from "./customHooks/productListHook";
+import useGlobalSearchResult from "./customHooks/globalSearchHook";
+import { AppContext } from "./context/context";
+import useAuth from "./customHooks/authHook";
 
 // the global store we give acces to our hooks to all appplication by this global store through appcontext provider
 const GlobalStore = ({ children }) => {
@@ -13,13 +13,13 @@ const GlobalStore = ({ children }) => {
     decreaseProductFromBasket,
     removeAllProductsFromBasket,
     removeProductFromBasket,
-    setActive
+    setActive,
   } = useBasket();
   const {
     state,
     getProducts,
     sortProducts,
-    sortProductsByCategories
+    sortProductsByCategories,
   } = useProductList();
   const { globalSearch, search } = useGlobalSearchResult();
   const { auth, login, logout, register } = useAuth();
@@ -30,28 +30,26 @@ const GlobalStore = ({ children }) => {
       decrease: decreaseProductFromBasket,
       removeAllProducts: removeAllProductsFromBasket,
       removeProductFromBasket: removeProductFromBasket,
-      setActive: setActive
+      setActive: setActive,
     },
     products: {
       list: state.sortedProducts,
       get: getProducts,
       sort: sortProducts,
-      sortByCategories: sortProductsByCategories
+      sortByCategories: sortProductsByCategories,
     },
 
     globalSearch: {
       state: globalSearch,
-      search: search
+      search: search,
     },
 
     auth: {
       login: login,
       logout: logout,
       register: register,
-      user: auth
+      user: auth,
     },
-
-
   };
   return <AppContext.Provider value={store}> {children} </AppContext.Provider>;
 };

@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import * as io from "socket.io-client";
 import "./App.css";
 import history from "./history";
 import { Router, Switch, Route } from "react-router-dom";
@@ -14,14 +13,11 @@ import ProtectedRoute from "./ProtectedRoutes";
 import Chat from "./Chat";
 import Footer from "./components/Footer";
 
-require("dotenv").config();
-
 function App() {
   const { globalSearch } = useContext(AppContext);
   const { state: globalSearchState } = globalSearch;
   const [basketIsActive, setBasketActive] = useState(false);
   const [chatActive, setChatActive] = useState(false);
-
   return (
     <div className="App" style={{ minHeight: "100vh" }}>
       <div style={{ minHeight: "100vh" }}>
@@ -55,14 +51,14 @@ function App() {
                 )}
               </Switch>
             )}
+            {chatActive && (
+              <Row style={{ padding: 15 }}>
+                <Chat setChatActive={setChatActive} history={history} />
+              </Row>
+            )}
           </Col>
 
           {basketIsActive && <Basket setBasketActive={setBasketActive} />}
-          {chatActive && (
-            <Row style={{ padding: 15 }}>
-              <Chat setChatActive={setChatActive} history={history} />
-            </Row>
-          )}
         </Router>
       </div>
 
