@@ -1,33 +1,70 @@
-import React, { useContext } from 'react';
-import { Row } from 'antd';
-import { AppContext } from '../../context/context';
-import ProductsNumber from '../product/ProductsNumber';
-import TotalPrice from './TotalPrice';
+import React from "react";
+import { Row, Col } from "antd";
+import { Carousel, Card } from "antd";
 
 const SubBasket = () => {
-  const { basket } = useContext(AppContext);
-let num = 0;
-const productInBasket = basket.list.length > 0 && basket.list.reduce((accumulateur, valeurCourante) => {
-  return accumulateur + valeurCourante.num * valeurCourante.productPrice;
-}, num);
+  let num = 0;
 
-return (
-    basket.list.length > 0 && productInBasket !== 0  && (
+  const list = JSON.parse(localStorage.getItem("basket")) || [];
+  const productInBasket =
+    list.length > 0 &&
+    list.reduce((accumulateur, valeurCourante) => {
+      return accumulateur + valeurCourante.num * valeurCourante.productPrice;
+    }, num);
+  return (
+    list.length > 0 &&
+    productInBasket !== 0 && (
       <Row
         align="middle"
         style={{
-          padding: '1%',
           boxShadow:
-            '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
-          background: '#fff',
-          borderRadius: '2px'
+            "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+          background: "#fff",
+          borderRadius: "2px",
         }}
       >
-        <b style={{ color: '#686868' }}>Sous total:</b>
-        <Row style={{ marginLeft: '5px' }}>
-          <ProductsNumber />
-          <TotalPrice />
-        </Row>
+        <Col span={1}>
+          <b>Sous total:</b>
+        </Col>
+        <Col span={2}>
+          <p style={{ margin: "0", color: "red" }}>
+            {list.length} types de produits dans le panier
+          </p>
+        </Col>
+        <Col span={21}>
+          <Carousel autoplay>
+            {list.map(
+              (product) =>
+                product.num !== 0 && (
+                  <Card>
+                    <Row justify="center" align="middle">
+                      <Col lg={1} md={1} sm={4} xs={4}>
+                        <img
+                          style={{ width: "100%" }}
+                          src={product.imageUrl}
+                          alt="image du produit"
+                        />
+                      </Col>
+                      <Col lg={1} md={1} sm={5} xs={4}>
+                        <p>{product.name}</p>
+                      </Col>
+                      <Col lg={1} md={1} sm={5} xs={4}>
+                        <p>{product.num} pièces</p>
+                      </Col>
+                      <Col lg={1} md={1} sm={5} xs={4}>
+                        <p>{product.productPrice} pièces</p>
+                      </Col>
+                      <Col lg={1} md={1} sm={5} xs={4}>
+                        <p>
+                          {product.num * product.productPrice} € de produits
+                        </p>
+                      </Col>
+                    </Row>
+                  </Card>
+                )
+            )}
+          </Carousel>
+        </Col>
       </Row>
     )
   );

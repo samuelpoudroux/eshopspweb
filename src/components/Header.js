@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import {
   MenuOutlined,
-  ShoppingCartOutlined,
   LoginOutlined,
   LogoutOutlined,
-  QqOutlined,
+  RobotOutlined,
 } from "@ant-design/icons";
-import { Row, Col, Popover } from "antd";
+import { Row, Col, Popover, Badge } from "antd";
 import logo from "../assets/logoWhite.svg";
 import ProductsNumber from "../components/product/ProductsNumber";
 import TotalPrice from "../components/basket/TotalPrice";
+import bot from "../assets/bot.svg";
 import NavBar from "./Menu";
 import CleanBasket from "../components/basket/CleanBasket";
 import Globalsearchinput from "../components/globalSearch/GlobalSearchInput";
@@ -81,7 +81,7 @@ const Header = ({
             </Col>
             <Col lg={7} md={2} xs={4} sm={4}>
               <Popover title="Besoin d'aide">
-                <QqOutlined
+                <RobotOutlined
                   onClick={() => setChatActive(true)}
                   style={{ fontSize: 50, color: "white" }}
                 />
@@ -97,23 +97,24 @@ const Header = ({
           sm={24}
           style={{ marginTop: isMobile && "8%" }}
         >
-          <Row justify="center" align="middle">
-            <Col lg={2} md={3} xs={3} sm={3}>
-              <ShoppingCartOutlined
-                style={{ fontSize: "20px", color: "white" }}
-                onClick={() => setBasketActive(!basketIsActive)}
+          <Row justify={!isMobile && "center"} align="middle">
+            <Col lg={2} md={4} xs={4} sm={4}>
+              <ProductsNumber
+                header
+                setBasketActive={setBasketActive}
+                basketIsActive={basketIsActive}
               />
             </Col>
             <Col lg={2} md={4} xs={4} sm={4}>
-              <ProductsNumber />
+              <TotalPrice
+                basketIsActive={basketIsActive}
+                setBasketActive={setBasketActive}
+              />
             </Col>
-            <Col lg={2} md={4} xs={4} sm={4}>
-              <TotalPrice />
-            </Col>
-            <Col lg={2} md={4} xs={4} sm={4}>
+            <Col lg={2} md={4} xs={3} sm={3}>
               <CleanBasket />
             </Col>
-            <Col lg={6} md={5} xs={5} sm={5}>
+            <Col lg={10} md={5} xs={11} sm={11}>
               <p style={{ color: "white", margin: "0", fontSize: "1em" }}>
                 {local &&
                   local.firstName &&
@@ -123,7 +124,7 @@ const Header = ({
                   }`}
               </p>
             </Col>
-            <Col lg={10} md={4} xs={4} sm={4}>
+            <Col lg={2} md={4} xs={2} sm={2}>
               <Row>
                 {local && local.isLogged && (
                   <Row align="middle" justify="center">
@@ -133,9 +134,7 @@ const Header = ({
                     />
                   </Row>
                 )}
-                {isAdmin && (
-                  <p style={{ margin: 0, color: "white" }}>Administration</p>
-                )}
+
                 {!local && (
                   <LoginOutlined
                     style={iconStyle}
@@ -146,6 +145,9 @@ const Header = ({
             </Col>
           </Row>
         </Col>
+      </Row>
+      <Row style={{ marginTop: 50 }}>
+        {isAdmin && <p style={{ margin: 0, color: "white" }}>Administration</p>}
       </Row>
       <Globalsearchinput globalSearchApi={globalSearchApi} />
     </header>

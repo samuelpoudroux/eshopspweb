@@ -20,6 +20,7 @@ const GlobalStore = ({ children }) => {
     getProducts,
     sortProducts,
     sortProductsByCategories,
+    getAllProducts,
   } = useProductList();
   const { globalSearch, search } = useGlobalSearchResult();
   const { auth, login, logout, register } = useAuth();
@@ -35,6 +36,7 @@ const GlobalStore = ({ children }) => {
     products: {
       list: state.sortedProducts,
       get: getProducts,
+      getAllProducts: getAllProducts,
       sort: sortProducts,
       sortByCategories: sortProductsByCategories,
     },

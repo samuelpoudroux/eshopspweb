@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 import {
   Form,
   Input,
@@ -9,25 +9,28 @@ import {
   Col,
   notification,
   Select,
-  Upload
-} from 'antd';
-import {setValuesLocalStorage, getDefaultValueLocalStorage, getInitialValue} from '../../repository/localStorage'
+  Upload,
+} from "antd";
+import {
+  setValuesLocalStorage,
+  getDefaultValueLocalStorage,
+  getInitialValue,
+} from "../../repository/localStorage";
 import {
   SmileOutlined,
   UploadOutlined,
-  CloseCircleOutlined
-} from '@ant-design/icons';
-import TextArea from 'antd/lib/input/TextArea';
-
+  CloseCircleOutlined,
+} from "@ant-design/icons";
+import TextArea from "antd/lib/input/TextArea";
 
 const { Option } = Select;
-const itemKey='product'
+const itemKey = "product";
 
 const {
   REACT_APP_API_DOMAIN,
   REACT_APP_API_PRODUCT,
   REACT_APP_API_PRODUCT_ADD,
-  REACT_APP_API_CATEGORIES
+  REACT_APP_API_CATEGORIES,
 } = process.env;
 
 const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
@@ -36,7 +39,7 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
 
   const onFinish = async (values) => {
     const formData = new FormData();
-    formData.append('upload', files);
+    formData.append("upload", files);
     for (const [key, value] of Object.entries(values)) {
       formData.append(`${key}`, value);
     }
@@ -49,15 +52,15 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
     if (!error && message) {
       notification.open({
         message: message,
-        icon: <SmileOutlined style={{ color: '#89ba17' }} />
+        icon: <SmileOutlined style={{ color: "#89ba17" }} />,
       });
       setAddProduct(false);
-      forceUpdate()
+      forceUpdate({});
     }
     if (error && !message) {
       notification.open({
         message: error,
-        icon: <SmileOutlined style={{ color: 'red' }} />
+        icon: <SmileOutlined style={{ color: "red" }} />,
       });
     }
   };
@@ -68,7 +71,7 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
     ).then(({ data }) => setCategories(data));
   }, []);
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -78,9 +81,9 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
           justify="center"
           align="middle"
           style={{
-            padding: '2%',
-            height: '100%',
-            background: 'rgba(0, 0, 0, 0.7)'
+            padding: "2%",
+            height: "100%",
+            background: "rgba(0, 0, 0, 0.7)",
           }}
         >
           <Row
@@ -88,12 +91,12 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
             align="middle"
             style={{
               boxShadow:
-                '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
-              background: '#fff',
-              borderRadius: '2px',
-              position: 'relative',
-              width: 'auto',
-              padding: '1%'
+                "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+              background: "#fff",
+              borderRadius: "2px",
+              position: "relative",
+              width: "auto",
+              padding: "1%",
             }}
           >
             <Col>
@@ -101,7 +104,7 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                 <CloseCircleOutlined onClick={() => setAddProduct(false)} />
               </Row>
               <Form
-                style={{ marginTop: '3%' }}
+                style={{ marginTop: "3%" }}
                 name="basic"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
@@ -115,12 +118,20 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                       {
                         required: true,
                         min: 4,
-                        message: 'Nom oligatoire avec minimum 3 caractéres'
-                      }
+                        message: "Nom oligatoire avec minimum 3 caractéres",
+                      },
                     ]}
                     hasFeedback
                   >
-                  <Input  onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='name' defaultValue = {getDefaultValueLocalStorage('name', {itemKey})}  />
+                    <Input
+                      onChange={(e) =>
+                        setValuesLocalStorage(e.target, { itemKey })
+                      }
+                      name="name"
+                      defaultValue={getDefaultValueLocalStorage("name", {
+                        itemKey,
+                      })}
+                    />
                   </Form.Item>
                   <Form.Item
                     label=" Prix du produit"
@@ -128,40 +139,68 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                     rules={[
                       {
                         required: true,
-                        message: "Merci d'indiquer le prix du produit"
-                      }
+                        message: "Merci d'indiquer le prix du produit",
+                      },
                     ]}
                     hasFeedback
                   >
-                  <Input type='number' onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='productPrice' defaultValue = {getDefaultValueLocalStorage('productPrice', {itemKey})}  />
+                    <Input
+                      type="number"
+                      onChange={(e) =>
+                        setValuesLocalStorage(e.target, { itemKey })
+                      }
+                      name="productPrice"
+                      defaultValue={getDefaultValueLocalStorage(
+                        "productPrice",
+                        { itemKey }
+                      )}
+                    />
                   </Form.Item>
                   <Form.Item
-                  label="Longue description"
-                  name="longDescription"
-                  rules={[
-                    {
-                      min: 10,
-                      message: 'Nom avec minimum 10 caractéres'
-                    }
-                  ]}
-                  hasFeedback
-                >
-                  <TextArea  onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='longDescription' defaultValue = {getDefaultValueLocalStorage('longDescription', {itemKey})} />
+                    label="Longue description"
+                    name="longDescription"
+                    rules={[
+                      {
+                        min: 10,
+                        message: "Nom avec minimum 10 caractéres",
+                      },
+                    ]}
+                    hasFeedback
+                  >
+                    <TextArea
+                      onChange={(e) =>
+                        setValuesLocalStorage(e.target, { itemKey })
+                      }
+                      name="longDescription"
+                      defaultValue={getDefaultValueLocalStorage(
+                        "longDescription",
+                        { itemKey }
+                      )}
+                    />
                   </Form.Item>
 
                   <Form.Item
-                  label="courte description"
-                  name="shortDescription"
-                  rules={[
-                    {
-                      min: 10,
-                      message: 'Nom oligatoire avec minimum 10 caractéres'
-                    }
-                  ]}
-                  hasFeedback
-                >
-                <TextArea  onChange={(e) => setValuesLocalStorage(e.target, {itemKey})}  name='shortDescription' defaultValue = {getDefaultValueLocalStorage('shortDescription', {itemKey})} />
-                </Form.Item>
+                    label="courte description"
+                    name="shortDescription"
+                    rules={[
+                      {
+                        min: 10,
+                        message: "Nom oligatoire avec minimum 10 caractéres",
+                      },
+                    ]}
+                    hasFeedback
+                  >
+                    <TextArea
+                      onChange={(e) =>
+                        setValuesLocalStorage(e.target, { itemKey })
+                      }
+                      name="shortDescription"
+                      defaultValue={getDefaultValueLocalStorage(
+                        "shortDescription",
+                        { itemKey }
+                      )}
+                    />
+                  </Form.Item>
 
                   <Form.Item
                     label="En stock"
@@ -169,8 +208,8 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                     rules={[
                       {
                         required: true,
-                        message: 'Merci de renseigner si en stock ou non'
-                      }
+                        message: "Merci de renseigner si en stock ou non",
+                      },
                     ]}
                     hasFeedback
                   >
@@ -185,8 +224,8 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                     rules={[
                       {
                         required: true,
-                        message: 'Merci de renseigner la catégorie du produit'
-                      }
+                        message: "Merci de renseigner la catégorie du produit",
+                      },
                     ]}
                     hasFeedback
                   >
@@ -218,9 +257,9 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                   <Form.Item>
                     <Button
                       style={{
-                        background: '#89ba17',
-                        border: 'none',
-                        marginTop: '1rem'
+                        background: "#89ba17",
+                        border: "none",
+                        marginTop: "1rem",
                       }}
                       type="primary"
                       htmlType="submit"

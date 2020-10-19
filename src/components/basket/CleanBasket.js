@@ -1,17 +1,19 @@
-import React, { useContext } from 'react';
-import { Popconfirm } from 'antd';
-import { QuestionCircleOutlined, DeleteOutlined } from '@ant-design/icons';
-import { AppContext } from '../../context/context';
+import React, { useContext } from "react";
+import { Popconfirm } from "antd";
+import { QuestionCircleOutlined, DeleteOutlined } from "@ant-design/icons";
+import { AppContext } from "../../context/context";
 
-const CleanBasket = ({ color = '#89ba17', fontSize = '20px' }) => {
+const CleanBasket = ({ color = "#89ba17", fontSize = "20px" }) => {
   const { basket } = useContext(AppContext);
-  const { removeAllProducts, list } = basket;
+  const { removeAllProducts } = basket;
+
+  const list = JSON.parse(localStorage.getItem("basket")) || [];
   return (
     <>
       {list.length > 0 && (
         <Popconfirm
           title="Souhaitez vous vider le panier？"
-          icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+          icon={<QuestionCircleOutlined style={{ color: "red" }} />}
           onConfirm={() => removeAllProducts()}
         >
           <DeleteOutlined style={{ color: color, fontSize: fontSize }} />
