@@ -10,7 +10,7 @@ const Chat = ({ setChatActive, history }) => {
   const [socket, setSocket] = useState(io(process.env.REACT_APP_API_DOMAIN));
   const { isMobile } = useResponsive();
   useEffect(() => {
-    return () => socket.disconnect();
+    // return () => socket.disconnect();
   }, []);
 
   socket.on("newMessage", (messages) => {
