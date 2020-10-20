@@ -8,7 +8,7 @@ import Header from "./components/Header";
 import GlobalSearchResult from "./components//globalSearch/GlobalSearchResult";
 import Basket from "./components/basket/Basket";
 import SubBasket from "./components/basket/SubBasket";
-import { Col, Row } from "antd";
+import { Col, Row, Drawer } from "antd";
 import ProtectedRoute from "./ProtectedRoutes";
 import Chat from "./Chat";
 import Footer from "./components/Footer";
@@ -18,6 +18,7 @@ function App() {
   const { state: globalSearchState } = globalSearch;
   const [basketIsActive, setBasketActive] = useState(false);
   const [chatActive, setChatActive] = useState(false);
+
   return (
     <div className="App" style={{ minHeight: "100vh" }}>
       <div style={{ minHeight: "100vh" }}>
@@ -27,7 +28,11 @@ function App() {
             basketIsActive={basketIsActive}
             setChatActive={setChatActive}
           />
-          <SubBasket />
+
+          <SubBasket
+            setBasketActive={setBasketActive}
+            basketIsActive={basketIsActive}
+          />
           <Col span={24} style={{ position: "relative", minHeight: "100vh" }}>
             {globalSearchState.active && (
               <GlobalSearchResult state={globalSearchState} />

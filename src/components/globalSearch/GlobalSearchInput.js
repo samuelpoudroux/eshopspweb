@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
-import { AppContext } from '../../context/context';
-import { Col } from 'antd';
-import useResponsive from '../../customHooks/responsiveHook';
+import React, { useState, useContext } from "react";
+import { AppContext } from "../../context/context";
+import { Col } from "antd";
+import useResponsive from "../../customHooks/responsiveHook";
 
 const Globalsearchinput = ({ globalSearchApi }) => {
   const [searchValue, setSearchValue] = useState(undefined);
@@ -25,15 +25,14 @@ const Globalsearchinput = ({ globalSearchApi }) => {
         onSubmit={(e) => handleSubmit(e)}
         className="globalSearchInput"
         style={{
-          display: 'flex',
-          position: 'relative',
-          marginTop: isMobile ? '8%' : '2%'
+          display: "flex",
+          position: "relative",
         }}
       >
         <input
           style={{
-            borderRadius: '8px',
-            height: '50px'
+            borderRadius: "8px",
+            height: "50px",
           }}
           type="text"
           placeholder="Rechercher"
@@ -42,10 +41,10 @@ const Globalsearchinput = ({ globalSearchApi }) => {
         />
         <button
           style={{
-            borderRadius: '8px ',
-            width: '90px',
-            marginLeft: '-80px',
-            height: '50px'
+            borderRadius: "8px ",
+            width: "90px",
+            marginLeft: "-80px",
+            height: "50px",
           }}
           type="submit"
         >

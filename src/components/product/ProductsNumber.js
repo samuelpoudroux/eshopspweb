@@ -7,6 +7,7 @@ const ProductsNumber = ({
   setBasketActive,
   basketIsActive,
   iconBasketColor,
+  BadgeStyle,
 }) => {
   const basketList = JSON.parse(localStorage.getItem("basket"));
   const numOfProducts = useCallback(() => {
@@ -14,12 +15,12 @@ const ProductsNumber = ({
   }, [basketList]);
   const totalOfProducts = numOfProducts();
   return (
-    <Badge style={{ backgroundColor: "#89ba17" }} count={`${totalOfProducts}`}>
+    <Badge style={BadgeStyle} count={`${totalOfProducts}`}>
       <ShoppingCartOutlined
         style={{
           fontSize: "30px",
           color: iconBasketColor || "white",
-          marginTop: "10px",
+          marginRight: "10px",
         }}
         onClick={() => setBasketActive(!basketIsActive)}
       />

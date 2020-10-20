@@ -25,7 +25,6 @@ const Productlist = () => {
     products.getAllProducts();
   }, [state]);
 
-  console.log("update");
   return (
     <div>
       {addProduct && (

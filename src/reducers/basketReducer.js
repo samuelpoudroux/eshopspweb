@@ -1,16 +1,18 @@
 import {
   ADD_PRODUCT_TO_BASKET,
   DECREASE_PRODUCT_FROM_BASKET,
+  DECREASE_PRODUCTS_FROM_BASKET,
   REMOVE_ALL_PRODUCTS_FROM_BASKET,
-  REMOVE_PRODUCT_FROM_BASKET
-} from '../constants/basket.js';
+  REMOVE_PRODUCT_FROM_BASKET,
+} from "../constants/basket.js";
 
 import {
   addProductToBasket,
   decreaseProductFromBasket,
+  decreaseProductsFromBasket,
   removeAllProductsFromBasket,
-  removeProductFromBasket
-} from '../repository/basket';
+  removeProductFromBasket,
+} from "../repository/basket";
 
 const basketreducer = (currentBasket, action) => {
   switch (action.type) {
@@ -22,6 +24,8 @@ const basketreducer = (currentBasket, action) => {
       return removeAllProductsFromBasket(currentBasket, action);
     case REMOVE_PRODUCT_FROM_BASKET:
       return removeProductFromBasket(currentBasket, action);
+    case DECREASE_PRODUCTS_FROM_BASKET:
+      return decreaseProductsFromBasket(currentBasket, action);
     default:
       break;
   }

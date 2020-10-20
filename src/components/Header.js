@@ -43,6 +43,12 @@ const Header = ({
     }
   };
 
+  const goToBot = () => {
+    var elmnt = document.getElementById("bot");
+    elmnt.scrollIntoView();
+    setChatActive(true);
+  };
+
   const { isAdmin } = useIsAdmin();
 
   const local = JSON.parse(localStorage.getItem("users"))
@@ -63,13 +69,13 @@ const Header = ({
       <Row align="middle" style={{ width: "100%" }}>
         <Col lg={10} md={11} xs={24} sm={24}>
           <Row align="middle" justify="center">
-            <Col lg={2} md={1} xs={5} sm={1}>
+            <Col lg={2} md={5} xs={5} sm={5}>
               <MenuOutlined
                 onClick={() => setMenuIsOpened(!menuIsOpened)}
                 style={{ float: "left", fontSize: "28px", color: "white" }}
               />
             </Col>
-            <Col lg={15} md={15} xs={15} sm={19}>
+            <Col lg={15} md={12} xs={15} sm={12}>
               <img
                 alt="logo"
                 src={logo}
@@ -79,10 +85,10 @@ const Header = ({
                 }}
               />
             </Col>
-            <Col lg={7} md={2} xs={4} sm={4}>
+            <Col lg={7} md={7} xs={4} sm={4}>
               <Popover title="Besoin d'aide">
                 <RobotOutlined
-                  onClick={() => setChatActive(true)}
+                  onClick={() => goToBot()}
                   style={{ fontSize: 50, color: "white" }}
                 />
               </Popover>
@@ -95,7 +101,7 @@ const Header = ({
           md={12}
           xs={24}
           sm={24}
-          style={{ marginTop: isMobile && "8%" }}
+          style={{ marginTop: isMobile && "10%" }}
         >
           <Row justify={!isMobile && "center"} align="middle">
             <Col lg={2} md={4} xs={4} sm={4}>
@@ -103,10 +109,12 @@ const Header = ({
                 header
                 setBasketActive={setBasketActive}
                 basketIsActive={basketIsActive}
+                BadgeStyle={{ backgroundColor: "#89ba17", color: "white" }}
               />
             </Col>
             <Col lg={2} md={4} xs={4} sm={4}>
               <TotalPrice
+                BadgeStyle={{ backgroundColor: "#fff", color: "#89ba17" }}
                 basketIsActive={basketIsActive}
                 setBasketActive={setBasketActive}
               />
@@ -146,7 +154,8 @@ const Header = ({
           </Row>
         </Col>
       </Row>
-      <Row style={{ marginTop: 50 }}>
+
+      <Row style={{ padding: isMobile ? "3%" : "1.5%" }}>
         {isAdmin && <p style={{ margin: 0, color: "white" }}>Administration</p>}
       </Row>
       <Globalsearchinput globalSearchApi={globalSearchApi} />

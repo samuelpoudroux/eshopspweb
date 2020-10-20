@@ -51,6 +51,7 @@ p {
   bottom: 0;
   margin: auto;
   background: #89ba179f;
+  z-index: 25;
 }
 
 .basket_inner {
@@ -60,6 +61,7 @@ p {
   top: 0%;
   bottom: 0%;
   margin: auto;
+  z-index: 25;
 }
 
 @media screen and (min-width: 200px) and (max-width: 1024px) {
@@ -102,10 +104,7 @@ input:hover {
   cursor: pointer;
 }
 
-.productCard:hover {
-  transform: scale(1.1);
-  cursor: pointer;
-}
+
 
 .ant-tag-checkable-checked,
 .ant-checkbox {
@@ -120,7 +119,10 @@ input:hover {
   background-color: #89ba17 !important;
   border-color: #89ba17 !important;
 }
-
+@keyframes bounce{
+  from {transform: translateY(0);}
+  to   {transform: translateY(-10px);}
+}
 .popup {
   position: fixed;
   width: 100%;
