@@ -9,6 +9,10 @@ const RemoveSeveralProducts = ({ product }) => {
   const [visible, setVisible] = useState(false);
   const [numberToDelete, setNumberToDelete] = useState(0);
   const { decreaseProductsFromBasket } = basket;
+  const productInBasket =
+    JSON.parse(localStorage.getItem("basket")).find(
+      (e) => product.id === e.id
+    ) || null;
 
   const handleVisibleChange = (visible) => {
     setVisible(visible);
@@ -16,14 +20,13 @@ const RemoveSeveralProducts = ({ product }) => {
   const list = JSON.parse(localStorage.getItem("basket")) || [];
 
   const numberHandleChange = (value) => {
-    if (parseInt(value) > product.num) {
-      setNumberToDelete(product.num);
+    if (parseInt(value) > productInBasket.num) {
+      setNumberToDelete(productInBasket.num);
     } else {
       setNumberToDelete(value);
     }
   };
 
-  console.log("numberToDelete", numberToDelete);
   const choice = () => (
     <Row>
       <Col span={24}>
@@ -77,7 +80,7 @@ const RemoveSeveralProducts = ({ product }) => {
           visible={visible}
           onVisibleChange={handleVisibleChange}
         >
-          <DeleteOutlined style={{ color: "#89ba17" }} />
+          <DeleteOutlined style={{ fontSize: "1.3em", color: "#89ba17" }} />
         </Popover>
       )}
     </>

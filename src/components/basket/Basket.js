@@ -8,11 +8,12 @@ import { getTotalPrice } from "../../repository/product";
 import Addandremoveproduct from "../product/AddAndRemoveProduct";
 import ProductNumber from "../product/ProductNumber";
 import RemoveSeveralProducts from "../product/RemoveSeveralProduct";
+import { join } from "lodash";
 
 const Basket = ({ setBasketActive }) => {
   const { basket } = useContext(AppContext);
   const basketList = JSON.parse(localStorage.getItem("basket"));
-
+  const list = JSON.parse(localStorage.getItem("basket")) || [];
   const totalPrices = useCallback(() => {
     return getTotalPrice(basketList);
   }, [basket]);
@@ -44,23 +45,26 @@ const Basket = ({ setBasketActive }) => {
                 (product) =>
                   product.num > 0 && (
                     <Col span={24}>
-                      <Row justify="center" align="middle">
-                        <Col key={product.id} span={22}>
+                      <Row justify="center">
+                        <Col key={product.id} span={24}>
                           <Card
                             style={{ marginTop: "5px" }}
                             title={productName(product)}
                             bordered={false}
                           >
                             <Row justify="space-between" align="middle">
-                              <Col span={4}>
+                              <Col span={10}>
                                 <ProductNumber product={product} />
                               </Col>
-                              <Col span={12}>
+                              <Col span={4}>
                                 <Addandremoveproduct product={product} />
                               </Col>
-                              <p style={{ color: "#686868" }}>
-                                Sous-total:{product.productPrice * product.num}€
-                              </p>
+                              <Col span={8}>
+                                <p style={{ color: "#686868", margin: 0 }}>
+                                  Sous-total:
+                                  {product.productPrice * product.num}€
+                                </p>
+                              </Col>
                             </Row>
                           </Card>
                         </Col>
@@ -69,9 +73,8 @@ const Basket = ({ setBasketActive }) => {
                   )
               )}
           </Row>
-          <Row align="center" style={{ color: "white", fontSize: "2em" }}>
-            {!basket.list ||
-              (basket.list.length === 0 && <p>Votre panier est vide</p>)}
+          <Row align="middle" style={{ color: "white", fontSize: "2em" }}>
+            {!list || (list.length === 0 && <p>Votre panier est vide</p>)}
           </Row>
         </div>
 

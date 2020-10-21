@@ -39,24 +39,12 @@ const Productlist = () => {
           marginTop: " 10px",
           padding: "1%",
         }}
+        align="middle"
       >
-        <Col lg={22}>
-          <SortProducts
-            categoriesHandleChange={categoriesHandleChange}
-            products={products}
-          />
-        </Col>
-
-        {isAdmin && (
-          <Col lg={2}>
-            <Popover title="Ajouter un produit">
-              <PlusCircleOutlined
-                onClick={() => setAddProduct(true)}
-                style={{ fontSize: "1.5em" }}
-              />
-            </Popover>
-          </Col>
-        )}
+        <SortProducts
+          categoriesHandleChange={categoriesHandleChange}
+          products={products}
+        />
       </Row>
       <Row
         style={{

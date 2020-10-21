@@ -56,11 +56,13 @@ function App() {
                 )}
               </Switch>
             )}
-            {chatActive && (
-              <Row style={{ padding: 15 }}>
-                <Chat setChatActive={setChatActive} history={history} />
-              </Row>
-            )}
+            <div id="bot">
+              {chatActive && (
+                <Row style={{ padding: 15 }}>
+                  <Chat setChatActive={setChatActive} history={history} />
+                </Row>
+              )}
+            </div>
           </Col>
 
           {basketIsActive && <Basket setBasketActive={setBasketActive} />}

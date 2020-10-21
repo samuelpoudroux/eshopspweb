@@ -73,7 +73,7 @@ const decreaseProductsFromBasket = (test, action) => {
     );
     currentBasket.splice(productIndex, 1, {
       ...productIsHad,
-      num: productIsHad.num - action.number,
+      num: productIsHad.num - action.number || 0,
     });
   }
   localStorage.setItem("basket", JSON.stringify([...currentBasket]));

@@ -1,18 +1,22 @@
-import React from 'react';
-import { Row } from 'antd';
+import { Badge } from "antd";
+import React from "react";
 
 const ProductNumber = ({ product }) => {
-const list = JSON.parse(localStorage.getItem('basket'))
+  const productInBasket =
+    JSON.parse(localStorage.getItem("basket")).find(
+      (e) => product.id === e.id
+    ) || null;
 
   return (
-    <Row justify="center">
-      {list &&
-      list.length > 0 &&
-      list.find((p) => p.id === product.id) !== undefined
-        ? list.find((p) => p.id === product.id).num
-        : '0'}{' '}
-      piéces
-    </Row>
+    <Badge
+      style={{
+        backgroundColor: "#89ba17",
+        color: "white",
+      }}
+      count={`${
+        productInBasket && productInBasket.num ? productInBasket.num : "0"
+      } piéces dans le panier`}
+    />
   );
 };
 

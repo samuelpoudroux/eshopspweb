@@ -7,6 +7,7 @@ import useResponsive from "../../customHooks/responsiveHook";
 import Addandremoveproduct from "../product/AddAndRemoveProduct";
 import { withRouter } from "react-router";
 import RemoveSeveralProducts from "../product/RemoveSeveralProduct";
+import ProductNumber from "../product/ProductNumber";
 const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
   let num = 0;
   const list = JSON.parse(localStorage.getItem("basket")) || [];
@@ -151,13 +152,7 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
                               )}
                               <Col lg={4} md={10} sm={12} xs={12}>
                                 <Row>
-                                  <Badge
-                                    style={{
-                                      backgroundColor: "#89ba17",
-                                      color: "white",
-                                    }}
-                                    count={`${product.num} produits dans le panier`}
-                                  />
+                                  <ProductNumber product={product} />
                                 </Row>
                               </Col>
                               <Col

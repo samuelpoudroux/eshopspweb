@@ -19,12 +19,12 @@ const ChatFeedComponent = ({ messages, socket, history }) => {
   };
 
   const goToPage = (redirect) => {
-    console.log(redirect);
     if (redirect !== "products") {
-      window.scrollTo(0, 0);
+      var elmnt = document.getElementById("root");
+      elmnt.scrollIntoView();
       history.push(`/${redirect}`);
     } else {
-      window.scrollTo(0, 0);
+      var elmnt = document.getElementById("root");
       history.push(`/`);
     }
   };

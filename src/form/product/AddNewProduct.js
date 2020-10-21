@@ -146,6 +146,7 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                   >
                     <Input
                       type="number"
+                      min={0}
                       onChange={(e) =>
                         setValuesLocalStorage(e.target, { itemKey })
                       }
