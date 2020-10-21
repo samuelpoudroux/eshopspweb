@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AppContext } from "../context/context";
 import { withRouter } from "react-router";
 import {
   MenuOutlined,
@@ -10,7 +11,6 @@ import { Row, Col, Popover, Badge } from "antd";
 import logo from "../assets/logoWhite.svg";
 import ProductsNumber from "../components/product/ProductsNumber";
 import TotalPrice from "../components/basket/TotalPrice";
-import bot from "../assets/bot.svg";
 import NavBar from "./Menu";
 import CleanBasket from "../components/basket/CleanBasket";
 import Globalsearchinput from "../components/globalSearch/GlobalSearchInput";
@@ -18,6 +18,8 @@ import useResponsive from "../customHooks/responsiveHook";
 import Axios from "axios";
 import { logout } from "../repository/auth";
 import useIsAdmin from "../customHooks/isAdminHooks";
+import AddNewProduct from "../form/product/AddNewProduct";
+import { PlusCircleOutlined } from "@ant-design/icons";
 
 const Header = ({
   setBasketActive,
@@ -28,6 +30,9 @@ const Header = ({
   const [menuIsOpened, setMenuIsOpened] = useState(false);
   const { isMobile } = useResponsive();
   const [globalSearchApi, setGlobalSearchApi] = useState();
+  const [addProduct, setAddProduct] = useState(false);
+  const { products } = useContext(AppContext);
+  const [state, updateState] = useState(true);
 
   const { REACT_APP_API_DOMAIN, REACT_APP_API_GLOBAL_SEARCH } = process.env;
 
@@ -44,10 +49,13 @@ const Header = ({
   };
 
   const goToBot = () => {
-    var elmnt = document.getElementById("bot");
-    elmnt.scrollIntoView();
     setChatActive(true);
+    var elmnt = document.getElementById("bot");
+    elmnt.scrollIntoView(true);
   };
+  useEffect(() => {
+    products.getAllProducts();
+  }, [state]);
 
   const { isAdmin } = useIsAdmin();
 
@@ -65,6 +73,12 @@ const Header = ({
         width: "100%",
       }}
     >
+      {addProduct && (
+        <AddNewProduct
+          forceUpdate={updateState}
+          setAddProduct={setAddProduct}
+        />
+      )}
       {menuIsOpened && <NavBar setMenuIsOpened={setMenuIsOpened} />}
       <Row align="middle" style={{ width: "100%" }}>
         <Col lg={10} md={11} xs={24} sm={24}>
@@ -151,13 +165,33 @@ const Header = ({
                 )}
               </Row>
             </Col>
+            {isAdmin && (
+              <Col lg={2} sm={24} xs={24}>
+                <Row
+                  style={{
+                    marginTop: isMobile && 20,
+                  }}
+                  justify="center"
+                >
+                  <Popover title="Ajouter un produit">
+                    <PlusCircleOutlined
+                      onClick={() => setAddProduct(true)}
+                      style={{
+                        fontSize: "1.5em",
+                        color: "white",
+                      }}
+                    />
+                  </Popover>
+                  {isAdmin && (
+                    <p style={{ margin: 0, color: "white" }}>Administration</p>
+                  )}
+                </Row>
+              </Col>
+            )}
           </Row>
         </Col>
       </Row>
 
-      <Row style={{ padding: isMobile ? "3%" : "1.5%" }}>
-        {isAdmin && <p style={{ margin: 0, color: "white" }}>Administration</p>}
-      </Row>
       <Globalsearchinput globalSearchApi={globalSearchApi} />
     </header>
   );

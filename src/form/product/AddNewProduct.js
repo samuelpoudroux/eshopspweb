@@ -82,7 +82,6 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
           align="middle"
           style={{
             padding: "2%",
-            height: "100%",
             background: "rgba(0, 0, 0, 0.7)",
           }}
         >
@@ -104,7 +103,7 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                 <CloseCircleOutlined onClick={() => setAddProduct(false)} />
               </Row>
               <Form
-                style={{ marginTop: "3%" }}
+                style={{ marginTop: "3%", overflowY: "scroll" }}
                 name="basic"
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ChatFeedComponent from "./ChatFeed";
 import ChatHeader from "./ChatHeader";
-import { Row } from "antd";
+import { Col, Row, Spin } from "antd";
 import useResponsive from "./customHooks/responsiveHook";
 import * as io from "socket.io-client";
 
@@ -26,7 +26,14 @@ const Chat = ({ setChatActive, history }) => {
       }}
     >
       <ChatHeader socket={socket} setChatActive={setChatActive} />
-      <Row style={{ width: "100%" }}>
+      <Row align="middle">
+        {messages.length === 0 && (
+          <Col span={24}>
+            <Row style={{ height: "350px" }} align="middle" justify="center">
+              <Spin />
+            </Row>
+          </Col>
+        )}
         <ChatFeedComponent
           messages={messages}
           socket={socket}

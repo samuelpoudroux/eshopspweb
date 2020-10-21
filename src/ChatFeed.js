@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Spin } from "antd";
 
 const ChatFeedComponent = ({ messages, socket, history }) => {
   const [messageEnd, setMessageEnd] = useState();
@@ -35,7 +35,6 @@ const ChatFeedComponent = ({ messages, socket, history }) => {
       style={{
         position: "relative",
         overflow: "scroll",
-        maxHeight: "350px",
         WebkitOverflowScroll: "touch",
       }}
     >
@@ -50,6 +49,7 @@ const ChatFeedComponent = ({ messages, socket, history }) => {
             >
               <Col
                 lg={18}
+                sm={24}
                 style={{
                   background: id === 0 ? "#89ba17" : "grey",
                   padding: 20,

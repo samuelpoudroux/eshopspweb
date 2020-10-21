@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { Form, Input, Button, Checkbox, Row, Col, Spin } from 'antd';
-import { AppContext } from '../../context/context';
+import React, { useContext, useState } from "react";
+import { Form, Input, Button, Checkbox, Row, Col, Spin } from "antd";
+import { AppContext } from "../../context/context";
 
 const Login = ({ history }) => {
   const { auth } = useContext(AppContext);
@@ -14,83 +14,86 @@ const Login = ({ history }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
   return (
-    <Row
-      justify="center"
-      align="middle"
-      style={{ padding: '2%', height: '70vh' }}
-    >
+    <Col style={{ padding: 40 }}>
+      <h3>Se connecter</h3>
       <Row
         justify="center"
         align="middle"
-        style={{
-          boxShadow:
-            '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
-          background: '#fff',
-          borderRadius: '2px',
-          position: 'relative',
-          width: 'auto',
-          padding: '2%'
-        }}
+        style={{ padding: "2%", height: "50vh" }}
       >
-        <Form
-          name="basic"
-          initialValues={{
-            remember: true
+        <Row
+          justify="center"
+          align="middle"
+          style={{
+            boxShadow:
+              "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+            background: "#fff",
+            borderRadius: "2px",
+            position: "relative",
+            width: "auto",
+            padding: "2%",
           }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
         >
-          <Col>
-            <Form.Item
-              label="Mail"
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your username!'
-                }
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!'
-                }
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
-            <Form.Item name="remember" valuePropName="checked">
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                style={{ background: '#89ba17', border: 'none' }}
-                type="primary"
-                htmlType="submit"
+          <Form
+            name="basic"
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+          >
+            <Col>
+              <Form.Item
+                label="Mail"
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your username!",
+                  },
+                ]}
               >
-                Submit
-              </Button>
-            </Form.Item>
-            {isLoading && <Spin />}
-            {user.error && <p style={{ color: 'red' }}>{user.error}</p>}
-            <a style={{ color: 'grey' }} href="/register">
-              Register
-            </a>
-          </Col>
-        </Form>
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your password!",
+                  },
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
+              <Form.Item name="remember" valuePropName="checked">
+                <Checkbox>Remember me</Checkbox>
+              </Form.Item>
+
+              <Form.Item>
+                <Button
+                  style={{ background: "#89ba17", border: "none" }}
+                  type="primary"
+                  htmlType="submit"
+                >
+                  Submit
+                </Button>
+              </Form.Item>
+              {isLoading && <Spin />}
+              {user.error && <p style={{ color: "red" }}>{user.error}</p>}
+              <a style={{ color: "grey" }} href="/register">
+                Register
+              </a>
+            </Col>
+          </Form>
+        </Row>
       </Row>
-    </Row>
+    </Col>
   );
 };
 

@@ -33,7 +33,7 @@ function App() {
             setBasketActive={setBasketActive}
             basketIsActive={basketIsActive}
           />
-          <Col span={24} style={{ position: "relative", minHeight: "100vh" }}>
+          <Col span={24} style={{ position: "relative" }}>
             {globalSearchState.active && (
               <GlobalSearchResult state={globalSearchState} />
             )}
@@ -58,9 +58,7 @@ function App() {
             )}
             <div id="bot">
               {chatActive && (
-                <Row style={{ padding: 15 }}>
-                  <Chat setChatActive={setChatActive} history={history} />
-                </Row>
+                <Chat setChatActive={setChatActive} history={history} />
               )}
             </div>
           </Col>

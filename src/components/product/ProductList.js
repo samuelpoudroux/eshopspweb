@@ -1,20 +1,16 @@
 import React, { useContext, useState, useCallback } from "react";
-import { Row, Col, Popover } from "antd";
+import { Col, Row, Spin } from "antd";
 import { AppContext } from "../../context/context";
-import { PlusCircleOutlined } from "@ant-design/icons";
 
 import Productcard from "./ProductCard";
 import SortProducts from "./SortProducts";
 import useIsAdmin from "../../customHooks/isAdminHooks";
-import AddNewProduct from "../../form/product/AddNewProduct";
 import { useEffect } from "react";
 
 const Productlist = () => {
   const { products } = useContext(AppContext);
-  const [addProduct, setAddProduct] = useState(false);
   const [state, updateState] = useState(true);
 
-  const { isAdmin } = useIsAdmin();
   let productList = products.list;
   // cateorgies select management
   function categoriesHandleChange(values) {
@@ -26,20 +22,15 @@ const Productlist = () => {
   }, [state]);
 
   return (
-    <div>
-      {addProduct && (
-        <AddNewProduct
-          forceUpdate={updateState}
-          setAddProduct={setAddProduct}
-        />
-      )}
+    <Col>
+      <h3>Nos produits</h3>
+
       <Row
         style={{
           border: "1px solid #89ba17",
           marginTop: " 10px",
           padding: "1%",
         }}
-        align="middle"
       >
         <SortProducts
           categoriesHandleChange={categoriesHandleChange}
@@ -53,13 +44,19 @@ const Productlist = () => {
           justifyContent: "space-evenly",
         }}
       >
+        {products.list.length === 0 && (
+          <Row style={{ marginTop: 150 }}>
+            <Spin />{" "}
+          </Row>
+        )}
+
         {productList &&
           productList.length > 0 &&
           productList.map((product) => (
             <Productcard key={product.id} product={product} />
           ))}
       </Row>
-    </div>
+    </Col>
   );
 };
 

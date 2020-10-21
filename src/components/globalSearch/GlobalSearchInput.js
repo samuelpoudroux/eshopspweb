@@ -20,7 +20,7 @@ const Globalsearchinput = ({ globalSearchApi }) => {
       search(searchValue);
   };
   return (
-    <Col md={24} xs={24} sm={24} lg={24}>
+    <Col md={24} xs={24} sm={24} lg={24} style={{ marginTop: 20 }}>
       <form
         onSubmit={(e) => handleSubmit(e)}
         className="globalSearchInput"
