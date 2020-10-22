@@ -42,13 +42,11 @@ const Productlist = () => {
           paddingLeft: "4%",
           paddingRight: "4%",
           justifyContent: "space-evenly",
+          minHeight: "30vh",
         }}
+        align="middle"
       >
-        {products.list.length === 0 && (
-          <Row style={{ marginTop: 150 }}>
-            <Spin />{" "}
-          </Row>
-        )}
+        {products.list.length === 0 && <Spin />}
 
         {productList &&
           productList.length > 0 &&

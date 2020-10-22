@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Validator from "validator";
 import Axios from "axios";
@@ -80,11 +80,12 @@ const Register = ({ history }) => {
                 hasFeedback
               >
                 <Input
-                  onChange={(e) => setValuesLocalStorage(e.target, { itemKey })}
+                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="lastName"
-                  defaultValue={getDefaultValueLocalStorage("lastName", {
-                    itemKey,
-                  })}
+                  defaultValue={getDefaultValueLocalStorage(
+                    "lastName",
+                    itemKey
+                  )}
                 />
               </Form.Item>
               <Form.Item
@@ -100,11 +101,12 @@ const Register = ({ history }) => {
                 hasFeedback
               >
                 <Input
-                  onChange={(e) => setValuesLocalStorage(e.target, { itemKey })}
+                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="firstName"
-                  defaultValue={getDefaultValueLocalStorage("firstName", {
-                    itemKey,
-                  })}
+                  defaultValue={getDefaultValueLocalStorage(
+                    "firstName",
+                    itemKey
+                  )}
                 />
               </Form.Item>
               <Form.Item
@@ -127,11 +129,9 @@ const Register = ({ history }) => {
                 ]}
               >
                 <Input
-                  onChange={(e) => setValuesLocalStorage(e.target, { itemKey })}
+                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="email"
-                  defaultValue={getDefaultValueLocalStorage("email", {
-                    itemKey,
-                  })}
+                  defaultValue={getDefaultValueLocalStorage("email", itemKey)}
                 />
               </Form.Item>
               <Form.Item
@@ -184,11 +184,12 @@ const Register = ({ history }) => {
                 hasFeedback
               >
                 <Input
-                  onChange={(e) => setValuesLocalStorage(e.target, { itemKey })}
+                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="billsAddress"
-                  defaultValue={getDefaultValueLocalStorage("billsAddress", {
-                    itemKey,
-                  })}
+                  defaultValue={getDefaultValueLocalStorage(
+                    "billsAddress",
+                    itemKey
+                  )}
                 />
               </Form.Item>
               <Form.Item
@@ -205,11 +206,12 @@ const Register = ({ history }) => {
                 hasFeedback
               >
                 <Input
-                  onChange={(e) => setValuesLocalStorage(e.target, { itemKey })}
+                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="dropAddress"
-                  defaultValue={getDefaultValueLocalStorage("dropAddress", {
-                    itemKey,
-                  })}
+                  defaultValue={getDefaultValueLocalStorage(
+                    "dropAddress",
+                    itemKey
+                  )}
                 />
               </Form.Item>
               <Form.Item
@@ -228,7 +230,7 @@ const Register = ({ history }) => {
                 hasFeedback
               >
                 <Input
-                  onChange={(e) => setValuesLocalStorage(e.target, { itemKey })}
+                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="phoneNumber"
                   defaultValue={getDefaultValueLocalStorage("phoneNumber", {
                     itemKey,

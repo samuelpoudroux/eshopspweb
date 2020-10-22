@@ -130,7 +130,7 @@ input:hover {
   top: 0;
   left: 0;
   right: 0;
-  /* bottom: 0; */
+  bottom: 0;
   margin: auto;
   z-Index: 1
 }
@@ -140,7 +140,7 @@ input:hover {
   left: 0%;
   right: 0%;
   top: 0%;
-  /* bottom: 0%; */
+  bottom: 0%;
   margin: auto;
 }
 
@@ -155,8 +155,11 @@ input:disabled {
   color: #89ba17 !important;
 }
 
-.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn .ant-spin-dot-item {
   color:#89ba17 !important
+}
+.ant-spin-dot-item{
+  background-color:#89ba17 !important
 }
 
 .ant-menu-item-selected{
@@ -196,3 +199,5 @@ input:disabled {
 .ant-input-suffix{
 z-index: 0 !important;
 }
+
+a {color:'white'}

@@ -5,7 +5,7 @@ import { Col, Row, Spin } from "antd";
 import useResponsive from "./customHooks/responsiveHook";
 import * as io from "socket.io-client";
 
-const Chat = ({ setChatActive, history }) => {
+const Chat = ({ setChatActive, history, appRef }) => {
   const [messages, setMessages] = useState([]);
   const [socket, setSocket] = useState(io(process.env.REACT_APP_API_DOMAIN));
   const { isMobile } = useResponsive();
@@ -22,14 +22,15 @@ const Chat = ({ setChatActive, history }) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        marginTop: 50,
+        marginTop: 10,
+        border: "dashed grey 3px",
       }}
     >
       <ChatHeader socket={socket} setChatActive={setChatActive} />
       <Row align="middle">
         {messages.length === 0 && (
           <Col span={24}>
-            <Row style={{ height: "350px" }} align="middle" justify="center">
+            <Row align="middle" justify="center">
               <Spin />
             </Row>
           </Col>
@@ -38,6 +39,8 @@ const Chat = ({ setChatActive, history }) => {
           messages={messages}
           socket={socket}
           history={history}
+          appRef={appRef}
+          setChatActive={setChatActive}
         />
       </Row>
     </div>

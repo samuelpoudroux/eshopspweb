@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Col, Row, Spin } from "antd";
+import { v4 as uuidv4 } from "uuid";
 
-const ChatFeedComponent = ({ messages, socket, history }) => {
+const ChatFeedComponent = ({ messages, socket, history, setChatActive }) => {
+  const secondTest = useRef(null);
   const [messageEnd, setMessageEnd] = useState();
-
   useEffect(() => {
     if (messageEnd !== undefined) {
-      messageEnd.scrollIntoView({ behavior: "smooth" });
+      messageEnd.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
     }
   }, [messages]);
 
+  const appRef = document.getElementById("root");
   const sendResponseToBot = (value, previousMessage) => {
     socket.emit("newMessage", {
       id: 1,
@@ -20,11 +26,12 @@ const ChatFeedComponent = ({ messages, socket, history }) => {
 
   const goToPage = (redirect) => {
     if (redirect !== "products") {
-      var elmnt = document.getElementById("root");
-      elmnt.scrollIntoView();
+      appRef.scrollIntoView(true);
+      setChatActive(false);
       history.push(`/${redirect}`);
     } else {
-      var elmnt = document.getElementById("root");
+      appRef.scrollIntoView(true);
+      setChatActive(false);
       history.push(`/`);
     }
   };
@@ -34,9 +41,12 @@ const ChatFeedComponent = ({ messages, socket, history }) => {
       lg={24}
       style={{
         position: "relative",
-        overflow: "scroll",
+        overflow: "auto",
+        maxHeight: "350px",
         WebkitOverflowScroll: "touch",
+        padding: "2%",
       }}
+      ref={secondTest}
     >
       {messages.length > 0 &&
         messages.map((value) => {
@@ -75,7 +85,7 @@ const ChatFeedComponent = ({ messages, socket, history }) => {
                     choice &&
                     choice.map((value) => (
                       <input
-                        key={value}
+                        key={uuidv4()}
                         type="button"
                         style={{
                           background: value === "oui" ? "white" : "grey",
@@ -92,7 +102,6 @@ const ChatFeedComponent = ({ messages, socket, history }) => {
             </Row>
           );
         })}
-
       <div
         style={{ float: "left", clear: "both" }}
         ref={(el) => {

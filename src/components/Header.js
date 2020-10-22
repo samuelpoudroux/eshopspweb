@@ -6,8 +6,9 @@ import {
   LoginOutlined,
   LogoutOutlined,
   RobotOutlined,
+  ContactsOutlined,
 } from "@ant-design/icons";
-import { Row, Col, Popover, Badge } from "antd";
+import { Row, Col, Popover } from "antd";
 import logo from "../assets/logoWhite.svg";
 import ProductsNumber from "../components/product/ProductsNumber";
 import TotalPrice from "../components/basket/TotalPrice";
@@ -26,6 +27,7 @@ const Header = ({
   basketIsActive,
   history,
   setChatActive,
+  botRef,
 }) => {
   const [menuIsOpened, setMenuIsOpened] = useState(false);
   const { isMobile } = useResponsive();
@@ -49,9 +51,8 @@ const Header = ({
   };
 
   const goToBot = () => {
+    botRef.current.scrollIntoView();
     setChatActive(true);
-    var elmnt = document.getElementById("bot");
-    elmnt.scrollIntoView(true);
   };
   useEffect(() => {
     products.getAllProducts();
@@ -89,23 +90,31 @@ const Header = ({
                 style={{ float: "left", fontSize: "28px", color: "white" }}
               />
             </Col>
-            <Col lg={15} md={12} xs={15} sm={12}>
+            <Col lg={15} md={11} xs={10} sm={10}>
               <img
                 alt="logo"
                 src={logo}
                 style={{
                   maxWidth: isMobile ? "100%" : "100%",
                   maxHeight: isMobile ? "100%" : "100%",
+                  cursor: "pointer",
                 }}
+                onClick={() => history.push("/")}
               />
             </Col>
-            <Col lg={7} md={7} xs={4} sm={4}>
+            <Col lg={4} md={4} xs={4} sm={4}>
               <Popover title="Besoin d'aide">
                 <RobotOutlined
                   onClick={() => goToBot()}
                   style={{ fontSize: 50, color: "white" }}
                 />
               </Popover>
+            </Col>
+            <Col lg={3} md={4} xs={5} sm={5}>
+              <ContactsOutlined
+                onClick={() => history.push("/contact")}
+                style={{ fontSize: 50, color: "white" }}
+              />
             </Col>
           </Row>
         </Col>
