@@ -61,7 +61,10 @@ function App() {
                 )}
               </Switch>
             )}
-            <Col style={{ paddingTop: 25, marginTop: isMobile && 20 }}>
+            <Col
+              ref={botRef}
+              style={{ paddingTop: 25, marginTop: isMobile && 20 }}
+            >
               {chatActive && (
                 <Col>
                   <Row justify="start" align="middle">
