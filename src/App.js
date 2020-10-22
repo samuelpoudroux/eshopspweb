@@ -18,7 +18,7 @@ function App() {
   const { globalSearch } = useContext(AppContext);
   const { state: globalSearchState } = globalSearch;
   const [basketIsActive, setBasketActive] = useState(false);
-  const [chatActive, setChatActive] = useState(true);
+  const [chatActive, setChatActive] = useState(false);
   const botRef = useRef(null);
   const appRef = useRef(null);
   const { isMobile } = useResponsive();
@@ -61,10 +61,7 @@ function App() {
                 )}
               </Switch>
             )}
-            <Col
-              ref={botRef}
-              style={{ paddingTop: 25, marginTop: isMobile && 400 }}
-            >
+            <Col style={{ paddingTop: 25, marginTop: isMobile && 20 }}>
               {chatActive && (
                 <Col>
                   <Row justify="start" align="middle">
