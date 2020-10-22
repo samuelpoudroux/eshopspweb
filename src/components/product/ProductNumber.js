@@ -3,9 +3,11 @@ import React from "react";
 
 const ProductNumber = ({ product }) => {
   const productInBasket =
-    JSON.parse(localStorage.getItem("basket")).find(
-      (e) => product.id === e.id
-    ) || null;
+    (JSON.parse(localStorage.getItem("basket")) &&
+      JSON.parse(localStorage.getItem("basket")).find(
+        (e) => product.id === e.id
+      )) ||
+    null;
 
   return (
     <Badge
