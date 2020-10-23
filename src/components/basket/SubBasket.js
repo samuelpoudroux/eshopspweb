@@ -71,112 +71,71 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
           closable={true}
           onClose={() => setSubBasketVisible(false)}
           visible={subBasketVisible}
-          height={isMobile ? "350px" : "auto"}
+          height={"auto"}
           key={"top"}
           bodyStyle={{
             paddingLeft: "5px",
             paddingRight: "5px",
-            paddingBottom: "0px",
           }}
           style={{ zIndex: 0 }}
           footerStyle={{ padding: "0px" }}
         >
-          <Row
-            align="middle"
-            style={{
-              boxShadow:
-                "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-              background: "#fff",
-              borderRadius: "2px",
-            }}
-          >
-            <Col span={24} style={{ padding: "10px" }}>
-              <h3 style={{ textAlign: "center" }}>Produits dans le panier</h3>
-              <Carousel autoplay dots={false}>
-                {list.map(
-                  (product) =>
-                    product.num !== 0 && (
-                      <Col
-                        span={24}
-                        style={{
-                          padding: "15px",
-                          cursor: "pointer",
-                        }}
-                        onClick={() =>
-                          history.push(`/productDetails/${product.id}`)
-                        }
-                      >
-                        <Row
-                          style={{
-                            padding: "5px",
-                            border: "3px dashed #686868",
-                            borderRadius: "2px",
-                          }}
+          <Col span={24} style={{ padding: "10px" }}>
+            <h3 style={{ textAlign: "center" }}>Produits dans le panier</h3>
+            <Carousel
+              autoplay
+              dots={true}
+              style={{
+                boxShadow:
+                  "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+                background: "#fff",
+                borderRadius: "2px",
+                borderRadius: "2px",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {list.map(
+                (product) =>
+                  product.num !== 0 && (
+                    <Row
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      onClick={() =>
+                        history.push(`/productDetails/${product.id}`)
+                      }
+                    >
+                      <Row style={{ paddingBottom: "25px" }}>
+                        <Col lg={6} md={12} sm={24} xs={24}>
+                          <img
+                            style={{
+                              width: "100%",
+                              height: "250px",
+                            }}
+                            src={product.imageUrl}
+                            alt="image du produit"
+                          />
+                        </Col>
+                        <Col
+                          lg={18}
+                          md={12}
+                          sm={24}
+                          xs={24}
+                          style={{ padding: "2%" }}
                         >
-                          <Col lg={23} md={20} sm={24} xs={24}>
-                            <Row align="middle">
-                              <Col lg={4} md={5} sm={12} xs={12}>
-                                <img
-                                  style={{ width: "100%" }}
-                                  src={product.imageUrl}
-                                  alt="image du produit"
-                                />
-                              </Col>
-                              <Col lg={3} md={5} sm={10} xs={10}>
-                                <Row justify="center">
-                                  <b
-                                    style={{
-                                      fontSize: "1.3em",
-                                      color: "#686868",
-                                    }}
-                                  >
-                                    {product.name}
-                                  </b>
-                                </Row>
-                              </Col>
-                              {isMobile && (
-                                <Col sm={2} xs={2}>
-                                  <Row
-                                    style={{ padding: "5px" }}
-                                    justify="center"
-                                  >
-                                    <Badge
-                                      style={{
-                                        backgroundColor: "#89ba17",
-                                        color: "white",
-                                      }}
-                                      count={`${product.productPrice}€`}
-                                    />
-                                  </Row>
-                                </Col>
-                              )}
-                              <Col lg={4} md={10} sm={12} xs={12}>
-                                <Row>
-                                  <ProductNumber product={product} />
-                                </Row>
-                              </Col>
-                              <Col
-                                lg={5}
-                                md={4}
-                                sm={6}
-                                xs={6}
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                <Addandremoveproduct product={product} />
-                              </Col>
-                              <Col lg={2} md={2} sm={4} xs={4}>
-                                <Row
-                                  style={{ padding: "5px" }}
-                                  justify="center"
+                          <Row justify="space-between" align="top">
+                            <Col lg={20}>
+                              <Row>
+                                <h1
+                                  style={{
+                                    color: "#686868",
+                                  }}
                                 >
-                                  <RemoveSeveralProducts product={product} />
-                                </Row>
-                              </Col>
-                            </Row>
-                          </Col>
-                          {!isMobile && (
-                            <Col lg={1} md={2} sm={2} xs={2}>
-                              <Row style={{ padding: "5px" }} justify="center">
+                                  {product.name}
+                                </h1>
+                              </Row>
+                              <Row>
+                                <b>Prix du produit:</b>
                                 <Badge
                                   style={{
                                     backgroundColor: "#89ba17",
@@ -186,18 +145,44 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
                                 />
                               </Row>
                             </Col>
-                          )}
-                        </Row>
-                      </Col>
-                    )
-                )}
-              </Carousel>
-            </Col>
-          </Row>
+                            <Col lg={4}>
+                              <Row justify="end">
+                                <RemoveSeveralProducts product={product} />
+                              </Row>
+                            </Col>
+                          </Row>
+                          <Row>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing
+                            elit. Culpa nihil unde ullam animi provident laborum
+                            nesciunt, tenetur iure suscipit modi doloribus odio
+                            ad vitae quaerat aspernatur nisi omnis minus
+                            impedit.
+                          </Row>
+                          <Row
+                            style={{ marginTop: !isMobile ? 80 : 10 }}
+                            justify={isMobile ? "space-between" : "start"}
+                          >
+                            <Col lg={4}>
+                              <ProductNumber product={product} />
+                            </Col>
+                            <Col lg={2}>
+                              <Addandremoveproduct product={product} />
+                            </Col>
+                          </Row>
+                        </Col>
+                      </Row>
+                    </Row>
+                  )
+              )}
+            </Carousel>
+          </Col>
         </Drawer>
       </div>
     )
   );
 };
 
+// {product.shortDescription
+//   ? product.shortDescription
+//   : "Pas de description pour ce produit"}
 export default withRouter(SubBasket);

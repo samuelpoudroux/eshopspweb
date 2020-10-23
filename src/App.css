@@ -60,9 +60,15 @@ p {
   right: 0;
   bottom: 0;
   margin: auto;
-  background: #89ba179f;
+  background: #89ba179f
+  ;
   z-index: 25;
 }
+.slick-dots li button {
+  background-color: #686868 !important;
+}
+
+
 
 .addProduct_inner {
   position: absolute;
@@ -225,3 +231,7 @@ z-index: 0 !important;
 }
 
 a {color:'white'}
+
+.ant-carousel .slick-dots-bottom {
+  bottom: 0 !important
+}

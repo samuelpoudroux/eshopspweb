@@ -124,9 +124,7 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                     hasFeedback
                   >
                     <Input
-                      onChange={(e) =>
-                        setValuesLocalStorage(e.target, { itemKey })
-                      }
+                      onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                       name="name"
                       defaultValue={getDefaultValueLocalStorage("name", {
                         itemKey,
@@ -147,13 +145,11 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                     <Input
                       type="number"
                       min={0}
-                      onChange={(e) =>
-                        setValuesLocalStorage(e.target, { itemKey })
-                      }
+                      onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                       name="productPrice"
                       defaultValue={getDefaultValueLocalStorage(
                         "productPrice",
-                        { itemKey }
+                        itemKey
                       )}
                     />
                   </Form.Item>
@@ -169,13 +165,11 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                     hasFeedback
                   >
                     <TextArea
-                      onChange={(e) =>
-                        setValuesLocalStorage(e.target, { itemKey })
-                      }
+                      onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                       name="longDescription"
                       defaultValue={getDefaultValueLocalStorage(
                         "longDescription",
-                        { itemKey }
+                        itemKey
                       )}
                     />
                   </Form.Item>
@@ -192,13 +186,11 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                     hasFeedback
                   >
                     <TextArea
-                      onChange={(e) =>
-                        setValuesLocalStorage(e.target, { itemKey })
-                      }
+                      onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                       name="shortDescription"
                       defaultValue={getDefaultValueLocalStorage(
                         "shortDescription",
-                        { itemKey }
+                        itemKey
                       )}
                     />
                   </Form.Item>
