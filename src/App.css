@@ -41,6 +41,16 @@ p {
   word-wrap: break-word;
 }
 
+.basket_inner {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  margin: auto;
+  z-index: 25;
+}
+
 .basket {
   position: fixed;
   width: 20%;
@@ -54,7 +64,7 @@ p {
   z-index: 25;
 }
 
-.basket_inner {
+.addProduct_inner {
   position: absolute;
   left: 0%;
   right: 0%;
@@ -63,6 +73,20 @@ p {
   margin: auto;
   z-index: 25;
 }
+
+.addProduct {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background:rgba(0, 0, 0, 0.7);
+  /* margin: auto; */
+  z-index: 25;
+  overflow: scroll;
+}
+
+
 
 @media screen and (min-width: 200px) and (max-width: 1024px) {
   .basket {

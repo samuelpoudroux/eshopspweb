@@ -71,7 +71,7 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
           closable={true}
           onClose={() => setSubBasketVisible(false)}
           visible={subBasketVisible}
-          height={"auto"}
+          height={isMobile ? "350px" : "auto"}
           key={"top"}
           bodyStyle={{
             paddingLeft: "5px",

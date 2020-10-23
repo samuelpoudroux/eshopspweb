@@ -28,8 +28,6 @@ const Productlist = () => {
       <Row
         style={{
           border: "1px solid #89ba17",
-          marginTop: " 10px",
-          padding: "1%",
         }}
       >
         <SortProducts

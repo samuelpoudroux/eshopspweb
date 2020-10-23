@@ -75,13 +75,14 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
   };
 
   return (
-    <div className="popup">
-      <div className="popup_inner">
+    <div className="addProduct">
+      <div className="addProduct_inner">
         <Row
           justify="center"
           align="middle"
           style={{
             padding: "2%",
+            height: "100%",
             background: "rgba(0, 0, 0, 0.7)",
           }}
         >

@@ -2,7 +2,7 @@ import React from "react";
 
 import Validator from "validator";
 import Axios from "axios";
-import { Form, Input, Button, Checkbox, Row, Col, notification } from "antd";
+import { Form, Input, Button, Row, Col, notification } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 import {
   setValuesLocalStorage,
