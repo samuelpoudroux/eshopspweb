@@ -44,7 +44,7 @@ const Register = ({ history }) => {
   const itemKey = "userData";
 
   return (
-    <Col style={{ padding: "5px" }}>
+    <Col style={{ padding: "5px", textAlign: "center" }}>
       <h3>Je crée mon compte</h3>
       <Row justify="center" align="middle" style={{ padding: "2%" }}>
         <Row

@@ -73,7 +73,9 @@ const ContactForm = ({ history }) => {
             height: "100%",
           }}
         >
-          <h2 style={{ color: "#686868" }}>Votre message</h2>
+          <h2 style={{ color: "#686868", textAlign: "center" }}>
+            Votre message
+          </h2>
           <Row justify="center" align="middle">
             <Col span={24}>
               <Form

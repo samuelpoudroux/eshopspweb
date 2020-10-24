@@ -4,6 +4,7 @@ import useProductList from "./customHooks/productListHook";
 import useGlobalSearchResult from "./customHooks/globalSearchHook";
 import { AppContext } from "./context/context";
 import useAuth from "./customHooks/authHook";
+import useFavorites from "./customHooks/favoritesHook";
 
 // the global store we give acces to our hooks to all appplication by this global store through appcontext provider
 const GlobalStore = ({ children }) => {
@@ -24,6 +25,11 @@ const GlobalStore = ({ children }) => {
     getAllProducts,
   } = useProductList();
   const { globalSearch, search } = useGlobalSearchResult();
+  const {
+    favorites,
+    addProductToFavorites,
+    removeProductFromFavorites,
+  } = useFavorites();
   const { auth, login, logout, register } = useAuth();
   const store = {
     basket: {
@@ -53,6 +59,12 @@ const GlobalStore = ({ children }) => {
       logout: logout,
       register: register,
       user: auth,
+    },
+
+    favorites: {
+      addProductToFavorites,
+      removeProductFromFavorites,
+      favorites,
     },
   };
   return <AppContext.Provider value={store}> {children} </AppContext.Provider>;

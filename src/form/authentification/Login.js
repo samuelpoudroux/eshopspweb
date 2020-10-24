@@ -18,7 +18,7 @@ const Login = ({ history }) => {
   };
 
   return (
-    <Col style={{ padding: 40 }}>
+    <Col style={{ textAlign: "center", padding: 40 }}>
       <h3>Se connecter</h3>
       <Row
         justify="center"

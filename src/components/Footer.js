@@ -5,6 +5,7 @@ import logo from "../assets/logoWhite.svg";
 import useResponsive from "../customHooks/responsiveHook";
 import { PHONENUMBER, EMAIL, ADDRESS } from "../constants/contact";
 import { HomeOutlined, PhoneOutlined, MailOutlined } from "@ant-design/icons";
+import styleVariable from "../styleVariable";
 
 const Footer = ({ history }) => {
   const { isMobile } = useResponsive();
@@ -12,7 +13,7 @@ const Footer = ({ history }) => {
   return (
     <Col
       style={{
-        background: "#686868",
+        background: styleVariable.backgroundColorGradient,
         width: "100%",
         padding: "2%",
         paddingBottom: "1%",

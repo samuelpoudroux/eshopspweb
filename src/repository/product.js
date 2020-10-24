@@ -32,6 +32,16 @@ const sortProductsByCategories = (state, categories) => {
   }
   return { ...state, sortedProducts };
 };
+// sort product related to maxPrice
+const sortProductsByMaxPrice = (state, value) => {
+  console.log("toto", value);
+  const copy = _.cloneDeep(state.products);
+  let sortedProducts = [];
+  sortedProducts.push(
+    ...copy.filter((product) => product.productPrice <= value)
+  );
+  return { ...state, sortedProducts };
+};
 
 const getNumberOfProducts = (basketList) => {
   const copy = _.cloneDeep(basketList);
@@ -61,4 +71,5 @@ export {
   sortProductsByCategories,
   getNumberOfProducts,
   getTotalPrice,
+  sortProductsByMaxPrice,
 };

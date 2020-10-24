@@ -23,7 +23,7 @@ const Productlist = () => {
 
   return (
     <Col>
-      <h3>Nos produits</h3>
+      <h3 style={{ textAlign: "center" }}>Nos produits</h3>
 
       <Row
         style={{

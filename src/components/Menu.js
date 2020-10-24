@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
-import { Menu, Row, Col, Icon} from 'antd';
-import { withRouter } from 'react-router';
-import { HomeOutlined, CloseCircleOutlined, ContactsOutlined} from '@ant-design/icons';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import { Menu, Row, Col, Icon } from "antd";
+import { withRouter } from "react-router";
+import {
+  HomeOutlined,
+  CloseCircleOutlined,
+  ContactsOutlined,
+} from "@ant-design/icons";
+import PropTypes from "prop-types";
 
 const NavBar = ({ setMenuIsOpened, history }) => {
-  const [current, setCurrent] = useState('home');
+  const [current, setCurrent] = useState("home");
   const handleClick = (e) => {
     setCurrent(e.key);
   };
@@ -18,60 +22,65 @@ const NavBar = ({ setMenuIsOpened, history }) => {
 
   return (
     <Row className="popup">
-      <Row className="popup_inner" style={{ padding: '0px', fontSize:"20em" }}>
+      <Row className="popup_inner" style={{ padding: "0px", fontSize: "20em" }}>
         <Col
           span={19}
           style={{
-            height: '100%',
-            background: 'red'
+            height: "100%",
+            background: "red",
           }}
         >
           <Menu
             style={{
-              height: '100%',
-              paddingTop: '2%',
-              border: '0px'
+              height: "100%",
+              paddingTop: "2%",
+              border: "0px",
             }}
             onClick={handleClick}
             selectedKeys={[current]}
             mode="vertical"
           >
-
             <Menu.Item
               key="home"
-              icon={<HomeOutlined style={{ color: '#89ba17 ', fontSize:'1.5em' }} />}
-              onClick={(e) => goToPage(e, '/')}
-              style={{fontSize:"1.5em"}}
+              icon={
+                <HomeOutlined
+                  style={{ color: "#89ba17 ", fontSize: "1.5em" }}
+                />
+              }
+              onClick={(e) => goToPage(e, "/")}
+              style={{ fontSize: "1.5em" }}
             >
-            
-            Accueil
+              Accueil
             </Menu.Item>
             <Menu.Item
               key="contact"
-              icon={<ContactsOutlined style={{ color: '#89ba17 ', fontSize:'1.5em' }} />}
-              onClick={(e) => goToPage(e, '/contact')}
-              style={{fontSize:"1.5em"}}
+              icon={
+                <ContactsOutlined
+                  style={{ color: "#89ba17 ", fontSize: "1.5em" }}
+                />
+              }
+              onClick={(e) => goToPage(e, "/contact")}
+              style={{ fontSize: "1.5em" }}
             >
-            contact
+              contact
             </Menu.Item>
           </Menu>
         </Col>
         <Col
           span={5}
           style={{
-            paddingTop: '25px',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            margin: 0
+            paddingTop: "25px",
+            height: "100%",
+            backgroundColorGradient: "rgba(0, 0, 0, 0.7)",
+            margin: 0,
           }}
         >
-        <Row justify='center'>
-        <CloseCircleOutlined
-          onClick={() => setMenuIsOpened(false)}
-          style={{ color: 'white', fontSize: '28px' }}
-        />
-        
-        </Row>
+          <Row justify="center">
+            <CloseCircleOutlined
+              onClick={() => setMenuIsOpened(false)}
+              style={{ color: "white", fontSize: "28px" }}
+            />
+          </Row>
         </Col>
       </Row>
     </Row>
@@ -79,7 +88,7 @@ const NavBar = ({ setMenuIsOpened, history }) => {
 };
 
 NavBar.propTypes = {
-  setMenuIsOpened: PropTypes.func
+  setMenuIsOpened: PropTypes.func,
 };
 
 export default withRouter(NavBar);

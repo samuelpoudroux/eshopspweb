@@ -5,7 +5,7 @@ import {
   MenuOutlined,
   LoginOutlined,
   LogoutOutlined,
-  RobotOutlined,
+  MessageOutlined,
   ContactsOutlined,
 } from "@ant-design/icons";
 import { Row, Col, Popover } from "antd";
@@ -21,10 +21,14 @@ import { logout } from "../repository/auth";
 import useIsAdmin from "../customHooks/isAdminHooks";
 import AddNewProduct from "../form/product/AddNewProduct";
 import { PlusCircleOutlined } from "@ant-design/icons";
+import styleVariable from "../styleVariable";
+import FavoriteNumber from "./product/FavoriteNumber";
 
 const Header = ({
   setBasketActive,
   basketIsActive,
+  favoriteIsActive,
+  setFavoriteActive,
   history,
   setChatActive,
   botRef,
@@ -70,7 +74,7 @@ const Header = ({
     <header
       style={{
         padding: isMobile ? "3%" : "1.5%",
-        background: "#686868",
+        background: styleVariable.backgroundColorGradient,
         width: "100%",
       }}
     >
@@ -104,7 +108,7 @@ const Header = ({
             </Col>
             <Col lg={4} md={4} xs={4} sm={4}>
               <Popover title="Besoin d'aide">
-                <RobotOutlined
+                <MessageOutlined
                   onClick={() => goToBot()}
                   style={{ fontSize: 50, color: "white" }}
                 />
@@ -126,8 +130,8 @@ const Header = ({
           sm={24}
           style={{ marginTop: isMobile && "10%" }}
         >
-          <Row justify={!isMobile && "center"} align="middle">
-            <Col lg={2} md={4} xs={4} sm={4}>
+          <Row justify="center" align="middle">
+            <Col lg={2} md={4} xs={6} sm={6}>
               <ProductsNumber
                 header
                 setBasketActive={setBasketActive}
@@ -135,17 +139,30 @@ const Header = ({
                 BadgeStyle={{ backgroundColor: "#89ba17", color: "white" }}
               />
             </Col>
-            <Col lg={2} md={4} xs={4} sm={4}>
+            <Col lg={2} md={4} xs={6} sm={6}>
               <TotalPrice
                 BadgeStyle={{ backgroundColor: "#fff", color: "#89ba17" }}
                 basketIsActive={basketIsActive}
                 setBasketActive={setBasketActive}
               />
             </Col>
-            <Col lg={2} md={4} xs={3} sm={3}>
+            <Col lg={2} md={4} xs={6} sm={6}>
+              <FavoriteNumber
+                BadgeStyle={{ backgroundColor: "#686868", color: "white" }}
+                setFavoriteActive={setFavoriteActive}
+                favoriteIsActive={favoriteIsActive}
+              />
+            </Col>
+            <Col lg={2} md={4} xs={6} sm={6}>
               <CleanBasket />
             </Col>
-            <Col lg={10} md={5} xs={11} sm={11}>
+            <Col
+              lg={3}
+              md={5}
+              xs={12}
+              sm={12}
+              style={{ marginTop: isMobile && 50 }}
+            >
               <p style={{ color: "white", margin: "0", fontSize: "1em" }}>
                 {local &&
                   local.firstName &&
@@ -155,10 +172,16 @@ const Header = ({
                   }`}
               </p>
             </Col>
-            <Col lg={2} md={4} xs={2} sm={2}>
+            <Col
+              lg={2}
+              md={2}
+              xs={12}
+              sm={12}
+              style={{ marginTop: isMobile && 50 }}
+            >
               <Row>
                 {local && local.isLogged && (
-                  <Row align="middle" justify="center">
+                  <Row justify="center">
                     <LogoutOutlined
                       style={iconStyle}
                       onClick={() => logout(history)}
@@ -175,7 +198,7 @@ const Header = ({
               </Row>
             </Col>
             {isAdmin && (
-              <Col lg={2} sm={24} xs={24}>
+              <Col lg={2} md={24} sm={24} xs={24}>
                 <Row
                   style={{
                     marginTop: isMobile && 20,

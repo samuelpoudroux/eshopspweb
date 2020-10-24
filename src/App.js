@@ -13,24 +13,28 @@ import ProtectedRoute from "./ProtectedRoutes";
 import Chat from "./Chat";
 import Footer from "./components/Footer";
 import useResponsive from "./customHooks/responsiveHook";
+import Favorites from "./components/favorite/Favorites";
 
 function App() {
   const { globalSearch } = useContext(AppContext);
   const { state: globalSearchState } = globalSearch;
   const [basketIsActive, setBasketActive] = useState(false);
+  const [favoriteIsActive, setFavoriteActive] = useState(false);
   const [chatActive, setChatActive] = useState(false);
   const botRef = useRef(null);
   const appRef = useRef(null);
   const { isMobile } = useResponsive();
 
   return (
-    <div className="App" ref={appRef} style={{ minHeight: "100vh" }}>
+    <div ref={appRef} style={{ minHeight: "100vh" }}>
       <div style={{ minHeight: "100vh" }}>
         <Router history={history}>
           <Header
             botRef={botRef}
             setBasketActive={setBasketActive}
             basketIsActive={basketIsActive}
+            setFavoriteActive={setFavoriteActive}
+            favoriteIsActive={favoriteIsActive}
             setChatActive={setChatActive}
           />
 
@@ -68,9 +72,7 @@ function App() {
               {chatActive && (
                 <Col>
                   <Row justify="start" align="middle">
-                    <Col lg={6} md={12} xs={24} sm={24}>
-                      <h3>En quoi puis je vous aider</h3>
-                    </Col>
+                    <Col lg={6} md={12} xs={24} sm={24}></Col>
                     <Col span={24}>
                       <Chat
                         appRef={appRef}
@@ -84,6 +86,12 @@ function App() {
             </Col>
           </Col>
           {basketIsActive && <Basket setBasketActive={setBasketActive} />}
+          {favoriteIsActive && (
+            <Favorites
+              favoriteIsActive={favoriteIsActive}
+              setFavoriteActive={setFavoriteActive}
+            />
+          )}
           <Footer history={history} />
         </Router>
       </div>

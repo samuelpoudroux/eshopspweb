@@ -6,8 +6,7 @@ import { DownOutlined } from "@ant-design/icons";
 import useResponsive from "../../customHooks/responsiveHook";
 import Addandremoveproduct from "../product/AddAndRemoveProduct";
 import { withRouter } from "react-router";
-import RemoveSeveralProducts from "../product/RemoveSeveralProduct";
-import ProductNumber from "../product/ProductNumber";
+
 const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
   let num = 0;
   const list = JSON.parse(localStorage.getItem("basket")) || [];
@@ -52,7 +51,7 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
   return (
     list.length > 0 &&
     productInBasket !== 0 && (
-      <div>
+      <div style={{ textAlign: "center" }}>
         {list.length > 0 && (
           <DownOutlined
             style={{
@@ -98,6 +97,7 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
                 (product) =>
                   product.num !== 0 && (
                     <Row
+                      key={product.id}
                       style={{
                         cursor: "pointer",
                       }}
@@ -134,38 +134,27 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
                                   {product.name}
                                 </h1>
                               </Row>
-                              <Row>
-                                <b>Prix du produit:</b>
-                                <Badge
-                                  style={{
-                                    backgroundColor: "#89ba17",
-                                    color: "white",
-                                  }}
-                                  count={`${product.productPrice}€`}
-                                />
-                              </Row>
                             </Col>
                             <Col lg={4}>
-                              <Row justify="end">
-                                <RemoveSeveralProducts product={product} />
+                              <Row justify="center" align="middle">
+                                <p
+                                  style={{
+                                    color: "#89ba17",
+                                    fontSize: "2em",
+                                    margin: 0,
+                                  }}
+                                >
+                                  {product.productPrice}€
+                                </p>
                               </Row>
                             </Col>
                           </Row>
-                          <Row>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing
-                            elit. Culpa nihil unde ullam animi provident laborum
-                            nesciunt, tenetur iure suscipit modi doloribus odio
-                            ad vitae quaerat aspernatur nisi omnis minus
-                            impedit.
-                          </Row>
+                          <Row>{product.shortDescription}</Row>
                           <Row
                             style={{ marginTop: !isMobile ? 80 : 10 }}
                             justify={isMobile ? "space-between" : "start"}
                           >
-                            <Col lg={4}>
-                              <ProductNumber product={product} />
-                            </Col>
-                            <Col lg={2}>
+                            <Col lg={6}>
                               <Addandremoveproduct product={product} />
                             </Col>
                           </Row>
