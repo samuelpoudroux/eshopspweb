@@ -8,7 +8,7 @@ const FavoriteNumber = ({
   iconBasketColor,
   BadgeStyle,
 }) => {
-  const favoriteList = JSON.parse(localStorage.getItem("favorites"));
+  const favoriteList = JSON.parse(localStorage.getItem("favorites")) || [];
 
   return (
     <Badge style={BadgeStyle} count={favoriteList.length}>
