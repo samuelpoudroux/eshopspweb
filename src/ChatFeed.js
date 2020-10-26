@@ -1,8 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
+import _ from "lodash";
 import { Col, Row, Spin } from "antd";
 import { v4 as uuidv4 } from "uuid";
 
-const ChatFeedComponent = ({ messages, socket, history, setChatActive }) => {
+const ChatFeedComponent = ({
+  messages,
+  socket,
+  history,
+  setChatActive,
+  setFavoriteActive,
+  setBasketActive,
+}) => {
   const secondTest = useRef(null);
   const [messageEnd, setMessageEnd] = useState();
   useEffect(() => {
@@ -13,7 +21,47 @@ const ChatFeedComponent = ({ messages, socket, history, setChatActive }) => {
         inline: "nearest",
       });
     }
+
+    if (messages && messages.length > 0) {
+      const copy = messages;
+      redirect(messages.pop().message);
+    }
   }, [messages]);
+
+  const goToPage = (page) => {
+    appRef.scrollIntoView(true);
+    history.push(page);
+  };
+
+  const redirect = (expr) => {
+    switch (expr) {
+      case "Nous vous dirigeons vers la page de paiement":
+        return goToPage("/paiement");
+        break;
+      case "Gérer mon panier":
+        return "blue";
+        break;
+      case "Nous vous dirigeons vers nos produits":
+        return goToPage("/paiement");
+        break;
+      case "Nous vous dirigons vers la page de création":
+        return goToPage("/register");
+        break;
+      case "Nous vous redirigeons vers notre page contact":
+        return goToPage("/contact");
+        break;
+      case "Voici vos favoris":
+        return setFavoriteActive(true);
+        break;
+      case "Voici votre panier":
+        return setBasketActive(true);
+      case "Nous vous dirigeons vers la page de gestion du compte":
+        return goToPage("/informations");
+        break;
+      default:
+        return "grey";
+    }
+  };
 
   const appRef = document.getElementById("root");
   const sendResponseToBot = (value, previousMessage) => {
@@ -24,15 +72,27 @@ const ChatFeedComponent = ({ messages, socket, history, setChatActive }) => {
     });
   };
 
-  const goToPage = (redirect) => {
-    if (redirect !== "products") {
-      appRef.scrollIntoView(true);
-      setChatActive(false);
-      history.push(`/${redirect}`);
-    } else {
-      appRef.scrollIntoView(true);
-      setChatActive(false);
-      history.push(`/`);
+  const renderBackgroundInput = (expr) => {
+    switch (expr) {
+      case "Gérer mes favoris":
+        return "#be924a";
+        break;
+      case "Gérer mon panier":
+        return "grey";
+      case "Finaliser ma commande":
+        return "grey"; // expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
+      case "Modifier mes informations":
+        return "#be924a"; // expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
+      case "oui":
+        return "white"; // expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
+      case "non":
+        return "grey"; // expected output: "Mangoes and papayas are $2.79 a pound."
+        break;
+      default:
+        return "grey";
     }
   };
 
@@ -67,7 +127,6 @@ const ChatFeedComponent = ({ messages, socket, history, setChatActive }) => {
                   width: "60%",
                 }}
               >
-                {redirect && goToPage(redirect)}
                 <Row justify="center">
                   <p
                     style={{
@@ -88,8 +147,10 @@ const ChatFeedComponent = ({ messages, socket, history, setChatActive }) => {
                         key={uuidv4()}
                         type="button"
                         style={{
-                          background: value === "oui" ? "white" : "grey",
+                          background: renderBackgroundInput(value),
                           border: "none",
+                          color: value === "oui" ? "grey" : "white",
+                          cursor: "pointer",
                         }}
                         value={value}
                         onClick={(e) =>

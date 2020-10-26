@@ -14,7 +14,6 @@ import Chat from "./Chat";
 import Footer from "./components/Footer";
 import useResponsive from "./customHooks/responsiveHook";
 import Favorites from "./components/favorite/Favorites";
-import NewNess from "./components/product/NewNess";
 
 function App() {
   const { globalSearch } = useContext(AppContext);
@@ -80,6 +79,8 @@ function App() {
                         appRef={appRef}
                         setChatActive={setChatActive}
                         history={history}
+                        setBasketActive={setBasketActive}
+                        setFavoriteActive={setFavoriteActive}
                       />
                     </Col>
                   </Row>

@@ -5,7 +5,13 @@ import { Col, Row, Spin } from "antd";
 import useResponsive from "./customHooks/responsiveHook";
 import * as io from "socket.io-client";
 
-const Chat = ({ setChatActive, history, appRef }) => {
+const Chat = ({
+  setChatActive,
+  history,
+  appRef,
+  setFavoriteActive,
+  setBasketActive,
+}) => {
   const [messages, setMessages] = useState([]);
   const [socket, setSocket] = useState(io(process.env.REACT_APP_API_DOMAIN));
   const { isMobile } = useResponsive();
@@ -40,6 +46,8 @@ const Chat = ({ setChatActive, history, appRef }) => {
           history={history}
           appRef={appRef}
           setChatActive={setChatActive}
+          setBasketActive={setBasketActive}
+          setFavoriteActive={setFavoriteActive}
         />
       </Row>
     </div>
