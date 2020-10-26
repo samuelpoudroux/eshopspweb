@@ -233,6 +233,21 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                     </Select>
                   </Form.Item>
 
+                  <Form.Item
+                    label="Nouveauté"
+                    name="newNess"
+                    rules={[
+                      {
+                        required: false,
+                      },
+                    ]}
+                    hasFeedback
+                  >
+                    <Select>
+                      <Option value="true">oui</Option>
+                      <Option value="false">non</Option>
+                    </Select>
+                  </Form.Item>
                   <Upload
                     beforeUpload={(file) => {
                       setFiles(file);

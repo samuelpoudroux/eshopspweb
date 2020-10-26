@@ -7,20 +7,37 @@ import { Row, Col } from "antd";
 import PropTypes from "prop-types";
 import Addandremoveproduct from "./AddAndRemoveProduct";
 import useResponsive from "../../customHooks/responsiveHook";
-import { HeartFilled, HeartOutlined } from "@ant-design/icons";
+import {
+  HeartFilled,
+  HeartOutlined,
+  CrownFilled,
+  CrownOutlined,
+} from "@ant-design/icons";
+import useIsAdmin from "../../customHooks/isAdminHooks";
+import Axios from "axios";
+import { useEffect } from "react";
 import { useState } from "react";
 
-const Productcard = ({ product, history }) => {
-  const { globalSearch, favorites } = useContext(AppContext);
+const {
+  REACT_APP_API_DOMAIN,
+  REACT_APP_API_PRODUCT_IS_NEWNESS,
+  REACT_APP_API_PRODUCT,
+} = process.env;
+
+const Productcard = ({ product, history, large }) => {
+  const { globalSearch, favorites, products } = useContext(AppContext);
+  const { isAdmin } = useIsAdmin();
   const { search } = globalSearch;
   const { isMobile } = useResponsive();
-  const [isFavorites, setIsFavorites] = useState(false);
-  const productIsInFavorites =
-    (JSON.parse(localStorage.getItem("favorites")) &&
-      JSON.parse(localStorage.getItem("favorites")).find(
-        (e) => e.id === product.id
-      )) ||
-    null;
+
+  const isFavorites =
+    JSON.parse(localStorage.getItem("favorites")) &&
+    JSON.parse(localStorage.getItem("favorites")).length > 0 &&
+    JSON.parse(localStorage.getItem("favorites")).find(
+      (e) => e.id === product.id
+    )
+      ? true
+      : false;
   const {
     id,
     name,
@@ -41,12 +58,21 @@ const Productcard = ({ product, history }) => {
   };
 
   const addFavorites = () => {
-    setIsFavorites(true);
     favorites.addProductToFavorites(product);
   };
   const removeFromFavorites = () => {
-    setIsFavorites(false);
     favorites.removeProductFromFavorites(product);
+  };
+  const isProductNewNess = async (e, value) => {
+    e.stopPropagation();
+    await Axios.put(
+      REACT_APP_API_DOMAIN +
+        REACT_APP_API_PRODUCT +
+        REACT_APP_API_PRODUCT_IS_NEWNESS +
+        id,
+      { newNess: value }
+    );
+    products.getAllProducts();
   };
 
   return (
@@ -54,7 +80,7 @@ const Productcard = ({ product, history }) => {
       xs={20}
       sm={20}
       md={24}
-      lg={2}
+      lg={large || 4}
       style={{
         boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
         background: "#fff",
@@ -62,6 +88,7 @@ const Productcard = ({ product, history }) => {
         position: "relative",
         cursor: "pointer",
         padding: "1px",
+        marginTop: isMobile && 20,
       }}
       key={product.id}
     >
@@ -74,12 +101,18 @@ const Productcard = ({ product, history }) => {
           />
         </Row>
 
-        <Row justify={isMobile && "center"}>
-          <Col lg={3} md={1} sm={8} xs={4}>
+        <Row>
+          <Col
+            lg={24}
+            md={24}
+            sm={24}
+            xs={24}
+            style={{ wordBreak: "break-all", paddingTop: 15 }}
+          >
             <b style={{ color: "#878888" }}>{name}</b>
           </Col>
         </Row>
-        <Row justify={isMobile && "center"}>
+        <Row>
           <Col lg={6} md={1} sm={8} xs={4}>
             <p
               style={{
@@ -110,31 +143,53 @@ const Productcard = ({ product, history }) => {
           </Col>
         </Row>
 
-        <Row
-          justify={isMobile && "center"}
-          onClick={(e) => e.stopPropagation()}
-        >
+        <Row onClick={(e) => e.stopPropagation()}>
           <Col lg={24} md={6} sm={16} xs={16}>
             <Addandremoveproduct product={product} />
           </Col>
-          <Row align="middle">
+          <Row align="middle" justify="space-between">
             <Col lg={23}>
-              <ReactStars
-                count={5}
-                value={notation}
-                edit={false}
-                size={24}
-                activeColor="#89ba17"
-              />
+              <Row align="middle">
+                <ReactStars
+                  count={5}
+                  value={notation}
+                  edit={false}
+                  size={24}
+                  activeColor="#89ba17"
+                />
+              </Row>
             </Col>
             <Col lg={1}>
-              {isFavorites && (
-                <HeartFilled onClick={() => removeFromFavorites()} />
-              )}
-              {!isFavorites && <HeartOutlined onClick={() => addFavorites()} />}
+              <Row align="middle">
+                {isFavorites && (
+                  <HeartFilled
+                    style={{ fontSize: 24, color: "#89ba17" }}
+                    onClick={() => removeFromFavorites()}
+                  />
+                )}
+                {!isFavorites && (
+                  <HeartOutlined
+                    style={{ fontSize: 24, color: "#89ba17" }}
+                    onClick={() => addFavorites()}
+                  />
+                )}
+              </Row>
             </Col>
           </Row>
         </Row>
+        {isAdmin && product.newNess == 0 && (
+          <Row justify="center" align="middle">
+            <CrownOutlined onClick={(e) => isProductNewNess(e, "true")} />
+          </Row>
+        )}
+        {isAdmin && product.newNess === 1 && (
+          <Row justify="center" align="middle">
+            <CrownFilled
+              style={{ color: "#be924a" }}
+              onClick={(e) => isProductNewNess(e, "false")}
+            />
+          </Row>
+        )}
       </Col>
     </Col>
   );

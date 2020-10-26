@@ -37,8 +37,9 @@ const Header = ({
   const { isMobile } = useResponsive();
   const [globalSearchApi, setGlobalSearchApi] = useState();
   const [addProduct, setAddProduct] = useState(false);
-  const { products } = useContext(AppContext);
+  const { products, favorites } = useContext(AppContext);
   const [state, updateState] = useState(true);
+  const [update, setUpdate] = useState(false);
 
   const { REACT_APP_API_DOMAIN, REACT_APP_API_GLOBAL_SEARCH } = process.env;
 
@@ -70,6 +71,9 @@ const Header = ({
   useEffect(() => {
     getGlobalSearchApi();
   }, []);
+  useEffect(() => {
+    setUpdate(!update);
+  }, [favorites]);
   return (
     <header
       style={{
@@ -99,8 +103,8 @@ const Header = ({
                 alt="logo"
                 src={logo}
                 style={{
-                  maxWidth: isMobile ? "100%" : "100%",
-                  maxHeight: isMobile ? "100%" : "100%",
+                  maxWidth: isMobile ? "120%" : "100%",
+                  maxHeight: isMobile ? "150%" : "100%",
                   cursor: "pointer",
                 }}
                 onClick={() => history.push("/")}
@@ -114,7 +118,7 @@ const Header = ({
                 />
               </Popover>
             </Col>
-            <Col lg={3} md={4} xs={5} sm={5}>
+            <Col lg={3} md={4} xs={4} sm={4}>
               <ContactsOutlined
                 onClick={() => history.push("/contact")}
                 style={{ fontSize: 50, color: "white" }}

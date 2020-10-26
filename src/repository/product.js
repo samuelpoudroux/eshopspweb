@@ -1,4 +1,5 @@
 import _ from "lodash";
+import SortProducts from "../components/product/SortProducts";
 
 // sort product from higher to lowest  price
 const sortProductsByHigher = (state) => {
@@ -6,7 +7,7 @@ const sortProductsByHigher = (state) => {
   const sortedProducts = copy.sort(
     (productA, productB) => productB.productPrice - productA.productPrice
   );
-  return { ...state, sortedProducts };
+  return { ...state, sortedProducts, notFound: false };
 };
 
 // sort product from lowest to higher  price
@@ -15,7 +16,7 @@ const sortProductsByLowest = (state) => {
   const sortedProducts = copy.sort(
     (productA, productB) => productA.productPrice - productB.productPrice
   );
-  return { ...state, sortedProducts };
+  return { ...state, sortedProducts, notFound: false };
 };
 
 // sort product related to categories selected on select
@@ -30,17 +31,20 @@ const sortProductsByCategories = (state, categories) => {
   if (sortedProducts.length === 0) {
     sortedProducts = state.products;
   }
-  return { ...state, sortedProducts };
+  return { ...state, sortedProducts, notFound: false };
 };
 // sort product related to maxPrice
 const sortProductsByMaxPrice = (state, value) => {
-  console.log("toto", value);
   const copy = _.cloneDeep(state.products);
   let sortedProducts = [];
   sortedProducts.push(
     ...copy.filter((product) => product.productPrice <= value)
   );
-  return { ...state, sortedProducts };
+
+  if (sortedProducts.length === 0) {
+    return { ...state, sortedProducts: copy, notFound: value };
+  }
+  return { ...state, sortedProducts, notFound: false };
 };
 
 const getNumberOfProducts = (basketList) => {

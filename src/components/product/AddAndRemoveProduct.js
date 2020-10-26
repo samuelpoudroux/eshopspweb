@@ -1,5 +1,5 @@
-import { Row, Input, Col, notification } from "antd";
-import React, { useContext } from "react";
+import { Row, Input, Col, notification, Badge } from "antd";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../../context/context";
 import ProductInBasket from "./ProductInBasket";
 import { SmileOutlined } from "@ant-design/icons";
@@ -8,34 +8,39 @@ import useResponsive from "../../customHooks/responsiveHook";
 
 const Addandremoveproduct = ({ product, buttonPadding }) => {
   const { basket } = useContext(AppContext);
+  const [notification, addNotification] = useState(false);
   const list = JSON.parse(localStorage.getItem("basket")) || [];
   const { isMobile } = useResponsive();
   const { add, decrease } = basket;
   const addProduct = (e) => {
     add(product);
-    notification.open({
-      message: `1 ${product.name} ajouté au panier`,
-      icon: <SmileOutlined style={{ color: "#89ba17" }} />,
-      duration: 1,
+    addNotification({
+      num: "1",
+      add: true,
     });
+    setTimeout(function () {
+      addNotification(false);
+    }, 1000);
     e.stopPropagation();
   };
   const removeProduct = (e) => {
     const productInBasket = list.find((e) => e.id === product.id);
-    if (productInBasket.num > 0) {
-      notification.open({
-        message: `1 ${product.name} retiré du panier`,
-        icon: <SmileOutlined style={{ color: "#89ba17" }} />,
-        duration: 1,
+    if (productInBasket && productInBasket.num > 0) {
+      addNotification({
+        num: "1",
+        remove: true,
       });
+      setTimeout(function () {
+        addNotification(false);
+      }, 1000);
     }
 
     e.stopPropagation();
     decrease(product);
   };
-
+  console.log("noti", notification.num);
   return (
-    <Row justify={isMobile ? "center" : "space-between"} align="middle">
+    <Row justify={isMobile ? "start" : "space-between"} align="middle">
       <Col lg={3} md={6} sm={5} xs={5}>
         <Row justify="start">
           <button
@@ -49,6 +54,14 @@ const Addandremoveproduct = ({ product, buttonPadding }) => {
           >
             +
           </button>
+          {notification && notification.add && (
+            <Badge
+              style={{ background: "#be924a" }}
+              count={`${notification.add && "+" + notification.num}`}
+            >
+              <a style={{ marginLeft: 5 }} href="#" className="head-example" />
+            </Badge>
+          )}
         </Row>
       </Col>
       <Col lg={9} md={6} sm={5} xs={5}>
@@ -72,6 +85,14 @@ const Addandremoveproduct = ({ product, buttonPadding }) => {
           >
             -
           </button>
+          {notification && notification.remove && (
+            <Badge
+              style={{ background: "#be924a" }}
+              count={`${notification.remove && "-" + notification.num}`}
+            >
+              <a style={{ marginLeft: 5 }} href="#" className="head-example" />
+            </Badge>
+          )}
         </Row>
       </Col>
       <Col lg={6} md={6} sm={5} xs={5}>

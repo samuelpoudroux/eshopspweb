@@ -23,7 +23,6 @@ const Chat = ({ setChatActive, history, appRef }) => {
         flexDirection: "column",
         justifyContent: "space-between",
         marginTop: 10,
-        border: "dashed grey 3px",
       }}
     >
       <ChatHeader socket={socket} setChatActive={setChatActive} />

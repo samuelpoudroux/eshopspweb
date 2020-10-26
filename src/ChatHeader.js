@@ -8,7 +8,7 @@ const ChatHeader = ({ setChatActive, socket }) => {
   };
   return (
     <div className="chatHeader">
-      <div className="leftInnerContainer">
+      <div className="">
         <h3 style={{ color: "white" }}>En quoi puis je vous aider ?</h3>
       </div>
       <div className="rightInnerContainer">

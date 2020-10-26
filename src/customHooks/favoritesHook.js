@@ -5,20 +5,23 @@ import { useState } from "react";
 const useFavorites = () => {
   const [favorites, setFavorites] = useState([]);
 
+  const oldFavorites =
+    (JSON.parse(localStorage.getItem("favorites")) &&
+      JSON.parse(localStorage.getItem("favorites"))) ||
+    [];
+
   const addProductToFavorites = (product) => {
-    console.log("produict", product);
-    const productIsinFavorites = favorites.find((e) => e.id === product.id);
+    const productIsinFavorites = oldFavorites.find((e) => e.id === product.id);
     if (!productIsinFavorites) {
-      const newFavorites = [...favorites, product];
+      const newFavorites = [...oldFavorites, product];
       setFavorites(newFavorites);
       localStorage.setItem("favorites", JSON.stringify(newFavorites));
     }
   };
   const removeProductFromFavorites = (product) => {
-    console.log("fav", favorites);
-    const productIsinFavorites = favorites.find((e) => e.id === product.id);
+    const productIsinFavorites = oldFavorites.find((e) => e.id === product.id);
     if (productIsinFavorites) {
-      const newFavorites = _.cloneDeep(favorites);
+      const newFavorites = _.cloneDeep(oldFavorites);
       const index = newFavorites.findIndex(
         (i) => i.id === productIsinFavorites.id
       );

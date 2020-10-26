@@ -43,6 +43,7 @@ const GlobalStore = ({ children }) => {
     },
     products: {
       list: state.sortedProducts,
+      notFound: state.notFound,
       get: getProducts,
       getAllProducts: getAllProducts,
       sort: sortProducts,

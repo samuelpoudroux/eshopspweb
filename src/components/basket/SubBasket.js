@@ -59,6 +59,7 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
               marginTop: 20,
               color: "#686868",
               fontSize: "1.3em",
+              overflowY: isMobile && "scroll",
             }}
             onClick={() => setSubBasketVisible(true)}
           />
@@ -125,7 +126,7 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
                         >
                           <Row justify="space-between" align="top">
                             <Col lg={20}>
-                              <Row>
+                              <Row style={{ wordBreak: "break-word" }}>
                                 <h1
                                   style={{
                                     color: "#686868",

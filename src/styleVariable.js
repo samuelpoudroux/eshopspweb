@@ -1,6 +1,6 @@
 const styleVariable = {
   margin: "1%",
-  backgroundColorGradient: "linear-gradient(0deg, #686868 0%, #1c7ce0 100%)",
+  backgroundColorGradient: "linear-gradient(0deg, #be924a 0%, #fde162 100%)",
   mainColor: "#522db8",
   secondaryColor: "#89ba17",
   fontStyle: "helvetica",
