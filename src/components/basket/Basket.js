@@ -1,17 +1,16 @@
-import React, { useContext, useCallback } from "react";
+import React, { useContext, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { AppContext } from "../../context/context";
-import { CloseCircleOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, ShopFilled } from "@ant-design/icons";
 import { Card, Col, Row } from "antd";
 import CleanBasket from "./CleanBasket";
 import { getTotalPrice } from "../../repository/product";
 import Addandremoveproduct from "../product/AddAndRemoveProduct";
-import ProductInBasket from "../product/ProductInBasket";
-import RemoveSeveralProducts from "../product/RemoveSeveralProduct";
-import { join } from "lodash";
+import styleVariable from "../../styleVariable";
 
 const Basket = ({ setBasketActive }) => {
   const { basket } = useContext(AppContext);
+  const [notification, addNotification] = useState(false);
   const basketList = JSON.parse(localStorage.getItem("basket"));
   const list = JSON.parse(localStorage.getItem("basket")) || [];
   const totalPrices = useCallback(() => {
@@ -19,8 +18,8 @@ const Basket = ({ setBasketActive }) => {
   }, [basket]);
   const productName = (product) => {
     return (
-      <Row justify="space-between">
-        <h2 style={{ color: "#89ba17" }}>{product.name}</h2>
+      <Row justify="space-between" style={{ wordBreak: "break-word" }}>
+        <h2 style={{ color: styleVariable.mainColor }}>{product.name}</h2>
       </Row>
     );
   };
@@ -31,10 +30,14 @@ const Basket = ({ setBasketActive }) => {
 
   return (
     <div className="basket" onClick={(e) => closeBasket(e)}>
-      <Col className="basket_inner">
-        <div style={{ padding: "2%" }}>
-          <Row justify="space-between">
+      <Col
+        className="basket_inner"
+        style={{ background: styleVariable.secondaryColor, paddingTop: 15 }}
+      >
+        <div style={{ padding: "2%", overflowY: "scroll" }}>
+          <Row justify="space-between" onClick={(e) => e.stopPropagation()}>
             <CleanBasket color={"white"} fontSize={"30px"} />
+            <ShopFilled style={{ fontSize: "35px", color: "white" }} />
             <CloseCircleOutlined
               style={{ color: "white", fontSize: "30px" }}
               onClick={() => setBasketActive(false)}
@@ -59,13 +62,19 @@ const Basket = ({ setBasketActive }) => {
                           >
                             <Row justify="space-between" align="middle">
                               <Col span={14}>
-                                <Addandremoveproduct product={product} />
+                                <Addandremoveproduct
+                                  notification={notification}
+                                  addNotification={addNotification}
+                                  product={product}
+                                />
                               </Col>
                               <Col span={10}>
-                                <p style={{ color: "#686868", margin: 0 }}>
-                                  Sous-total:
-                                  {product.productPrice * product.num}€
-                                </p>
+                                <Row justify="end">
+                                  <p style={{ color: "#686868", margin: 0 }}>
+                                    Sous-total:
+                                    {product.productPrice * product.num}€
+                                  </p>
+                                </Row>
                               </Col>
                             </Row>
                           </Card>
@@ -83,7 +92,7 @@ const Basket = ({ setBasketActive }) => {
         <Row
           style={{
             marginTop: "20%",
-            background: "rgba(104,104,104, 0.8)",
+            background: styleVariable.mainColor,
             padding: "10px",
           }}
           justify="space-between"

@@ -9,6 +9,7 @@ import {
   getDefaultValueLocalStorage,
   getInitialValue,
 } from "../../repository/localStorage";
+import styleVariable from "../../styleVariable";
 const {
   REACT_APP_API_DOMAIN,
   REACT_APP_API_AUTH,
@@ -25,7 +26,7 @@ const Register = ({ history }) => {
     if (!errors && message) {
       notification.open({
         message: message,
-        icon: <SmileOutlined style={{ color: "#89ba17" }} />,
+        icon: <SmileOutlined style={{ color: styleVariable.secondaryColor }} />,
       });
       history.push("/login");
     }
@@ -240,7 +241,10 @@ const Register = ({ history }) => {
 
               <Form.Item>
                 <Button
-                  style={{ background: "#89ba17", border: "none" }}
+                  style={{
+                    background: styleVariable.secondaryColor,
+                    border: "none",
+                  }}
                   type="primary"
                   htmlType="submit"
                 >

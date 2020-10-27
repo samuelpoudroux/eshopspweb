@@ -22,6 +22,7 @@ import {
   CloseCircleOutlined,
 } from "@ant-design/icons";
 import TextArea from "antd/lib/input/TextArea";
+import styleVariable from "../../styleVariable";
 
 const { Option } = Select;
 const itemKey = "product";
@@ -248,24 +249,27 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate }) => {
                       <Option value="false">non</Option>
                     </Select>
                   </Form.Item>
-                  <Upload
-                    beforeUpload={(file) => {
-                      setFiles(file);
-                      return false;
-                    }}
-                    onRemove={(file) => setFiles(null)}
-                  >
-                    <Button
-                      disabled={files ? true : false}
-                      icon={<UploadOutlined />}
+                  <div style={{ textAlign: "center" }}>
+                    <Upload
+                      beforeUpload={(file) => {
+                        setFiles(file);
+                        return false;
+                      }}
+                      onRemove={(file) => setFiles(null)}
                     >
-                      Charger l'image du produit
-                    </Button>
-                  </Upload>
-                  <Form.Item>
+                      <Button
+                        disabled={files ? true : false}
+                        icon={<UploadOutlined />}
+                      >
+                        Charger l'image du produit
+                      </Button>
+                    </Upload>
+                  </div>
+
+                  <Form.Item style={{ textAlign: "center" }}>
                     <Button
                       style={{
-                        background: "#89ba17",
+                        background: styleVariable.secondaryColor,
                         border: "none",
                         marginTop: "1rem",
                       }}

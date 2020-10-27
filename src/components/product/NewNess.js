@@ -3,6 +3,7 @@ import { Col, Row, Spin, Carousel } from "antd";
 import { AppContext } from "../../context/context";
 import Productcard from "./ProductCard";
 import { useEffect } from "react";
+import styleVariable from "../../styleVariable";
 
 const NewNess = () => {
   const { products } = useContext(AppContext);
@@ -16,7 +17,9 @@ const NewNess = () => {
 
   return (
     <Col lg={24}>
-      <h3 style={{ textAlign: "center" }}>Nos nouveautés</h3>
+      <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
+        Nos nouveautés
+      </h3>
 
       <Carousel
         autoplay
@@ -27,6 +30,7 @@ const NewNess = () => {
           background: "#ref",
           borderRadius: "2px",
           borderRadius: "2px",
+          padding: 25,
         }}
         onClick={(e) => e.stopPropagation()}
       >

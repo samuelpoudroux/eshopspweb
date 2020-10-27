@@ -3,6 +3,7 @@ import { Popover, Popconfirm, Col, Row, Input } from "antd";
 import { QuestionCircleOutlined, DeleteOutlined } from "@ant-design/icons";
 import { AppContext } from "../../context/context";
 import { useState } from "react";
+import styleVariable from "../../styleVariable";
 
 const RemoveSeveralProducts = ({ product }) => {
   const { basket } = useContext(AppContext);
@@ -63,7 +64,7 @@ const RemoveSeveralProducts = ({ product }) => {
               decreaseProductsFromBasket(product, numberToDelete)
             }
           >
-            <DeleteOutlined style={{ color: "green" }} />
+            <DeleteOutlined style={{ color: styleVariable.secondaryColor }} />
           </Popconfirm>
         </Row>
       </Col>
@@ -80,7 +81,9 @@ const RemoveSeveralProducts = ({ product }) => {
           visible={visible}
           onVisibleChange={handleVisibleChange}
         >
-          <DeleteOutlined style={{ fontSize: "1.3em", color: "#89ba17" }} />
+          <DeleteOutlined
+            style={{ fontSize: "1.3em", color: styleVariable.secondaryColor }}
+          />
         </Popover>
       )}
     </>

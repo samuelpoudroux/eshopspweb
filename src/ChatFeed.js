@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import _ from "lodash";
 import { Col, Row, Spin } from "antd";
 import { v4 as uuidv4 } from "uuid";
+import styleVariable from "./styleVariable";
 
 const ChatFeedComponent = ({
   messages,
@@ -121,7 +122,10 @@ const ChatFeedComponent = ({
                 lg={18}
                 sm={24}
                 style={{
-                  background: id === 0 ? "#89ba17" : "grey",
+                  background:
+                    id === 0
+                      ? styleVariable.mainColor
+                      : styleVariable.secondaryColor,
                   padding: 20,
                   borderRadius: 50,
                   width: "60%",
@@ -149,7 +153,8 @@ const ChatFeedComponent = ({
                         style={{
                           background: renderBackgroundInput(value),
                           border: "none",
-                          color: value === "oui" ? "grey" : "white",
+                          color:
+                            value === "oui" ? styleVariable.mainColor : "white",
                           cursor: "pointer",
                         }}
                         value={value}

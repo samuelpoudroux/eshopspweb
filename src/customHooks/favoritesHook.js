@@ -31,9 +31,15 @@ const useFavorites = () => {
     }
   };
 
+  const removeAllProductFromFavorites = (product) => {
+    localStorage.setItem("favorites", JSON.stringify([]));
+    setFavorites([]);
+  };
+
   return {
     addProductToFavorites,
     removeProductFromFavorites,
+    removeAllProductFromFavorites,
     favorites,
   };
 };

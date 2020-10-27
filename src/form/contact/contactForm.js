@@ -16,6 +16,7 @@ import {
   getInitialValue,
 } from "../../repository/localStorage";
 import { PHONENUMBER, EMAIL, ADDRESS } from "../../constants/contact";
+import styleVariable from "../../styleVariable";
 
 const ContactForm = ({ history }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +38,7 @@ const ContactForm = ({ history }) => {
     if (!errors && message) {
       notification.open({
         message: message,
-        icon: <SmileOutlined style={{ color: "#89ba17" }} />,
+        icon: <SmileOutlined style={{ color: styleVariable.secondaryColor }} />,
       });
       history.push("/");
     }
@@ -57,7 +58,7 @@ const ContactForm = ({ history }) => {
   return (
     <Col>
       <Row justify="center">
-        <h1 style={{ color: "#686868" }}>Contact</h1>
+        <h1 style={{ color: styleVariable.mainColor }}>Contact</h1>
       </Row>
       <Row justify="space-around" style={{ height: !isMobile && "50vh" }}>
         <Col
@@ -73,7 +74,7 @@ const ContactForm = ({ history }) => {
             height: "100%",
           }}
         >
-          <h2 style={{ color: "#686868", textAlign: "center" }}>
+          <h2 style={{ color: styleVariable.mainColor, textAlign: "center" }}>
             Votre message
           </h2>
           <Row justify="center" align="middle">
@@ -230,9 +231,12 @@ const ContactForm = ({ history }) => {
                           )}
                         />
                       </Form.Item>
-                      <Form.Item>
+                      <Form.Item style={{ textAlign: "center" }}>
                         <Button
-                          style={{ background: "#89ba17", border: "none" }}
+                          style={{
+                            background: styleVariable.secondaryColor,
+                            border: "none",
+                          }}
                           type="primary"
                           htmlType="submit"
                         >
@@ -262,7 +266,9 @@ const ContactForm = ({ history }) => {
             height: "100%",
           }}
         >
-          <h2 style={{ color: "#686868" }}>Information</h2>
+          <h2 style={{ color: styleVariable.mainColor, textAlign: "center" }}>
+            Information
+          </h2>
           <Row style={{ padding: "1%" }}>
             <Col lg={12} md={12} xs={24}>
               <address>
@@ -270,7 +276,10 @@ const ContactForm = ({ history }) => {
                   <Col lg={6} xs={4}>
                     <Row>
                       <HomeOutlined
-                        style={{ fontSize: "1.3em", color: "#686868" }}
+                        style={{
+                          fontSize: "1.3em",
+                          color: styleVariable.mainColor,
+                        }}
                       />
                     </Row>
                   </Col>
@@ -286,14 +295,17 @@ const ContactForm = ({ history }) => {
                   <Col lg={6} xs={4}>
                     <Row>
                       <MailOutlined
-                        style={{ fontSize: "1.3em", color: "#686868" }}
+                        style={{
+                          fontSize: "1.3em",
+                          color: styleVariable.mainColor,
+                        }}
                       />
                     </Row>
                   </Col>
                   <Col lg={18} xs={12}>
                     <Row>
                       <a
-                        style={{ color: "#89ba17" }}
+                        style={{ color: styleVariable.secondaryColor }}
                         href="mailto:jim@rock.com"
                       >
                         {EMAIL}
@@ -307,31 +319,39 @@ const ContactForm = ({ history }) => {
                   <Col lg={6} xs={4}>
                     <Row>
                       <PhoneOutlined
-                        style={{ fontSize: "1.3em", color: "#686868" }}
+                        style={{
+                          fontSize: "1.3em",
+                          color: styleVariable.mainColor,
+                        }}
                       />
                     </Row>
                   </Col>
                   <Col lg={18} xs={12}>
                     <Row>
-                      <a style={{ color: "#89ba17" }} href="tel:+13115552368">
+                      <a
+                        style={{ color: styleVariable.secondaryColor }}
+                        href="tel:+13115552368"
+                      >
                         {PHONENUMBER}
                       </a>
                     </Row>
                   </Col>
                 </Row>
               </address>
-              <Button
-                style={{
-                  background: "#89ba17",
-                  border: "none",
-                  marginTop: isMobile ? 15 : 50,
-                }}
-                type="primary"
-                htmlType="submit"
-                onClick={(e) => window.history.back()}
-              >
-                Retour
-              </Button>
+              <Row justify="center">
+                <Button
+                  style={{
+                    background: styleVariable.secondaryColor,
+                    border: "none",
+                    marginTop: isMobile ? 15 : 50,
+                  }}
+                  type="primary"
+                  htmlType="submit"
+                  onClick={(e) => window.history.back()}
+                >
+                  Retour
+                </Button>
+              </Row>
             </Col>
             <Col lg={12} md={12} xs={24} style={{ marginTop: isMobile && 15 }}>
               <iframe

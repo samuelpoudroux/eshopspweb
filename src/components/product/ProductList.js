@@ -6,6 +6,8 @@ import Productcard from "./ProductCard";
 import SortProducts from "./SortProducts";
 import useIsAdmin from "../../customHooks/isAdminHooks";
 import { useEffect } from "react";
+import "../../App.css";
+import styleVariable from "../../styleVariable";
 
 const Productlist = () => {
   const { products } = useContext(AppContext);
@@ -23,11 +25,19 @@ const Productlist = () => {
 
   return (
     <Col>
-      <h3 style={{ textAlign: "center", marginTop: 20 }}>Nos produits</h3>
+      <h3
+        style={{
+          textAlign: "center",
+          marginTop: 20,
+          color: styleVariable.mainColor,
+        }}
+      >
+        Nos produits
+      </h3>
 
       <Row
         style={{
-          border: "1px solid #89ba17",
+          border: `1px solid ${styleVariable.mainColor}`,
         }}
       >
         <SortProducts
@@ -43,9 +53,11 @@ const Productlist = () => {
         align="middle"
       >
         <Col>
-          {products.list.length === 0 && !products.notFound && <Spin />}
+          <Row align="middle" style={{ height: "10vh" }}>
+            {products.list.length === 0 && !products.notFound && <Spin />}
+          </Row>
           {products.notFound && products.list.length > 0 && (
-            <h2 style={{ textAlign: "center" }}>
+            <h2 style={{ textAlign: "center", color: styleVariable.mainColor }}>
               Nous sommes désolé il n'y a pas de produits inférieur à{" "}
               {products.notFound} €
             </h2>

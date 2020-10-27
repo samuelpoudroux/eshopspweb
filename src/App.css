@@ -1,30 +1,6 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
+:root {
+  --mainColor:#5a6165;
+  --secondaryColor: #003d2e;
 }
 
 @keyframes App-logo-spin {
@@ -43,12 +19,9 @@ p {
 
 .basket_inner {
   position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
   margin: auto;
   z-index: 25;
+  height: 100%;
 }
 
 .basket {
@@ -58,14 +31,12 @@ p {
   top: 0;
   left: 25;
   right: 0;
-  bottom: 0;
+  height: 100%;
   margin: auto;
-  background: #89ba179f
-  ;
   z-index: 25;
 }
 .slick-dots li button {
-  background-color: #686868 !important;
+  background-color: var(--mainColor) !important;
 }
 
 
@@ -86,7 +57,6 @@ p {
   top: 0;
   right: 0;
   bottom: 0;
-  background:rgba(0, 0, 0, 0.7);
   /* margin: auto; */
   z-index: 25;
   overflow: scroll;
@@ -108,24 +78,30 @@ input:hover {
 .globalSearchInput>input[type='text'] {
   padding: 10px;
   font-size: 17px;
-  border: 1px solid grey;
+  border: 1px solid var(--mainColor);
   border-left: none;
   border-right: none;
   border-top: none;
   float: left;
   width: 100%;
-  background: #ffffff;
+  background: none;
+}
+.globalSearchInput>input[type='text']::placeholder {
+  color:white
+}
+.globalSearchInput>input[type='text'] {
+  color:white
 }
 
 .globalSearchInput>input[type='text']:hover {
-  border: 1px solid #89ba17;
+  border: 1px solid white;
 }
 
 /* Style the submit button */
 .globalSearchInput>button {
   width: 20%;
   padding: 10px;
-  background: #89ba17;
+  background: var(--secondaryColor);
   color: white;
   font-size: 17px;
   border: none;
@@ -138,7 +114,7 @@ input:hover {
 
 .ant-tag-checkable-checked,
 .ant-checkbox {
-  background-color: #878888 !important;
+  background-color: var(--secondaryColor)!important;
 }
 
 .ant-tag-checkable-checked {
@@ -146,8 +122,8 @@ input:hover {
 }
 
 .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: #89ba17 !important;
-  border-color: #89ba17 !important;
+  background-color: var(--secondaryColor) !important;
+  border-color: var(--secondaryColor) !important;
 }
 @keyframes bounce{
   from {transform: translateY(0);}
@@ -162,7 +138,7 @@ input:hover {
   right: 0;
   bottom: 0;
   margin: auto;
-  z-Index: 1
+  z-Index: 20
 }
 
 .popup_inner {
@@ -172,24 +148,26 @@ input:hover {
   top: 0%;
   bottom: 0%;
   margin: auto;
+  z-Index: 20
+
 }
 
 input:disabled {
-  background: 'grey'
+  background: var(--mainColor)
 
 }
 .ant-tabs-ink-bar {
-  background-color: #89ba17 !important; 
+  background-color: var(--secondaryColor) !important; 
 }
 .ant-tabs-tab:hover {
-  color: #89ba17 !important;
+  color: var(--secondaryColor) !important;
 }
 
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn .ant-spin-dot-item {
-  color:#89ba17 !important
+  color:var(--secondaryColor) !important
 }
 .ant-spin-dot-item{
-  background-color:#89ba17 !important
+  background-color: var(--secondaryColor) !important
 }
 
 .ant-menu-item-selected{
@@ -198,32 +176,7 @@ input:disabled {
 }
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  background-color: #878888 !important;
-}
-
-.chatHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #89ba17;
-  border-radius: 4px 4px 0 0;
-  height: 60px;
-  width: 100%;
-}
-
-.leftInnerContainer {
-  flex: 0.5;
-  display: flex;
-  align-items: center;
-  margin-left: 5%;
-}
-
-.rightInnerContainer {
-  display: flex;
-  flex: 0.5;
-  justify-content: flex-end;
-  margin-right: 5%;
-
+  background-color: var(--mainColor) !important;
 }
 
 .ant-input-suffix{
@@ -234,4 +187,13 @@ a {color:'white'}
 
 .ant-carousel .slick-dots-bottom {
   bottom: 0 !important
+}
+
+
+h3 {
+  color:var(--mainColor) 
+}
+
+.ant-card-head-title {
+  white-space: pre-line !important;
 }

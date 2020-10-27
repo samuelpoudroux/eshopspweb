@@ -6,10 +6,12 @@ import { DownOutlined } from "@ant-design/icons";
 import useResponsive from "../../customHooks/responsiveHook";
 import Addandremoveproduct from "../product/AddAndRemoveProduct";
 import { withRouter } from "react-router";
+import styleVariable from "../../styleVariable";
 
 const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
   let num = 0;
   const list = JSON.parse(localStorage.getItem("basket")) || [];
+  const [notification, addNotification] = useState(false);
   const [subBasketVisible, setSubBasketVisible] = useState(false);
   const { isMobile } = useResponsive();
 
@@ -17,23 +19,31 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
     return (
       <Row>
         <Col span={12}>
-          <b style={{ fontSize: "1.3em", color: "#686868" }}>Sous total</b>
+          <b style={{ fontSize: "1.3em", color: styleVariable.mainColor }}>
+            Sous total
+          </b>
         </Col>
         <Col span={12}>
           <Row>
             <Col span={12}>
               <ProductsNumber
                 header
-                BadgeStyle={{ backgroundColor: "#89ba17", color: "white" }}
-                iconBasketColor="#686868"
+                BadgeStyle={{
+                  backgroundColor: styleVariable.secondaryColor,
+                  color: "white",
+                }}
+                iconBasketColor={styleVariable.mainColor}
                 setBasketActive={setBasketActive}
                 basketIsActive={basketIsActive}
               />
             </Col>
             <Col span={12}>
               <TotalPrice
-                BadgeStyle={{ backgroundColor: "#89ba17", color: "white" }}
-                iconEuroColor="#686868"
+                BadgeStyle={{
+                  backgroundColor: styleVariable.secondaryColor,
+                  color: "white",
+                }}
+                iconEuroColor={styleVariable.mainColor}
                 basketIsActive={basketIsActive}
                 setBasketActive={setBasketActive}
               />
@@ -57,7 +67,7 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
             style={{
               animation: "bounce 0.35s ease infinite alternate",
               marginTop: 20,
-              color: "#686868",
+              color: styleVariable.mainColor,
               fontSize: "1.3em",
               overflowY: isMobile && "scroll",
             }}
@@ -81,7 +91,9 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
           footerStyle={{ padding: "0px" }}
         >
           <Col span={24} style={{ padding: "10px" }}>
-            <h3 style={{ textAlign: "center" }}>Produits dans le panier</h3>
+            <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
+              Produits dans le panier
+            </h3>
             <Carousel
               autoplay
               dots={true}
@@ -129,7 +141,7 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
                               <Row style={{ wordBreak: "break-word" }}>
                                 <h1
                                   style={{
-                                    color: "#686868",
+                                    color: styleVariable.mainColor,
                                   }}
                                 >
                                   {product.name}
@@ -140,7 +152,7 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
                               <Row justify="center" align="middle">
                                 <p
                                   style={{
-                                    color: "#89ba17",
+                                    color: styleVariable.secondaryColor,
                                     fontSize: "2em",
                                     margin: 0,
                                   }}
@@ -156,7 +168,11 @@ const SubBasket = ({ setBasketActive, basketIsActive, history }) => {
                             justify={isMobile ? "space-between" : "start"}
                           >
                             <Col lg={6}>
-                              <Addandremoveproduct product={product} />
+                              <Addandremoveproduct
+                                notification={notification}
+                                addNotification={addNotification}
+                                product={product}
+                              />
                             </Col>
                           </Row>
                         </Col>

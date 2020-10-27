@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Popconfirm } from "antd";
-import { QuestionCircleOutlined, DeleteOutlined } from "@ant-design/icons";
+import { QuestionCircleOutlined, DeleteFilled } from "@ant-design/icons";
 import { AppContext } from "../../context/context";
+import styleVariable from "../../styleVariable";
 
-const CleanBasket = ({ color = "#89ba17", fontSize = "20px" }) => {
+const CleanBasket = ({ color = "white", fontSize = "20px" }) => {
   const { basket } = useContext(AppContext);
   const { removeAllProducts } = basket;
 
@@ -16,7 +17,7 @@ const CleanBasket = ({ color = "#89ba17", fontSize = "20px" }) => {
           icon={<QuestionCircleOutlined style={{ color: "red" }} />}
           onConfirm={() => removeAllProducts()}
         >
-          <DeleteOutlined style={{ color: color, fontSize: fontSize }} />
+          <DeleteFilled style={{ color: color, fontSize: fontSize }} />
         </Popconfirm>
       )}
     </>

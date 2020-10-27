@@ -140,50 +140,54 @@ const Header = ({
                 header
                 setBasketActive={setBasketActive}
                 basketIsActive={basketIsActive}
-                BadgeStyle={{ backgroundColor: "#89ba17", color: "white" }}
+                BadgeStyle={{
+                  backgroundColor: styleVariable.mainColor,
+                  color: "white",
+                }}
               />
             </Col>
             <Col lg={2} md={4} xs={6} sm={6}>
               <TotalPrice
-                BadgeStyle={{ backgroundColor: "#fff", color: "#89ba17" }}
+                BadgeStyle={{
+                  backgroundColor: "#fff",
+                  color: styleVariable.secondaryColor,
+                }}
                 basketIsActive={basketIsActive}
                 setBasketActive={setBasketActive}
               />
             </Col>
             <Col lg={2} md={4} xs={6} sm={6}>
               <FavoriteNumber
-                BadgeStyle={{ backgroundColor: "#686868", color: "white" }}
+                BadgeStyle={{
+                  backgroundColor: styleVariable.mainColor,
+                  color: "white",
+                }}
                 setFavoriteActive={setFavoriteActive}
                 favoriteIsActive={favoriteIsActive}
               />
             </Col>
-            <Col lg={2} md={4} xs={6} sm={6}>
+            <Col lg={2} md={4} xs={3} sm={3}>
               <CleanBasket />
             </Col>
             <Col
-              lg={3}
+              lg={4}
               md={5}
-              xs={12}
-              sm={12}
-              style={{ marginTop: isMobile && 50 }}
+              xs={local && local.isLogged ? 24 : 3}
+              sm={local && local.isLogged ? 24 : 3}
             >
-              <p style={{ color: "white", margin: "0", fontSize: "1em" }}>
-                {local &&
-                  local.firstName &&
-                  `Bienvenue ${
-                    local.firstName[0].toUpperCase() +
-                    local.firstName.substring(1)
-                  }`}
-              </p>
-            </Col>
-            <Col
-              lg={2}
-              md={2}
-              xs={12}
-              sm={12}
-              style={{ marginTop: isMobile && 50 }}
-            >
-              <Row>
+              <Row
+                align="middle"
+                justify="center"
+                style={{ marginTop: local && local.isLogged && isMobile && 35 }}
+              >
+                <p style={{ color: "white", margin: "0", fontSize: "1em" }}>
+                  {local &&
+                    local.firstName &&
+                    `Bienvenue ${
+                      local.firstName[0].toUpperCase() +
+                      local.firstName.substring(1)
+                    }`}
+                </p>
                 {local && local.isLogged && (
                   <Row justify="center">
                     <LogoutOutlined

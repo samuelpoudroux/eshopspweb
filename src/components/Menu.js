@@ -7,19 +7,16 @@ import {
   ContactsOutlined,
 } from "@ant-design/icons";
 import PropTypes from "prop-types";
+import styleVariable from "../styleVariable";
 
 const NavBar = ({ setMenuIsOpened, history }) => {
-  const [current, setCurrent] = useState("home");
-  const handleClick = (e) => {
-    setCurrent(e.key);
-  };
-
   const goToPage = (e, url) => {
-    setCurrent(e.key);
+    localStorage.setItem("menuActive", e.key);
     history.push(url);
     setMenuIsOpened(false);
   };
 
+  const currentKey = localStorage.getItem("menuActive") || null;
   return (
     <Row className="popup">
       <Row className="popup_inner" style={{ padding: "0px", fontSize: "20em" }}>
@@ -36,15 +33,20 @@ const NavBar = ({ setMenuIsOpened, history }) => {
               paddingTop: "2%",
               border: "0px",
             }}
-            onClick={handleClick}
-            selectedKeys={[current]}
+            selectedKeys={currentKey}
             mode="vertical"
           >
             <Menu.Item
               key="home"
               icon={
                 <HomeOutlined
-                  style={{ color: "#89ba17 ", fontSize: "1.5em" }}
+                  style={{
+                    color:
+                      currentKey === "home"
+                        ? "white"
+                        : styleVariable.secondaryColor,
+                    fontSize: "1.5em",
+                  }}
                 />
               }
               onClick={(e) => goToPage(e, "/")}
@@ -56,7 +58,13 @@ const NavBar = ({ setMenuIsOpened, history }) => {
               key="contact"
               icon={
                 <ContactsOutlined
-                  style={{ color: "#89ba17 ", fontSize: "1.5em" }}
+                  style={{
+                    color:
+                      currentKey === "contact"
+                        ? "white"
+                        : styleVariable.secondaryColor,
+                    fontSize: "1.5em",
+                  }}
                 />
               }
               onClick={(e) => goToPage(e, "/contact")}
@@ -67,11 +75,12 @@ const NavBar = ({ setMenuIsOpened, history }) => {
           </Menu>
         </Col>
         <Col
+          onClick={() => setMenuIsOpened(false)}
           span={5}
           style={{
             paddingTop: "25px",
             height: "100%",
-            backgroundColorGradient: "rgba(0, 0, 0, 0.7)",
+            backgroundColor: styleVariable.secondaryColor,
             margin: 0,
           }}
         >

@@ -1,13 +1,11 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../context/context";
 import { Col } from "antd";
-import useResponsive from "../../customHooks/responsiveHook";
 
 const Globalsearchinput = ({ globalSearchApi }) => {
   const [searchValue, setSearchValue] = useState(undefined);
   const { globalSearch } = useContext(AppContext);
   const { search } = globalSearch;
-  const { isMobile } = useResponsive();
 
   const globalSearchHandleChange = (searchValue) => {
     setSearchValue(searchValue);

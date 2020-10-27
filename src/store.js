@@ -29,6 +29,7 @@ const GlobalStore = ({ children }) => {
     favorites,
     addProductToFavorites,
     removeProductFromFavorites,
+    removeAllProductFromFavorites,
   } = useFavorites();
   const { auth, login, logout, register } = useAuth();
   const store = {
@@ -65,6 +66,7 @@ const GlobalStore = ({ children }) => {
     favorites: {
       addProductToFavorites,
       removeProductFromFavorites,
+      removeAllProductFromFavorites,
       favorites,
     },
   };

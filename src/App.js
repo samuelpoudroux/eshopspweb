@@ -14,6 +14,7 @@ import Chat from "./Chat";
 import Footer from "./components/Footer";
 import useResponsive from "./customHooks/responsiveHook";
 import Favorites from "./components/favorite/Favorites";
+import styleVariable from "./styleVariable";
 
 function App() {
   const { globalSearch } = useContext(AppContext);
@@ -26,7 +27,10 @@ function App() {
   const { isMobile } = useResponsive();
 
   return (
-    <div ref={appRef} style={{ minHeight: "100vh" }}>
+    <div
+      ref={appRef}
+      style={{ minHeight: "100vh", color: styleVariable.mainColor }}
+    >
       <div style={{ minHeight: "100vh" }}>
         <Router history={history}>
           <Header

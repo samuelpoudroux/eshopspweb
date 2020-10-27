@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../context/context";
-import { Tag } from "antd";
+import { Badge, Tag } from "antd";
 import ReactStars from "react-rating-stars-component";
 import { withRouter } from "react-router";
 import { Row, Col } from "antd";
@@ -12,11 +12,13 @@ import {
   HeartOutlined,
   CrownFilled,
   CrownOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import useIsAdmin from "../../customHooks/isAdminHooks";
 import Axios from "axios";
-import { useEffect } from "react";
+import styleVariable from "../../styleVariable";
 import { useState } from "react";
+import ProductInBasket from "./ProductInBasket";
 
 const {
   REACT_APP_API_DOMAIN,
@@ -29,6 +31,7 @@ const Productcard = ({ product, history, large }) => {
   const { isAdmin } = useIsAdmin();
   const { search } = globalSearch;
   const { isMobile } = useResponsive();
+  const [notification, addNotification] = useState(false);
 
   const isFavorites =
     JSON.parse(localStorage.getItem("favorites")) &&
@@ -47,9 +50,19 @@ const Productcard = ({ product, history, large }) => {
     productPriceReduced,
   } = product;
   const priceStyle = {
-    color: "red",
+    color: styleVariable.mainColor,
     fontSize: "1em",
     margin: "0",
+  };
+
+  const renderCount = () => {
+    if (product && ProductInBasket({ product }) > 0 && notification.add) {
+      return `+${notification.num}`;
+    } else if (notification && notification.remove) {
+      return `-${notification.num}`;
+    } else {
+      return 0;
+    }
   };
 
   const goToProductDetails = (e) => {
@@ -101,23 +114,43 @@ const Productcard = ({ product, history, large }) => {
           />
         </Row>
 
-        <Row>
+        <Row align="middle" style={{ marginTop: 20 }}>
           <Col
-            lg={24}
-            md={24}
-            sm={24}
-            xs={24}
+            lg={20}
+            md={16}
+            sm={16}
+            xs={16}
             style={{ wordBreak: "break-all", paddingTop: 15 }}
           >
-            <b style={{ color: "#878888" }}>{name}</b>
+            <b style={{ color: styleVariable.mainColor }}>{name}</b>
+          </Col>
+          <Col lg={4} md={8} sm={8} xs={8} style={{ paddingTop: 15 }}>
+            <Badge
+              style={{
+                background: notification.add
+                  ? styleVariable.secondaryColor
+                  : "red",
+              }}
+              count={renderCount()}
+            >
+              {notification && (
+                <ShoppingCartOutlined
+                  style={{
+                    fontSize: "20px",
+                    color: styleVariable.secondaryColor,
+                    marginRight: "16px",
+                  }}
+                />
+              )}
+            </Badge>
           </Col>
         </Row>
-        <Row>
+        <Row align="middle" style={{ marginTop: 20 }}>
           <Col lg={6} md={1} sm={8} xs={4}>
             <p
               style={{
                 fontSize: "1.2em",
-                color: "#878888",
+                color: styleVariable.mainColor,
                 margin: 0,
               }}
             >
@@ -128,7 +161,7 @@ const Productcard = ({ product, history, large }) => {
             <s
               style={{
                 fontSize: "1.2em",
-                color: priceStyle.color,
+                color: "red",
               }}
             >
               {/*productPriceReduced && `${productPriceReduced + "€"}`*/}
@@ -138,16 +171,24 @@ const Productcard = ({ product, history, large }) => {
 
           <Col lg={12} md={21} sm={8} xs={6}>
             <Row justify="end">
-              <Tag color="#89ba17">{category}</Tag>
+              <Tag color={styleVariable.secondaryColor}>{category}</Tag>
             </Row>
           </Col>
         </Row>
 
-        <Row onClick={(e) => e.stopPropagation()}>
+        <Row
+          onClick={(e) => e.stopPropagation()}
+          align="middle"
+          style={{ marginTop: 20 }}
+        >
           <Col lg={24} md={6} sm={16} xs={16}>
-            <Addandremoveproduct product={product} />
+            <Addandremoveproduct
+              product={product}
+              notification={notification}
+              addNotification={addNotification}
+            />
           </Col>
-          <Row align="middle" justify="space-between">
+          <Row align="middle" justify="space-between" style={{ marginTop: 20 }}>
             <Col lg={23}>
               <Row align="middle">
                 <ReactStars
@@ -155,7 +196,7 @@ const Productcard = ({ product, history, large }) => {
                   value={notation}
                   edit={false}
                   size={24}
-                  activeColor="#89ba17"
+                  activeColor={styleVariable.secondaryColor}
                 />
               </Row>
             </Col>
@@ -163,13 +204,19 @@ const Productcard = ({ product, history, large }) => {
               <Row align="middle">
                 {isFavorites && (
                   <HeartFilled
-                    style={{ fontSize: 24, color: "#89ba17" }}
+                    style={{
+                      fontSize: 24,
+                      color: styleVariable.secondaryColor,
+                    }}
                     onClick={() => removeFromFavorites()}
                   />
                 )}
                 {!isFavorites && (
                   <HeartOutlined
-                    style={{ fontSize: 24, color: "#89ba17" }}
+                    style={{
+                      fontSize: 24,
+                      color: styleVariable.secondaryColor,
+                    }}
                     onClick={() => addFavorites()}
                   />
                 )}

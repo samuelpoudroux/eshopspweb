@@ -22,6 +22,7 @@ import {
 import { LOWEST, HIGHEST } from "../../constants/category";
 
 import useResponsive from "../../customHooks/responsiveHook";
+import styleVariable from "../../styleVariable";
 
 const { REACT_APP_API_DOMAIN, REACT_APP_API_CATEGORIES } = process.env;
 
@@ -105,15 +106,13 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
     setValue("");
   }, [selectedTags]);
 
-  const colorText = { color: "#878888" };
-
   return (
     <Col span={24} style={{ padding: 15 }}>
       <Row align="middle">
         <Col lg={8} md={6} sm={24} xs={24}>
           <Row justify="space-between" align="middle">
             <Col lg={3} md={4} sm={2} xs={2}>
-              <span style={{ ...colorText }}>Prix:</span>
+              <span style={{}}>Prix:</span>
             </Col>
             <Col lg={21} md={20} sm={22} xs={22}>
               <Select
@@ -165,13 +164,12 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
         >
           <Row align="middle">
             <Col lg={5} md={6} sm={8} xs={8}>
-              <span style={{ ...colorText }}>Categories:</span>
+              <span style={{}}>Categories:</span>
             </Col>
             <Col lg={19} md={18} sm={16} xs={16}>
               {categories.map((tag) => (
                 <CheckableTag
                   style={{
-                    ...colorText,
                     width: "auto",
                     border: "1px #878888 dotted",
                   }}
@@ -188,7 +186,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
         <Col md={8} sm={24} xs={24} style={{ marginTop: isMobile && 15 }}>
           <Row>
             <Checkbox onChange={(e) => selectAllCategoriesButtonHandle(e)}>
-              <span style={{ ...colorText }}>
+              <span style={{ color: styleVariable.mainColor }}>
                 Selectionner toutes les catégories
               </span>
             </Checkbox>

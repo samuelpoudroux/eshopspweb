@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Form, Input, Button, Checkbox, Row, Col, Spin } from "antd";
 import { AppContext } from "../../context/context";
+import styleVariable from "../../styleVariable";
 
 const Login = ({ history }) => {
   const { auth } = useContext(AppContext);
@@ -77,7 +78,10 @@ const Login = ({ history }) => {
 
               <Form.Item>
                 <Button
-                  style={{ background: "#89ba17", border: "none" }}
+                  style={{
+                    background: styleVariable.secondaryColor,
+                    border: "none",
+                  }}
                   type="primary"
                   htmlType="submit"
                 >
