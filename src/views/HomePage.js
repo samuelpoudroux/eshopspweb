@@ -4,10 +4,10 @@ import Productlist from "../components/product/ProductList";
 
 const HomePage = () => {
   return (
-    <>
+    <div style={{ paddingTop: 20 }}>
       <NewNess />
       <Productlist />;
-    </>
+    </div>
   );
 };
 

@@ -49,13 +49,15 @@ const Productlist = () => {
         style={{
           justifyContent: "space-evenly",
           minHeight: "30vh",
+          marginTop: 20,
         }}
-        align="middle"
       >
         <Col>
-          <Row align="middle" style={{ height: "10vh" }}>
-            {products.list.length === 0 && !products.notFound && <Spin />}
-          </Row>
+          {products.list.length === 0 && !products.notFound && (
+            <Row align="middle" style={{ height: "10vh" }}>
+              <Spin />
+            </Row>
+          )}
           {products.notFound && products.list.length > 0 && (
             <h2 style={{ textAlign: "center", color: styleVariable.mainColor }}>
               Nous sommes désolé il n'y a pas de produits inférieur à{" "}
@@ -66,7 +68,6 @@ const Productlist = () => {
             style={{
               paddingLeft: "4%",
               paddingRight: "4%",
-              marginTop: 20,
               justifyContent: "space-evenly",
               minHeight: "30vh",
             }}
