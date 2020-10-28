@@ -34,7 +34,7 @@ const Favorites = ({ setFavoriteActive }) => {
             onConfirm={() => removeProductFromFavorites(product)}
           >
             <DeleteFilled
-              style={{ color: styleVariable.secondaryColor, fontSize: "30px" }}
+              style={{ color: styleVariable.secondaryColor, fontSize: "20px" }}
             />
           </Popconfirm>
         </Col>
@@ -49,6 +49,7 @@ const Favorites = ({ setFavoriteActive }) => {
   return (
     <div className="basket" onClick={(e) => closeFavorites(e)}>
       <Col
+        span={24}
         className="basket_inner"
         style={{ background: styleVariable.secondaryColor, paddingTop: 15 }}
       >
@@ -59,17 +60,17 @@ const Favorites = ({ setFavoriteActive }) => {
               icon={<QuestionCircleOutlined style={{ color: "red" }} />}
               onConfirm={() => removeAllProductFromFavorites()}
             >
-              <DeleteFilled style={{ color: "white", fontSize: "30px" }} />
+              <DeleteFilled style={{ color: "white", fontSize: "20px" }} />
             </Popconfirm>
             <HeartFilled
               style={{
-                fontSize: "30px",
-                color: "white",
+                fontSize: "20px",
+                color: "red",
               }}
             />
             <b style={{ color: "white" }}>Mes futurs achats</b>
             <CloseCircleOutlined
-              style={{ color: "white", fontSize: "30px" }}
+              style={{ color: "white", fontSize: "20px" }}
               onClick={() => setFavoriteActive(false)}
             />
           </Row>

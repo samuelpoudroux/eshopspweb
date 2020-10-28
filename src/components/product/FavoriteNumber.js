@@ -14,7 +14,7 @@ const FavoriteNumber = ({
     <Badge style={BadgeStyle} count={favoriteList.length}>
       <HeartOutlined
         style={{
-          fontSize: "30px",
+          fontSize: "20px",
           color: iconBasketColor || "white",
           marginRight: "10px",
         }}

@@ -18,7 +18,7 @@ const ProductsNumber = ({
     <Badge style={BadgeStyle} count={`${totalOfProducts}`}>
       <ShoppingCartOutlined
         style={{
-          fontSize: "30px",
+          fontSize: "20px",
           color: iconBasketColor || "white",
           marginRight: "10px",
         }}

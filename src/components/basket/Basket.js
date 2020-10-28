@@ -31,15 +31,17 @@ const Basket = ({ setBasketActive }) => {
   return (
     <div className="basket" onClick={(e) => closeBasket(e)}>
       <Col
+        span={24}
         className="basket_inner"
         style={{ background: styleVariable.secondaryColor, paddingTop: 15 }}
       >
         <div style={{ padding: "2%", overflowY: "scroll" }}>
           <Row justify="space-between" onClick={(e) => e.stopPropagation()}>
-            <CleanBasket color={"white"} fontSize={"30px"} />
-            <ShopFilled style={{ fontSize: "35px", color: "white" }} />
+            <CleanBasket color={"white"} fontSize={"20px"} />
+            <ShopFilled style={{ fontSize: "20px", color: "white" }} />
+            <b style={{ color: "white" }}>Mon Panier</b>
             <CloseCircleOutlined
-              style={{ color: "white", fontSize: "30px" }}
+              style={{ color: "white", fontSize: "20px" }}
               onClick={() => setBasketActive(false)}
             />
           </Row>

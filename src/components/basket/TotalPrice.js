@@ -17,7 +17,7 @@ const TotalPrice = ({
     <Badge style={BadgeStyle} count={`${totalPrice}€`}>
       <EuroOutlined
         style={{
-          fontSize: "30px",
+          fontSize: "20px",
           color: iconEuroColor || "white",
           marginRight: "10px",
         }}
