@@ -4,6 +4,7 @@ import ChatHeader from "./ChatHeader";
 import { Col, Row, Spin } from "antd";
 import useResponsive from "./customHooks/responsiveHook";
 import * as io from "socket.io-client";
+import styleVariable from "./styleVariable";
 
 const Chat = ({
   setChatActive,
@@ -28,6 +29,7 @@ const Chat = ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        border: `1px solid ${styleVariable.secondaryColor}`,
         marginTop: 10,
       }}
     >

@@ -111,18 +111,22 @@ const Header = ({
               />
             </Col>
             <Col lg={4} md={4} xs={4} sm={4}>
-              <Popover title="Besoin d'aide">
-                <MessageOutlined
-                  onClick={() => goToBot()}
-                  style={{ fontSize: 50, color: "white" }}
-                />
-              </Popover>
+              <Row justify="center">
+                <Popover title="Besoin d'aide">
+                  <MessageOutlined
+                    onClick={() => goToBot()}
+                    style={{ fontSize: 20, color: "white" }}
+                  />
+                </Popover>
+              </Row>
             </Col>
             <Col lg={3} md={4} xs={4} sm={4}>
-              <ContactsOutlined
-                onClick={() => history.push("/contact")}
-                style={{ fontSize: 50, color: "white" }}
-              />
+              <Row justify="center">
+                <ContactsOutlined
+                  onClick={() => history.push("/contact")}
+                  style={{ fontSize: 20, color: "white" }}
+                />
+              </Row>
             </Col>
           </Row>
         </Col>

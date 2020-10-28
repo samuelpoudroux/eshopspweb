@@ -66,8 +66,7 @@ p {
 
 @media screen and (min-width: 200px) and (max-width: 1024px) {
   .basket {
-    left: 0;
-    width: 100%;
+    width: 100%; 
   }
 }
 
@@ -197,3 +196,4 @@ h3 {
 .ant-card-head-title {
   white-space: pre-line !important;
 }
+

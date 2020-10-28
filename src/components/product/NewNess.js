@@ -25,8 +25,6 @@ const NewNess = () => {
         autoplay
         dots={true}
         style={{
-          boxShadow:
-            "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
           background: "#ref",
           borderRadius: "2px",
           borderRadius: "2px",

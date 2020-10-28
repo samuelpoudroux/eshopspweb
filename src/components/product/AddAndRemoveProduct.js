@@ -1,4 +1,4 @@
-import { Row, Input, Col } from "antd";
+import { Row, Input, Col, Button } from "antd";
 import React, { useContext } from "react";
 import { AppContext } from "../../context/context";
 import ProductInBasket from "./ProductInBasket";
@@ -38,49 +38,48 @@ const Addandremoveproduct = ({ product, addNotification }) => {
   };
 
   return (
-    <Row justify={isMobile ? "start" : "space-between"} align="middle">
-      <Col lg={3} md={6} sm={5} xs={5}>
+    <Row align="middle">
+      <Col lg={12} xs={18}>
         <Row justify="start">
-          <button
+          <Button
             style={{
               background: styleVariable.secondaryColor,
               color: "white",
               cursor: "pointer",
+              paddingLeft: 8,
+              paddingRight: 8,
               borderRadius: 50,
             }}
             onClick={(e) => addProduct(e)}
           >
             +
-          </button>
-        </Row>
-      </Col>
-      <Col lg={9} md={6} sm={5} xs={5}>
-        <Row justify="center">
+          </Button>
           <Input
             style={{
-              borderRadius: 50,
               textAlign: "center",
+              width: "40%",
+              marginLeft: 4,
+              marginRight: 4,
             }}
             value={ProductInBasket({ product })}
           />
-        </Row>
-      </Col>
-      <Col lg={3} md={6} sm={5} xs={5}>
-        <Row justify="end">
-          <button
+          <Button
             style={{
               background: styleVariable.mainColor,
               color: "white",
               cursor: "pointer",
+              paddingLeft: 8,
+              paddingRight: 8,
               borderRadius: 50,
             }}
             onClick={(e) => removeProduct(e)}
           >
             -
-          </button>
+          </Button>
         </Row>
       </Col>
-      <Col lg={3} md={6} sm={5} xs={5}>
+
+      <Col lg={12} xs={6}>
         {list &&
           list.length > 0 &&
           list.find((p) => p.id === product.id) !== undefined &&

@@ -91,12 +91,12 @@ const Productcard = ({ product, history, large }) => {
 
   return (
     <Col
-      xs={20}
-      sm={20}
+      xs={22}
+      sm={22}
       md={24}
-      lg={large || 4}
+      lg={4}
       style={{
-        boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+        boxShadow: "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.40)",
         background: "#fff",
         borderRadius: "2px",
         position: "relative",
@@ -115,7 +115,7 @@ const Productcard = ({ product, history, large }) => {
           />
         </Row>
 
-        <Row align="middle" style={{ marginTop: 20 }}>
+        <Row align="middle" style={{ marginTop: 20 }} justify="space-between">
           <Col
             lg={20}
             md={16}
@@ -126,24 +126,26 @@ const Productcard = ({ product, history, large }) => {
             <b style={{ color: styleVariable.mainColor }}>{name}</b>
           </Col>
           <Col lg={4} md={8} sm={8} xs={8} style={{ paddingTop: 15 }}>
-            <Badge
-              style={{
-                background: notification.add
-                  ? styleVariable.secondaryColor
-                  : "red",
-              }}
-              count={renderCount()}
-            >
-              {notification && (
-                <ShoppingCartOutlined
-                  style={{
-                    fontSize: "20px",
-                    color: styleVariable.secondaryColor,
-                    marginRight: "16px",
-                  }}
-                />
-              )}
-            </Badge>
+            <Row justify="end">
+              <Badge
+                style={{
+                  background: notification.add
+                    ? styleVariable.secondaryColor
+                    : "red",
+                }}
+                count={renderCount()}
+              >
+                {notification && (
+                  <ShoppingCartOutlined
+                    style={{
+                      fontSize: "20px",
+                      color: styleVariable.secondaryColor,
+                      marginRight: "16px",
+                    }}
+                  />
+                )}
+              </Badge>
+            </Row>
           </Col>
         </Row>
         <Row align="middle" style={{ marginTop: 20 }}>
