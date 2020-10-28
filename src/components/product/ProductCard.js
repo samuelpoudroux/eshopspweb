@@ -167,8 +167,7 @@ const Productcard = ({ product, history, large }) => {
                 color: "red",
               }}
             >
-              {/*productPriceReduced && `${productPriceReduced + "€"}`*/}
-              {"5" + "€"}
+              {productPriceReduced && `${productPriceReduced + "€"}`}
             </s>
           </Col>
 
