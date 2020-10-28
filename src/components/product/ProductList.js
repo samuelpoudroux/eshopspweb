@@ -54,7 +54,7 @@ const Productlist = () => {
       >
         <Col span={24}>
           {products.list.length === 0 && !products.notFound && (
-            <Row align="middle" style={{ height: "10vh" }}>
+            <Row align="middle" justify="center" style={{ height: "10vh" }}>
               <Spin />
             </Row>
           )}

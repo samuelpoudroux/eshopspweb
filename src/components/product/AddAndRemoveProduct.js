@@ -44,9 +44,9 @@ const Addandremoveproduct = ({ product, addNotification }) => {
           <button
             style={{
               background: styleVariable.secondaryColor,
-              border: "2px dotted",
               color: "white",
               cursor: "pointer",
+              borderRadius: 50,
             }}
             onClick={(e) => addProduct(e)}
           >
@@ -58,8 +58,8 @@ const Addandremoveproduct = ({ product, addNotification }) => {
         <Row justify="center">
           <Input
             style={{
-              border: `0.2px dotted ${styleVariable.mainColor}`,
               borderRadius: 50,
+              textAlign: "center",
             }}
             value={ProductInBasket({ product })}
           />
@@ -70,9 +70,9 @@ const Addandremoveproduct = ({ product, addNotification }) => {
           <button
             style={{
               background: styleVariable.mainColor,
-              border: "2px dotted ",
               color: "white",
               cursor: "pointer",
+              borderRadius: 50,
             }}
             onClick={(e) => removeProduct(e)}
           >

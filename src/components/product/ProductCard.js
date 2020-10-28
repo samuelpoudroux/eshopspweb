@@ -177,13 +177,16 @@ const Productcard = ({ product, history, large }) => {
           </Col>
         </Row>
 
-        <Row style={{ marginTop: 20 }}>
-          {shortDescription && shortDescription}
+        <Row style={{ paddingTop: 20 }}>
+          <p style={{ margin: 0, wordBreak: "break-all" }}>
+            {shortDescription && shortDescription}
+          </p>
         </Row>
 
         <Row
           onClick={(e) => e.stopPropagation()}
           align="middle"
+          justify={isMobile && "space-between"}
           style={{ marginTop: 20 }}
         >
           <Col lg={24} md={6} sm={16} xs={16}>
@@ -193,8 +196,12 @@ const Productcard = ({ product, history, large }) => {
               addNotification={addNotification}
             />
           </Col>
-          <Row align="middle" justify="space-between" style={{ marginTop: 20 }}>
-            <Col lg={23}>
+          <Row
+            align="middle"
+            justify={isMobile && "center"}
+            style={{ marginTop: 20 }}
+          >
+            <Col span={23}>
               <Row align="middle">
                 <ReactStars
                   count={5}
@@ -205,7 +212,7 @@ const Productcard = ({ product, history, large }) => {
                 />
               </Row>
             </Col>
-            <Col lg={1}>
+            <Col span={1}>
               <Row align="middle">
                 {isFavorites && (
                   <HeartFilled
