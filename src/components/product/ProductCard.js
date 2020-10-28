@@ -47,6 +47,7 @@ const Productcard = ({ product, history, large }) => {
     category,
     notation,
     productPrice,
+    shortDescription,
     productPriceReduced,
   } = product;
   const priceStyle = {
@@ -174,6 +175,10 @@ const Productcard = ({ product, history, large }) => {
               <Tag color={styleVariable.secondaryColor}>{category}</Tag>
             </Row>
           </Col>
+        </Row>
+
+        <Row style={{ marginTop: 20 }}>
+          {shortDescription && shortDescription}
         </Row>
 
         <Row
