@@ -35,7 +35,7 @@ const NewNess = () => {
         onClick={(e) => e.stopPropagation()}
       >
         {newNess.map((product) => (
-          <Col>
+          <Col key={product.id}>
             <Row justify="center" style={{ paddingBottom: 30 }}>
               <Productcard
                 key={product && product.id}

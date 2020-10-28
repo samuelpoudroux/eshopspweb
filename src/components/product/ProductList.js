@@ -24,7 +24,7 @@ const Productlist = () => {
   }, [state]);
 
   return (
-    <Col>
+    <Col span={24}>
       <h3
         style={{
           textAlign: "center",
@@ -52,7 +52,7 @@ const Productlist = () => {
           marginTop: 20,
         }}
       >
-        <Col>
+        <Col span={24}>
           {products.list.length === 0 && !products.notFound && (
             <Row align="middle" style={{ height: "10vh" }}>
               <Spin />
