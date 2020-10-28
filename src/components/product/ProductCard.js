@@ -96,7 +96,7 @@ const Productcard = ({ product, history, large }) => {
       md={24}
       lg={4}
       style={{
-        boxShadow: " 0px 0px 10px 10px rgba(90, 97, 101, 0.7)",
+        boxShadow: " 0px  10px 10px rgba(90, 97, 101, 0.7)",
         background: "#fff",
         borderRadius: "2px",
         position: "relative",
