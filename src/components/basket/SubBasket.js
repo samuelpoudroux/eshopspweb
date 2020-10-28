@@ -7,14 +7,9 @@ import useResponsive from "../../customHooks/responsiveHook";
 import Addandremoveproduct from "../product/AddAndRemoveProduct";
 import { withRouter } from "react-router";
 import styleVariable from "../../styleVariable";
+import CleanBasket from "./CleanBasket";
 
-const SubBasket = ({
-  setBasketActive,
-  basketIsActive,
-  history,
-  subBasketVisible,
-  setSubBasketVisible,
-}) => {
+const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
   let num = 0;
   const list = JSON.parse(localStorage.getItem("basket")) || [];
   const [notification, addNotification] = useState(false);
@@ -23,35 +18,44 @@ const SubBasket = ({
   const drawerHeader = () => {
     return (
       <Row>
-        <Col lg={12} md={12} sm={12} xs={12}>
+        <Col lg={8} md={8} sm={10} xs={10}>
           <b style={{ fontSize: "1.3em", color: styleVariable.mainColor }}>
             Sous total
           </b>
         </Col>
-        <Col lg={12} md={12} sm={12} xs={12}>
+        <Col lg={16} md={16} sm={13} xs={13}>
           <Row justify="space-between">
-            <Col lg={12} md={12} sm={12} xs={12}>
+            <Col lg={8} md={8} sm={8} xs={8}>
               <ProductsNumber
+                notClickable
                 header
                 BadgeStyle={{
-                  backgroundColor: styleVariable.secondaryColor,
+                  backgroundColor: styleVariable.mainColor,
                   color: "white",
                 }}
                 iconBasketColor={styleVariable.mainColor}
-                setBasketActive={setBasketActive}
-                basketIsActive={basketIsActive}
+                setSubBasketVisible={setSubBasketVisible}
+                subBasketVisible={subBasketVisible}
               />
             </Col>
-            <Col lg={12} md={12} sm={12} xs={12}>
+            <Col lg={8} md={8} sm={7} xs={7}>
               <TotalPrice
+                notClickable
                 BadgeStyle={{
                   backgroundColor: styleVariable.secondaryColor,
                   color: "white",
                 }}
-                iconEuroColor={styleVariable.mainColor}
-                basketIsActive={basketIsActive}
-                setBasketActive={setBasketActive}
+                subBasketVisible={subBasketVisible}
+                setSubBasketVisible={setSubBasketVisible}
               />
+            </Col>
+            <Col span={8}>
+              <Row justify="center">
+                <CleanBasket
+                  color={styleVariable.secondaryColor}
+                  fontSize={"20px"}
+                />
+              </Row>
             </Col>
           </Row>
         </Col>
@@ -74,7 +78,6 @@ const SubBasket = ({
               marginTop: 20,
               color: styleVariable.mainColor,
               fontSize: "1.3em",
-              overflowY: isMobile && "scroll",
             }}
             onClick={() => setSubBasketVisible(true)}
           />
@@ -82,8 +85,9 @@ const SubBasket = ({
 
         <Drawer
           title={drawerHeader()}
-          placement={"top"}
           closable={true}
+          placement="right"
+          width={isMobile ? 296 : 900}
           onClose={() => setSubBasketVisible(false)}
           visible={subBasketVisible}
           height={"auto"}
@@ -92,7 +96,7 @@ const SubBasket = ({
             paddingLeft: "5px",
             paddingRight: "5px",
           }}
-          style={{ zIndex: 0 }}
+          style={{ zIndex: 0, height: "100%", overflowY: "scroll" }}
           footerStyle={{ padding: "0px" }}
         >
           <Col lg={24} style={{ padding: "10px" }}>
@@ -119,6 +123,7 @@ const SubBasket = ({
                           history.push(`/productDetails/${product.id}`)
                         }
                         key={product.id}
+                        align="middle"
                         style={{
                           cursor: "pointer",
                         }}
@@ -135,13 +140,12 @@ const SubBasket = ({
                         <Col lg={21} md={18} sm={18} xs={18}>
                           <Row>
                             <Col lg={20} md={18} sm={18} xs={18}>
-                              <Row
-                                style={{ wordBreak: "break-word" }}
-                                justify="center"
-                              >
+                              <Row justify="center" align="middle">
                                 <b
                                   style={{
                                     color: styleVariable.mainColor,
+                                    fontSize: "0.6em",
+                                    margin: 0,
                                   }}
                                 >
                                   {product.name}
@@ -169,6 +173,7 @@ const SubBasket = ({
                             notification={notification}
                             addNotification={addNotification}
                             product={product}
+                            subBasket
                           />
                         </Col>
                       </Row>

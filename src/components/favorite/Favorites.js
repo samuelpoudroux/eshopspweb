@@ -4,108 +4,187 @@ import {
   CloseCircleOutlined,
   HeartFilled,
   QuestionCircleOutlined,
+  DeleteOutlined,
   DeleteFilled,
 } from "@ant-design/icons";
-import { Card, Col, Row, Popconfirm } from "antd";
+import { Card, Col, Row, Popconfirm, Drawer } from "antd";
 import Addandremoveproduct from "../product/AddAndRemoveProduct";
 import styleVariable from "../../styleVariable";
 import { useContext } from "react";
 import { AppContext } from "../../context/context";
+import useResponsive from "../../customHooks/responsiveHook";
 
-const Favorites = ({ setFavoriteActive }) => {
+const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
   const { favorites } = useContext(AppContext);
   const [notification, addNotification] = useState(false);
+  const { isMobile } = useResponsive();
 
   const {
     removeAllProductFromFavorites,
     removeProductFromFavorites,
   } = favorites;
   const list = JSON.parse(localStorage.getItem("favorites")) || [];
-  const productName = (product) => {
+
+  const drawerHeader = () => {
     return (
-      <Row justify="space-between">
-        <Col span={21} style={{ wordBreak: "break-word" }}>
-          <h2 style={{ color: styleVariable.mainColor }}>{product.name}</h2>
+      <Row>
+        <Col lg={5} md={5} xs={17} sm={17}>
+          <b style={{ fontSize: "1.3em", color: styleVariable.mainColor }}>
+            Vos futurs Achats{" "}
+          </b>
         </Col>
-        <Col span={3}>
-          <Popconfirm
-            title="Souhaitez vous supprimer ce produit de vos favoris"
-            icon={<QuestionCircleOutlined style={{ color: "red" }} />}
-            onConfirm={() => removeProductFromFavorites(product)}
-          >
-            <DeleteFilled
-              style={{ color: styleVariable.secondaryColor, fontSize: "20px" }}
+        <Col lg={1} md={5} xs={4} sm={4}>
+          <Row>
+            <HeartFilled
+              style={{
+                fontSize: "20px",
+                color: "red",
+                marginLeft: 5,
+              }}
             />
+          </Row>
+        </Col>
+        <Col lg={17} md={5} xs={1} sm={1}>
+          <Popconfirm
+            title={`Souhaitez vous supprimer tous les favoris`}
+            icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+            onConfirm={() => removeAllProductFromFavorites()}
+          >
+            <Row justify="end" align="middle">
+              <DeleteFilled
+                style={{
+                  color: styleVariable.secondaryColor,
+                  fontSize: "20px",
+                }}
+              />
+            </Row>
           </Popconfirm>
         </Col>
       </Row>
     );
   };
-
   const closeFavorites = (e) => {
     setFavoriteActive(false);
   };
 
   return (
-    <div className="basket" onClick={(e) => closeFavorites(e)}>
-      <Col
-        className="basket_inner"
-        style={{ background: styleVariable.secondaryColor, paddingTop: 15 }}
-      >
-        <div style={{ padding: "2%" }}>
-          <Row justify="space-between" onClick={(e) => e.stopPropagation()}>
-            <Popconfirm
-              title="Souhaitez vous vider ts vos favoris"
-              icon={<QuestionCircleOutlined style={{ color: "red" }} />}
-              onConfirm={() => removeAllProductFromFavorites()}
-            >
-              <DeleteFilled style={{ color: "white", fontSize: "20px" }} />
-            </Popconfirm>
-            <HeartFilled
-              style={{
-                fontSize: "20px",
-                color: "red",
-              }}
-            />
-            <b style={{ color: "white" }}>Mes futurs achats</b>
-            <CloseCircleOutlined
-              style={{ color: "white", fontSize: "20px" }}
-              onClick={() => setFavoriteActive(false)}
-            />
-          </Row>
-          <Row
-            style={{ marginTop: "10%" }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {list &&
-              list.length > 0 &&
-              list.map((product) => (
-                <Col span={24}>
-                  <Row justify="center">
-                    <Col key={product.id} span={24} style={{}}>
-                      <Card
-                        style={{ marginTop: "5px" }}
-                        title={productName(product)}
-                        bordered={false}
-                      >
-                        <Row justify="space-between" align="middle">
-                          <Col span={14}>
-                            <Addandremoveproduct
-                              notification={notification}
-                              addNotification={addNotification}
-                              product={product}
-                            />
-                          </Col>
-                        </Row>
-                      </Card>
+    <Drawer
+      title={drawerHeader()}
+      closable={true}
+      placement="right"
+      width={isMobile ? 296 : 900}
+      onClose={() => closeFavorites()}
+      visible={favoriteIsActive}
+      height={"auto"}
+      key={"top"}
+      bodyStyle={{
+        paddingLeft: "5px",
+        paddingRight: "5px",
+      }}
+      style={{ zIndex: 0, height: "100%", overflowY: "scroll" }}
+      footerStyle={{ padding: "0px" }}
+    >
+      <Col lg={24} style={{ padding: "10px" }}>
+        <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
+          Je suis intéressé par ces produits
+        </h3>
+        <Row>
+          {list.map(
+            (product) =>
+              product.num !== 0 && (
+                <Col
+                  lg={6}
+                  md={11}
+                  xs={24}
+                  sm={24}
+                  style={{
+                    boxShadow: " 0px  10px 10px rgba(90, 97, 101, 0.7)",
+                    padding: 5,
+                    margin: 5,
+                  }}
+                >
+                  <Row
+                    onClick={() =>
+                      history.push(`/productDetails/${product.id}`)
+                    }
+                    key={product.id}
+                    align="middle"
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  >
+                    <Col lg={3} md={6} sm={6} xs={6}>
+                      <img
+                        style={{
+                          height: "20px",
+                        }}
+                        src={product.imageUrl}
+                        alt="image du produit"
+                      />
+                    </Col>
+                    <Col lg={21} md={18} sm={18} xs={18}>
+                      <Row>
+                        <Col lg={20} md={18} sm={18} xs={18}>
+                          <Row justify="center" align="middle">
+                            <b
+                              style={{
+                                color: styleVariable.mainColor,
+                                fontSize: "0.6em",
+                                margin: 0,
+                              }}
+                            >
+                              {product.name}
+                            </b>
+                          </Row>
+                        </Col>
+                        <Col lg={4} md={6} sm={6} xs={6}>
+                          <Row justify="center" align="middle">
+                            <b
+                              style={{
+                                color: styleVariable.secondaryColor,
+                              }}
+                            >
+                              {product.productPrice}€
+                            </b>
+                          </Row>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+
+                  <Row style={{ padding: 5 }}>
+                    <Col lg={20}>
+                      <Addandremoveproduct
+                        notification={notification}
+                        addNotification={addNotification}
+                        product={product}
+                        notClickable
+                        subBasket
+                        test
+                      />
+                    </Col>
+                    <Col lg={4}>
+                      <Row align="center">
+                        <Popconfirm
+                          title={`Souhaitez vous supprimer ce produit des favoris`}
+                          icon={
+                            <QuestionCircleOutlined style={{ color: "red" }} />
+                          }
+                          onConfirm={() => removeProductFromFavorites(product)}
+                        >
+                          <DeleteOutlined
+                            style={{ color: styleVariable.secondaryColor }}
+                          />
+                        </Popconfirm>
+                      </Row>
                     </Col>
                   </Row>
                 </Col>
-              ))}
-          </Row>
-        </div>
+              )
+          )}
+        </Row>
       </Col>
-    </div>
+    </Drawer>
   );
 };
 

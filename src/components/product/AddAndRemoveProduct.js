@@ -6,7 +6,7 @@ import RemoveSeveralProducts from "./RemoveSeveralProduct";
 import useResponsive from "../../customHooks/responsiveHook";
 import styleVariable from "../../styleVariable";
 
-const Addandremoveproduct = ({ product, addNotification }) => {
+const Addandremoveproduct = ({ product, addNotification, subBasket, test }) => {
   const { basket } = useContext(AppContext);
   const list = JSON.parse(localStorage.getItem("basket")) || [];
   const { isMobile } = useResponsive();
@@ -39,7 +39,7 @@ const Addandremoveproduct = ({ product, addNotification }) => {
 
   return (
     <Row align="middle">
-      <Col lg={12} md={23} sm={23} xs={18}>
+      <Col lg={subBasket ? 20 : 12} md={23} sm={23} xs={18}>
         <Row justify="start">
           <Button
             style={{
@@ -79,9 +79,10 @@ const Addandremoveproduct = ({ product, addNotification }) => {
         </Row>
       </Col>
 
-      <Col lg={12} md={1} xs={6} sm={1}>
+      <Col lg={subBasket ? 4 : 12} md={1} xs={6} sm={1}>
         {list &&
           list.length > 0 &&
+          !test &&
           list.find((p) => p.id === product.id) !== undefined &&
           list.find((p) => p.id === product.id).num > 0 && (
             <Row align="middle" justify="end">
