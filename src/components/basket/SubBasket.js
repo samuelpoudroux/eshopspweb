@@ -115,7 +115,7 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
                       style={{
                         boxShadow: " 0px  10px 10px rgba(90, 97, 101, 0.7)",
                         padding: 5,
-                        margin: 5,
+                        margin: 10,
                       }}
                     >
                       <Row

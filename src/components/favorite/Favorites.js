@@ -86,8 +86,11 @@ const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
     >
       <Col lg={24} style={{ padding: "10px" }}>
         <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
-          Je suis intéressé par ces produits
+          {list.length > 0
+            ? "Je suis intéressé par ces produits"
+            : "Pas de produits dans vos favoris"}
         </h3>
+
         <Row>
           {list.map(
             (product) =>
@@ -100,7 +103,7 @@ const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
                   style={{
                     boxShadow: " 0px  10px 10px rgba(90, 97, 101, 0.7)",
                     padding: 5,
-                    margin: 5,
+                    margin: 10,
                   }}
                 >
                   <Row
@@ -152,8 +155,8 @@ const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
                     </Col>
                   </Row>
 
-                  <Row style={{ padding: 5 }}>
-                    <Col lg={18}>
+                  <Row style={{ padding: 5 }} align="middle">
+                    <Col lg={18} xs={20} sm={20}>
                       <Addandremoveproduct
                         notification={notification}
                         addNotification={addNotification}
@@ -163,8 +166,8 @@ const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
                         test
                       />
                     </Col>
-                    <Col lg={8}>
-                      <Row align="center">
+                    <Col lg={8} xs={4} sm={4}>
+                      <Row align="middle">
                         <Popconfirm
                           title={`Souhaitez vous supprimer ce produit des favoris`}
                           icon={
