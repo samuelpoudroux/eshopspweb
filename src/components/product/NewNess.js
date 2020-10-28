@@ -34,7 +34,7 @@ const NewNess = () => {
       >
         {newNess.map((product) => (
           <Col key={product.id}>
-            <Row justify="center" style={{ paddingBottom: 30 }}>
+            <Row justify="center" style={{ paddingBottom: 30, paddingTop: 15 }}>
               <Productcard
                 key={product && product.id}
                 product={product}
