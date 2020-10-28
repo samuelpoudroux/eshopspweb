@@ -1,3 +1,5 @@
+import Login from "../form/authentification/Login";
+
 //add product to basket
 const addProductToBasket = (test = [], action) => {
   const currentBasket = JSON.parse(localStorage.getItem("basket")) || [];
@@ -51,7 +53,9 @@ const decreaseProductFromBasket = (test, action) => {
       num: productIsHad.num > 0 ? productIsHad.num - 1 : 0,
     });
   }
+
   localStorage.setItem("basket", JSON.stringify([...currentBasket]));
+  console.log("toto", currentBasket);
   return [...currentBasket];
 };
 // remove all products from basket
@@ -91,7 +95,6 @@ const removeProductFromBasket = (test, action) => {
     );
     currentBasket.splice(productIndex, 1);
   }
-
   localStorage.setItem("basket", JSON.stringify([...currentBasket]));
   return [...currentBasket];
 };

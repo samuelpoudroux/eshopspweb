@@ -49,7 +49,6 @@ const Favorites = ({ setFavoriteActive }) => {
   return (
     <div className="basket" onClick={(e) => closeFavorites(e)}>
       <Col
-        span={24}
         className="basket_inner"
         style={{ background: styleVariable.secondaryColor, paddingTop: 15 }}
       >

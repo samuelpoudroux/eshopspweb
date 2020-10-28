@@ -4,12 +4,13 @@ import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Row } from "antd";
 
 const ProductsNumber = ({
-  setBasketActive,
-  basketIsActive,
   iconBasketColor,
+  setSubBasketVisible,
+  subBasketVisible,
   BadgeStyle,
 }) => {
-  const basketList = JSON.parse(localStorage.getItem("basket"));
+  const basketList = JSON.parse(localStorage.getItem("basket")) || [];
+  console.log("basketList", basketList);
   const numOfProducts = useCallback(() => {
     return getNumberOfProducts(basketList ? basketList : []);
   }, [basketList]);
@@ -19,10 +20,10 @@ const ProductsNumber = ({
       <ShoppingCartOutlined
         style={{
           fontSize: "20px",
-          color: iconBasketColor || "white",
+          color: totalOfProducts === 0 ? "grey" : "white",
           marginRight: "10px",
         }}
-        onClick={() => setBasketActive(!basketIsActive)}
+        onClick={() => setSubBasketVisible(!subBasketVisible)}
       />
     </Badge>
   );

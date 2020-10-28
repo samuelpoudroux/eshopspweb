@@ -92,9 +92,9 @@ const Productcard = ({ product, history, large }) => {
   return (
     <Col
       xs={22}
-      sm={22}
+      sm={24}
       md={24}
-      lg={4}
+      lg={6}
       style={{
         boxShadow: " 0px  10px 10px rgba(90, 97, 101, 0.7)",
         background: "#fff",
@@ -102,7 +102,7 @@ const Productcard = ({ product, history, large }) => {
         position: "relative",
         cursor: "pointer",
         padding: "1px",
-        marginTop: isMobile && 50,
+        margin: 20,
       }}
       key={product.id}
     >
@@ -119,13 +119,13 @@ const Productcard = ({ product, history, large }) => {
           <Col
             lg={20}
             md={16}
-            sm={16}
+            sm={24}
             xs={16}
             style={{ wordBreak: "break-all", paddingTop: 15 }}
           >
             <b style={{ color: styleVariable.mainColor }}>{name}</b>
           </Col>
-          <Col lg={4} md={8} sm={8} xs={8} style={{ paddingTop: 15 }}>
+          <Col lg={4} md={8} sm={24} xs={8} style={{ paddingTop: 15 }}>
             <Row justify="end">
               <Badge
                 style={{
@@ -191,7 +191,7 @@ const Productcard = ({ product, history, large }) => {
           justify={isMobile && "space-between"}
           style={{ marginTop: 20 }}
         >
-          <Col lg={24} md={6} sm={16} xs={16}>
+          <Col lg={24} md={6} sm={24} xs={16}>
             <Addandremoveproduct
               product={product}
               notification={notification}
@@ -203,7 +203,7 @@ const Productcard = ({ product, history, large }) => {
             justify={isMobile && "center"}
             style={{ marginTop: 20 }}
           >
-            <Col span={23}>
+            <Col lg={23} md={22}>
               <Row align="middle">
                 <ReactStars
                   count={5}
@@ -214,7 +214,7 @@ const Productcard = ({ product, history, large }) => {
                 />
               </Row>
             </Col>
-            <Col span={1}>
+            <Col lg={1} md={2}>
               <Row align="middle">
                 {isFavorites && (
                   <HeartFilled

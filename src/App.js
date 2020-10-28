@@ -21,6 +21,7 @@ function App() {
   const { state: globalSearchState } = globalSearch;
   const [basketIsActive, setBasketActive] = useState(false);
   const [favoriteIsActive, setFavoriteActive] = useState(false);
+  const [subBasketVisible, setSubBasketVisible] = useState(false);
   const [chatActive, setChatActive] = useState(false);
   const botRef = useRef(null);
   const appRef = useRef(null);
@@ -35,14 +36,15 @@ function App() {
         <Router history={history}>
           <Header
             botRef={botRef}
-            setBasketActive={setBasketActive}
-            basketIsActive={basketIsActive}
             setFavoriteActive={setFavoriteActive}
             favoriteIsActive={favoriteIsActive}
             setChatActive={setChatActive}
+            setSubBasketVisible={setSubBasketVisible}
           />
 
           <SubBasket
+            subBasketVisible={subBasketVisible}
+            setSubBasketVisible={setSubBasketVisible}
             setBasketActive={setBasketActive}
             basketIsActive={basketIsActive}
           />
@@ -92,7 +94,6 @@ function App() {
               )}
             </Col>
           </Col>
-          {basketIsActive && <Basket setBasketActive={setBasketActive} />}
           {favoriteIsActive && (
             <Favorites
               favoriteIsActive={favoriteIsActive}

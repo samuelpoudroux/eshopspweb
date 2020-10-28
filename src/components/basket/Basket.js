@@ -35,7 +35,7 @@ const Basket = ({ setBasketActive }) => {
         className="basket_inner"
         style={{ background: styleVariable.secondaryColor, paddingTop: 15 }}
       >
-        <div style={{ padding: "2%", overflowY: "scroll" }}>
+        <div style={{ padding: "2%" }}>
           <Row justify="space-between" onClick={(e) => e.stopPropagation()}>
             <CleanBasket color={"white"} fontSize={"20px"} />
             <ShopFilled style={{ fontSize: "20px", color: "white" }} />
@@ -72,7 +72,12 @@ const Basket = ({ setBasketActive }) => {
                               </Col>
                               <Col span={10}>
                                 <Row justify="end">
-                                  <p style={{ color: "#686868", margin: 0 }}>
+                                  <p
+                                    style={{
+                                      color: styleVariable.mainColor,
+                                      margin: 0,
+                                    }}
+                                  >
                                     Sous-total:
                                     {product.productPrice * product.num}€
                                   </p>
@@ -86,14 +91,16 @@ const Basket = ({ setBasketActive }) => {
                   )
               )}
           </Row>
-          <Row align="middle" style={{ color: "white", fontSize: "2em" }}>
-            {!list || (list.length === 0 && <p>Votre panier est vide</p>)}
-          </Row>
+          <Row
+            align="middle"
+            justify="center"
+            style={{ color: "white", fontSize: "1em", textAlign: "center" }}
+          ></Row>
         </div>
 
         <Row
           style={{
-            marginTop: "20%",
+            marginTop: "1%",
             background: styleVariable.mainColor,
             padding: "10px",
           }}

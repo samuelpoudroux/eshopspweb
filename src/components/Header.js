@@ -25,12 +25,12 @@ import styleVariable from "../styleVariable";
 import FavoriteNumber from "./product/FavoriteNumber";
 
 const Header = ({
-  setBasketActive,
-  basketIsActive,
   favoriteIsActive,
   setFavoriteActive,
   history,
   setChatActive,
+  setSubBasketVisible,
+  subBasketVisible,
   botRef,
 }) => {
   const [menuIsOpened, setMenuIsOpened] = useState(false);
@@ -142,8 +142,8 @@ const Header = ({
             <Col lg={2} md={4} xs={6} sm={6}>
               <ProductsNumber
                 header
-                setBasketActive={setBasketActive}
-                basketIsActive={basketIsActive}
+                setSubBasketVisible={setSubBasketVisible}
+                subBasketVisible={subBasketVisible}
                 BadgeStyle={{
                   backgroundColor: styleVariable.mainColor,
                   color: "white",
@@ -156,8 +156,8 @@ const Header = ({
                   backgroundColor: "#fff",
                   color: styleVariable.secondaryColor,
                 }}
-                basketIsActive={basketIsActive}
-                setBasketActive={setBasketActive}
+                setSubBasketVisible={setSubBasketVisible}
+                subBasketVisible={subBasketVisible}
               />
             </Col>
             <Col lg={2} md={4} xs={6} sm={6}>

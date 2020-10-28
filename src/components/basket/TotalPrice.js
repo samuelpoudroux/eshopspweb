@@ -3,10 +3,10 @@ import { Badge } from "antd";
 import { getTotalPrice } from "../../repository/product";
 import { EuroOutlined } from "@ant-design/icons";
 const TotalPrice = ({
-  setBasketActive,
-  basketIsActive,
+  subBasketVisible,
   iconEuroColor,
   BadgeStyle,
+  setSubBasketVisible,
 }) => {
   const basketList = JSON.parse(localStorage.getItem("basket"));
   const totalPrices = useCallback(() => {
@@ -21,7 +21,7 @@ const TotalPrice = ({
           color: iconEuroColor || "white",
           marginRight: "10px",
         }}
-        onClick={() => setBasketActive(!basketIsActive)}
+        onClick={() => setSubBasketVisible(!subBasketVisible)}
       />
     </Badge>
   );
