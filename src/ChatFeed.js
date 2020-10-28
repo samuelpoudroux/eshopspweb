@@ -10,7 +10,7 @@ const ChatFeedComponent = ({
   history,
   setChatActive,
   setFavoriteActive,
-  setBasketActive,
+  setSubBasketVisible,
 }) => {
   const secondTest = useRef(null);
   const [messageEnd, setMessageEnd] = useState();
@@ -55,7 +55,7 @@ const ChatFeedComponent = ({
         return setFavoriteActive(true);
         break;
       case "Voici votre panier":
-        return setBasketActive(true);
+        return setSubBasketVisible(true);
       case "Nous vous dirigeons vers la page de gestion du compte":
         return goToPage("/informations");
         break;

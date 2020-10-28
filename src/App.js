@@ -87,6 +87,7 @@ function App() {
                         history={history}
                         setBasketActive={setBasketActive}
                         setFavoriteActive={setFavoriteActive}
+                        setSubBasketVisible={setSubBasketVisible}
                       />
                     </Col>
                   </Row>

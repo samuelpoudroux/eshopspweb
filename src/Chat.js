@@ -12,6 +12,7 @@ const Chat = ({
   appRef,
   setFavoriteActive,
   setBasketActive,
+  setSubBasketVisible,
 }) => {
   const [messages, setMessages] = useState([]);
   const [socket, setSocket] = useState(io(process.env.REACT_APP_API_DOMAIN));
@@ -50,6 +51,7 @@ const Chat = ({
           setChatActive={setChatActive}
           setBasketActive={setBasketActive}
           setFavoriteActive={setFavoriteActive}
+          setSubBasketVisible={setSubBasketVisible}
         />
       </Row>
     </div>
