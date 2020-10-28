@@ -153,7 +153,7 @@ const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
                   </Row>
 
                   <Row style={{ padding: 5 }}>
-                    <Col lg={20}>
+                    <Col lg={18}>
                       <Addandremoveproduct
                         notification={notification}
                         addNotification={addNotification}
@@ -163,7 +163,7 @@ const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
                         test
                       />
                     </Col>
-                    <Col lg={4}>
+                    <Col lg={8}>
                       <Row align="center">
                         <Popconfirm
                           title={`Souhaitez vous supprimer ce produit des favoris`}
