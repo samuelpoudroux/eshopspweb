@@ -102,7 +102,7 @@ const Productcard = ({ product, history, large }) => {
         position: "relative",
         cursor: "pointer",
         padding: "1px",
-        marginTop: isMobile && 20,
+        marginTop: isMobile && 50,
       }}
       key={product.id}
     >
