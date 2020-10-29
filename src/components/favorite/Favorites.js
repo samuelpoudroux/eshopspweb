@@ -1,24 +1,29 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
-  CloseCircleOutlined,
+  ShoppingCartOutlined,
   HeartFilled,
   QuestionCircleOutlined,
   DeleteOutlined,
   DeleteFilled,
 } from "@ant-design/icons";
-import { Card, Col, Row, Popconfirm, Drawer } from "antd";
+import { Col, Row, Popconfirm, Drawer, Badge } from "antd";
 import Addandremoveproduct from "../product/AddAndRemoveProduct";
 import styleVariable from "../../styleVariable";
 import { useContext } from "react";
 import { AppContext } from "../../context/context";
 import useResponsive from "../../customHooks/responsiveHook";
+import useBasket from "../../customHooks/basketHook";
 
 const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
   const { favorites } = useContext(AppContext);
-  const [notification, addNotification] = useState(false);
+  const { notification, addNotification } = useBasket();
   const { isMobile } = useResponsive();
-
+  const basketList = JSON.parse(localStorage.getItem("basket")) || [];
+  const productInBasket = (product) => {
+    const productNumber = basketList.find((p) => p.id === product.id).num || 0;
+    return productNumber;
+  };
   const {
     removeAllProductFromFavorites,
     removeProductFromFavorites,
@@ -28,23 +33,27 @@ const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
   const drawerHeader = () => {
     return (
       <Row>
-        <Col lg={5} md={5} xs={17} sm={17}>
-          <b style={{ fontSize: "1.3em", color: styleVariable.mainColor }}>
+        <Col lg={8} md={5} xs={15} sm={15}>
+          <b
+            style={{
+              fontSize: isMobile ? "1em" : "1.3em",
+              color: styleVariable.mainColor,
+            }}
+          >
             Vos futurs Achats{" "}
           </b>
         </Col>
-        <Col lg={1} md={5} xs={4} sm={4}>
+        <Col lg={1} md={5} xs={1} sm={1}>
           <Row>
             <HeartFilled
               style={{
                 fontSize: "20px",
                 color: "red",
-                marginLeft: 5,
               }}
             />
           </Row>
         </Col>
-        <Col lg={17} md={5} xs={1} sm={1}>
+        <Col lg={14} md={5} xs={5} sm={5}>
           <Popconfirm
             title={`Souhaitez vous supprimer tous les favoris`}
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}
@@ -72,7 +81,7 @@ const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
       title={drawerHeader()}
       closable={true}
       placement="right"
-      width={isMobile ? 296 : 900}
+      width={isMobile ? 296 : 780}
       onClose={() => closeFavorites()}
       visible={favoriteIsActive}
       height={"auto"}
@@ -83,6 +92,7 @@ const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
       }}
       style={{ zIndex: 0, height: "100%", overflowY: "scroll" }}
       footerStyle={{ padding: "0px" }}
+      onTouchMove={() => closeFavorites()}
     >
       <Col lg={24} style={{ padding: "10px" }}>
         <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
@@ -91,12 +101,12 @@ const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
             : "Pas de produits dans vos favoris"}
         </h3>
 
-        <Row>
+        <Row justify="center">
           {list.map(
             (product) =>
               product.num !== 0 && (
                 <Col
-                  lg={6}
+                  lg={9}
                   md={11}
                   xs={24}
                   sm={24}
@@ -155,19 +165,23 @@ const Favorites = ({ setFavoriteActive, history, favoriteIsActive }) => {
                     </Col>
                   </Row>
 
-                  <Row style={{ padding: 5 }} align="middle">
-                    <Col lg={18} xs={20} sm={20}>
+                  <Row
+                    style={{ paddingTop: 5 }}
+                    justify="space-evenly"
+                    align="middle"
+                  >
+                    <Col span={20}>
                       <Addandremoveproduct
                         notification={notification}
                         addNotification={addNotification}
                         product={product}
                         notClickable
-                        subBasket
-                        test
+                        favorite
                       />
                     </Col>
-                    <Col lg={8} xs={4} sm={4}>
-                      <Row align="middle">
+
+                    <Col xl={1} xs={1} sm={1}>
+                      <Row>
                         <Popconfirm
                           title={`Souhaitez vous supprimer ce produit des favoris`}
                           icon={

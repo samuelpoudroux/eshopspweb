@@ -139,7 +139,7 @@ const Header = ({
           style={{ marginTop: isMobile && "10%" }}
         >
           <Row justify="center" align="middle">
-            <Col lg={2} md={4} xs={6} sm={6}>
+            <Col lg={3} md={4} xs={6} sm={6}>
               <ProductsNumber
                 header
                 setSubBasketVisible={setSubBasketVisible}
@@ -150,7 +150,7 @@ const Header = ({
                 }}
               />
             </Col>
-            <Col lg={2} md={4} xs={6} sm={6}>
+            <Col lg={3} md={4} xs={6} sm={6}>
               <TotalPrice
                 BadgeStyle={{
                   backgroundColor: "#fff",
@@ -160,7 +160,7 @@ const Header = ({
                 subBasketVisible={subBasketVisible}
               />
             </Col>
-            <Col lg={2} md={4} xs={6} sm={6}>
+            <Col lg={3} md={4} xs={6} sm={6}>
               <FavoriteNumber
                 BadgeStyle={{
                   backgroundColor: styleVariable.mainColor,
@@ -170,7 +170,7 @@ const Header = ({
                 favoriteIsActive={favoriteIsActive}
               />
             </Col>
-            <Col lg={2} md={4} xs={3} sm={3}>
+            <Col lg={3} md={4} xs={3} sm={3}>
               <CleanBasket />
             </Col>
             <Col

@@ -108,7 +108,15 @@ input:hover {
   cursor: pointer;
 }
 
-
+.card{
+  background-color: var(--secondaryColor);
+  -webkit-box-shadow:inset 1px 1px 12px 1px var(--mainColor);
+  -moz-box-shadow:inset 1px 1px 12px 1px var(--mainColor);
+  box-shadow:inset 1px 1px 12px 1px var(--mainColor);
+  -moz-border-radius:0px;
+  -webkit-border-radius:0px;
+  border-radius:0px;
+  }
 
 .ant-tag-checkable-checked,
 .ant-checkbox {

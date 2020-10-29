@@ -8,7 +8,6 @@ const ProductsNumber = ({
   notClickable,
   setSubBasketVisible,
   subBasketVisible,
-  BadgeStyle,
 }) => {
   const basketList = JSON.parse(localStorage.getItem("basket")) || [];
   const numOfProducts = useCallback(() => {
@@ -22,6 +21,7 @@ const ProductsNumber = ({
         color: notClickable ? "white" : styleVariable.secondaryColor,
       }}
       count={`${totalOfProducts}`}
+      overflowCount={1000}
     >
       <ShoppingCartOutlined
         style={{
@@ -30,7 +30,7 @@ const ProductsNumber = ({
             totalOfProducts === 0 || notClickable
               ? styleVariable.mainColor
               : "white",
-          marginRight: "10px",
+          marginRight: "22px",
         }}
         onClick={() => !notClickable && setSubBasketVisible(!subBasketVisible)}
       />

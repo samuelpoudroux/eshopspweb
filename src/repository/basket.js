@@ -2,6 +2,7 @@ import Login from "../form/authentification/Login";
 
 //add product to basket
 const addProductToBasket = (test = [], action) => {
+  console.log("toto", action.num);
   const currentBasket = JSON.parse(localStorage.getItem("basket")) || [];
   const produitIsAlreadyAdded = currentBasket.find(
     (product) => product.id === action.product.id
@@ -14,7 +15,7 @@ const addProductToBasket = (test = [], action) => {
         ...currentBasket,
         {
           ...action.product,
-          num: 1,
+          num: action.num,
         },
       ])
     );
@@ -22,7 +23,7 @@ const addProductToBasket = (test = [], action) => {
       ...currentBasket,
       {
         ...action.product,
-        num: 1,
+        num: action.num,
       },
     ];
   } else {
@@ -31,7 +32,7 @@ const addProductToBasket = (test = [], action) => {
     );
     currentBasket.splice(productIndex, 1, {
       ...action.product,
-      num: (produitIsAlreadyAdded.num += 1),
+      num: (produitIsAlreadyAdded.num += action.num),
     });
     localStorage.setItem("basket", JSON.stringify([...currentBasket]));
   }
@@ -50,12 +51,11 @@ const decreaseProductFromBasket = (test, action) => {
     );
     currentBasket.splice(productIndex, 1, {
       ...productIsHad,
-      num: productIsHad.num > 0 ? productIsHad.num - 1 : 0,
+      num: productIsHad.num > 0 ? productIsHad.num - action.num : 0,
     });
   }
 
   localStorage.setItem("basket", JSON.stringify([...currentBasket]));
-  console.log("toto", currentBasket);
   return [...currentBasket];
 };
 // remove all products from basket

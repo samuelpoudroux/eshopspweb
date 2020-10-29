@@ -76,24 +76,24 @@ const ChatFeedComponent = ({
   const renderBackgroundInput = (expr) => {
     switch (expr) {
       case "Gérer mes favoris":
-        return "#be924a";
+        return styleVariable.secondaryColor;
         break;
       case "Gérer mon panier":
-        return "grey";
+        return "#be924a";
       case "Finaliser ma commande":
-        return "grey"; // expected output: "Mangoes and papayas are $2.79 a pound."
+        return "#be924a"; // expected output: "Mangoes and papayas are $2.79 a pound."
         break;
       case "Modifier mes informations":
-        return "#be924a"; // expected output: "Mangoes and papayas are $2.79 a pound."
+        return styleVariable.secondaryColor; // expected output: "Mangoes and papayas are $2.79 a pound."
         break;
       case "oui":
         return "white"; // expected output: "Mangoes and papayas are $2.79 a pound."
         break;
       case "non":
-        return "grey"; // expected output: "Mangoes and papayas are $2.79 a pound."
+        return styleVariable.secondaryColor; // expected output: "Mangoes and papayas are $2.79 a pound."
         break;
       default:
-        return "grey";
+        return styleVariable.secondaryColor;
     }
   };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import Productlist from "./components/product/ProductList";
 import Login from "./form/authentification/Login";
 import Register from "./form/authentification/Register";
 import ContactForm from "./form/contact/contactForm";
@@ -18,6 +19,10 @@ const Routes = [
   {
     path: "/register",
     component: Register,
+  },
+  {
+    path: "/products",
+    component: Productlist,
   },
   {
     path: "/contact",

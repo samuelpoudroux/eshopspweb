@@ -55,6 +55,24 @@ const NavBar = ({ setMenuIsOpened, history }) => {
               Accueil
             </Menu.Item>
             <Menu.Item
+              key="products"
+              icon={
+                <HomeOutlined
+                  style={{
+                    color:
+                      currentKey === "products"
+                        ? "white"
+                        : styleVariable.secondaryColor,
+                    fontSize: "1.5em",
+                  }}
+                />
+              }
+              onClick={(e) => goToPage(e, "/products")}
+              style={{ fontSize: "1.5em" }}
+            >
+              Nos produits
+            </Menu.Item>
+            <Menu.Item
               key="contact"
               icon={
                 <ContactsOutlined

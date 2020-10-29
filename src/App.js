@@ -6,7 +6,6 @@ import Routes from "./routes";
 import { AppContext } from "./context/context";
 import Header from "./components/Header";
 import GlobalSearchResult from "./components//globalSearch/GlobalSearchResult";
-import Basket from "./components/basket/Basket";
 import SubBasket from "./components/basket/SubBasket";
 import { Col, Row } from "antd";
 import ProtectedRoute from "./ProtectedRoutes";

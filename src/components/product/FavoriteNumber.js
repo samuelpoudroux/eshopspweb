@@ -16,7 +16,7 @@ const FavoriteNumber = ({
         style={{
           fontSize: "20px",
           color: iconBasketColor || "white",
-          marginRight: "10px",
+          marginRight: "15px",
         }}
         onClick={() => setFavoriteActive(!favoriteIsActive)}
       />

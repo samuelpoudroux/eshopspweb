@@ -26,7 +26,7 @@ const TotalPrice = ({
         style={{
           fontSize: "20px",
           color: notClickable ? styleVariable.mainColor : "white",
-          marginRight: "10px",
+          marginRight: "25px",
         }}
         onClick={() => !notClickable && setSubBasketVisible(!subBasketVisible)}
       />
