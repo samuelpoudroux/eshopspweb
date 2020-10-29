@@ -19,6 +19,8 @@ const TotalPrice = ({
       style={{
         background: notClickable ? styleVariable.secondaryColor : "white",
         color: notClickable ? "white" : styleVariable.secondaryColor,
+        paddingRight: "5px",
+        paddingLeft: "5px",
       }}
       count={`${totalPrice}€`}
     >
@@ -26,7 +28,7 @@ const TotalPrice = ({
         style={{
           fontSize: "20px",
           color: notClickable ? styleVariable.mainColor : "white",
-          marginRight: "25px",
+          marginRight: "22px",
         }}
         onClick={() => !notClickable && setSubBasketVisible(!subBasketVisible)}
       />

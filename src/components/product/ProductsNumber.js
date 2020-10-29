@@ -19,6 +19,8 @@ const ProductsNumber = ({
       style={{
         background: notClickable ? styleVariable.secondaryColor : "white",
         color: notClickable ? "white" : styleVariable.secondaryColor,
+        paddingRight: "15px",
+        paddingLeft: "15px",
       }}
       count={`${totalOfProducts}`}
       overflowCount={1000}
@@ -26,11 +28,11 @@ const ProductsNumber = ({
       <ShoppingCartOutlined
         style={{
           fontSize: "20px",
+          marginRight: "22px",
           color:
             totalOfProducts === 0 || notClickable
               ? styleVariable.mainColor
               : "white",
-          marginRight: "22px",
         }}
         onClick={() => !notClickable && setSubBasketVisible(!subBasketVisible)}
       />
