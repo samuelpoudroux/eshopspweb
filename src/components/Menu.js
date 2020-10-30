@@ -10,6 +10,7 @@ import {
 import PropTypes from "prop-types";
 import styleVariable from "../styleVariable";
 import useCategory from "../customHooks/categoryHook";
+import useResponsive from "../customHooks/responsiveHook";
 const { SubMenu } = Menu;
 
 const NavBar = ({ setMenuIsOpened, history }) => {
@@ -18,6 +19,7 @@ const NavBar = ({ setMenuIsOpened, history }) => {
     history.push(url);
     setMenuIsOpened(false);
   };
+  const { isMobile } = useResponsive();
 
   const { categories } = useCategory();
   const currentKey = localStorage.getItem("menuActive") || null;

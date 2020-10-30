@@ -30,7 +30,6 @@ const Productcard = ({ product, history, large }) => {
   const { globalSearch, favorites, products } = useContext(AppContext);
   const { isAdmin } = useIsAdmin();
   const { search } = globalSearch;
-  const { isMobile } = useResponsive();
   const { notification, addNotification, renderNotification } = useBasket();
   const list = JSON.parse(localStorage.getItem("basket")) || [];
 
