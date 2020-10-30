@@ -108,7 +108,7 @@ const NavBar = ({ setMenuIsOpened, history }) => {
                 />
               }
               title="Categories"
-              style={{ fontSize: "1.5em", width: "20%" }}
+              style={{ fontSize: "1.5em", width: !isMobile && "20%" }}
             >
               {categories.list.map((category) => (
                 <Menu.Item
