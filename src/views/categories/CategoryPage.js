@@ -51,7 +51,7 @@ const CategoryPage = ({ match }) => {
   };
   useEffect(() => {
     getProductsByCategories();
-  }, []);
+  }, [match.params.name]);
   return (
     <Col lg={24} style={{ padding: "1%" }}>
       <h3 style={{ textAlign: "center" }}>
@@ -94,8 +94,11 @@ const CategoryPage = ({ match }) => {
         {isLoading && <Spin />}
         {!isLoading &&
           !searchResult.active &&
-          products &&
+          products.length > 0 &&
           products.map((product) => <ProductCard product={product} />)}
+        {!isLoading && !searchResult.active && products.length === 0 && (
+          <h1>Pas de produits pour cette catégorie</h1>
+        )}
         {!isLoading &&
           searchResult.active &&
           searchResult.list.length > 0 &&
