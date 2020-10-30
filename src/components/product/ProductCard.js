@@ -87,7 +87,7 @@ const Productcard = ({ product, history, large }) => {
       md={10}
       lg={6}
       xl={5}
-      xxl={3}
+      xxl={4}
       style={{
         // boxShadow: " 0px  10px 10px rgba(90, 97, 101, 0.7)",
         background: "#fff",

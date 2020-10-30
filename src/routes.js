@@ -3,6 +3,7 @@ import Productlist from "./components/product/ProductList";
 import Login from "./form/authentification/Login";
 import Register from "./form/authentification/Register";
 import ContactForm from "./form/contact/contactForm";
+import CategoryPage from "./views/categories/CategoryPage";
 import ProductDetails from "./views/product/ProductDetails";
 const { default: HomePage } = require("./views/HomePage");
 export const test = () => <h1>ProductDetails</h1>;
@@ -23,6 +24,10 @@ const Routes = [
   {
     path: "/products",
     component: Productlist,
+  },
+  {
+    path: "/categories/:name",
+    component: CategoryPage,
   },
   {
     path: "/contact",

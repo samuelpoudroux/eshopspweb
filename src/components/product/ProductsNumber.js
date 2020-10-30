@@ -28,7 +28,7 @@ const ProductsNumber = ({
       <ShoppingCartOutlined
         style={{
           fontSize: "20px",
-          marginRight: "22px",
+          marginRight: "18px",
           color:
             totalOfProducts === 0 || notClickable
               ? styleVariable.mainColor

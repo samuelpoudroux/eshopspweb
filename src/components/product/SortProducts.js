@@ -23,6 +23,7 @@ import { LOWEST, HIGHEST } from "../../constants/category";
 
 import useResponsive from "../../customHooks/responsiveHook";
 import styleVariable from "../../styleVariable";
+import useCategory from "../../customHooks/categoryHook";
 
 const { REACT_APP_API_DOMAIN, REACT_APP_API_CATEGORIES } = process.env;
 
@@ -32,9 +33,9 @@ const { CheckableTag } = Tag;
 const SortProducts = ({ categoriesHandleChange, products }) => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectAllCategories, setSelectAllCategories] = useState(false);
-  const [categories, setCategories] = useState([]);
   const [value, setValue] = useState(null);
   const [newMaxBudget, setNewMaxBudget] = useState(null);
+  const { categories, setCategories } = useCategory();
   const [items, setItems] = useState([
     { id: 1, value: "LOWEST", name: "Prix croissant" },
     { id: 2, value: "HIGHEST", name: "Prix Décroissant" },
@@ -63,8 +64,8 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
     const { checked } = e.target;
     if (checked) {
       setSelectAllCategories(!selectAllCategories);
-      setSelectedTags(categories);
-      categoriesHandleChange(categories);
+      setSelectedTags(categories.list);
+      categoriesHandleChange(categories.list);
     } else {
       setSelectedTags([]);
     }
@@ -95,12 +96,6 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
       });
     }
   };
-
-  useEffect(() => {
-    Axios.get(
-      REACT_APP_API_DOMAIN + REACT_APP_API_CATEGORIES
-    ).then(({ data }) => setCategories(data));
-  }, []);
 
   useEffect(() => {
     setValue("");
@@ -167,7 +162,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
               <span style={{}}>Categories:</span>
             </Col>
             <Col lg={19} md={18} sm={16} xs={16}>
-              {categories.map((tag) => (
+              {categories.list.map((tag) => (
                 <CheckableTag
                   style={{
                     width: "auto",

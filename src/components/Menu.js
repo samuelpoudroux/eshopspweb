@@ -5,9 +5,12 @@ import {
   HomeOutlined,
   CloseCircleOutlined,
   ContactsOutlined,
+  AppstoreOutlined,
 } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import styleVariable from "../styleVariable";
+import useCategory from "../customHooks/categoryHook";
+const { SubMenu } = Menu;
 
 const NavBar = ({ setMenuIsOpened, history }) => {
   const goToPage = (e, url) => {
@@ -16,6 +19,7 @@ const NavBar = ({ setMenuIsOpened, history }) => {
     setMenuIsOpened(false);
   };
 
+  const { categories } = useCategory();
   const currentKey = localStorage.getItem("menuActive") || null;
   return (
     <Row className="popup">
@@ -90,6 +94,31 @@ const NavBar = ({ setMenuIsOpened, history }) => {
             >
               contact
             </Menu.Item>
+            <SubMenu
+              key="Categories"
+              icon={
+                <AppstoreOutlined
+                  style={{
+                    fontSize: "1.5em",
+                    color:
+                      currentKey === "Categories"
+                        ? "white"
+                        : styleVariable.secondaryColor,
+                  }}
+                />
+              }
+              title="Categories"
+              style={{ fontSize: "1.5em", width: "20%" }}
+            >
+              {categories.list.map((category) => (
+                <Menu.Item
+                  onClick={(e) => goToPage(e, `/categories/${category.name}`)}
+                  key={category.name}
+                >
+                  {category.name}
+                </Menu.Item>
+              ))}
+            </SubMenu>
           </Menu>
         </Col>
         <Col

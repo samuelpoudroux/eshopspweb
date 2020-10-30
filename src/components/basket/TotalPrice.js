@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback } from "react";
 import { Badge } from "antd";
 import { getTotalPrice } from "../../repository/product";
 import { EuroOutlined } from "@ant-design/icons";
@@ -28,7 +28,7 @@ const TotalPrice = ({
         style={{
           fontSize: "20px",
           color: notClickable ? styleVariable.mainColor : "white",
-          marginRight: "22px",
+          marginRight: "18px",
         }}
         onClick={() => !notClickable && setSubBasketVisible(!subBasketVisible)}
       />
