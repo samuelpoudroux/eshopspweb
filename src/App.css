@@ -108,7 +108,7 @@ input:hover {
   cursor: pointer;
 }
 
-.card{
+.productCard{
   background-color: var(--secondaryColor);
   -webkit-box-shadow:inset 1px 1px 12px 1px var(--mainColor);
   -moz-box-shadow:inset 1px 1px 12px 1px var(--mainColor);
@@ -177,12 +177,12 @@ input:disabled {
 }
 
 .ant-menu-item-selected{
-  color:white !important
+  color:#89ba17 !important
 
 }
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  background-color: var(--mainColor) !important;
+  background-color: rgba(63, 62, 62, 0.103) !important;
 }
 
 .ant-input-suffix{

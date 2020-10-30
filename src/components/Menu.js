@@ -6,6 +6,7 @@ import {
   CloseCircleOutlined,
   ContactsOutlined,
   AppstoreOutlined,
+  ShopOutlined,
 } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import styleVariable from "../styleVariable";
@@ -30,7 +31,6 @@ const NavBar = ({ setMenuIsOpened, history }) => {
           span={19}
           style={{
             height: "100%",
-            background: "red",
           }}
         >
           <Menu
@@ -49,7 +49,7 @@ const NavBar = ({ setMenuIsOpened, history }) => {
                   style={{
                     color:
                       currentKey === "home"
-                        ? "white"
+                        ? "#89ba17"
                         : styleVariable.secondaryColor,
                     fontSize: "1.5em",
                   }}
@@ -63,11 +63,11 @@ const NavBar = ({ setMenuIsOpened, history }) => {
             <Menu.Item
               key="products"
               icon={
-                <HomeOutlined
+                <ShopOutlined
                   style={{
                     color:
                       currentKey === "products"
-                        ? "white"
+                        ? "#89ba17"
                         : styleVariable.secondaryColor,
                     fontSize: "1.5em",
                   }}
@@ -78,24 +78,6 @@ const NavBar = ({ setMenuIsOpened, history }) => {
             >
               Nos produits
             </Menu.Item>
-            <Menu.Item
-              key="contact"
-              icon={
-                <ContactsOutlined
-                  style={{
-                    color:
-                      currentKey === "contact"
-                        ? "white"
-                        : styleVariable.secondaryColor,
-                    fontSize: "1.5em",
-                  }}
-                />
-              }
-              onClick={(e) => goToPage(e, "/contact")}
-              style={{ fontSize: "1.5em" }}
-            >
-              contact
-            </Menu.Item>
             <SubMenu
               key="Categories"
               icon={
@@ -104,7 +86,7 @@ const NavBar = ({ setMenuIsOpened, history }) => {
                     fontSize: "1.5em",
                     color:
                       currentKey === "Categories"
-                        ? "white"
+                        ? "#89ba17"
                         : styleVariable.secondaryColor,
                   }}
                 />
@@ -121,6 +103,24 @@ const NavBar = ({ setMenuIsOpened, history }) => {
                 </Menu.Item>
               ))}
             </SubMenu>
+            <Menu.Item
+              key="contact"
+              icon={
+                <ContactsOutlined
+                  style={{
+                    color:
+                      currentKey === "contact"
+                        ? "#89ba17"
+                        : styleVariable.secondaryColor,
+                    fontSize: "1.5em",
+                  }}
+                />
+              }
+              onClick={(e) => goToPage(e, "/contact")}
+              style={{ fontSize: "1.5em" }}
+            >
+              contact
+            </Menu.Item>
           </Menu>
         </Col>
         <Col

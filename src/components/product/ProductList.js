@@ -2,7 +2,7 @@ import React, { useContext, useState, useCallback } from "react";
 import { Col, Row, Spin } from "antd";
 import { AppContext } from "../../context/context";
 
-import Productcard from "./ProductCard";
+import ProductCard from "./ProductCard";
 import SortProducts from "./SortProducts";
 import useIsAdmin from "../../customHooks/isAdminHooks";
 import { useEffect } from "react";
@@ -77,7 +77,7 @@ const Productlist = () => {
               productList.length > 0 &&
               !products.notFound &&
               productList.map((product) => (
-                <Productcard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product} />
               ))}
           </Row>
         </Col>

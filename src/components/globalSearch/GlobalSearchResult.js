@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import Productcard from "../product/ProductCard";
+import { withRouter } from "react-router";
 import { Row, Col, Divider, Tag } from "antd";
 import styleVariable from "../../styleVariable";
+import { AppContext } from "../../context/context";
 
-const GlobalsearchResult = ({ state }) => {
+const GlobalsearchResult = ({ state, history }) => {
   const items = [];
+  const { globalSearch } = useContext(AppContext);
+  const { search } = globalSearch;
 
+  const goToPage = (key, value) => {
+    history.push(key === "categories" && `/categories/${value.name}`);
+    search("");
+  };
   for (const [key, values] of Object.entries(state)) {
     if (Array.isArray(values) && values.length > 0) {
       items.push(
@@ -38,7 +46,9 @@ const GlobalsearchResult = ({ state }) => {
                       background: "#fff",
                       borderRadius: "2px",
                       position: "relative",
+                      cursor: "pointer",
                     }}
+                    onClick={() => goToPage(key, value)}
                   >
                     {value.name}
                   </div>
@@ -69,4 +79,4 @@ GlobalsearchResult.propTypes = {
   state: PropTypes.object,
 };
 
-export default GlobalsearchResult;
+export default withRouter(GlobalsearchResult);

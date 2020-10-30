@@ -1,24 +1,21 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../context/context";
-import { Badge, Tag } from "antd";
+import { Tag } from "antd";
 import ReactStars from "react-rating-stars-component";
 import { withRouter } from "react-router";
 import { Row, Col } from "antd";
 import PropTypes from "prop-types";
 import Addandremoveproduct from "./AddAndRemoveProduct";
-import useResponsive from "../../customHooks/responsiveHook";
 import {
   HeartFilled,
   HeartOutlined,
   CrownFilled,
   CrownOutlined,
-  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import useIsAdmin from "../../customHooks/isAdminHooks";
 import Axios from "axios";
 import styleVariable from "../../styleVariable";
 import useBasket from "../../customHooks/basketHook";
-import BasketNotification from "../Badge/BasketNotification";
 
 const {
   REACT_APP_API_DOMAIN,
@@ -26,12 +23,11 @@ const {
   REACT_APP_API_PRODUCT,
 } = process.env;
 
-const Productcard = ({ product, history, large }) => {
+const ProductCard = ({ product, history, large }) => {
   const { globalSearch, favorites, products } = useContext(AppContext);
   const { isAdmin } = useIsAdmin();
   const { search } = globalSearch;
   const { notification, addNotification, renderNotification } = useBasket();
-  const list = JSON.parse(localStorage.getItem("basket")) || [];
 
   const isFavorites =
     JSON.parse(localStorage.getItem("favorites")) &&
@@ -50,11 +46,6 @@ const Productcard = ({ product, history, large }) => {
     shortDescription,
     productPriceReduced,
   } = product;
-  const priceStyle = {
-    color: styleVariable.mainColor,
-    fontSize: "1em",
-    margin: "0",
-  };
 
   const goToProductDetails = (e) => {
     search("");
@@ -81,14 +72,7 @@ const Productcard = ({ product, history, large }) => {
 
   return (
     <Col
-      xs={23}
-      sm={24}
-      md={10}
-      lg={6}
-      xl={5}
-      xxl={4}
       style={{
-        // boxShadow: " 0px  10px 10px rgba(90, 97, 101, 0.7)",
         background: "#fff",
         borderRadius: "2px",
         position: "relative",
@@ -98,7 +82,7 @@ const Productcard = ({ product, history, large }) => {
         padding: "8px",
       }}
       key={product.id}
-      className="card"
+      className="productCard"
     >
       <Col
         onClick={(e) => goToProductDetails(e)}
@@ -106,7 +90,13 @@ const Productcard = ({ product, history, large }) => {
           padding: "3%",
         }}
       >
-        <Row justify="center" style={{ height: "80px", width: "100%" }}>
+        <Row align="middle" style={{ wordBreak: "break-all" }} justify="center">
+          <b style={{ color: styleVariable.mainColor }}>{name}</b>
+        </Row>
+        <Row
+          justify="center"
+          style={{ height: "80px", width: "100%", paddingTop: 20 }}
+        >
           <img
             alt="Image du produit"
             src={`${product.imageUrl}`}
@@ -114,17 +104,6 @@ const Productcard = ({ product, history, large }) => {
           />
         </Row>
 
-        <Row align="middle" style={{ marginTop: 20 }} justify="space-between">
-          <Col
-            lg={20}
-            md={16}
-            sm={24}
-            xs={24}
-            style={{ wordBreak: "break-all", paddingTop: 15 }}
-          >
-            <b style={{ color: styleVariable.mainColor }}>{name}</b>
-          </Col>
-        </Row>
         <Row align="middle" style={{ marginTop: 20 }}>
           <Col lg={6} md={6} sm={8} xs={4}>
             <p
@@ -230,9 +209,9 @@ const Productcard = ({ product, history, large }) => {
   );
 };
 
-Productcard.propTypes = {
+ProductCard.propTypes = {
   product: PropTypes.object,
   history: PropTypes.object,
 };
 
-export default withRouter(Productcard);
+export default withRouter(ProductCard);
