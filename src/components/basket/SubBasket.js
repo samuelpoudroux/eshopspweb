@@ -135,10 +135,10 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
               align="middle"
               justify="start"
               style={{ padding: "10px", marginTop: 30 }}
-              gutter={20}
+              gutter={(20, 50)}
             >
               <Col lg={6} xs={24}>
-                <Row justify="start">
+                <Row justify={isMobile && "center"}>
                   <b style={{ color: styleVariable.mainColor }}>
                     Total de mon panier: {getTotalPrice(list)}€
                   </b>
