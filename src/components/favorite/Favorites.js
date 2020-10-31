@@ -237,10 +237,11 @@ const Favorites = ({
                   style={{
                     color: styleVariable.mainColor,
                     background: "white",
+                    maxWidth: "100%",
                   }}
                   onClick={() => addAllProductToBasket()}
                 >
-                  J'ajoute mes coups de coeur dans mon panier
+                  J'ajoute tous mes coups de coeur
                 </Button>
               </Row>
             )}

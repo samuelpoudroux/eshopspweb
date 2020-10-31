@@ -31,7 +31,7 @@ const TotalPrice = ({ history, notClickable }) => {
         }}
         count={totalPrice > 0 ? `${totalPrice + "€"}` : 0}
         overflowCount={3000}
-        showZero={true}
+        showZero={false}
         offset={[23, -5]}
       >
         <CreditCardOutlined
