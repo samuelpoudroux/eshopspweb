@@ -1,6 +1,6 @@
-import React from 'react';
-import { SmileOutlined } from '@ant-design/icons';
-import { notification } from 'antd';
+import React from "react";
+import { SmileOutlined } from "@ant-design/icons";
+import { notification } from "antd";
 
 const login = (authState, user, history) => {
   if (user.error) {
@@ -8,24 +8,19 @@ const login = (authState, user, history) => {
       isLoading: false,
       ...user,
       isLogged: false,
-      error: user.error
+      error: user.error,
     };
   } else {
-    history.push('/');
-    notification.open({
-      message: 'Vous êtes connecté',
-      icon: <SmileOutlined style={{ color: '#89ba17' }} />
-    });
     return { isLoading: false, ...user, isLogged: true };
   }
 };
 const logout = (history) => {
-  localStorage.removeItem('users');
+  localStorage.removeItem("users");
   notification.open({
-    message: 'Vous êtes deconnecté',
-    icon: <SmileOutlined style={{ color: '#89ba17' }} />
+    message: "Vous êtes deconnecté",
+    icon: <SmileOutlined style={{ color: "#89ba17" }} />,
   });
-  history.push('/');
+  history.push("/");
   return { isLogged: false };
 };
 const register = async () => {};

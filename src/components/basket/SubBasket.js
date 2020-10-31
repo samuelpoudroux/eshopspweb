@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from "react";
-import { Row, Col, Drawer } from "antd";
+import React from "react";
+import { Row, Col, Drawer, Button } from "antd";
 import ProductsNumber from "../product/ProductsNumber";
 import TotalPrice from "./TotalPrice";
 import { DownOutlined } from "@ant-design/icons";
@@ -8,16 +8,18 @@ import ProductCardSubBasket from "./ProductCardSubBasket";
 import { withRouter } from "react-router";
 import styleVariable from "../../styleVariable";
 import CleanBasket from "./CleanBasket";
-import useBasket from "../../customHooks/basketHook";
+import { getTotalPrice } from "../../repository/product";
 
 const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
   let num = 0;
   const list = JSON.parse(localStorage.getItem("basket")) || [];
   const { isMobile } = useResponsive();
-
+  const user = JSON.parse(localStorage.getItem("users"))
+    ? JSON.parse(localStorage.getItem("users"))
+    : undefined;
   const drawerHeader = () => {
     return (
-      <Row>
+      <Row style={{ paddingTop: "2%" }}>
         <Col lg={8} md={8} sm={8} xs={8}>
           <b
             style={{
@@ -30,7 +32,7 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
         </Col>
         <Col lg={16} md={16} sm={14} xs={16}>
           <Row justify="space-between">
-            <Col lg={8} md={8} sm={8} xs={8}>
+            <Col lg={8} md={8} sm={8} xs={10}>
               <ProductsNumber
                 notClickable
                 header
@@ -43,7 +45,7 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
                 subBasketVisible={subBasketVisible}
               />
             </Col>
-            <Col lg={8} md={8} sm={7} xs={7}>
+            <Col lg={8} md={8} sm={7} xs={10}>
               <TotalPrice
                 notClickable
                 BadgeStyle={{
@@ -54,7 +56,7 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
                 setSubBasketVisible={setSubBasketVisible}
               />
             </Col>
-            <Col span={8}>
+            <Col span={4}>
               <Row justify="center">
                 <CleanBasket
                   color={styleVariable.secondaryColor}
@@ -73,6 +75,11 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
     list.reduce((accumulateur, valeurCourante) => {
       return accumulateur + valeurCourante.num * valeurCourante.productPrice;
     }, num);
+
+  const goToPaiement = () => {
+    history.push(`/paiement/${(user && user.id) || "noId"}`);
+    setSubBasketVisible(false);
+  };
 
   return (
     list.length > 0 &&
@@ -99,11 +106,12 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
           visible={subBasketVisible}
           height={"auto"}
           key={"top"}
+          closable={false}
           bodyStyle={{
             paddingLeft: "5px",
             paddingRight: "5px",
           }}
-          style={{ zIndex: 0, height: "100%", overflowY: "scroll" }}
+          style={{ zIndex: 26, height: "100%", overflowY: "scroll" }}
           footerStyle={{ padding: "0px" }}
           onTouchMove={() => setSubBasketVisible(false)}
         >
@@ -111,7 +119,7 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
             <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
               Produits dans le panier
             </h3>
-            <Row justify="center">
+            <Row justify={isMobile && "center"}>
               {list.map(
                 (product) =>
                   product.num !== 0 && (
@@ -122,6 +130,33 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
                     />
                   )
               )}
+            </Row>
+            <Row
+              align="middle"
+              justify="start"
+              style={{ padding: "10px", marginTop: 30 }}
+              gutter={20}
+            >
+              <Col lg={6} xs={24}>
+                <Row justify="start">
+                  <b style={{ color: styleVariable.mainColor }}>
+                    Total de mon panier: {getTotalPrice(list)}€
+                  </b>
+                </Row>
+              </Col>
+              <Col lg={6} xs={24}>
+                <Row justify="center">
+                  <Button
+                    style={{
+                      color: "white",
+                      background: styleVariable.secondaryColor,
+                    }}
+                    onClick={() => goToPaiement()}
+                  >
+                    Finaliser ma commande
+                  </Button>
+                </Row>
+              </Col>
             </Row>
           </Col>
         </Drawer>

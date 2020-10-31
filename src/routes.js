@@ -3,8 +3,9 @@ import Productlist from "./components/product/ProductList";
 import Login from "./form/authentification/Login";
 import Register from "./form/authentification/Register";
 import ContactForm from "./form/contact/contactForm";
+import PaiementPage from "./PaiementPage";
 import CategoryPage from "./views/categories/CategoryPage";
-import ProductDetails from "./views/product/ProductDetails";
+import ProductDetail from "./views/product/ProductDetails";
 const { default: HomePage } = require("./views/HomePage");
 export const test = () => <h1>ProductDetails</h1>;
 const Routes = [
@@ -14,8 +15,16 @@ const Routes = [
     component: HomePage,
   },
   {
+    path: "/login/:paiement",
+    component: Login,
+  },
+  {
     path: "/login",
     component: Login,
+  },
+  {
+    path: "/register/:paiement",
+    component: Register,
   },
   {
     path: "/register",
@@ -38,9 +47,8 @@ const Routes = [
     component: test,
   },
   {
-    protected: true,
-    path: "/product/add",
-    component: Login,
+    path: "/paiement",
+    component: PaiementPage,
   },
 ];
 

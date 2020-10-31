@@ -73,27 +73,55 @@ const ChatFeedComponent = ({
     });
   };
 
-  const renderBackgroundInput = (expr) => {
+  const renderStyle = (expr) => {
+    const style = {
+      border: "none",
+      cursor: "pointer",
+    };
     switch (expr) {
       case "Gérer mes favoris":
-        return styleVariable.secondaryColor;
+        return {
+          ...style,
+          color: "white",
+          background: styleVariable.secondaryColor,
+        };
         break;
       case "Gérer mon panier":
-        return "#be924a";
+        return {
+          ...style,
+          color: "white",
+          background: styleVariable.secondaryColor,
+        };
       case "Finaliser ma commande":
-        return "#be924a"; // expected output: "Mangoes and papayas are $2.79 a pound."
+        return {
+          ...style,
+          color: styleVariable.secondaryColor,
+          background: "white",
+        };
         break;
       case "Modifier mes informations":
-        return styleVariable.secondaryColor; // expected output: "Mangoes and papayas are $2.79 a pound."
+        return {
+          ...style,
+          color: styleVariable.secondaryColor,
+          background: "white",
+        };
         break;
       case "oui":
-        return "white"; // expected output: "Mangoes and papayas are $2.79 a pound."
+        return {
+          ...style,
+          color: "white",
+          background: styleVariable.secondaryColor,
+        };
         break;
       case "non":
-        return styleVariable.secondaryColor; // expected output: "Mangoes and papayas are $2.79 a pound."
+        return {
+          ...style,
+          color: styleVariable.secondaryColor,
+          background: "white",
+        };
         break;
       default:
-        return styleVariable.secondaryColor;
+        return style;
     }
   };
 
@@ -128,14 +156,14 @@ const ChatFeedComponent = ({
                       : styleVariable.secondaryColor,
                   padding: 20,
                   borderRadius: 50,
-                  width: "60%",
+                  width: "auto",
                 }}
               >
                 <Row justify="center">
                   <p
                     style={{
                       color: "white",
-                      fontSize: "1.2em",
+                      fontSize: "1em",
                       textAlign: "center",
                     }}
                   >
@@ -150,13 +178,7 @@ const ChatFeedComponent = ({
                       <input
                         key={uuidv4()}
                         type="button"
-                        style={{
-                          background: renderBackgroundInput(value),
-                          border: "none",
-                          color:
-                            value === "oui" ? styleVariable.mainColor : "white",
-                          cursor: "pointer",
-                        }}
+                        style={renderStyle(value)}
                         value={value}
                         onClick={(e) =>
                           sendResponseToBot(e.target.value, message)

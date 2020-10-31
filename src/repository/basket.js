@@ -1,8 +1,6 @@
-import Login from "../form/authentification/Login";
-
+import _ from "lodash";
 //add product to basket
-const addProductToBasket = (test = [], action) => {
-  console.log("toto", action.num);
+const addProductToBasket = (state = [], action) => {
   const currentBasket = JSON.parse(localStorage.getItem("basket")) || [];
   const produitIsAlreadyAdded = currentBasket.find(
     (product) => product.id === action.product.id
@@ -15,7 +13,7 @@ const addProductToBasket = (test = [], action) => {
         ...currentBasket,
         {
           ...action.product,
-          num: action.num,
+          num: 1,
         },
       ])
     );
@@ -23,7 +21,7 @@ const addProductToBasket = (test = [], action) => {
       ...currentBasket,
       {
         ...action.product,
-        num: action.num,
+        num: 1,
       },
     ];
   } else {
@@ -32,15 +30,30 @@ const addProductToBasket = (test = [], action) => {
     );
     currentBasket.splice(productIndex, 1, {
       ...action.product,
-      num: (produitIsAlreadyAdded.num += action.num),
+      num: (produitIsAlreadyAdded.num += 1),
     });
     localStorage.setItem("basket", JSON.stringify([...currentBasket]));
   }
   return [...currentBasket];
 };
 
+const addAllFavoritesToBasket = async (currentState, action) => {
+  const currentBasket = JSON.parse(localStorage.getItem("basket")) || [];
+  const favorites = action.favorites;
+  favorites.map((favorite) => {
+    const productAlreadyInBasket = currentBasket.find(
+      (e) => e.id === favorite.id
+    );
+    if (!productAlreadyInBasket) {
+      currentBasket.push({ ...favorite, num: 1 });
+    }
+  });
+  localStorage.setItem("basket", JSON.stringify([...currentBasket]));
+  return [...currentBasket];
+};
+
 // remove prodcut from basket
-const decreaseProductFromBasket = (test, action) => {
+const decreaseProductFromBasket = (state, action) => {
   const currentBasket = JSON.parse(localStorage.getItem("basket")) || [];
   const productIsHad = currentBasket.find(
     (product) => product.id === action.product.id
@@ -49,10 +62,14 @@ const decreaseProductFromBasket = (test, action) => {
     const productIndex = currentBasket.findIndex(
       (product) => product.id === action.product.id
     );
-    currentBasket.splice(productIndex, 1, {
-      ...productIsHad,
-      num: productIsHad.num > 0 ? productIsHad.num - action.num : 0,
-    });
+    if (productIsHad.num === 1) {
+      currentBasket.splice(productIndex, 1);
+    } else {
+      currentBasket.splice(productIndex, 1, {
+        ...productIsHad,
+        num: productIsHad.num > 1 ? productIsHad.num - 1 : 0,
+      });
+    }
   }
 
   localStorage.setItem("basket", JSON.stringify([...currentBasket]));
@@ -64,7 +81,7 @@ const removeAllProductsFromBasket = () => {
   return [];
 };
 // remove prodcuts from basket
-const decreaseProductsFromBasket = (test, action) => {
+const decreaseProductsFromBasket = (state, action) => {
   const currentBasket = JSON.parse(localStorage.getItem("basket")) || [];
 
   const productIsHad = currentBasket.find(
@@ -84,7 +101,7 @@ const decreaseProductsFromBasket = (test, action) => {
   return [...currentBasket];
 };
 
-const removeProductFromBasket = (test, action) => {
+const removeProductFromBasket = (state, action) => {
   const currentBasket = JSON.parse(localStorage.getItem("basket")) || [];
   const productToDecrease = currentBasket.find(
     (product) => product.id === action.product.id
@@ -104,4 +121,5 @@ export {
   removeAllProductsFromBasket,
   removeProductFromBasket,
   decreaseProductsFromBasket,
+  addAllFavoritesToBasket,
 };

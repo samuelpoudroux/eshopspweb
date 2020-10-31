@@ -5,6 +5,7 @@ import RemoveSeveralProducts from "./RemoveSeveralProduct";
 import styleVariable from "../../styleVariable";
 import { useState } from "react";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import { useEffect } from "react";
 
 const Addandremoveproduct = ({
   product,
@@ -15,15 +16,11 @@ const Addandremoveproduct = ({
   const { basket } = useContext(AppContext);
   const list = JSON.parse(localStorage.getItem("basket")) || [];
   const { add, decrease } = basket;
-  const [num, setNum] = useState(
-    (list.find((p) => p.id === product.id) &&
-      list.find((p) => p.id === product.id).num) ||
-      1
-  );
+  const [num, setNum] = useState(0);
   const addProduct = (e) => {
     add(product, num);
     addNotification({
-      num,
+      num: "1",
       add: true,
     });
     setTimeout(function () {
@@ -32,11 +29,10 @@ const Addandremoveproduct = ({
     e.stopPropagation();
   };
   const removeProduct = (e) => {
-    let numToRemove = (num > productNumber && productNumber) || num;
     const productInBasket = list.find((e) => e.id === product.id);
     if (productInBasket && productInBasket.num > 0) {
       addNotification({
-        num,
+        num: "1",
         remove: true,
       });
       setTimeout(function () {
@@ -45,25 +41,16 @@ const Addandremoveproduct = ({
     }
     e.stopPropagation();
 
-    decrease(product, numToRemove);
+    decrease(product);
   };
 
-  const productInBasket = () => {
-    const productIsFound =
-      list &&
-      list.length > 0 &&
-      !favorite &&
-      list.find((p) => p.id === product.id) !== undefined &&
-      list.find((p) => p.id === product.id).num > 0 &&
-      list.find((p) => p.id === product.id);
-    if (productIsFound) {
-      return productIsFound;
-    } else {
-      return false;
-    }
-  };
-
-  const productNumber = (productInBasket() && productInBasket().num) || 0;
+  useEffect(() => {
+    setNum(
+      (list.find((p) => p.id === product.id) &&
+        list.find((p) => p.id === product.id).num) ||
+        0
+    );
+  }, [basket.list]);
 
   return (
     <Col lg={24} md={23} sm={18} xs={24}>
@@ -91,8 +78,7 @@ const Addandremoveproduct = ({
                 marginRight: 4,
               }}
               min={0}
-              onChange={(e) => setNum(parseInt(e.target.value))}
-              defaultValue={num}
+              value={num}
             />
             <Button
               style={{
@@ -110,10 +96,10 @@ const Addandremoveproduct = ({
           </Row>
         </Col>
 
-        {productInBasket() && !favorite && (
+        {num > 0 && !favorite && (
           <Col lg={2} md={1} xs={3} sm={1}>
             <Row align="middle" justify="center">
-              <RemoveSeveralProducts product={product} />
+              <RemoveSeveralProducts num={num} product={product} />
             </Row>
           </Col>
         )}
@@ -124,7 +110,7 @@ const Addandremoveproduct = ({
               style={{
                 background: styleVariable.secondaryColor,
               }}
-              count={(productInBasket() && productInBasket().num) || 0}
+              count={num}
               showZero
               overflowCount={250}
             >

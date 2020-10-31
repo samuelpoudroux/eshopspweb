@@ -110,9 +110,9 @@ input:hover {
 
 .productCard{
   background-color: var(--secondaryColor);
-  -webkit-box-shadow:inset 1px 1px 12px 1px var(--mainColor);
-  -moz-box-shadow:inset 1px 1px 12px 1px var(--mainColor);
-  box-shadow:inset 1px 1px 12px 1px var(--mainColor);
+  -webkit-box-shadow:inset 1px 1px 12px 1px#d2d6da;
+  -moz-box-shadow:inset 1px 1px 12px 1px#d2d6da;
+  box-shadow:inset 1px 1px 12px 1px#d2d6da;
   -moz-border-radius:0px;
   -webkit-border-radius:0px;
   border-radius:0px;
@@ -204,4 +204,31 @@ h3 {
   white-space: pre-line !important;
 }
 
+@keyframes bounce {
+  from {transform: translateY(0);} to {transform: translateY(-10px)}
+}
 
+@-webkit-keyframes color_change {
+	from {color: var(--mainColor); }
+	to {color:white; }
+}
+@-moz-keyframes color_change {
+	from {color: var(--mainColor); }
+	to {color:white; }
+}
+@-ms-keyframes color_change {
+	from {color: var(--mainColor); }
+	to {color:white; }
+}
+@-o-keyframes color_change {
+	from {color: var(--mainColor); }
+	to {color:white; }
+}
+@keyframes color_change {
+	from {color: var(--mainColor); }
+	to {color:white; }
+}
+
+  span.creditCard > svg{
+	animation: color_change 0.5s infinite alternate;
+}

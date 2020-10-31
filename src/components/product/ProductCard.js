@@ -16,6 +16,7 @@ import useIsAdmin from "../../customHooks/isAdminHooks";
 import Axios from "axios";
 import styleVariable from "../../styleVariable";
 import useBasket from "../../customHooks/basketHook";
+import { upperCase } from "../../helpers/UpperCase";
 
 const {
   REACT_APP_API_DOMAIN,
@@ -90,8 +91,10 @@ const ProductCard = ({ product, history, large }) => {
           padding: "3%",
         }}
       >
-        <Row align="middle" style={{ wordBreak: "break-all" }} justify="center">
-          <b style={{ color: styleVariable.mainColor }}>{name}</b>
+        <Row align="middle" style={{ wordBreak: "break-all" }} justify="start">
+          <b style={{ color: styleVariable.secondaryColor }}>
+            {upperCase(name)}
+          </b>
         </Row>
         <Row
           justify="center"

@@ -11,12 +11,15 @@ const FavoriteNumber = ({
   const favoriteList = JSON.parse(localStorage.getItem("favorites")) || [];
 
   return (
-    <Badge style={BadgeStyle} count={favoriteList.length}>
+    <Badge
+      style={{ ...BadgeStyle, minWidth: "50px" }}
+      count={favoriteList.length}
+      offset={[23, -5]}
+    >
       <HeartOutlined
         style={{
           fontSize: "20px",
           color: iconBasketColor || "white",
-          marginRight: "15px",
         }}
         onClick={() => setFavoriteActive(!favoriteIsActive)}
       />

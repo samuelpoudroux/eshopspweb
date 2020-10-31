@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import _ from "lodash";
-import { Col, Row, Spin, Carousel } from "antd";
+import { Col, Row, Spin, Carousel, Button } from "antd";
+import { withRouter } from "react-router";
 import { AppContext } from "../../context/context";
 import { useEffect } from "react";
 import styleVariable from "../../styleVariable";
@@ -8,7 +9,7 @@ import ProductCard from "./ProductCard";
 import useResponsive from "../../customHooks/responsiveHook";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 
-const NewNess = () => {
+const NewNess = ({ history }) => {
   const { products } = useContext(AppContext);
   const { isMobile } = useResponsive();
   const carrouselRef = useRef();
@@ -30,17 +31,15 @@ const NewNess = () => {
   }, [newNess]);
 
   return (
-    <Col lg={24}>
+    <Col lg={24} style={{ padding: 20 }}>
       <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
         Nos nouveautés
       </h3>
-
       {newNess.length === 0 && (
         <Row style={{ minHeight: "30vh" }} justify="center" align="middle">
           <Spin />
         </Row>
       )}
-
       {newNess.length > 0 && (
         <Carousel
           ref={carrouselRef}
@@ -83,8 +82,16 @@ const NewNess = () => {
           ))}
         </Carousel>
       )}
+      <Row justify="center">
+        <Button
+          onClick={() => history.push("/products")}
+          style={{ background: styleVariable.secondaryColor, color: "white" }}
+        >
+          + de produits
+        </Button>
+      </Row>{" "}
     </Col>
   );
 };
 
-export default NewNess;
+export default withRouter(NewNess);

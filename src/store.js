@@ -15,6 +15,7 @@ const GlobalStore = ({ children }) => {
     removeAllProductsFromBasket,
     removeProductFromBasket,
     decreaseProductsFromBasket,
+    addAllFavoritesToBasket,
     setActive,
   } = useBasket();
   const {
@@ -40,6 +41,7 @@ const GlobalStore = ({ children }) => {
       removeAllProducts: removeAllProductsFromBasket,
       removeProductFromBasket: removeProductFromBasket,
       decreaseProductsFromBasket: decreaseProductsFromBasket,
+      addAllFavoritesToBasket: addAllFavoritesToBasket,
       setActive: setActive,
     },
     products: {

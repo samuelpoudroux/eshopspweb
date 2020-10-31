@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Axios from "axios";
 import {
   Select,
   Tag,
@@ -25,8 +24,6 @@ import useResponsive from "../../customHooks/responsiveHook";
 import styleVariable from "../../styleVariable";
 import useCategory from "../../customHooks/categoryHook";
 
-const { REACT_APP_API_DOMAIN, REACT_APP_API_CATEGORIES } = process.env;
-
 const { Option } = Select;
 const { CheckableTag } = Tag;
 
@@ -34,22 +31,20 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectAllCategories, setSelectAllCategories] = useState(false);
   const [value, setValue] = useState(null);
-  const [newMaxBudget, setNewMaxBudget] = useState(null);
   const { categories, setCategories } = useCategory();
   const [items, setItems] = useState([
     { id: 1, value: "LOWEST", name: "Prix croissant" },
     { id: 2, value: "HIGHEST", name: "Prix Décroissant" },
   ]);
 
-  const { isMobile } = useResponsive();
-
   const selectHandleChange = (value) => {
     setValue(value);
     value === HIGHEST && products.sort(SORT_PRODUCTS_BY_HIGHER);
     value === LOWEST && products.sort(SORT_PRODUCTS_BY_LOWEST);
-    value !== LOWEST &&
-      value !== HIGHEST &&
-      products.sort(SORT_PRODUCTS_BY_MAX_PRICE, value);
+  };
+
+  const sortByMaxBudget = (value) => {
+    products.sort(SORT_PRODUCTS_BY_MAX_PRICE, value);
   };
 
   const handleChange = (tag, checked) => {
@@ -71,114 +66,66 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
     }
   };
 
-  const addNewItem = () => {
-    const priceMaxExisted = items.find((e) => e.value === newMaxBudget);
-    if (!priceMaxExisted && newMaxBudget !== null) {
-      const item = {
-        id: uuidv4(),
-        value: newMaxBudget,
-        name: `${newMaxBudget}€`,
-      };
-
-      setItems([...items, item]);
-      setNewMaxBudget(null);
-    } else if (!priceMaxExisted && newMaxBudget === null) {
-      notification.open({
-        message: `Merci d'indiquer une valeur`,
-        icon: <SmileOutlined style={{ color: "red" }} />,
-        duration: 1,
-      });
-    } else {
-      notification.open({
-        message: `Le budget maximum de ${newMaxBudget}€ est déjà existant`,
-        icon: <SmileOutlined style={{ color: "red" }} />,
-        duration: 1,
-      });
-    }
-  };
-
   useEffect(() => {
     setValue("");
   }, [selectedTags]);
 
   return (
     <Col span={24} style={{ padding: 15 }}>
-      <Row align="middle">
-        <Col lg={8} md={6} sm={24} xs={24}>
-          <Row justify="space-between" align="middle">
-            <Col lg={3} md={4} sm={2} xs={2}>
-              <span style={{}}>Prix:</span>
-            </Col>
-            <Col lg={21} md={20} sm={22} xs={22}>
-              <Select
-                dropdownRender={(menu) => (
-                  <div>
-                    {menu}
-                    <Divider style={{ margin: "4px 0" }} />
-                    <Row
-                      align="middle"
-                      justify="space-between"
-                      style={{
-                        padding: 8,
-                      }}
-                    >
-                      <Col span={21}>
-                        <Input
-                          type="number"
-                          min={0}
-                          placeholder="Budget max"
-                          value={newMaxBudget}
-                          onChange={(e) => setNewMaxBudget(e.target.value)}
-                        />
-                      </Col>
-                      <Col span={2}>
-                        <PlusCircleOutlined onClick={() => addNewItem()} />
-                      </Col>
-                    </Row>
-                  </div>
-                )}
-                style={{ width: 150 }}
-                onChange={(value) => selectHandleChange(value)}
-                value={value}
-              >
-                {items.map((item) => (
-                  <Option value={item.value} key={item.id}>
-                    {item.name}
-                  </Option>
-                ))}
-              </Select>
-            </Col>
-          </Row>
+      <Row align="middle" gutter={[15, 15]} justify="start">
+        <Col xl={1} lg={6} xs={12}>
+          <span>Prix:</span>
         </Col>
-        <Col
-          lg={8}
-          md={10}
-          sm={24}
-          xs={24}
-          style={{ marginTop: isMobile && 15 }}
-        >
-          <Row align="middle">
-            <Col lg={5} md={6} sm={8} xs={8}>
-              <span style={{}}>Categories:</span>
-            </Col>
-            <Col lg={19} md={18} sm={16} xs={16}>
-              {categories.list.map((tag) => (
-                <CheckableTag
-                  style={{
-                    width: "auto",
-                    border: "1px #878888 dotted",
-                  }}
-                  key={tag.id}
-                  checked={selectedTags.indexOf(tag) > -1}
-                  onChange={(checked) => handleChange(tag, checked)}
-                >
-                  {tag.name}
-                </CheckableTag>
-              ))}
-            </Col>
-          </Row>
+        <Col xl={2} lg={6} xs={12}>
+          <Select
+            dropdownRender={(menu) => (
+              <div>
+                {menu}
+                <Divider style={{ margin: "4px 0" }} />
+              </div>
+            )}
+            style={{ width: 150 }}
+            onChange={(value) => selectHandleChange(value)}
+            value={value}
+          >
+            {items.map((item) => (
+              <Option value={item.value} key={item.id}>
+                {item.name}
+              </Option>
+            ))}
+          </Select>
         </Col>
-        <Col md={8} sm={24} xs={24} style={{ marginTop: isMobile && 15 }}>
+
+        <Col xl={2} lg={6} xs={12}>
+          <span>Budget maximum: </span>
+        </Col>
+        <Col xl={2} lg={6} xs={12}>
+          <Input
+            type="number"
+            min={0}
+            placeholder="Budget max"
+            onChange={(e) => sortByMaxBudget(e.target.value)}
+          />
+        </Col>
+        <Col xl={1} lg={1} xs={12}>
+          <span>Categories:</span>
+        </Col>
+        <Col lg={4} xs={12}>
+          {categories.list.map((tag) => (
+            <CheckableTag
+              style={{
+                width: "auto",
+                border: "1px #878888 dotted",
+              }}
+              key={tag.id}
+              checked={selectedTags.indexOf(tag) > -1}
+              onChange={(checked) => handleChange(tag, checked)}
+            >
+              {tag.name}
+            </CheckableTag>
+          ))}
+        </Col>
+        <Col xl={4} lg={6} xs={24}>
           <Row>
             <Checkbox onChange={(e) => selectAllCategoriesButtonHandle(e)}>
               <span style={{ color: styleVariable.mainColor }}>

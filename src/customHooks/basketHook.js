@@ -7,6 +7,7 @@ import {
   REMOVE_PRODUCT_FROM_BASKET,
   DECREASE_PRODUCTS_FROM_BASKET,
   REMOVE_ALL_PRODUCTS_FROM_BASKET,
+  ADD_ALL_FAVORITES_TO_BASKET,
 } from "../constants/basket";
 import ProductInBasket from "../components/product/ProductInBasket";
 
@@ -33,6 +34,12 @@ const useBasket = () => {
       type: ADD_PRODUCT_TO_BASKET,
       product,
       num,
+    });
+  }, []);
+  const addAllFavoritesToBasket = useCallback((favorites) => {
+    return dispatch({
+      type: ADD_ALL_FAVORITES_TO_BASKET,
+      favorites,
     });
   }, []);
 
@@ -69,6 +76,7 @@ const useBasket = () => {
     removeAllProductsFromBasket,
     removeProductFromBasket,
     decreaseProductsFromBasket,
+    addAllFavoritesToBasket,
     renderNotification,
     addNotification,
     notification,

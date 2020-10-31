@@ -1,17 +1,12 @@
 import React from "react";
-import { Badge, Col, Row } from "antd";
+import { Col, Row } from "antd";
 import useBasket from "../../customHooks/basketHook";
 import Addandremoveproduct from "../product/AddAndRemoveProduct";
 import styleVariable from "../../styleVariable";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { upperCase } from "../../helpers/UpperCase";
 
 const ProductCardSubBasket = ({ product, history, list }) => {
   const { notification, addNotification, renderNotification } = useBasket();
-  const productInBasket =
-    (list.find((p) => p.id === product.id) &&
-      list.find((p) => p.id === product.id).num) ||
-    0;
-
   return (
     <Col
       lg={8}
@@ -54,12 +49,12 @@ const ProductCardSubBasket = ({ product, history, list }) => {
               >
                 <b
                   style={{
-                    color: styleVariable.mainColor,
-                    fontSize: "0.6em",
+                    color: styleVariable.secondaryColor,
+                    fontSize: "0.8em",
                     margin: 0,
                   }}
                 >
-                  {product.name}
+                  {upperCase(product.name)}
                 </b>
               </Row>
             </Col>

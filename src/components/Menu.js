@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 import styleVariable from "../styleVariable";
 import useCategory from "../customHooks/categoryHook";
 import useResponsive from "../customHooks/responsiveHook";
+import { upperCase } from "../helpers/UpperCase";
 const { SubMenu } = Menu;
 
 const NavBar = ({ setMenuIsOpened, history }) => {
@@ -40,7 +41,7 @@ const NavBar = ({ setMenuIsOpened, history }) => {
               border: "0px",
             }}
             selectedKeys={currentKey}
-            mode="vertical"
+            mode="inline"
           >
             <Menu.Item
               key="home"
@@ -51,12 +52,12 @@ const NavBar = ({ setMenuIsOpened, history }) => {
                       currentKey === "home"
                         ? "#89ba17"
                         : styleVariable.secondaryColor,
-                    fontSize: "1.5em",
+                    fontSize: "1.1em",
                   }}
                 />
               }
               onClick={(e) => goToPage(e, "/")}
-              style={{ fontSize: "1.5em" }}
+              style={{ fontSize: "1.1em" }}
             >
               Accueil
             </Menu.Item>
@@ -69,12 +70,12 @@ const NavBar = ({ setMenuIsOpened, history }) => {
                       currentKey === "products"
                         ? "#89ba17"
                         : styleVariable.secondaryColor,
-                    fontSize: "1.5em",
+                    fontSize: "1.1em",
                   }}
                 />
               }
               onClick={(e) => goToPage(e, "/products")}
-              style={{ fontSize: "1.5em" }}
+              style={{ fontSize: "1.1em" }}
             >
               Nos produits
             </Menu.Item>
@@ -83,7 +84,7 @@ const NavBar = ({ setMenuIsOpened, history }) => {
               icon={
                 <AppstoreOutlined
                   style={{
-                    fontSize: "1.5em",
+                    fontSize: "1.1em",
                     color:
                       currentKey === "Categories"
                         ? "#89ba17"
@@ -92,14 +93,14 @@ const NavBar = ({ setMenuIsOpened, history }) => {
                 />
               }
               title="Categories"
-              style={{ fontSize: "1.5em", width: !isMobile && "20%" }}
+              style={{ fontSize: "1.1em", width: !isMobile && "20%" }}
             >
               {categories.list.map((category) => (
                 <Menu.Item
                   onClick={(e) => goToPage(e, `/categories/${category.name}`)}
                   key={category.name}
                 >
-                  {category.name}
+                  {upperCase(category.name)}
                 </Menu.Item>
               ))}
             </SubMenu>
@@ -112,12 +113,12 @@ const NavBar = ({ setMenuIsOpened, history }) => {
                       currentKey === "contact"
                         ? "#89ba17"
                         : styleVariable.secondaryColor,
-                    fontSize: "1.5em",
+                    fontSize: "1.1em",
                   }}
                 />
               }
               onClick={(e) => goToPage(e, "/contact")}
-              style={{ fontSize: "1.5em" }}
+              style={{ fontSize: "1.1em" }}
             >
               contact
             </Menu.Item>

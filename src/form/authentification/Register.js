@@ -16,7 +16,7 @@ const {
   REACT_APP_API_AUTH_REGISTER,
 } = process.env;
 
-const Register = ({ history }) => {
+const Register = ({ history, match }) => {
   const onFinish = async (values) => {
     const { data } = await Axios.post(
       REACT_APP_API_DOMAIN + REACT_APP_API_AUTH + REACT_APP_API_AUTH_REGISTER,
@@ -28,7 +28,11 @@ const Register = ({ history }) => {
         message: message,
         icon: <SmileOutlined style={{ color: styleVariable.secondaryColor }} />,
       });
-      history.push("/login");
+      if (match.params.paiement) {
+        history.push("/login/paiement");
+      } else {
+        history.push("/login");
+      }
     }
     if (errors && !message) {
       notification.open({

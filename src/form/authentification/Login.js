@@ -1,9 +1,19 @@
 import React, { useContext, useState } from "react";
-import { Form, Input, Button, Checkbox, Row, Col, Spin } from "antd";
+import { SmileOutlined } from "@ant-design/icons";
+import {
+  Form,
+  Input,
+  Button,
+  Checkbox,
+  Row,
+  Col,
+  Spin,
+  notification,
+} from "antd";
 import { AppContext } from "../../context/context";
 import styleVariable from "../../styleVariable";
 
-const Login = ({ history }) => {
+const Login = ({ history, match }) => {
   const { auth } = useContext(AppContext);
   const { login, user } = auth;
   const [isLoading, setIsLoading] = useState(false);
@@ -11,6 +21,19 @@ const Login = ({ history }) => {
   const onFinish = async (values) => {
     setIsLoading(true);
     await login(values, history);
+    if (user && match.params.paiement) {
+      history.push(`/paiement/`);
+      notification.open({
+        message: "Vous êtes connecté",
+        icon: <SmileOutlined style={{ color: "#89ba17" }} />,
+      });
+    } else {
+      history.push(`/`);
+      notification.open({
+        message: "Vous êtes connecté",
+        icon: <SmileOutlined style={{ color: "#89ba17" }} />,
+      });
+    }
     setIsLoading(false);
   };
 
@@ -85,13 +108,18 @@ const Login = ({ history }) => {
                   type="primary"
                   htmlType="submit"
                 >
-                  Submit
+                  Se connecter
                 </Button>
               </Form.Item>
               {isLoading && <Spin />}
               {user.error && <p style={{ color: "red" }}>{user.error}</p>}
-              <a style={{ color: "grey" }} href="/register">
-                Register
+              <a
+                style={{ color: "grey" }}
+                href={`${
+                  match.params.paiement ? "/register/paiement" : "/register"
+                }`}
+              >
+                S'inscrire
               </a>
             </Col>
           </Form>

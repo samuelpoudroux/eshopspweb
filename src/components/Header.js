@@ -65,7 +65,7 @@ const Header = ({
 
   const { isAdmin } = useIsAdmin();
 
-  const local = JSON.parse(localStorage.getItem("users"))
+  const user = JSON.parse(localStorage.getItem("users"))
     ? JSON.parse(localStorage.getItem("users"))
     : undefined;
   useEffect(() => {
@@ -80,6 +80,10 @@ const Header = ({
         padding: isMobile ? "3%" : "1.5%",
         background: styleVariable.backgroundColorGradient,
         width: "100%",
+        position: "fixed",
+        top: 0,
+        overflow: "hidden",
+        zIndex: 26,
       }}
     >
       {addProduct && (
@@ -176,23 +180,23 @@ const Header = ({
             <Col
               lg={4}
               md={5}
-              xs={local && local.isLogged ? 24 : 3}
-              sm={local && local.isLogged ? 24 : 3}
+              xs={user && user.isLogged ? 24 : 3}
+              sm={user && user.isLogged ? 24 : 3}
             >
               <Row
                 align="middle"
                 justify="center"
-                style={{ marginTop: local && local.isLogged && isMobile && 35 }}
+                style={{ marginTop: user && user.isLogged && isMobile && 35 }}
               >
                 <p style={{ color: "white", margin: "0", fontSize: "1em" }}>
-                  {local &&
-                    local.firstName &&
+                  {user &&
+                    user.firstName &&
                     `Bienvenue ${
-                      local.firstName[0].toUpperCase() +
-                      local.firstName.substring(1)
+                      user.firstName[0].toUpperCase() +
+                      user.firstName.substring(1)
                     }`}
                 </p>
-                {local && local.isLogged && (
+                {user && user.isLogged && (
                   <Row justify="center">
                     <LogoutOutlined
                       style={iconStyle}
@@ -201,7 +205,7 @@ const Header = ({
                   </Row>
                 )}
 
-                {!local && (
+                {!user && (
                   <LoginOutlined
                     style={iconStyle}
                     onClick={() => history.push("/login")}

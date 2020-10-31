@@ -18,7 +18,6 @@ import styleVariable from "./styleVariable";
 function App() {
   const { globalSearch } = useContext(AppContext);
   const { state: globalSearchState } = globalSearch;
-  const [basketIsActive, setBasketActive] = useState(false);
   const [favoriteIsActive, setFavoriteActive] = useState(false);
   const [subBasketVisible, setSubBasketVisible] = useState(false);
   const [chatActive, setChatActive] = useState(false);
@@ -44,11 +43,9 @@ function App() {
           <SubBasket
             subBasketVisible={subBasketVisible}
             setSubBasketVisible={setSubBasketVisible}
-            setBasketActive={setBasketActive}
-            basketIsActive={basketIsActive}
           />
 
-          <Col span={24} style={{ position: "relative" }}>
+          <Col span={24} style={{ position: "relative", marginTop: "20vh" }}>
             {globalSearchState.active && (
               <GlobalSearchResult state={globalSearchState} />
             )}
@@ -84,7 +81,6 @@ function App() {
                         appRef={appRef}
                         setChatActive={setChatActive}
                         history={history}
-                        setBasketActive={setBasketActive}
                         setFavoriteActive={setFavoriteActive}
                         setSubBasketVisible={setSubBasketVisible}
                       />

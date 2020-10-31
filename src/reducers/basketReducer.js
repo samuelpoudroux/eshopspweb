@@ -4,6 +4,7 @@ import {
   DECREASE_PRODUCTS_FROM_BASKET,
   REMOVE_ALL_PRODUCTS_FROM_BASKET,
   REMOVE_PRODUCT_FROM_BASKET,
+  ADD_ALL_FAVORITES_TO_BASKET,
 } from "../constants/basket.js";
 
 import {
@@ -12,6 +13,7 @@ import {
   decreaseProductsFromBasket,
   removeAllProductsFromBasket,
   removeProductFromBasket,
+  addAllFavoritesToBasket,
 } from "../repository/basket";
 
 const basketreducer = (currentBasket, action) => {
@@ -26,6 +28,8 @@ const basketreducer = (currentBasket, action) => {
       return removeProductFromBasket(currentBasket, action);
     case DECREASE_PRODUCTS_FROM_BASKET:
       return decreaseProductsFromBasket(currentBasket, action);
+    case ADD_ALL_FAVORITES_TO_BASKET:
+      return addAllFavoritesToBasket(currentBasket, action);
     default:
       break;
   }

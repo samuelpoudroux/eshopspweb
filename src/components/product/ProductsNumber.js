@@ -19,16 +19,16 @@ const ProductsNumber = ({
       style={{
         background: notClickable ? styleVariable.secondaryColor : "white",
         color: notClickable ? "white" : styleVariable.secondaryColor,
-        paddingRight: "15px",
-        paddingLeft: "15px",
+        textAlign: "center",
+        minWidth: "50px",
       }}
+      offset={[23, -5]}
       count={`${totalOfProducts}`}
       overflowCount={1000}
     >
       <ShoppingCartOutlined
         style={{
           fontSize: "20px",
-          marginRight: "18px",
           color:
             totalOfProducts === 0 || notClickable
               ? styleVariable.mainColor
