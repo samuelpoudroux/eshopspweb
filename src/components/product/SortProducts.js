@@ -107,10 +107,10 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
             onChange={(e) => sortByMaxBudget(e.target.value)}
           />
         </Col>
-        <Col xl={1} lg={1} xs={12}>
+        <Col xl={1} lg={1} xs={6}>
           <span>Categories:</span>
         </Col>
-        <Col lg={4} xs={12}>
+        <Col lg={4} xs={18}>
           {categories.list.map((tag) => (
             <CheckableTag
               style={{
