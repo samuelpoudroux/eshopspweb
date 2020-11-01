@@ -17,50 +17,10 @@ p {
   word-wrap: break-word;
 }
 
-.basket_inner {
-  position: absolute;
-  margin: auto;
-  z-index: 25;
-  height: 100%;
-}
 
-.basket {
-  position: fixed;
-  height: 100%;
-  top: 0;
-  right: 0;
-  margin: auto;
-  z-index: 28;
-  width: 20%;
-
-}
 .slick-dots li button {
   background-color: var(--mainColor) !important;
 }
-
-
-
-.addProduct_inner {
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  margin: auto;
-  z-index: 25;
-}
-
-.addProduct {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  /* margin: auto; */
-  z-index: 25;
-  overflow: scroll;
-}
-
 
 
 @media screen and (min-width: 200px) and (max-width: 1024px) {
@@ -135,28 +95,7 @@ input:hover {
   from {transform: translateY(0);}
   to   {transform: translateY(-10px);}
 }
-.popup {
-  position: fixed;
-  width: 100%;
-  min-height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  z-Index: 20
-}
 
-.popup_inner {
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  margin: auto;
-  z-Index: 20
-
-}
 
 input:disabled {
   background: var(--mainColor)

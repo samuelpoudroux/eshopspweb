@@ -1,7 +1,7 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback } from "react";
 import { getNumberOfProducts } from "../../repository/product";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge, Row } from "antd";
+import { Badge } from "antd";
 import styleVariable from "../../styleVariable";
 
 const ProductsNumber = ({
@@ -34,7 +34,11 @@ const ProductsNumber = ({
               ? styleVariable.mainColor
               : "white",
         }}
-        onClick={() => !notClickable && setSubBasketVisible(!subBasketVisible)}
+        onClick={() =>
+          !notClickable &&
+          basketList.length > 0 &&
+          setSubBasketVisible(!subBasketVisible)
+        }
       />
     </Badge>
   );

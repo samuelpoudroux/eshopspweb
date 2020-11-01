@@ -1,10 +1,13 @@
-import { Row, Input, Col, Button, Badge } from "antd";
+import { Row, Input, Col, Button, Badge, Popconfirm } from "antd";
 import React, { useContext } from "react";
 import { AppContext } from "../../context/context";
 import RemoveSeveralProducts from "./RemoveSeveralProduct";
 import styleVariable from "../../styleVariable";
 import { useState } from "react";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  ShoppingCartOutlined,
+  QuestionCircleOutlined,
+} from "@ant-design/icons";
 import { useEffect } from "react";
 
 const Addandremoveproduct = ({
@@ -80,19 +83,47 @@ const Addandremoveproduct = ({
               min={0}
               value={num}
             />
-            <Button
-              style={{
-                background: styleVariable.mainColor,
-                color: "white",
-                cursor: "pointer",
-                paddingLeft: 8,
-                paddingRight: 8,
-                borderRadius: 50,
-              }}
-              onClick={(e) => removeProduct(e)}
-            >
-              -
-            </Button>
+            {product.num === 1 && subBasket ? (
+              <Popconfirm
+                disabled={false}
+                style={{ cursor: "pointer" }}
+                title="Souhaitez vous supprimer le produit du panier？"
+                icon={
+                  <QuestionCircleOutlined
+                    style={{ color: styleVariable.secondaryColor }}
+                  />
+                }
+                onConfirm={(e) => removeProduct(e)}
+              >
+                {" "}
+                <Button
+                  style={{
+                    background: styleVariable.mainColor,
+                    color: "white",
+                    cursor: "pointer",
+                    paddingLeft: 8,
+                    paddingRight: 8,
+                    borderRadius: 50,
+                  }}
+                >
+                  -
+                </Button>
+              </Popconfirm>
+            ) : (
+              <Button
+                style={{
+                  background: styleVariable.mainColor,
+                  color: "white",
+                  cursor: "pointer",
+                  paddingLeft: 8,
+                  paddingRight: 8,
+                  borderRadius: 50,
+                }}
+                onClick={(e) => removeProduct(e)}
+              >
+                -
+              </Button>
+            )}
           </Row>
         </Col>
 

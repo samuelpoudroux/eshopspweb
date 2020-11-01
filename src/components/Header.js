@@ -11,7 +11,6 @@ import {
 import { Row, Col, Popover } from "antd";
 import logo from "../assets/logoWhite.svg";
 import ProductsNumber from "../components/product/ProductsNumber";
-import TotalPrice from "../components/basket/TotalPrice";
 import NavBar from "./Menu";
 import CleanBasket from "../components/basket/CleanBasket";
 import Globalsearchinput from "../components/globalSearch/GlobalSearchInput";
@@ -74,25 +73,24 @@ const Header = ({
   useEffect(() => {
     setUpdate(!update);
   }, [favorites]);
+
   return (
     <header
       style={{
         padding: isMobile ? "3%" : "1.5%",
         background: styleVariable.backgroundColorGradient,
         width: "100%",
-        position: "fixed",
         top: 0,
         overflow: "hidden",
         zIndex: 26,
       }}
     >
-      {addProduct && (
-        <AddNewProduct
-          forceUpdate={updateState}
-          setAddProduct={setAddProduct}
-        />
-      )}
-      {menuIsOpened && <NavBar setMenuIsOpened={setMenuIsOpened} />}
+      <AddNewProduct
+        forceUpdate={updateState}
+        setAddProduct={setAddProduct}
+        addProduct={addProduct}
+      />
+      {<NavBar setMenuIsOpened={setMenuIsOpened} menuIsOpened={menuIsOpened} />}
       <Row align="middle" style={{ width: "100%" }}>
         <Col lg={10} md={11} xs={24} sm={24}>
           <Row align="middle" justify="center">
@@ -107,8 +105,8 @@ const Header = ({
                 alt="logo"
                 src={logo}
                 style={{
-                  maxWidth: isMobile ? "120%" : "100%",
-                  maxHeight: isMobile ? "150%" : "100%",
+                  maxWidth: isMobile ? "120%" : "60%",
+                  maxHeight: isMobile ? "150%" : "60%",
                   cursor: "pointer",
                 }}
                 onClick={() => history.push("/")}
@@ -169,7 +167,7 @@ const Header = ({
             </Col>
             <Col
               lg={4}
-              md={5}
+              md={8}
               xs={user && user.isLogged ? 24 : 3}
               sm={user && user.isLogged ? 24 : 3}
             >

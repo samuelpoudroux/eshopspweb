@@ -61,12 +61,22 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
   return (
     <Col span={24} style={{ padding: 15 }}>
       <Row align="middle" gutter={[15, 15]} justify="start">
-        <Col xl={{ span: 1 }} lg={{ span: 1 }} xs={12}>
+        <Col
+          xl={{ span: 1 }}
+          md={{ span: 1 }}
+          lg={{ span: 1 }}
+          xs={{ span: 2 }}
+        >
           <span>Prix:</span>
         </Col>
-        <Col xl={{ span: 3 }} lg={{ span: 5 }} xs={12}>
+        <Col
+          xl={{ span: 3 }}
+          lg={{ span: 5 }}
+          md={{ span: 5 }}
+          xs={{ span: 10, offset: 1 }}
+        >
           <Select
-            style={{ width: "50%" }}
+            style={{ width: "100%" }}
             dropdownRender={(menu) => (
               <div>
                 {menu}
@@ -88,16 +98,23 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
           xxl={{ span: 2, offset: 1 }}
           xl={{ span: 3, offset: 1 }}
           lg={{ span: 3 }}
-          xs={12}
+          md={{ span: 4 }}
+          xs={{ span: 12 }}
         >
           <span>Budget maximum: </span>
         </Col>
-        <Col xl={{ span: 2 }} xl={{ span: 3 }} lg={{ span: 12 }} xs={12}>
+        <Col
+          xl={{ span: 2 }}
+          xl={{ span: 3 }}
+          lg={{ span: 12 }}
+          md={{ span: 10 }}
+          xs={10}
+        >
           <Input
             type="number"
             min={0}
+            style={{ width: "100%" }}
             placeholder="Budget max"
-            style={{ width: "50%" }}
             onChange={(e) => sortByMaxBudget(e.target.value)}
           />
         </Col>
@@ -105,11 +122,18 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
           xxl={{ span: 1 }}
           xl={{ span: 2, offset: 1 }}
           lg={{ span: 4 }}
+          md={{ span: 5 }}
           xs={6}
         >
           <span>Categories:</span>
         </Col>
-        <Col xxl={{ span: 8 }} xl={{ span: 10 }} lg={{ span: 12 }} xs={18}>
+        <Col
+          xxl={{ span: 7 }}
+          xl={{ span: 10 }}
+          lg={{ span: 12 }}
+          md={{ span: 10 }}
+          xs={18}
+        >
           <Row justify="start">
             {categories.list.map((tag) => (
               <CheckableTag
@@ -126,7 +150,13 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
             ))}
           </Row>
         </Col>
-        <Col xxl={{ span: 4 }} xl={{ span: 24 }} lg={8} xs={24}>
+        <Col
+          xxl={{ span: 4 }}
+          xl={{ span: 24 }}
+          lg={8}
+          md={{ span: 8 }}
+          xs={24}
+        >
           <Row>
             <Checkbox onChange={(e) => selectAllCategoriesButtonHandle(e)}>
               <span style={{ color: styleVariable.mainColor }}>
