@@ -155,16 +155,6 @@ const Header = ({
               />
             </Col>
             <Col lg={3} md={4} xs={6} sm={6}>
-              <TotalPrice
-                BadgeStyle={{
-                  backgroundColor: "#fff",
-                  color: styleVariable.secondaryColor,
-                }}
-                setSubBasketVisible={setSubBasketVisible}
-                subBasketVisible={subBasketVisible}
-              />
-            </Col>
-            <Col lg={3} md={4} xs={6} sm={6}>
               <FavoriteNumber
                 BadgeStyle={{
                   backgroundColor: styleVariable.mainColor,

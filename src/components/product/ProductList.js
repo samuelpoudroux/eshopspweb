@@ -4,14 +4,15 @@ import { AppContext } from "../../context/context";
 
 import ProductCard from "./ProductCard";
 import SortProducts from "./SortProducts";
-import useIsAdmin from "../../customHooks/isAdminHooks";
 import { useEffect } from "react";
 import "../../App.css";
 import styleVariable from "../../styleVariable";
+import useResponsive from "../../customHooks/responsiveHook";
 
 const Productlist = () => {
   const { products } = useContext(AppContext);
   const [state, updateState] = useState(true);
+  const { isMobile } = useResponsive();
 
   let productList = products.list;
   // cateorgies select management
@@ -28,7 +29,6 @@ const Productlist = () => {
       <h3
         style={{
           textAlign: "center",
-          marginTop: 20,
           color: styleVariable.mainColor,
         }}
       >

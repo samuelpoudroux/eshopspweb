@@ -45,7 +45,13 @@ function App() {
             setSubBasketVisible={setSubBasketVisible}
           />
 
-          <Col span={24} style={{ position: "relative", marginTop: "20vh" }}>
+          <Col
+            span={24}
+            style={{
+              position: "relative",
+              marginTop: isMobile ? "50%" : "15%",
+            }}
+          >
             {globalSearchState.active && (
               <GlobalSearchResult state={globalSearchState} />
             )}

@@ -241,7 +241,7 @@ const Favorites = ({
                   }}
                   onClick={() => addAllProductToBasket()}
                 >
-                  J'ajoute tous mes coups de coeur
+                  Ajouter au panier
                 </Button>
               </Row>
             )}

@@ -82,45 +82,44 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
   };
 
   return (
-    list.length > 0 &&
-    productInBasket !== 0 && (
-      <div style={{ textAlign: "center" }}>
-        {list.length > 0 && (
-          <DownOutlined
-            style={{
-              animation: "bounce 0.35s ease infinite alternate",
-              marginTop: 20,
-              color: styleVariable.mainColor,
-              fontSize: "1.3em",
-            }}
-            onClick={() => setSubBasketVisible(true)}
-          />
-        )}
-
-        <Drawer
-          title={drawerHeader()}
-          closable={true}
-          placement="right"
-          width={isMobile ? 330 : 900}
-          onClose={() => setSubBasketVisible(false)}
-          visible={subBasketVisible}
-          height={"auto"}
-          key={"top"}
-          closable={false}
-          bodyStyle={{
-            paddingLeft: "5px",
-            paddingRight: "5px",
+    <div style={{ textAlign: "center" }}>
+      {list.length > 0 && (
+        <DownOutlined
+          style={{
+            animation: "bounce 0.35s ease infinite alternate",
+            marginTop: 20,
+            color: styleVariable.mainColor,
+            fontSize: "1.3em",
           }}
-          style={{ zIndex: 26, height: "100%", overflowY: "scroll" }}
-          footerStyle={{ padding: "0px" }}
-          onTouchMove={() => setSubBasketVisible(false)}
-        >
-          <Col lg={24} style={{ padding: "10px" }}>
-            <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
-              Produits dans le panier
-            </h3>
-            <Row justify={isMobile && "center"}>
-              {list.map(
+          onClick={() => setSubBasketVisible(true)}
+        />
+      )}
+
+      <Drawer
+        title={drawerHeader()}
+        closable={true}
+        placement="right"
+        width={isMobile ? 330 : 900}
+        onClose={() => setSubBasketVisible(false)}
+        visible={subBasketVisible}
+        height={"auto"}
+        key={"top"}
+        closable={false}
+        bodyStyle={{
+          paddingLeft: "5px",
+          paddingRight: "5px",
+        }}
+        style={{ zIndex: 26, height: "100%", overflowY: "scroll" }}
+        footerStyle={{ padding: "0px" }}
+        onTouchMove={() => setSubBasketVisible(false)}
+      >
+        <Col lg={24} style={{ padding: "10px" }}>
+          <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
+            Produits dans le panier
+          </h3>
+          <Row justify={isMobile && "center"}>
+            {list && list.length > 0 ? (
+              list.map(
                 (product) =>
                   product.num !== 0 && (
                     <ProductCardSubBasket
@@ -129,39 +128,46 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
                       list={list}
                     />
                   )
-              )}
-            </Row>
-            <Row
-              align="middle"
-              justify="start"
-              style={{ padding: "10px", marginTop: 30 }}
-              gutter={(20, 50)}
-            >
-              <Col lg={6} xs={24}>
-                <Row justify={isMobile && "center"}>
-                  <b style={{ color: styleVariable.mainColor }}>
-                    Total de mon panier: {getTotalPrice(list)}€
-                  </b>
-                </Row>
-              </Col>
-              <Col lg={6} xs={24}>
+              )
+            ) : (
+              <Col span={24}>
                 <Row justify="center">
-                  <Button
-                    style={{
-                      color: "white",
-                      background: styleVariable.secondaryColor,
-                    }}
-                    onClick={() => goToPaiement()}
-                  >
-                    Finaliser ma commande
-                  </Button>
+                  <h4>Pas de produits dans votre panier</h4>
                 </Row>
               </Col>
-            </Row>
-          </Col>
-        </Drawer>
-      </div>
-    )
+            )}
+          </Row>
+          <Row
+            align="middle"
+            justify="start"
+            style={{ padding: "10px", marginTop: 30 }}
+            gutter={(20, 50)}
+          >
+            <Col lg={6} xs={24}>
+              <Row justify={isMobile && "center"}>
+                <b style={{ color: styleVariable.mainColor }}>
+                  Total de mon panier: {getTotalPrice(list)}€
+                </b>
+              </Row>
+            </Col>
+            <Col lg={6} xs={24}>
+              <Row justify="center">
+                <Button
+                  style={{
+                    color: "white",
+                    background: styleVariable.secondaryColor,
+                  }}
+                  disabled={list.length === 0}
+                  onClick={() => goToPaiement()}
+                >
+                  Finaliser ma commande
+                </Button>
+              </Row>
+            </Col>
+          </Row>
+        </Col>
+      </Drawer>
+    </div>
   );
 };
 export default withRouter(SubBasket);

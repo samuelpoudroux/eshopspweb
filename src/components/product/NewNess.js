@@ -31,7 +31,7 @@ const NewNess = ({ history }) => {
   }, [newNess]);
 
   return (
-    <Col lg={24} style={{ padding: 20 }}>
+    <Col lg={24}>
       <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
         Nos nouveautés
       </h3>
@@ -49,7 +49,7 @@ const NewNess = ({ history }) => {
             background: "#ref",
             borderRadius: "2px",
             borderRadius: "2px",
-            padding: 25,
+            paddingBottom: 25,
           }}
           onClick={(e) => e.stopPropagation()}
           arrows={true}
