@@ -2,15 +2,27 @@ import React from "react";
 
 import Validator from "validator";
 import Axios from "axios";
-import { Form, Input, Button, Row, Col, notification } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  notification,
+  Descriptions,
+} from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 import {
   setValuesLocalStorage,
   getDefaultValueLocalStorage,
   getInitialValue,
 } from "../../repository/localStorage";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+
 import styleVariable from "../../styleVariable";
 import { PageHeader } from "../../components/PageHeader";
+import { useState } from "react";
+import { set } from "lodash";
 const {
   REACT_APP_API_DOMAIN,
   REACT_APP_API_AUTH,
@@ -18,6 +30,8 @@ const {
 } = process.env;
 
 const Register = ({ history, match }) => {
+  const [billsAddress, setBillsAddress] = useState(null);
+  const [dropAddress, setDropAddress] = useState(null);
   const onFinish = async (values) => {
     const { data } = await Axios.post(
       REACT_APP_API_DOMAIN + REACT_APP_API_AUTH + REACT_APP_API_AUTH_REGISTER,
@@ -48,6 +62,26 @@ const Register = ({ history, match }) => {
   };
 
   const itemKey = "userData";
+
+  const setAdresse = (e, type) => {
+    if (type === "billsAddress") {
+      localStorage.setItem("billsAddress", JSON.stringify(e));
+      setBillsAddress(e);
+      setValuesLocalStorage(
+        { value: e, name: "billsAddress" },
+        itemKey,
+        "billsAddress"
+      );
+    } else {
+      localStorage.setItem("dropAddress", JSON.stringify(e));
+      setDropAddress(e);
+      setValuesLocalStorage(
+        { value: e, name: "dropAddress" },
+        itemKey,
+        "dropAddress"
+      );
+    }
+  };
 
   return (
     <Col style={{ padding: "5px", textAlign: "center" }}>
@@ -189,13 +223,15 @@ const Register = ({ history, match }) => {
                 ]}
                 hasFeedback
               >
-                <Input
-                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
-                  name="billsAddress"
-                  defaultValue={getDefaultValueLocalStorage(
-                    "billsAddress",
-                    itemKey
-                  )}
+                <GooglePlacesAutocomplete
+                  selectProps={{
+                    value:
+                      billsAddress ||
+                      (localStorage.getItem("billsAddress") &&
+                        JSON.parse(localStorage.getItem("billsAddress"))),
+                    onChange: (value) => setAdresse(value, "billsAddress"),
+                  }}
+                  apiKey="AIzaSyBS155m8oAmK1KZ67si1Csh1eMtlBdZqp8"
                 />
               </Form.Item>
               <Form.Item
@@ -211,13 +247,15 @@ const Register = ({ history, match }) => {
                 ]}
                 hasFeedback
               >
-                <Input
-                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
-                  name="dropAddress"
-                  defaultValue={getDefaultValueLocalStorage(
-                    "dropAddress",
-                    itemKey
-                  )}
+                <GooglePlacesAutocomplete
+                  selectProps={{
+                    value:
+                      dropAddress ||
+                      (localStorage.getItem("dropAddress") &&
+                        JSON.parse(localStorage.getItem("dropAddress"))),
+                    onChange: (value) => setAdresse(value, "dropAddress"),
+                  }}
+                  apiKey="AIzaSyBS155m8oAmK1KZ67si1Csh1eMtlBdZqp8"
                 />
               </Form.Item>
               <Form.Item
