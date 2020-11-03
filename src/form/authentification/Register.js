@@ -231,7 +231,7 @@ const Register = ({ history, match }) => {
                         JSON.parse(localStorage.getItem("billsAddress"))),
                     onChange: (value) => setAdresse(value, "billsAddress"),
                   }}
-                  apiKey="AIzaSyBS155m8oAmK1KZ67si1Csh1eMtlBdZqp8"
+                  apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
                 />
               </Form.Item>
               <Form.Item
@@ -255,7 +255,7 @@ const Register = ({ history, match }) => {
                         JSON.parse(localStorage.getItem("dropAddress"))),
                     onChange: (value) => setAdresse(value, "dropAddress"),
                   }}
-                  apiKey="AIzaSyBS155m8oAmK1KZ67si1Csh1eMtlBdZqp8"
+                  apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
                 />
               </Form.Item>
               <Form.Item
