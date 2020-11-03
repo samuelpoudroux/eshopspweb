@@ -19,12 +19,15 @@ const GlobalsearchResult = ({ state, history }) => {
     if (Array.isArray(values) && values.length > 0) {
       items.push(
         <Col span={24} key={key} style={{ margin: "2%" }}>
-          <Tag
-            color={styleVariable.secondaryColor}
-            style={{ padding: "0% 1%" }}
-          >
-            {key.charAt(0).toUpperCase() + key.slice(1)}
-          </Tag>
+          <Row justify="center">
+            <Tag
+              color={styleVariable.secondaryColor}
+              style={{ padding: "0% 1%" }}
+            >
+              {key.charAt(0).toUpperCase() + key.slice(1)}
+            </Tag>
+          </Row>
+
           <Row
             gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
             style={{

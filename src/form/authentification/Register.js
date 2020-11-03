@@ -10,6 +10,7 @@ import {
   getInitialValue,
 } from "../../repository/localStorage";
 import styleVariable from "../../styleVariable";
+import { PageHeader } from "../../components/PageHeader";
 const {
   REACT_APP_API_DOMAIN,
   REACT_APP_API_AUTH,
@@ -50,7 +51,7 @@ const Register = ({ history, match }) => {
 
   return (
     <Col style={{ padding: "5px", textAlign: "center" }}>
-      <h3>Je crée mon compte</h3>
+      <PageHeader action={() => window.history.back()} title={`S'inscrire `} />
       <Row justify="center" align="middle" style={{ padding: "2%" }}>
         <Row
           justify="center"

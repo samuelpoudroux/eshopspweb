@@ -12,6 +12,7 @@ import {
 } from "antd";
 import { AppContext } from "../../context/context";
 import styleVariable from "../../styleVariable";
+import { PageHeader } from "../../components/PageHeader";
 
 const Login = ({ history, match }) => {
   const { auth } = useContext(AppContext);
@@ -43,7 +44,10 @@ const Login = ({ history, match }) => {
 
   return (
     <Col style={{ textAlign: "center", padding: 40 }}>
-      <h3>Se connecter</h3>
+      <PageHeader
+        action={() => window.history.back()}
+        title={`Se connecter `}
+      />
       <Row
         justify="center"
         align="middle"
