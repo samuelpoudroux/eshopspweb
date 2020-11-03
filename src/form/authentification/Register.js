@@ -232,6 +232,15 @@ const Register = ({ history, match }) => {
                     onChange: (value) => setAdresse(value, "billsAddress"),
                   }}
                   apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
+                  autocompletionRequest={{
+                    bounds: [
+                      { lat: 50, lng: 50 },
+                      { lat: 100, lng: 100 },
+                    ],
+                    componentRestrictions: {
+                      country: ["fr"],
+                    },
+                  }}
                 />
               </Form.Item>
               <Form.Item
@@ -256,6 +265,15 @@ const Register = ({ history, match }) => {
                     onChange: (value) => setAdresse(value, "dropAddress"),
                   }}
                   apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
+                  autocompletionRequest={{
+                    bounds: [
+                      { lat: 50, lng: 50 },
+                      { lat: 100, lng: 100 },
+                    ],
+                    componentRestrictions: {
+                      country: ["fr"],
+                    },
+                  }}
                 />
               </Form.Item>
               <Form.Item
