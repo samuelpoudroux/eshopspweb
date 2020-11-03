@@ -39,6 +39,7 @@ const Header = ({
   const { products, favorites } = useContext(AppContext);
   const [state, updateState] = useState(true);
   const [update, setUpdate] = useState(false);
+  const { isAdmin } = useIsAdmin();
 
   const { REACT_APP_API_DOMAIN, REACT_APP_API_GLOBAL_SEARCH } = process.env;
 
@@ -62,8 +63,6 @@ const Header = ({
     products.getAllProducts();
   }, [state]);
 
-  const { isAdmin } = useIsAdmin();
-
   const user = JSON.parse(localStorage.getItem("users"))
     ? JSON.parse(localStorage.getItem("users"))
     : undefined;
@@ -72,7 +71,7 @@ const Header = ({
   }, []);
   useEffect(() => {
     setUpdate(!update);
-  }, [favorites]);
+  }, [favorites, isAdmin]);
 
   return (
     <header
@@ -227,7 +226,6 @@ const Header = ({
           </Row>
         </Col>
       </Row>
-
       <Globalsearchinput globalSearchApi={globalSearchApi} />
     </header>
   );

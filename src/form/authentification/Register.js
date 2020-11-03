@@ -28,7 +28,7 @@ const Register = ({ history, match }) => {
         message: message,
         icon: <SmileOutlined style={{ color: styleVariable.secondaryColor }} />,
       });
-      if (match.params.paiement) {
+      if (match.params.commandResume) {
         history.push("/login/paiement");
       } else {
         history.push("/login");

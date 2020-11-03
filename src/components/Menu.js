@@ -14,6 +14,8 @@ import styleVariable from "../styleVariable";
 import useCategory from "../customHooks/categoryHook";
 import useResponsive from "../customHooks/responsiveHook";
 import { upperCase } from "../helpers/UpperCase";
+import { useContext } from "react";
+import { AppContext } from "../context/context";
 const { SubMenu } = Menu;
 
 const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
@@ -23,10 +25,17 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
     setMenuIsOpened(false);
   };
   const { isMobile } = useResponsive();
+  const { auth } = useContext(AppContext);
 
-  const goToNewNess = () => {
-    history.push("/");
-    setMenuIsOpened(false);
+  const user = localStorage.getItem("users") || null;
+
+  const manageConnection = () => {
+    if (user) {
+      auth.logout(history);
+    } else {
+      history.push("/login");
+      setMenuIsOpened(false);
+    }
   };
 
   const drawerHeader = () => {
@@ -49,9 +58,9 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
               color: styleVariable.secondaryColor,
               background: "white",
             }}
-            onClick={() => goToNewNess()}
+            onClick={() => manageConnection()}
           >
-            Nos Nouveautés
+            {(user && "Se deconnecter") || "Se connecter"}
           </Button>
         </Col>
       </Row>
@@ -162,7 +171,7 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
           onClick={(e) => goToPage(e, "/contact")}
           style={{ fontSize: "1.1em" }}
         >
-          contact
+          Contact
         </Menu.Item>
       </Menu>
     </Drawer>

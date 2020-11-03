@@ -49,7 +49,6 @@ function App() {
             span={24}
             style={{
               position: "relative",
-              marginTop: "2%",
             }}
           >
             {globalSearchState.active && (

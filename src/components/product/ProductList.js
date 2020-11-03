@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import "../../App.css";
 import styleVariable from "../../styleVariable";
 import useResponsive from "../../customHooks/responsiveHook";
+import { PageHeader } from "../PageHeader";
 
 const Productlist = () => {
   const { products } = useContext(AppContext);
@@ -26,15 +27,10 @@ const Productlist = () => {
 
   return (
     <Col span={24}>
-      <h3
-        style={{
-          textAlign: "center",
-          color: styleVariable.mainColor,
-        }}
-      >
-        Nos produits
-      </h3>
-
+      <PageHeader
+        action={() => window.history.back()}
+        title={`Nos produits `}
+      />
       <Row
         style={{
           border: `1px solid ${styleVariable.mainColor}`,

@@ -11,6 +11,7 @@ import { LOWEST, HIGHEST } from "../../constants/category";
 
 import styleVariable from "../../styleVariable";
 import useCategory from "../../customHooks/categoryHook";
+import { upperCase } from "../../helpers/UpperCase";
 
 const { Option } = Select;
 const { CheckableTag } = Tag;
@@ -104,7 +105,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
           <span>Budget maximum: </span>
         </Col>
         <Col
-          xl={{ span: 2 }}
+          xxl={{ span: 2 }}
           xl={{ span: 3 }}
           lg={{ span: 12 }}
           md={{ span: 10 }}
@@ -129,7 +130,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
         </Col>
         <Col
           xxl={{ span: 7 }}
-          xl={{ span: 10 }}
+          xl={{ span: 9 }}
           lg={{ span: 12 }}
           md={{ span: 10 }}
           xs={18}
@@ -145,7 +146,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
                 checked={selectedTags.indexOf(tag) > -1}
                 onChange={(checked) => handleChange(tag, checked)}
               >
-                {tag.name}
+                {upperCase(tag.name)}
               </CheckableTag>
             ))}
           </Row>

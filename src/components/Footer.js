@@ -21,14 +21,14 @@ const Footer = ({ history }) => {
     >
       <Row>
         <Col lg={12} md={12} sm={24} xs={24} justify="space-between">
-          <Row>
+          <Row justify={isMobile && "center"}>
             <img
               alt="logo"
               src={logo}
               onClick={() => history.push("/")}
               style={{
-                maxWidth: isMobile ? "100%" : "25%",
-                maxHeight: isMobile ? "100%" : "25%",
+                maxWidth: isMobile ? "50%" : "25%",
+                maxHeight: isMobile ? "50%" : "25%",
                 cursor: "pointer",
               }}
             />

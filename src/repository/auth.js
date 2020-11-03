@@ -16,6 +16,7 @@ const login = (authState, user, history) => {
 };
 const logout = (history) => {
   localStorage.removeItem("users");
+  sessionStorage.removeItem("jwtData");
   notification.open({
     message: "Vous êtes deconnecté",
     icon: <SmileOutlined style={{ color: "#89ba17" }} />,

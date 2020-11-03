@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import _ from "lodash";
-import { Col, Row, Spin } from "antd";
+import { Col, notification, Row, Spin } from "antd";
 import { v4 as uuidv4 } from "uuid";
 import styleVariable from "./styleVariable";
 
@@ -14,6 +14,8 @@ const ChatFeedComponent = ({
 }) => {
   const secondTest = useRef(null);
   const [messageEnd, setMessageEnd] = useState();
+  const basketList = JSON.parse(localStorage.getItem("basket")) || [];
+  const favoriteList = JSON.parse(localStorage.getItem("favorite")) || [];
   useEffect(() => {
     if (messageEnd !== undefined) {
       messageEnd.scrollIntoView({
@@ -30,20 +32,26 @@ const ChatFeedComponent = ({
   }, [messages]);
 
   const goToPage = (page) => {
-    appRef.scrollIntoView(true);
-    history.push(page);
+    if (basketList.length === 0 && page === "/commandeResume") {
+      notification.open({
+        message: "Votre panier est vide",
+      });
+    } else {
+      appRef.scrollIntoView(true);
+      history.push(page);
+    }
   };
 
   const redirect = (expr) => {
     switch (expr) {
       case "Nous vous dirigeons vers la page de paiement":
-        return goToPage("/paiement");
+        return goToPage("/commandeResume");
         break;
       case "Gérer mon panier":
         return "blue";
         break;
       case "Nous vous dirigeons vers nos produits":
-        return goToPage("/paiement");
+        return goToPage("/commandeResume");
         break;
       case "Nous vous dirigons vers la page de création":
         return goToPage("/register");

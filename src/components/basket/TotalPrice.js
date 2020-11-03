@@ -20,7 +20,7 @@ const TotalPrice = ({ history, notClickable }) => {
           style={{ color: styleVariable.secondaryColor }}
         />
       }
-      onConfirm={() => history.push("/paiement")}
+      onConfirm={() => history.push("/commandeResume")}
     >
       <Badge
         style={{

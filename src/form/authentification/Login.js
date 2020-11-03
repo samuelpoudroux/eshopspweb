@@ -21,7 +21,7 @@ const Login = ({ history, match }) => {
   const onFinish = async (values) => {
     setIsLoading(true);
     await login(values, history);
-    if (user && match.params.paiement) {
+    if (user && match.params.commandResume) {
       history.push(`/paiement/`);
       notification.open({
         message: "Vous êtes connecté",
@@ -116,7 +116,9 @@ const Login = ({ history, match }) => {
               <a
                 style={{ color: "grey" }}
                 href={`${
-                  match.params.paiement ? "/register/paiement" : "/register"
+                  match.params.paiement
+                    ? "/register/commandeResume"
+                    : "/register"
                 }`}
               >
                 S'inscrire

@@ -8,6 +8,7 @@ import styleVariable from "../../styleVariable";
 import ProductCard from "./ProductCard";
 import useResponsive from "../../customHooks/responsiveHook";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
+import { PageHeader } from "../PageHeader";
 
 const NewNess = ({ history }) => {
   const { products } = useContext(AppContext);
@@ -32,9 +33,10 @@ const NewNess = ({ history }) => {
 
   return (
     <Col lg={24}>
-      <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
-        Nos nouveautés
-      </h3>
+      <PageHeader
+        action={() => window.history.back()}
+        title={`Nos nouveautés `}
+      />
       {newNess.length === 0 && (
         <Row style={{ minHeight: "30vh" }} justify="center" align="middle">
           <Spin />

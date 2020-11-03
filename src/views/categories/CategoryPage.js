@@ -3,6 +3,7 @@ import Axios from "axios";
 import { Col, Row, Spin } from "antd";
 import PropTypes from "prop-types";
 import ProductCard from "../../components/product/ProductCard";
+import { PageHeader } from "../../components/PageHeader";
 
 const CategoryPage = ({ match }) => {
   const [products, setProducts] = useState([]);
@@ -54,9 +55,10 @@ const CategoryPage = ({ match }) => {
   }, [match.params.name]);
   return (
     <Col lg={24} style={{ padding: "1%" }}>
-      <h3 style={{ textAlign: "center" }}>
-        Nos produits dans la catégorie {categoryName}
-      </h3>
+      <PageHeader
+        action={() => window.history.back()}
+        title={`Nos produits dans la catégorie ${categoryName}`}
+      />
       <Col md={24} xs={24} sm={24} lg={24} style={{ marginTop: 20 }}>
         <form
           onSubmit={(e) => console.log(e)}

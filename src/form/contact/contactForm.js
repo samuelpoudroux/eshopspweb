@@ -17,6 +17,7 @@ import {
 } from "../../repository/localStorage";
 import { PHONENUMBER, EMAIL, ADDRESS } from "../../constants/contact";
 import styleVariable from "../../styleVariable";
+import { PageHeader } from "../../components/PageHeader";
 
 const ContactForm = ({ history }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -57,10 +58,11 @@ const ContactForm = ({ history }) => {
 
   return (
     <Col>
-      <Row justify="center">
-        <h1 style={{ color: styleVariable.mainColor }}>Contact</h1>
-      </Row>
-      <Row justify="space-around" style={{ height: !isMobile && "50vh" }}>
+      <PageHeader action={() => window.history.back()} title={`Contact `} />
+      <Row
+        justify="space-around"
+        style={{ height: !isMobile && "50vh", padding: 20 }}
+      >
         <Col
           lg={11}
           sm={24}

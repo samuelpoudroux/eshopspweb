@@ -26,6 +26,7 @@ import {
 import TextArea from "antd/lib/input/TextArea";
 import styleVariable from "../../styleVariable";
 import useResponsive from "../../customHooks/responsiveHook";
+import { withRouter } from "react-router";
 
 const { Option } = Select;
 const itemKey = "product";
@@ -37,7 +38,12 @@ const {
   REACT_APP_API_CATEGORIES,
 } = process.env;
 
-const Loadnewproduct = ({ setAddProduct, forceUpdate, addProduct }) => {
+const Loadnewproduct = ({
+  setAddProduct,
+  forceUpdate,
+  addProduct,
+  history,
+}) => {
   const [categories, setCategories] = useState([]);
   const [files, setFiles] = useState();
   const { isMobile } = useResponsive();
@@ -64,28 +70,46 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate, addProduct }) => {
   const onFinish = async (values) => {
     const formData = new FormData();
     formData.append("upload", files);
+
     for (const [key, value] of Object.entries(values)) {
       formData.append(`${key}`, value);
     }
 
-    const { data } = await Axios.post(
-      REACT_APP_API_DOMAIN + REACT_APP_API_PRODUCT + REACT_APP_API_PRODUCT_ADD,
-      formData
-    );
-    const { error, message } = data;
-    if (!error && message) {
-      notification.open({
-        message: message,
-        icon: <SmileOutlined style={{ color: "#89ba17" }} />,
-      });
-      setAddProduct(false);
-      forceUpdate({});
-    }
-    if (error && !message) {
-      notification.open({
-        message: error,
-        icon: <SmileOutlined style={{ color: "red" }} />,
-      });
+    try {
+      const { data } = await Axios.post(
+        REACT_APP_API_DOMAIN +
+          REACT_APP_API_PRODUCT +
+          REACT_APP_API_PRODUCT_ADD,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("jwtData")}`,
+          },
+        }
+      );
+      const { error, message } = data;
+      if (!error && message) {
+        notification.open({
+          message: message,
+          icon: <SmileOutlined style={{ color: "#89ba17" }} />,
+        });
+        setAddProduct(false);
+        forceUpdate({});
+      }
+      if (error && !message) {
+        notification.open({
+          message: error,
+          icon: <SmileOutlined style={{ color: "red" }} />,
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+      if (error.message === "Request failed with status code 401") {
+        notification.open({
+          message: "Merci de vous reconnecter",
+        });
+        history.push("/login");
+      }
     }
   };
 
@@ -326,4 +350,4 @@ const Loadnewproduct = ({ setAddProduct, forceUpdate, addProduct }) => {
 
 Loadnewproduct.propTypes = {};
 
-export default Loadnewproduct;
+export default withRouter(Loadnewproduct);

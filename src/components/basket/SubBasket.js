@@ -77,24 +77,12 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
     }, num);
 
   const goToPaiement = () => {
-    history.push(`/paiement/${(user && user.id) || "noId"}`);
+    history.push(`/commandeResume/${(user && user.id) || "noId"}`);
     setSubBasketVisible(false);
   };
 
   return (
     <div style={{ textAlign: "center" }}>
-      {list.length > 0 && (
-        <DownOutlined
-          style={{
-            animation: "bounce 0.35s ease infinite alternate",
-            marginTop: 20,
-            color: styleVariable.mainColor,
-            fontSize: "1.3em",
-          }}
-          onClick={() => setSubBasketVisible(true)}
-        />
-      )}
-
       <Drawer
         title={drawerHeader()}
         closable={true}

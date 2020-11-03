@@ -3,11 +3,13 @@ import Productlist from "./components/product/ProductList";
 import Login from "./form/authentification/Login";
 import Register from "./form/authentification/Register";
 import ContactForm from "./form/contact/contactForm";
-import PaiementPage from "./PaiementPage";
 import CategoryPage from "./views/categories/CategoryPage";
 import ProductDetail from "./views/product/ProductDetails";
+import CommandResume from "./CommandResume";
+import Paiement from "./Paiement";
 const { default: HomePage } = require("./views/HomePage");
 export const test = () => <h1>ProductDetails</h1>;
+export const test2 = () => <h1>modifier mes informations</h1>;
 const Routes = [
   {
     path: "/",
@@ -15,7 +17,7 @@ const Routes = [
     component: HomePage,
   },
   {
-    path: "/login/:paiement",
+    path: "/login/:commandResume",
     component: Login,
   },
   {
@@ -23,7 +25,7 @@ const Routes = [
     component: Login,
   },
   {
-    path: "/register/:paiement",
+    path: "/register/:commandResume",
     component: Register,
   },
   {
@@ -44,11 +46,19 @@ const Routes = [
   },
   {
     path: "/productDetails/:id",
-    component: test,
+    component: ProductDetail,
+  },
+  {
+    path: "/commandeResume",
+    component: CommandResume,
   },
   {
     path: "/paiement",
-    component: PaiementPage,
+    component: Paiement,
+  },
+  {
+    path: "/informations",
+    component: test2,
   },
 ];
 

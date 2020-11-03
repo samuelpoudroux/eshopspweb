@@ -132,14 +132,16 @@ const ProductCard = ({ product, history, large }) => {
 
           <Col lg={12} md={12} sm={8} xs={15}>
             <Row justify="end">
-              <Tag color={styleVariable.secondaryColor}>{category}</Tag>
+              <Tag color={styleVariable.secondaryColor}>
+                {upperCase(category)}
+              </Tag>
             </Row>
           </Col>
         </Row>
 
         <Row style={{ paddingTop: 20 }}>
           <p style={{ margin: 0, wordBreak: "break-all" }}>
-            {shortDescription && shortDescription}
+            {shortDescription && upperCase(shortDescription)}
           </p>
         </Row>
 
