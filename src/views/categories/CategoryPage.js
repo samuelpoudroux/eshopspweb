@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import { Col, Row, Spin } from "antd";
-import PropTypes from "prop-types";
+import { Col, Input, Row, Spin } from "antd";
 import ProductCard from "../../components/product/ProductCard";
 import { PageHeader } from "../../components/PageHeader";
+import styleVariable from "../../styleVariable";
+import { SearchOutlined } from "@ant-design/icons";
+import useResponsive from "../../customHooks/responsiveHook";
 
 const CategoryPage = ({ match }) => {
   const [products, setProducts] = useState([]);
   const [searchResult, setSearchResult] = useState({ active: false, list: [] });
   const [isLoading, setIsLoading] = useState(false);
+  const { isMobile } = useResponsive();
 
   const { name: categoryName } = match.params;
   const {
@@ -54,12 +57,13 @@ const CategoryPage = ({ match }) => {
     getProductsByCategories();
   }, [match.params.name]);
   return (
-    <Col lg={24} style={{ padding: "1%" }}>
+    <Col lg={24}>
       <PageHeader
         action={() => window.history.back()}
         title={`Nos produits dans la catégorie ${categoryName}`}
       />
-      <Col md={24} xs={24} sm={24} lg={24} style={{ marginTop: 20 }}>
+
+      <Col span={24} style={{ margin: 20 }}>
         <form
           onSubmit={(e) => console.log(e)}
           className=""
@@ -68,38 +72,31 @@ const CategoryPage = ({ match }) => {
             position: "relative",
           }}
         >
-          <input
+          <Input
             style={{
               borderRadius: "8px",
               height: "50px",
-              width: "100%",
             }}
             type="text"
-            placeholder={`Rechercher un produit dans la catégorie ${categoryName}`}
+            placeholder={`Rechercher un produit dans la catégorie`}
             name="search"
             onChange={(e) => sortProductBySearch(e.target.value)}
+            suffix={
+              <SearchOutlined style={{ color: styleVariable.mainColor }} />
+            }
           />
-          <button
-            style={{
-              borderRadius: "8px ",
-              width: "90px",
-              marginLeft: "-80px",
-              height: "50px",
-            }}
-            type="submit"
-          >
-            <i className="fa fa-search"></i>
-          </button>
         </form>
       </Col>
-      <Row align="middle" justify="space-around">
+      <Row align="middle" justify={"center"}>
         {isLoading && <Spin />}
         {!isLoading &&
           !searchResult.active &&
           products.length > 0 &&
           products.map((product) => <ProductCard product={product} />)}
         {!isLoading && !searchResult.active && products.length === 0 && (
-          <h1>Pas de produits pour cette catégorie</h1>
+          <i style={{ textAlign: "center" }}>
+            Pas de produits pour cette catégorie
+          </i>
         )}
         {!isLoading &&
           searchResult.active &&
@@ -107,7 +104,11 @@ const CategoryPage = ({ match }) => {
           searchResult.list.map((product) => <ProductCard product={product} />)}
         {!isLoading &&
           searchResult.list.length === 0 &&
-          searchResult.active && <h1>Pas de résultat</h1>}
+          searchResult.active && (
+            <i style={{ textAlign: "center" }}>
+              Pas de résultat pour cette catégorie
+            </i>
+          )}
       </Row>
     </Col>
   );

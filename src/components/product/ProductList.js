@@ -34,6 +34,7 @@ const Productlist = () => {
       <Row
         style={{
           border: `1px solid ${styleVariable.mainColor}`,
+          marginTop: 20,
         }}
       >
         <SortProducts

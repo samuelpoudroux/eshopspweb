@@ -4,9 +4,12 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import styleVariable from "../styleVariable";
 export const PageHeader = ({ title, action }) => {
   return (
-    <Row justify="space-around" align="middle" style={{ padding: 20 }}>
+    <Row justify="space-around" align="middle">
       <Col xxl={1} xs={1}>
-        <ArrowLeftOutlined style={{ fontSize: 20 }} onClick={() => action()} />
+        <ArrowLeftOutlined
+          style={{ fontSize: 20, marginLeft: 20 }}
+          onClick={() => action()}
+        />
       </Col>
       <Col xxl={23} xs={23}>
         <Row justify="center">

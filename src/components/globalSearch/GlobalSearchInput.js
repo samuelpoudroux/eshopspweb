@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../context/context";
-import { Col } from "antd";
+import { Col, Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
 const Globalsearchinput = ({ globalSearchApi }) => {
   const [searchValue, setSearchValue] = useState(undefined);
@@ -27,7 +28,7 @@ const Globalsearchinput = ({ globalSearchApi }) => {
           position: "relative",
         }}
       >
-        <input
+        <Input
           style={{
             borderRadius: "8px",
             height: "50px",
@@ -36,18 +37,8 @@ const Globalsearchinput = ({ globalSearchApi }) => {
           placeholder="Rechercher"
           name="search"
           onChange={(e) => globalSearchHandleChange(e.target.value)}
+          suffix={<SearchOutlined style={{ color: "white" }} />}
         />
-        <button
-          style={{
-            borderRadius: "8px ",
-            width: "90px",
-            marginLeft: "-80px",
-            height: "50px",
-          }}
-          type="submit"
-        >
-          <i className="fa fa-search"></i>
-        </button>
       </form>
     </Col>
   );

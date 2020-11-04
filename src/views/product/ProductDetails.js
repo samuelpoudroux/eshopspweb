@@ -7,10 +7,12 @@ import useBasket from "../../customHooks/basketHook";
 import styleVariable from "../../styleVariable";
 import { upperCase } from "../../helpers/UpperCase";
 import { PageHeader } from "../../components/PageHeader";
+import useResponsive from "../../customHooks/responsiveHook";
 
 const ProductDetail = ({ match }) => {
   const [product, setProduct] = useState({});
   const { notification, addNotification } = useBasket();
+  const { isMobile } = useResponsive();
   const { id } = match.params;
   const { REACT_APP_API_DOMAIN, REACT_APP_API_PRODUCT } = process.env;
 
@@ -39,10 +41,10 @@ const ProductDetail = ({ match }) => {
           style={{
             textAlign: "center",
             wordBreak: "break-word",
-            color: styleVariable.mainColor,
+            color: styleVariable.secondaryColor,
           }}
         >
-          {product.name}
+          {upperCase(product.name)}
         </h1>
         <Row
           justify="space-around"
@@ -59,7 +61,7 @@ const ProductDetail = ({ match }) => {
           </Col>
           <Col>
             <Row align="middle">
-              <Col lg={24}>
+              <Col span={19}>
                 <Addandremoveproduct
                   notification={notification}
                   addNotification={addNotification}
@@ -67,13 +69,18 @@ const ProductDetail = ({ match }) => {
                   product={product}
                 />
               </Col>
+
+              <Col span={5}>
+                <Row justify={isMobile ? "center " : "end"}>
+                  <b style={{ fontSize: "2em" }}>{product.productPrice}€</b>
+                </Row>
+              </Col>
             </Row>
           </Col>
 
           <ProductDetailsTabs
             description={upperCase(product.longDescription)}
           />
-          <b style={{ fontSize: "2em" }}>{product.productPrice}€</b>
           <div>
             <Tag color={styleVariable.secondaryColor}>
               {upperCase(product.category)}

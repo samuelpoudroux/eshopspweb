@@ -1,5 +1,5 @@
-import { GLOBAL_SEARCH } from '../constants/globalSearch.js';
-import { globalSearch } from '../repository/globalSearch';
+import { GLOBAL_SEARCH } from "../constants/globalSearch.js";
+import { globalSearch } from "../repository/globalSearch";
 
 const globalSearchReducer = (state, action) => {
   switch (action.type) {

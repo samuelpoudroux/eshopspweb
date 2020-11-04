@@ -49,6 +49,7 @@ function App() {
             span={24}
             style={{
               position: "relative",
+              paddingTop: 20,
             }}
           >
             {globalSearchState.active && (

@@ -33,7 +33,7 @@ input:hover {
   outline: none;
 }
 
-.globalSearchInput>input[type='text'] {
+.globalSearchInput> span {
   padding: 10px;
   font-size: 17px;
   border: 1px solid var(--mainColor);
@@ -42,13 +42,18 @@ input:hover {
   border-top: none;
   float: left;
   width: 100%;
-  background: none;
+  background: none !important;
+}
+.globalSearchInput> span > input {
+  background: none !important;
 }
 .globalSearchInput>input[type='text']::placeholder {
   color:white
+  
 }
 .globalSearchInput>input[type='text'] {
-  color:white
+  color:white;
+
 }
 
 .globalSearchInput>input[type='text']:hover {
