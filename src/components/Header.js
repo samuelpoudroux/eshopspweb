@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../context/context";
 import { withRouter } from "react-router";
+import { upperCase } from "../helpers/UpperCase";
+
 import {
   MenuOutlined,
   LoginOutlined,
@@ -180,10 +182,7 @@ const Header = ({
                     user.userData &&
                     user.userData.firstName &&
                     `Bienvenue ${
-                      user.userData &&
-                      user.userData.firstName[0].toUpperCase() +
-                        user.userData &&
-                      user.userData.firstName.substring(1)
+                      user.userData && upperCase(user.userData.firstName)
                     }`}
                 </p>
                 {user && user.isLogged && (
