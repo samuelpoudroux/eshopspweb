@@ -74,6 +74,7 @@ const Addandremoveproduct = ({
               +
             </Button>
             <Input
+              className="inputStyle"
               style={{
                 textAlign: "center",
                 width: "40%",

@@ -126,6 +126,7 @@ const Register = ({ history, match }) => {
                 hasFeedback
               >
                 <Input
+                  className="inputStyle"
                   onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="lastName"
                   defaultValue={getDefaultValueLocalStorage(
@@ -147,6 +148,7 @@ const Register = ({ history, match }) => {
                 hasFeedback
               >
                 <Input
+                  className="inputStyle"
                   onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="firstName"
                   defaultValue={getDefaultValueLocalStorage(
@@ -175,6 +177,7 @@ const Register = ({ history, match }) => {
                 ]}
               >
                 <Input
+                  className="inputStyle"
                   onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="email"
                   defaultValue={getDefaultValueLocalStorage("email", itemKey)}
@@ -191,7 +194,7 @@ const Register = ({ history, match }) => {
                 ]}
                 hasFeedback
               >
-                <Input.Password />
+                <Input.Password className="inputStyle" />
               </Form.Item>
               <Form.Item
                 label="Confirmer mot de passe"
@@ -214,7 +217,7 @@ const Register = ({ history, match }) => {
                 ]}
                 hasFeedback
               >
-                <Input.Password />
+                <Input.Password className="inputStyle" />
               </Form.Item>
               <Form.Item
                 label="Adresse de facturation"
@@ -259,6 +262,7 @@ const Register = ({ history, match }) => {
                 hasFeedback
               >
                 <GooglePlacesAutocomplete
+                  className="inputStyle"
                   selectProps={{
                     value:
                       dropAddress ||
@@ -295,6 +299,7 @@ const Register = ({ history, match }) => {
                 hasFeedback
               >
                 <Input
+                  className="inputStyle"
                   onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="phoneNumber"
                   defaultValue={getDefaultValueLocalStorage("phoneNumber", {

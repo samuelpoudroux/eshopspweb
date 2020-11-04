@@ -31,48 +31,49 @@ p {
 
 input:hover {
   outline: none;
+
 }
 
-.globalSearchInput> span {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid var(--mainColor);
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  float: left;
-  width: 100%;
+input:focus {
+  outline: none;
+}
+
+
+.ant-input-affix-wrapper-focused{
+  border: 0;
+  border-bottom: 1px solid white !important; 
+outline: none !important;
+}
+
+.inputStyle{
+  border: 0;
+  border-bottom: 1px solid grey;
+  border-radius: 4px;
   background: none !important;
+
 }
-.globalSearchInput> span > input {
+.inputStyle:focus{
+  border: 0;
+  border-bottom: 1px solid #89ba17;
+  border-radius: 4px;
   background: none !important;
-}
-.globalSearchInput>input[type='text']::placeholder {
-  color:white
-  
-}
-.globalSearchInput>input[type='text'] {
-  color:white;
 
 }
 
-.globalSearchInput>input[type='text']:hover {
-  border: 1px solid white;
-}
 
-/* Style the submit button */
-.globalSearchInput>button {
-  width: 20%;
+.globalSearchInput{
+  margin-top: 28px;
   padding: 10px;
-  background: var(--secondaryColor);
-  color: white;
-  font-size: 17px;
-  border: none;
-  border-left: none;
-  /* Prevent double borders */
-  cursor: pointer;
+  border: 0;
+  border-bottom: 1px solid grey;
+  border-radius: 8px;
+  background: none !important;
+   color: white;
 }
+.globalSearchInput > input{
 
+   color: white;
+}
 .productCard{
   -webkit-box-shadow:inset 1px 1px 12px 1px#d2d6da;
   -moz-box-shadow:inset 1px 1px 12px 1px#d2d6da;
@@ -81,6 +82,7 @@ input:hover {
   -webkit-border-radius:0px;
   border-radius:0px;
   }
+
 .detailCard{
   -webkit-box-shadow:inset 1px 1px 12px 1px#b5b8b8;
   -moz-box-shadow:inset 1px 1px 12px 1px#b5b8b8;
@@ -183,4 +185,13 @@ h3, h1 {
 
   span.creditCard > svg{
 	animation: color_change 0.5s infinite alternate;
+}
+
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
 }

@@ -185,6 +185,7 @@ const Loadnewproduct = ({
                   hasFeedback
                 >
                   <Input
+                    className="inputStyle"
                     onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                     name="name"
                     defaultValue={getDefaultValueLocalStorage("name", {
@@ -204,6 +205,7 @@ const Loadnewproduct = ({
                   hasFeedback
                 >
                   <Input
+                    className="inputStyle"
                     type="number"
                     min={0}
                     onChange={(e) => setValuesLocalStorage(e.target, itemKey)}

@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import "antd/dist/antd.css";
+import App from "./App";
+import "./App.css";
 import * as serviceWorker from "./serviceWorker";
 import GlobalStore from "./store";
 import "swiper/css/swiper.css";

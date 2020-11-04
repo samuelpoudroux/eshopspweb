@@ -13,34 +13,17 @@ const Globalsearchinput = ({ globalSearchApi }) => {
     search(searchValue, globalSearchApi);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (searchValue !== undefined && searchValue.length > 0)
-      search(searchValue);
-  };
   return (
-    <Col md={24} xs={24} sm={24} lg={24} style={{ marginTop: 20 }}>
-      <form
-        onSubmit={(e) => handleSubmit(e)}
-        className="globalSearchInput"
-        style={{
-          display: "flex",
-          position: "relative",
-        }}
-      >
-        <Input
-          style={{
-            borderRadius: "8px",
-            height: "50px",
-          }}
-          type="text"
-          placeholder="Rechercher"
-          name="search"
-          onChange={(e) => globalSearchHandleChange(e.target.value)}
-          suffix={<SearchOutlined style={{ color: "white" }} />}
-        />
-      </form>
-    </Col>
+    <Input
+      className="inputStyle"
+      bordered={false}
+      className="globalSearchInput"
+      type="text"
+      placeholder="Rechercher"
+      name="search"
+      onChange={(e) => globalSearchHandleChange(e.target.value)}
+      suffix={<SearchOutlined style={{ color: "white" }} />}
+    />
   );
 };
 

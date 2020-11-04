@@ -112,6 +112,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
           xs={10}
         >
           <Input
+            className="inputStyle"
             type="number"
             min={0}
             style={{ width: "100%" }}

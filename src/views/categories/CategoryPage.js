@@ -73,6 +73,7 @@ const CategoryPage = ({ match }) => {
           }}
         >
           <Input
+            className="inputStyle"
             style={{
               borderRadius: "8px",
               height: "50px",

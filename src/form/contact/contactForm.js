@@ -106,6 +106,7 @@ const ContactForm = ({ history }) => {
                         hasFeedback
                       >
                         <Input
+                          className="inputStyle"
                           name="subject"
                           onChange={(e) =>
                             setValuesLocalStorage(e.target, itemKey)
@@ -132,6 +133,7 @@ const ContactForm = ({ history }) => {
                         hasFeedback
                       >
                         <Input
+                          className="inputStyle"
                           name="senderName"
                           onChange={(e) =>
                             setValuesLocalStorage(e.target, itemKey)
@@ -167,6 +169,7 @@ const ContactForm = ({ history }) => {
                         hasFeedback
                       >
                         <Input
+                          className="inputStyle"
                           name="senderEmail"
                           onChange={(e) =>
                             setValuesLocalStorage(e.target, itemKey)
@@ -197,6 +200,7 @@ const ContactForm = ({ history }) => {
                         hasFeedback
                       >
                         <Input
+                          className="inputStyle"
                           name="senderPhone"
                           onChange={(e) =>
                             setValuesLocalStorage(e.target, itemKey)

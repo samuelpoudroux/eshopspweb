@@ -138,7 +138,7 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
                 </b>
               </Row>
             </Col>
-            <Col lg={6} xs={24}>
+            <Col lg={6} xs={24} style={{ marginTop: isMobile && 30 }}>
               <Row justify="center">
                 <Button
                   style={{

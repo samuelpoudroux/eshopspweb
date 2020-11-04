@@ -1,5 +1,4 @@
 import React, { useContext, useState, useRef } from "react";
-import "./App.css";
 import history from "./history";
 import { Router, Switch, Route } from "react-router-dom";
 import Routes from "./routes";

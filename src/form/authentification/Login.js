@@ -92,7 +92,7 @@ const Login = ({ history, match }) => {
                   },
                 ]}
               >
-                <Input />
+                <Input className="inputStyle" bordered={false} />
               </Form.Item>
               <Form.Item
                 label="Password"
@@ -104,7 +104,7 @@ const Login = ({ history, match }) => {
                   },
                 ]}
               >
-                <Input.Password />
+                <Input.Password className="inputStyle" bordered={false} />
               </Form.Item>
               <Form.Item name="remember" valuePropName="checked">
                 <Checkbox>Remember me</Checkbox>

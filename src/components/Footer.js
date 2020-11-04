@@ -90,15 +90,17 @@ const Footer = ({ history }) => {
           </Col>
         </Col>
         <Col lg={12} md={12} sm={24} xs={24}>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d40675.06261229756!2d2.9232678538274244!3d50.418905218677295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47dd33143e8095ab%3A0xf539fc766a47c36e!2sH%C3%A9nin-Beaumont!5e0!3m2!1sfr!2sfr!4v1603208803664!5m2!1sfr!2sfr"
-            width="400"
-            height="300"
-            frameborder="0"
-            allowfullscreen=""
-            aria-hidden="false"
-            tabindex="0"
-          ></iframe>
+          <Row justify="center">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d40675.06261229756!2d2.9232678538274244!3d50.418905218677295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47dd33143e8095ab%3A0xf539fc766a47c36e!2sH%C3%A9nin-Beaumont!5e0!3m2!1sfr!2sfr!4v1603208803664!5m2!1sfr!2sfr"
+              width={400}
+              height="300"
+              frameborder="0"
+              allowfullscreen=""
+              aria-hidden="false"
+              tabindex="0"
+            ></iframe>
+          </Row>
         </Col>
       </Row>
       <Row
