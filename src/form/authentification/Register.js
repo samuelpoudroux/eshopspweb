@@ -215,8 +215,6 @@ const Register = ({ history, match }) => {
                 name="billsAddress"
                 rules={[
                   {
-                    required: true,
-                    min: 8,
                     message:
                       "Merci de renseigner votre adresse de facturation minimum 8 caractéres!",
                   },
@@ -248,8 +246,6 @@ const Register = ({ history, match }) => {
                 name="dropAddress"
                 rules={[
                   {
-                    required: true,
-                    min: 8,
                     message:
                       "Merci de renseigner votre adresse de livraison minimum 8 caractéres!",
                   },
