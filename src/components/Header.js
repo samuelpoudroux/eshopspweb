@@ -177,10 +177,10 @@ const Header = ({
               >
                 <p style={{ color: "white", margin: "0", fontSize: "1em" }}>
                   {user &&
-                    user.firstName &&
+                    user.userData.firstName &&
                     `Bienvenue ${
-                      user.firstName[0].toUpperCase() +
-                      user.firstName.substring(1)
+                      user.userData.firstName[0].toUpperCase() +
+                      user.userData.firstName.substring(1)
                     }`}
                 </p>
                 {user && user.isLogged && (

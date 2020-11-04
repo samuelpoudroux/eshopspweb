@@ -23,6 +23,7 @@ import styleVariable from "../../styleVariable";
 import { PageHeader } from "../../components/PageHeader";
 import { useState } from "react";
 import { set } from "lodash";
+import { useForm } from "antd/lib/form/Form";
 const {
   REACT_APP_API_DOMAIN,
   REACT_APP_API_AUTH,
@@ -32,6 +33,8 @@ const {
 const Register = ({ history, match }) => {
   const [billsAddress, setBillsAddress] = useState(null);
   const [dropAddress, setDropAddress] = useState(null);
+  const [form] = useForm();
+
   const onFinish = async (values) => {
     const { data } = await Axios.post(
       REACT_APP_API_DOMAIN + REACT_APP_API_AUTH + REACT_APP_API_AUTH_REGISTER,
@@ -65,6 +68,7 @@ const Register = ({ history, match }) => {
 
   const setAdresse = (e, type) => {
     if (type === "billsAddress") {
+      form.setFieldsValue({ billsAddress: e.label });
       localStorage.setItem("billsAddress", JSON.stringify(e));
       setBillsAddress(e);
       setValuesLocalStorage(
@@ -73,6 +77,7 @@ const Register = ({ history, match }) => {
         "billsAddress"
       );
     } else {
+      form.setFieldsValue({ dropAddress: e.label });
       localStorage.setItem("dropAddress", JSON.stringify(e));
       setDropAddress(e);
       setValuesLocalStorage(
@@ -101,6 +106,7 @@ const Register = ({ history, match }) => {
           }}
         >
           <Form
+            form={form}
             name="basic"
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -215,8 +221,8 @@ const Register = ({ history, match }) => {
                 name="billsAddress"
                 rules={[
                   {
-                    message:
-                      "Merci de renseigner votre adresse de facturation minimum 8 caractéres!",
+                    required: true,
+                    message: "L'adresse de facturation est requise",
                   },
                 ]}
                 hasFeedback
@@ -242,12 +248,12 @@ const Register = ({ history, match }) => {
                 />
               </Form.Item>
               <Form.Item
-                label="Adresse de Livraison"
+                label="Adresse de livraison"
                 name="dropAddress"
                 rules={[
                   {
-                    message:
-                      "Merci de renseigner votre adresse de livraison minimum 8 caractéres!",
+                    required: true,
+                    message: "L'adresse de livraison est requise",
                   },
                 ]}
                 hasFeedback
@@ -272,6 +278,7 @@ const Register = ({ history, match }) => {
                   }}
                 />
               </Form.Item>
+
               <Form.Item
                 label="Numéro de téléphone"
                 name="phoneNumber"

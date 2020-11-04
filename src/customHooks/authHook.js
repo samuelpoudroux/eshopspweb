@@ -1,7 +1,8 @@
-import { useEffect, useState, useReducer } from "react";
+import { useReducer } from "react";
 import { LOGIN, REGISTER, LOGOUT } from "../constants/login.js";
 import Axios from "axios";
 import authReducer from "../reducers/authReducer";
+import { useState } from "react";
 
 const {
   REACT_APP_API_DOMAIN,
@@ -13,42 +14,36 @@ const useAuth = () => {
   const [auth, dispatch] = useReducer(authReducer, {
     isLoading: false,
     isLogged: false,
+    error: true,
+  });
+
+  const [userData, setUserData] = useState({
+    isLoading: true,
+    data: {},
+    error: false,
   });
 
   const login = async (user, history) => {
-    const localData = JSON.parse(localStorage.getItem("users"));
-    let data;
-    if (!localData || (localData && localData.error)) {
-      const { data: userData } = await Axios.post(
-        REACT_APP_API_DOMAIN + REACT_APP_API_AUTH + REACT_APP_API_AUTH_LOGIN,
-        user,
-        { withCredentials: true }
+    const { data: userData } = await Axios.post(
+      REACT_APP_API_DOMAIN + REACT_APP_API_AUTH + REACT_APP_API_AUTH_LOGIN,
+      user,
+      { withCredentials: true }
+    );
+    userData.jwt && sessionStorage.setItem("jwtData", userData.jwt);
+    delete userData.jwt;
+    if (!userData.error) {
+      localStorage.setItem(
+        "users",
+        JSON.stringify({ ...userData, isLoading: false, isLogged: true })
       );
-      sessionStorage.setItem("jwtData", userData.jwt);
-      delete userData.jwt;
-      const { error } = userData;
-      if (!error) {
-        localStorage.setItem(
-          "users",
-          JSON.stringify({ ...userData, isLoading: false, isLogged: true })
-        );
-
-        data = { ...userData, isLoading: false, isLogged: true };
-      } else {
-        localStorage.setItem(
-          "users",
-          JSON.stringify({ error: error, isLoading: false, isLogged: false })
-        );
-        data = { error: error };
-      }
-    } else {
-      data = { localData, isLoading: false };
+      setUserData({ isLoading: false, error: false, data: userData });
     }
-    return dispatch({
-      type: LOGIN,
-      user: data,
-      history,
-    });
+    return {
+      ...userData,
+      isLoading: false,
+      isLogged: true,
+      error: userData.error,
+    };
   };
 
   const register = (user) => {
@@ -64,7 +59,7 @@ const useAuth = () => {
     });
   };
 
-  return { auth, login, logout, register };
+  return { auth, login, logout, register, userData };
 };
 
 export default useAuth;

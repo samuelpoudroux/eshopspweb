@@ -32,7 +32,7 @@ const GlobalStore = ({ children }) => {
     removeProductFromFavorites,
     removeAllProductFromFavorites,
   } = useFavorites();
-  const { auth, login, logout, register } = useAuth();
+  const { auth, login, logout, register, userData } = useAuth();
   const store = {
     basket: {
       list: userBasket,
@@ -63,6 +63,7 @@ const GlobalStore = ({ children }) => {
       logout: logout,
       register: register,
       user: auth,
+      userData: userData,
     },
 
     favorites: {

@@ -21,6 +21,8 @@ const getInitialValue = (itemKey) => {
     (localStorage.getItem(`${itemKey}`) &&
       JSON.parse(localStorage.getItem(`${itemKey}`))) ||
     {};
+
+  console.log("toto", data);
   return data;
 };
 

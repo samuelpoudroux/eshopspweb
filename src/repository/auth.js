@@ -4,14 +4,21 @@ import { notification } from "antd";
 
 const login = (authState, user, history) => {
   if (user.error) {
-    return {
-      isLoading: false,
-      ...user,
-      isLogged: false,
-      error: user.error,
-    };
+    notification.open({
+      message: user.error,
+      icon: <SmileOutlined style={{ color: "red" }} />,
+    });
+
+    return { error: user.error };
   } else {
-    return { isLoading: false, ...user, isLogged: true };
+    localStorage.setItem(
+      "users",
+      JSON.stringify({
+        isLoading: false,
+        ...user,
+        isLogged: true,
+      })
+    );
   }
 };
 const logout = (history) => {

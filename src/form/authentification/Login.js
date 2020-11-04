@@ -13,22 +13,29 @@ import {
 import { AppContext } from "../../context/context";
 import styleVariable from "../../styleVariable";
 import { PageHeader } from "../../components/PageHeader";
+import { useEffect } from "react";
 
 const Login = ({ history, match }) => {
   const { auth } = useContext(AppContext);
-  const { login, user } = auth;
+  const { login, user, userData } = auth;
   const [isLoading, setIsLoading] = useState(false);
 
   const onFinish = async (values) => {
     setIsLoading(true);
-    await login(values, history);
-    if (user && match.params.commandResume) {
+    const data = await login(values, history);
+    console.log(data);
+    if (!data.error && match.params.commandResume) {
       history.push(`/paiement/`);
       notification.open({
         message: "Vous êtes connecté",
         icon: <SmileOutlined style={{ color: "#89ba17" }} />,
       });
-    } else {
+    } else if (data.error) {
+      notification.open({
+        message: data.error,
+        icon: <SmileOutlined style={{ color: "red" }} />,
+      });
+    } else if (!data.error) {
       history.push(`/`);
       notification.open({
         message: "Vous êtes connecté",
@@ -116,7 +123,9 @@ const Login = ({ history, match }) => {
                 </Button>
               </Form.Item>
               {isLoading && <Spin />}
-              {user.error && <p style={{ color: "red" }}>{user.error}</p>}
+              {user && user.error && (
+                <p style={{ color: "red" }}>{user.error}</p>
+              )}
               <a
                 style={{ color: "grey" }}
                 href={`${
