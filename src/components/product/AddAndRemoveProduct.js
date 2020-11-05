@@ -59,27 +59,32 @@ const Addandremoveproduct = ({
     <Col lg={24} md={23} sm={18} xs={24}>
       <Row align="middle">
         <Col lg={subBasket ? 15 : 12} md={23} sm={23} xs={14}>
-          <Row justify="start">
+          <Row justify="start" align="middle">
             <Button
               style={{
-                background: styleVariable.secondaryColor,
-                color: "white",
+                color: styleVariable.secondaryColor,
                 cursor: "pointer",
                 paddingLeft: 8,
                 paddingRight: 8,
-                borderRadius: 50,
+                border: 0,
+                borderBottom: `2px solid ${styleVariable.secondaryColor}`,
+                borderTop: `2px solid ${styleVariable.secondaryColor}`,
+                borderRadius: 8,
               }}
               onClick={(e) => addProduct(e)}
             >
               +
             </Button>
             <Input
-              className="inputStyle"
               style={{
                 textAlign: "center",
                 width: "40%",
                 marginLeft: 4,
                 marginRight: 4,
+                border: 0,
+                borderRadius: 8,
+                borderTop: "2px solid grey ",
+                borderBottom: "2px solid grey ",
               }}
               min={0}
               value={num}
@@ -99,12 +104,14 @@ const Addandremoveproduct = ({
                 {" "}
                 <Button
                   style={{
-                    background: styleVariable.mainColor,
-                    color: "white",
+                    color: styleVariable.mainColor,
                     cursor: "pointer",
                     paddingLeft: 8,
                     paddingRight: 8,
-                    borderRadius: 50,
+                    border: 0,
+                    borderBottom: `2px solid ${styleVariable.mainColor}`,
+                    borderTop: `2px solid ${styleVariable.mainColor}`,
+                    borderRadius: "8px",
                   }}
                 >
                   -
@@ -113,12 +120,14 @@ const Addandremoveproduct = ({
             ) : (
               <Button
                 style={{
-                  background: styleVariable.mainColor,
-                  color: "white",
+                  color: styleVariable.mainColor,
                   cursor: "pointer",
                   paddingLeft: 8,
                   paddingRight: 8,
-                  borderRadius: 50,
+                  border: 0,
+                  borderBottom: `2px solid ${styleVariable.mainColor}`,
+                  borderTop: `2px solid ${styleVariable.mainColor}`,
+                  borderRadius: "8px",
                 }}
                 onClick={(e) => removeProduct(e)}
               >
