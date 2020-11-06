@@ -1,11 +1,9 @@
-import { LOGIN, REGISTER, LOGOUT } from '../constants/login.js';
+import { REGISTER, LOGOUT } from "../constants/login.js";
 
-import { login, logout, register } from '../repository/auth';
+import { logout, register } from "../repository/auth";
 
 const authReducer = (authState, action) => {
   switch (action.type) {
-    case LOGIN:
-      return login(authState, action.user, action.history);
     case REGISTER:
       return register(authState, action);
     case LOGOUT:

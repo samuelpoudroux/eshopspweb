@@ -22,8 +22,18 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
   const [value, setValue] = useState(null);
   const { categories, setCategories } = useCategory();
   const [items, setItems] = useState([
-    { id: 1, value: "LOWEST", name: "Prix croissant" },
-    { id: 2, value: "HIGHEST", name: "Prix Décroissant" },
+    {
+      id: 1,
+      value: "LOWEST",
+      name: "Prix croissant",
+      color: "grey",
+    },
+    {
+      id: 2,
+      value: "HIGHEST",
+      name: "Prix Décroissant",
+      color: styleVariable.secondaryColor,
+    },
   ]);
 
   const selectHandleChange = (value) => {
@@ -74,10 +84,12 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
           xl={{ span: 3 }}
           lg={{ span: 5 }}
           md={{ span: 5 }}
-          xs={{ span: 10, offset: 1 }}
+          xs={{ span: 15, offset: 1 }}
         >
           <Select
             style={{ width: "100%" }}
+            className="inputStyle"
+            bordered={false}
             dropdownRender={(menu) => (
               <div>
                 {menu}
@@ -88,7 +100,11 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
             value={value}
           >
             {items.map((item) => (
-              <Option value={item.value} key={item.id}>
+              <Option
+                style={{ color: item.color }}
+                value={item.value}
+                key={item.id}
+              >
                 {item.name}
               </Option>
             ))}
@@ -102,7 +118,9 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
           md={{ span: 4 }}
           xs={{ span: 12 }}
         >
-          <span>Budget maximum: </span>
+          <span style={{ color: styleVariable.secondaryColor }}>
+            Budget maximum:{" "}
+          </span>
         </Col>
         <Col
           xxl={{ span: 2 }}
@@ -112,7 +130,8 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
           xs={10}
         >
           <Input
-            className="inputStyle"
+            className="inputStyle, maxBudget"
+            bordered={false}
             type="number"
             min={0}
             style={{ width: "100%" }}

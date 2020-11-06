@@ -1,6 +1,11 @@
 :root {
   --mainColor:#5a6165;
   --secondaryColor: #003d2e;
+  --thirdColor: #89ba17;
+}
+
+body {
+  color: var(--mainColor)
 }
 
 @keyframes App-logo-spin {
@@ -15,6 +20,7 @@
 
 p {
   word-wrap: break-word;
+  
 }
 
 
@@ -38,11 +44,23 @@ input:focus {
   outline: none;
 }
 
+p{margin: 0}
+
 
 .ant-input-affix-wrapper-focused{
   border: 0;
   border-bottom: 1px solid white !important; 
 outline: none !important;
+}
+
+.ant-input-affix-wrapper-focused.inputStyle, .ant-select-focused{
+  border: 0;
+  border-bottom: 1px solid var(--thirdColor) !important; 
+outline: none !important;
+}
+
+.maxBudget::placeholder {
+  color:var(--thirdColor)
 }
 
 .inputStyle{
@@ -54,9 +72,14 @@ outline: none !important;
 }
 .inputStyle:focus{
   border: 0;
-  border-bottom: 1px solid #89ba17;
+  border-bottom: 1px solid var(--thirdColor) !important;
   border-radius: 4px;
   background: none !important;
+
+}
+
+.ant-select:focus {
+  border-bottom: 1px solid var(--thirdColor);
 
 }
 
@@ -130,7 +153,7 @@ input:disabled {
 }
 
 .ant-menu-item-selected{
-  color:#89ba17 !important
+  color:var(--thirdColor) !important
 
 }
 
@@ -194,4 +217,46 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.steps-content {
+  margin-top: 16px;
+  border: 1px dashed #e9e9e9;
+  border-radius: 2px;
+  background-color: #fafafa;
+  min-height: 200px;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.steps-action {
+  margin-top: 24px;
+}
+
+.ant-steps-item-process .ant-steps-item-icon {
+  background-color: var(--thirdColor);
+  border-color:white;
+}
+
+.ant-steps-item-finish .ant-steps-item-icon  {
+  background-color:var(--secondaryColor);
+  border-color: white;
+}
+
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title::after {
+  background-color:var(--secondaryColor);
+}
+
+.ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
+  color: white;
+}
+
+.buttonResume:hover{
+  background-color: var(--secondaryColor) !important;
+  color: white !important;
+  border: none;
+}
+
+.css-2b097c-container {
+  width: 100%
 }

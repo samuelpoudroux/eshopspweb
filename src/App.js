@@ -8,7 +8,7 @@ import GlobalSearchResult from "./components//globalSearch/GlobalSearchResult";
 import SubBasket from "./components/basket/SubBasket";
 import { Col, Row } from "antd";
 import ProtectedRoute from "./ProtectedRoutes";
-import Chat from "./Chat";
+import Chat from "./components/Chat/Chat";
 import Footer from "./components/Footer";
 import useResponsive from "./customHooks/responsiveHook";
 import Favorites from "./components/favorite/Favorites";

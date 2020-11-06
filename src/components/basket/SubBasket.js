@@ -70,14 +70,10 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
     );
   };
 
-  const productInBasket =
-    list.length > 0 &&
-    list.reduce((accumulateur, valeurCourante) => {
-      return accumulateur + valeurCourante.num * valeurCourante.productPrice;
-    }, num);
-
   const goToPaiement = () => {
-    history.push(`/commandeResume/${(user && user.id) || "noId"}`);
+    user && user.userData.id
+      ? history.push(`/orderResume/${user && user.userData.id}`)
+      : history.push(`/orderResume/`);
     setSubBasketVisible(false);
   };
 

@@ -23,9 +23,8 @@ const Login = ({ history, match }) => {
   const onFinish = async (values) => {
     setIsLoading(true);
     const data = await login(values, history);
-    console.log(data);
     if (!data.error && match.params.commandResume) {
-      history.push(`/paiement/`);
+      history.push(`/orderResume/${data.userData.id}`);
       notification.open({
         message: "Vous êtes connecté",
         icon: <SmileOutlined style={{ color: "#89ba17" }} />,
@@ -129,9 +128,7 @@ const Login = ({ history, match }) => {
               <a
                 style={{ color: "grey" }}
                 href={`${
-                  match.params.paiement
-                    ? "/register/commandeResume"
-                    : "/register"
+                  match.params.paiement ? "/register/orderResume" : "/register"
                 }`}
               >
                 S'inscrire

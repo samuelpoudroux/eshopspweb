@@ -4,12 +4,17 @@ import { withRouter } from "react-router";
 import { getTotalPrice } from "../../repository/product";
 import { CreditCardOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import styleVariable from "../../styleVariable";
-const TotalPrice = ({ history, notClickable }) => {
+const TotalPrice = ({ history, setSubBasketVisible, notClickable }) => {
   const basketList = JSON.parse(localStorage.getItem("basket"));
   const totalPrices = useCallback(() => {
     return getTotalPrice(basketList ? basketList : []);
   }, [basketList]);
   const totalPrice = totalPrices();
+
+  const goOrderResume = () => {
+    history.push("/orderResume");
+    setSubBasketVisible(false);
+  };
   return (
     <Popconfirm
       disabled={totalPrice === 0}
@@ -20,7 +25,7 @@ const TotalPrice = ({ history, notClickable }) => {
           style={{ color: styleVariable.secondaryColor }}
         />
       }
-      onConfirm={() => history.push("/commandeResume")}
+      onConfirm={() => goOrderResume()}
     >
       <Badge
         style={{

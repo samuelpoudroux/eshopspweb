@@ -36,6 +36,8 @@ const Register = ({ history, match }) => {
   const [form] = useForm();
 
   const onFinish = async (values) => {
+    values.billsAddress = JSON.stringify(values.billsAddress);
+    values.dropAddress = JSON.stringify(values.dropAddress);
     const { data } = await Axios.post(
       REACT_APP_API_DOMAIN + REACT_APP_API_AUTH + REACT_APP_API_AUTH_REGISTER,
       values
@@ -66,22 +68,20 @@ const Register = ({ history, match }) => {
 
   const itemKey = "userData";
 
-  const setAdresse = (e, type) => {
+  const setAdresse = (value, type) => {
     if (type === "billsAddress") {
-      form.setFieldsValue({ billsAddress: e.label });
-      localStorage.setItem("billsAddress", JSON.stringify(e));
-      setBillsAddress(e);
+      form.setFieldsValue({ billsAddress: value });
+      setBillsAddress(value);
       setValuesLocalStorage(
-        { value: e, name: "billsAddress" },
+        { value: value, name: "billsAddress" },
         itemKey,
         "billsAddress"
       );
     } else {
-      form.setFieldsValue({ dropAddress: e.label });
-      localStorage.setItem("dropAddress", JSON.stringify(e));
-      setDropAddress(e);
+      form.setFieldsValue({ dropAddress: value });
+      setDropAddress(value);
       setValuesLocalStorage(
-        { value: e, name: "dropAddress" },
+        { value: value, name: "dropAddress" },
         itemKey,
         "dropAddress"
       );
@@ -126,6 +126,7 @@ const Register = ({ history, match }) => {
                 hasFeedback
               >
                 <Input
+                  bordered={false}
                   className="inputStyle"
                   onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="lastName"
@@ -148,6 +149,7 @@ const Register = ({ history, match }) => {
                 hasFeedback
               >
                 <Input
+                  bordered={false}
                   className="inputStyle"
                   onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="firstName"
@@ -177,6 +179,7 @@ const Register = ({ history, match }) => {
                 ]}
               >
                 <Input
+                  bordered={false}
                   className="inputStyle"
                   onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="email"
@@ -194,7 +197,7 @@ const Register = ({ history, match }) => {
                 ]}
                 hasFeedback
               >
-                <Input.Password className="inputStyle" />
+                <Input.Password bordered={false} className="inputStyle" />
               </Form.Item>
               <Form.Item
                 label="Confirmer mot de passe"
@@ -217,7 +220,7 @@ const Register = ({ history, match }) => {
                 ]}
                 hasFeedback
               >
-                <Input.Password className="inputStyle" />
+                <Input.Password bordered={false} className="inputStyle" />
               </Form.Item>
               <Form.Item
                 label="Adresse de facturation"
@@ -234,8 +237,7 @@ const Register = ({ history, match }) => {
                   selectProps={{
                     value:
                       billsAddress ||
-                      (localStorage.getItem("billsAddress") &&
-                        JSON.parse(localStorage.getItem("billsAddress"))),
+                      getDefaultValueLocalStorage("billsAddress", itemKey),
                     onChange: (value) => setAdresse(value, "billsAddress"),
                   }}
                   apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
@@ -262,12 +264,12 @@ const Register = ({ history, match }) => {
                 hasFeedback
               >
                 <GooglePlacesAutocomplete
+                  bordered={false}
                   className="inputStyle"
                   selectProps={{
                     value:
                       dropAddress ||
-                      (localStorage.getItem("dropAddress") &&
-                        JSON.parse(localStorage.getItem("dropAddress"))),
+                      getDefaultValueLocalStorage("dropAddress", itemKey),
                     onChange: (value) => setAdresse(value, "dropAddress"),
                   }}
                   apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
@@ -299,6 +301,7 @@ const Register = ({ history, match }) => {
                 hasFeedback
               >
                 <Input
+                  bordered={false}
                   className="inputStyle"
                   onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                   name="phoneNumber"

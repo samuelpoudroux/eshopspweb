@@ -29,8 +29,9 @@ const useAuth = () => {
       user,
       { withCredentials: true }
     );
-    userData.jwt && sessionStorage.setItem("jwtData", userData.jwt);
-    delete userData.jwt;
+    userData.accessToken &&
+      sessionStorage.setItem("jwtData", userData.accessToken);
+    delete userData.accessToken;
     if (!userData.error) {
       localStorage.setItem(
         "users",

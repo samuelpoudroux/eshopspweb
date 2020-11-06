@@ -175,7 +175,9 @@ const Header = ({
               <Row
                 align="middle"
                 justify="center"
-                style={{ marginTop: user && user.isLogged && isMobile && 35 }}
+                style={{
+                  marginTop: user && user.isLogged && isMobile && 35,
+                }}
               >
                 <p style={{ color: "white", margin: "0", fontSize: "1em" }}>
                   {user &&

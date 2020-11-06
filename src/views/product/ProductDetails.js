@@ -79,13 +79,9 @@ const ProductDetail = ({ match }) => {
           </Col>
 
           <ProductDetailsTabs
+            category={product.category}
             description={upperCase(product.longDescription)}
           />
-          <div>
-            <Tag color={styleVariable.secondaryColor}>
-              {upperCase(product.category)}
-            </Tag>
-          </div>
         </Row>
       </Col>
     </Col>

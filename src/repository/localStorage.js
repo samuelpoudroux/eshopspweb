@@ -1,11 +1,6 @@
-const setValuesLocalStorage = ({ value, name }, itemKey, autocomplete) => {
+const setValuesLocalStorage = ({ value, name }, itemKey) => {
   let newObject = JSON.parse(localStorage.getItem(`${itemKey}`)) || {};
-  if (autocomplete) {
-    newObject[`${autocomplete}`] = value.label;
-  } else {
-    newObject[`${name}`] = value;
-  }
-
+  newObject[`${name}`] = value;
   localStorage.setItem(`${itemKey}`, JSON.stringify(newObject));
 };
 
@@ -21,8 +16,6 @@ const getInitialValue = (itemKey) => {
     (localStorage.getItem(`${itemKey}`) &&
       JSON.parse(localStorage.getItem(`${itemKey}`))) ||
     {};
-
-  console.log("toto", data);
   return data;
 };
 
