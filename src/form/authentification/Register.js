@@ -2,15 +2,7 @@ import React from "react";
 
 import Validator from "validator";
 import Axios from "axios";
-import {
-  Form,
-  Input,
-  Button,
-  Row,
-  Col,
-  notification,
-  Descriptions,
-} from "antd";
+import { Form, Input, Button, Row, Col, notification } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 import {
   setValuesLocalStorage,
@@ -22,7 +14,6 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import styleVariable from "../../styleVariable";
 import { PageHeader } from "../../components/PageHeader";
 import { useState } from "react";
-import { set } from "lodash";
 import { useForm } from "antd/lib/form/Form";
 const {
   REACT_APP_API_DOMAIN,
