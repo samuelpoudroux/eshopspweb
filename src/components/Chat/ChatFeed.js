@@ -103,15 +103,15 @@ const ChatFeedComponent = ({
       case "Finaliser ma commande":
         return {
           ...style,
-          color: styleVariable.secondaryColor,
-          background: "white",
+          color: "white",
+          background: styleVariable.mainColor,
         };
         break;
       case "Modifier mes informations":
         return {
           ...style,
-          color: styleVariable.secondaryColor,
-          background: "white",
+          color: "white",
+          background: styleVariable.mainColor,
         };
         break;
       case "oui":
@@ -124,8 +124,8 @@ const ChatFeedComponent = ({
       case "non":
         return {
           ...style,
-          color: styleVariable.secondaryColor,
-          background: "white",
+          color: "white",
+          background: styleVariable.mainColor,
         };
         break;
       default:
@@ -158,19 +158,16 @@ const ChatFeedComponent = ({
                 lg={18}
                 sm={24}
                 style={{
-                  background:
-                    id === 0
-                      ? styleVariable.mainColor
-                      : styleVariable.secondaryColor,
                   padding: 20,
-                  borderRadius: 50,
                   width: "auto",
+                  background: id === 0 ? "white" : styleVariable.secondaryColor,
                 }}
+                className="productCard"
               >
                 <Row justify="center">
                   <p
                     style={{
-                      color: "white",
+                      color: id === 0 ? styleVariable.mainColor : "white",
                       fontSize: "1em",
                       textAlign: "center",
                     }}

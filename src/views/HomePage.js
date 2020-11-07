@@ -35,24 +35,27 @@ const HomePage = ({ history }) => {
         </Row>
       </Col>
 
-      <Col span={24} style={{ marginTop: 15 }}>
+      <Col span={24} style={{ marginTop: 30 }}>
         <NewNess />
       </Col>
-      <Col span={24} style={{ marginTop: 15 }}>
+      <Col span={24} style={{ marginTop: 30 }}>
         <Row justify="center">
           <h2 style={{ color: styleVariable.mainColor }}>Nos Catégories</h2>
         </Row>
-        <Row style={{ padding: 10, marginTop: 15 }} justify="center">
+        <Row style={{ padding: 10 }} justify="center">
           {categories.list.length > 0 &&
             categories.list.map((category) => (
               <Col
                 className="categoryTag"
+                style={{ margin: 20 }}
                 xs={24}
                 xxl={4}
                 onClick={() => history.push(`/categories/${category.name}`)}
               >
                 <Row justify="center" align="middle">
-                  {category.name.toUpperCase()}
+                  <b style={{ fontSize: "1.2em" }}>
+                    {category.name.toUpperCase()}
+                  </b>
                 </Row>
               </Col>
             ))}
