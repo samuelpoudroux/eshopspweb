@@ -1,14 +1,15 @@
 import React from "react";
 import NewNess from "../components/product/NewNess";
-import { Col, Row } from "antd";
+import { Col, Divider, Row } from "antd";
 import styleVariable from "../styleVariable";
 import useCategory from "../customHooks/categoryHook";
+import useResponsive from "../customHooks/responsiveHook";
 
 const HomePage = ({ history }) => {
   const { categories, setCategories } = useCategory();
-  console.log(categories.list);
+  const { isMobile } = useResponsive();
   return (
-    <Row>
+    <Row justify="center">
       <Col xxl={12} xs={24} style={{ padding: 10, paddingTop: 0 }}>
         <h1 style={{ textAlign: "center" }}>Nos produits HOMEMADE</h1>
         <Row className="productCard" justify="center" style={{ padding: 20 }}>
@@ -35,10 +36,22 @@ const HomePage = ({ history }) => {
         </Row>
       </Col>
 
-      <Col span={24} style={{ marginTop: 30 }}>
+      {isMobile && (
+        <Col span={20}>
+          <Divider className="dividerAuth" />
+        </Col>
+      )}
+      <Col span={24}>
         <NewNess />
       </Col>
-      <Col span={24} style={{ marginTop: 30 }}>
+
+      {isMobile && (
+        <Col span={20}>
+          <Divider style={{ width: "10px" }} className="dividerAuth" />
+        </Col>
+      )}
+
+      <Col span={24}>
         <Row justify="center">
           <h2 style={{ color: styleVariable.mainColor }}>Nos Catégories</h2>
         </Row>
