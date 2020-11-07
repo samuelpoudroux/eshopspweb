@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { SmileOutlined } from "@ant-design/icons";
+import { SmileOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import {
   Form,
   Input,
@@ -13,7 +13,6 @@ import {
 } from "antd";
 import { AppContext } from "../../context/context";
 import styleVariable from "../../styleVariable";
-import { PageHeader } from "../../components/PageHeader";
 
 const Login = ({ history, match }) => {
   const { auth } = useContext(AppContext);
@@ -66,9 +65,18 @@ const Login = ({ history, match }) => {
           boxShadow:
             "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
           background: "#fff",
-          padding: "2.5%",
+          padding: "4%",
+          paddingTop: "2%",
         }}
       >
+        <Row justify="space-between" align="middle">
+          <Col span={2}>
+            <ArrowLeftOutlined onClick={() => window.history.back()} />
+          </Col>
+          <Col span={22}>
+            <h3 style={{ textAlign: "center" }}>Se connecter</h3>
+          </Col>
+        </Row>
         <Form
           name="basic"
           initialValues={{
@@ -77,11 +85,7 @@ const Login = ({ history, match }) => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
-          <Col span={24}>
-            <PageHeader
-              action={() => window.history.back()}
-              title={`Connectez-vous `}
-            />
+          <Col>
             <Divider className="dividerAuth" />
           </Col>
           <Form.Item

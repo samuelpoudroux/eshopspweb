@@ -3,7 +3,7 @@ import React from "react";
 import Validator from "validator";
 import Axios from "axios";
 import { Form, Input, Button, Row, Col, notification, Divider } from "antd";
-import { SmileOutlined } from "@ant-design/icons";
+import { SmileOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import {
   setValuesLocalStorage,
   getDefaultValueLocalStorage,
@@ -12,7 +12,6 @@ import {
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
 import styleVariable from "../../styleVariable";
-import { PageHeader } from "../../components/PageHeader";
 import { useState } from "react";
 import { useForm } from "antd/lib/form/Form";
 const {
@@ -97,9 +96,18 @@ const Register = ({ history, match }) => {
           boxShadow:
             "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
           background: "#fff",
-          padding: "2.5%",
+          padding: "4%",
+          paddingTop: "2%",
         }}
       >
+        <Row justify="space-between" align="middle">
+          <Col span={2}>
+            <ArrowLeftOutlined onClick={() => window.history.back()} />
+          </Col>
+          <Col span={22}>
+            <h3 style={{ textAlign: "center" }}>S'inscrire</h3>
+          </Col>
+        </Row>
         <Form
           form={form}
           name="basic"
@@ -108,11 +116,6 @@ const Register = ({ history, match }) => {
           initialValues={getInitialValue(itemKey)}
         >
           <Col span={24}>
-            <PageHeader
-              action={() => window.history.back()}
-              title={`S'inscrire `}
-            />
-
             <Divider className="dividerAuth" />
           </Col>
           <Form.Item

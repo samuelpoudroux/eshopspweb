@@ -31,8 +31,11 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
 
   const user = localStorage.getItem("users") || null;
 
-  const manageConnection = () => {
-    if (user) {
+  const manageConnection = (register) => {
+    if (register) {
+      history.push("/register");
+      setMenuIsOpened(false);
+    } else if (!register && user) {
       auth.logout(history);
     } else {
       history.push("/login");
@@ -77,7 +80,7 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
                 color: styleVariable.secondaryColor,
                 background: "white",
               }}
-              onClick={() => history.push("/register")}
+              onClick={() => manageConnection("register")}
             >
               Créer un compte
             </Button>

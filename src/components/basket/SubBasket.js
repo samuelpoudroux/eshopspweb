@@ -107,6 +107,7 @@ const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
                 (product) =>
                   product.num !== 0 && (
                     <ProductCardSubBasket
+                      history={history}
                       key={product.id}
                       product={product}
                       list={list}

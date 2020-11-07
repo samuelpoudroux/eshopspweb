@@ -24,13 +24,10 @@ const Productlist = () => {
 
   return (
     <Col span={24}>
-      <PageHeader
-        action={() => window.history.back()}
-        title={`Nos produits `}
-      />
+      <PageHeader action={() => window.history.back()} title={`NOS PRODUITS`} />
       <Row
+        className="productCard"
         style={{
-          border: `1px solid ${styleVariable.mainColor}`,
           marginTop: 20,
         }}
       >
@@ -60,8 +57,6 @@ const Productlist = () => {
           )}
           <Row
             style={{
-              paddingLeft: "2%",
-              paddingRight: "2%",
               justifyContent: "space-evenly",
               minHeight: "30vh",
             }}
@@ -71,7 +66,9 @@ const Productlist = () => {
               productList.length > 0 &&
               !products.notFound &&
               productList.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <Col xxl={4} xs={12}>
+                  <ProductCard key={product.id} product={product} />
+                </Col>
               ))}
           </Row>
         </Col>

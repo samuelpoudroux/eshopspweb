@@ -13,7 +13,7 @@ export const PageHeader = ({ title, action }) => {
       </Col>
       <Col xxl={23} xs={22}>
         <Row justify="center">
-          <h3 style={{ color: styleVariable.secondaryColor }}>{title}</h3>
+          <h3 style={{ color: styleVariable.mainColor }}>{title}</h3>
         </Row>
       </Col>
     </Row>

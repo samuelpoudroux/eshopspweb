@@ -5,12 +5,12 @@ import { upperCase } from "../helpers/UpperCase";
 
 import {
   MenuOutlined,
-  LoginOutlined,
+  UserOutlined,
   LogoutOutlined,
   MessageOutlined,
   ContactsOutlined,
 } from "@ant-design/icons";
-import { Row, Col, Popover } from "antd";
+import { Row, Col, Popover, Button, Divider } from "antd";
 import logo from "../assets/logoWhite.svg";
 import ProductsNumber from "../components/product/ProductsNumber";
 import NavBar from "./Menu";
@@ -35,6 +35,7 @@ const Header = ({
   botRef,
 }) => {
   const [menuIsOpened, setMenuIsOpened] = useState(false);
+  const [visible, setVisible] = useState(false);
   const { isMobile } = useResponsive();
   const [globalSearchApi, setGlobalSearchApi] = useState();
   const [addProduct, setAddProduct] = useState(false);
@@ -75,6 +76,18 @@ const Header = ({
     setUpdate(!update);
   }, [favorites, isAdmin]);
 
+  const handleVisibleChange = (visible) => {
+    setVisible(visible);
+  };
+
+  const goToAuth = (auth) => {
+    if (auth === "login") {
+      history.push("/login");
+    } else if (auth === "register") {
+      history.push("/register");
+    }
+    setVisible(false);
+  };
   return (
     <header
       style={{
@@ -197,10 +210,45 @@ const Header = ({
                 )}
 
                 {!user && (
-                  <LoginOutlined
-                    style={iconStyle}
-                    onClick={() => history.push("/login")}
-                  />
+                  <Popover
+                    content={
+                      <Col span={24}>
+                        <Row style={{ paddingTop: 4 }}>
+                          <p>MON COMPTE</p>
+                        </Row>
+                        <Row style={{ paddingTop: 4 }} justify="center">
+                          <Button
+                            style={{
+                              width: "100%",
+                              background: styleVariable.secondaryColor,
+                              color: "white",
+                            }}
+                            icon={<UserOutlined />}
+                            onClick={() => goToAuth("login")}
+                          >
+                            Se connecter
+                          </Button>
+                        </Row>
+                        <Divider className="dividerAuth" />
+                        <Row>
+                          <b>Vous n'avez pas encore de compte ?</b>
+                        </Row>
+                        <Row style={{ paddingTop: 4 }} justify="center">
+                          <Button
+                            style={{ width: "100%" }}
+                            onClick={() => goToAuth("register")}
+                          >
+                            Créer un compte
+                          </Button>
+                        </Row>
+                      </Col>
+                    }
+                    trigger="click"
+                    visible={visible}
+                    onVisibleChange={handleVisibleChange}
+                  >
+                    <UserOutlined style={iconStyle} />
+                  </Popover>
                 )}
               </Row>
             </Col>

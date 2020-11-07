@@ -33,10 +33,9 @@ const NewNess = ({ history }) => {
 
   return (
     <Col lg={24}>
-      <PageHeader
-        action={() => window.history.back()}
-        title={`NOS NOUVEAUTÉS `}
-      />
+      <h2 style={{ textAlign: "center", color: styleVariable.mainColor }}>
+        Nos nouveautés
+      </h2>
       {newNess.length === 0 && (
         <Row style={{ minHeight: "30vh" }} justify="center" align="middle">
           <Spin />
@@ -52,6 +51,7 @@ const NewNess = ({ history }) => {
             borderRadius: "2px",
             borderRadius: "2px",
             paddingBottom: 25,
+            marginTop: 10,
           }}
           onClick={(e) => e.stopPropagation()}
           arrows={true}

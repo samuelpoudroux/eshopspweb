@@ -103,6 +103,14 @@ outline: none !important;
   -webkit-border-radius:0px;
   border-radius:0px;
   }
+.testCard{
+  -webkit-box-shadow:inset 1px 1px 12px 1px#d2d6da;
+  -moz-box-shadow:inset 1px 1px 12px 1px#d2d6da;
+  box-shadow:inset 1px 1px 12px 1px#d2d6da;
+  -moz-border-radius:0px;
+  -webkit-border-radius:0px;
+  border-radius:0px;
+  }
 
 .detailCard{
   -webkit-box-shadow:inset 1px 1px 12px 1px#b5b8b8;

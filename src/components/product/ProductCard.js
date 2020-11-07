@@ -1,22 +1,26 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../context/context";
-import { Tag } from "antd";
-import ReactStars from "react-rating-stars-component";
+import { Badge, Tag } from "antd";
 import { withRouter } from "react-router";
 import { Row, Col } from "antd";
 import PropTypes from "prop-types";
+import ReactStars from "react-rating-stars-component";
 import Addandremoveproduct from "./AddAndRemoveProduct";
 import {
   HeartFilled,
   HeartOutlined,
   CrownFilled,
   CrownOutlined,
+  ShoppingCartOutlined,
+  StarFilled,
 } from "@ant-design/icons";
 import useIsAdmin from "../../customHooks/isAdminHooks";
 import Axios from "axios";
 import styleVariable from "../../styleVariable";
 import useBasket from "../../customHooks/basketHook";
 import { upperCase } from "../../helpers/UpperCase";
+import useResponsive from "../../customHooks/responsiveHook";
+import { useState } from "react";
 
 const {
   REACT_APP_API_DOMAIN,
@@ -28,6 +32,8 @@ const ProductCard = ({ product, history, large }) => {
   const { globalSearch, favorites, products } = useContext(AppContext);
   const { isAdmin } = useIsAdmin();
   const { search } = globalSearch;
+  const { isMobile } = useResponsive();
+  const [num, setNum] = useState(0);
   const { notification, addNotification, renderNotification } = useBasket();
 
   const isFavorites =
@@ -78,107 +84,136 @@ const ProductCard = ({ product, history, large }) => {
         borderRadius: "2px",
         position: "relative",
         cursor: "pointer",
-        margin: 20,
-        height: "100%",
-        padding: "8px",
+        margin: !isMobile && 20,
+        marginTop: isMobile && 20,
+        padding: 10,
       }}
       key={product.id}
-      className="productCard"
+      // className="testCard"
     >
-      <Col
-        onClick={(e) => goToProductDetails(e)}
+      <StarFilled
         style={{
-          padding: "3%",
+          position: "absolute",
+          top: 10,
+          left: 10,
+          zIndex: 1,
+          fontSize: "28px",
+          color: styleVariable.secondaryColor,
+        }}
+      />
+      <b
+        style={{
+          position: "absolute",
+          top: 13,
+          left: 20,
+          zIndex: 2,
+          fontSize: "1em",
+          color: "white",
         }}
       >
-        <Row align="middle" style={{ wordBreak: "break-all" }} justify="start">
-          <b style={{ color: styleVariable.secondaryColor }}>
-            {upperCase(name)}
-          </b>
-        </Row>
+        {notation || 5}
+      </b>
+
+      <Col onClick={(e) => goToProductDetails(e)}>
         <Row
+          align="middle"
           justify="center"
-          style={{ height: "80px", width: "100%", paddingTop: 20 }}
+          style={{ height: "50%", width: "100%" }}
         >
           <img
             alt="Image du produit"
-            src={`${product.imageUrl}`}
-            style={{ maxHeight: "100%", maxWidth: "100%" }}
+            src={`https://www.123gelules.com/6245-cart_default/vitamine-c-acerola-bio-1000-100-comprimes.jpg`}
+            style={{ maxHeight: "100%", maxWidth: "100%", zIndex: 0 }}
           />
         </Row>
-        <Row justify="center" style={{ marginTop: 20 }}>
+        <Row style={{ paddingTop: 5, height: "25px" }} justify="center">
+          <b
+            style={{
+              color: styleVariable.secondaryColor,
+              wordBreak: "break-all",
+            }}
+          >
+            {upperCase(name)}
+          </b>
+        </Row>
+        <Row justify="center" style={{ paddingTop: 5, height: "25px" }}>
+          <p style={{ margin: 0, wordBreak: "break-all" }}>
+            {shortDescription && upperCase(shortDescription)}
+          </p>
+        </Row>
+
+        <Row
+          align="middle"
+          justify="center"
+          style={{ paddingTop: 5, height: "40px" }}
+        >
           <p
             style={{
-              fontSize: "1.2em",
-              color: styleVariable.mainColor,
+              fontSize: "1.5em",
+              color: styleVariable.secondaryColor,
               margin: 0,
             }}
           >
             {productPrice}€
           </p>
         </Row>
-
-        <Row justify="center" align="middle" style={{ marginTop: 20 }}>
-          <Tag color={styleVariable.secondaryColor}>{upperCase(category)}</Tag>
-        </Row>
-
-        <Row style={{ paddingTop: 20 }}>
-          <p style={{ margin: 0, wordBreak: "break-all" }}>
-            {shortDescription && upperCase(shortDescription)}
-          </p>
-        </Row>
-
-        <Col
-          onClick={(e) => e.stopPropagation()}
+        <Row
           align="middle"
-          style={{ marginTop: 20 }}
+          justify="center"
+          style={{ paddingTop: 5, height: "40px" }}
         >
           <Col lg={24} md={24} sm={24} xs={24}>
             <Row align="middle">
               <Addandremoveproduct
+                setNum={setNum}
+                productList
                 product={product}
                 notification={notification}
                 addNotification={addNotification}
               />
             </Row>
           </Col>
-
-          <Row align="middle" justify="space-between" style={{ marginTop: 20 }}>
-            <Col lg={12} md={22}>
-              <Row align="middle">
-                <ReactStars
-                  count={5}
-                  value={notation}
-                  edit={false}
-                  size={24}
-                  activeColor={styleVariable.secondaryColor}
+        </Row>
+        <Row align="middle" justify="space-between" style={{ marginTop: 20 }}>
+          <Col span={24} onClick={(e) => e.stopPropagation()}>
+            <Row align="middle" justify="space-around">
+              {isFavorites && (
+                <HeartFilled
+                  style={{
+                    fontSize: 24,
+                    color: styleVariable.secondaryColor,
+                  }}
+                  onClick={() => removeFromFavorites()}
                 />
-              </Row>
-            </Col>
-            <Col lg={8} md={2}>
-              <Row align="middle" justify="start">
-                {isFavorites && (
-                  <HeartFilled
-                    style={{
-                      fontSize: 24,
-                      color: styleVariable.secondaryColor,
-                    }}
-                    onClick={() => removeFromFavorites()}
-                  />
-                )}
-                {!isFavorites && (
-                  <HeartOutlined
-                    style={{
-                      fontSize: 24,
-                      color: styleVariable.secondaryColor,
-                    }}
-                    onClick={() => addFavorites()}
-                  />
-                )}
-              </Row>
-            </Col>
-          </Row>
-        </Col>
+              )}
+              {!isFavorites && (
+                <HeartOutlined
+                  style={{
+                    fontSize: 24,
+                    color: styleVariable.secondaryColor,
+                  }}
+                  onClick={() => addFavorites()}
+                />
+              )}
+              <Badge
+                style={{
+                  background: styleVariable.secondaryColor,
+                }}
+                count={num}
+                showZero
+                overflowCount={250}
+              >
+                <ShoppingCartOutlined
+                  style={{
+                    fontSize: "20px",
+                    color: styleVariable.secondaryColor,
+                    marginRight: "10px",
+                  }}
+                />
+              </Badge>
+            </Row>
+          </Col>
+        </Row>
         {isAdmin && product.newNess == 0 && (
           <Row justify="center" align="middle">
             <CrownOutlined onClick={(e) => isProductNewNess(e, "true")} />

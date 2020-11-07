@@ -15,6 +15,8 @@ const Addandremoveproduct = ({
   addNotification,
   subBasket,
   favorite,
+  productList,
+  setNum: setNumToProductCard,
 }) => {
   const { basket } = useContext(AppContext);
   const list = JSON.parse(localStorage.getItem("basket")) || [];
@@ -53,13 +55,26 @@ const Addandremoveproduct = ({
         list.find((p) => p.id === product.id).num) ||
         0
     );
+
+    if (setNumToProductCard) {
+      setNumToProductCard(
+        (list.find((p) => p.id === product.id) &&
+          list.find((p) => p.id === product.id).num) ||
+          0
+      );
+    }
   }, [basket.list]);
 
   return (
     <Col lg={24} md={23} sm={18} xs={24}>
       <Row align="middle">
-        <Col lg={subBasket ? 15 : 12} md={23} sm={23} xs={14}>
-          <Row justify="start" align="middle">
+        <Col
+          lg={subBasket ? 15 : !productList ? 14 : 23}
+          md={23}
+          sm={23}
+          xs={!productList ? 14 : 22}
+        >
+          <Row justify={productList && "center"} align="middle">
             <Button
               style={{
                 color: styleVariable.secondaryColor,
@@ -138,33 +153,40 @@ const Addandremoveproduct = ({
         </Col>
 
         {num > 0 && !favorite && (
-          <Col lg={2} md={1} xs={3} sm={1}>
+          <Col
+            lg={!productList ? 2 : 1}
+            md={1}
+            xs={!productList ? 3 : 2}
+            sm={1}
+          >
             <Row align="middle" justify="center">
               <RemoveSeveralProducts num={num} product={product} />
             </Row>
           </Col>
         )}
 
-        <Col lg={subBasket ? 6 : 9} md={22} sm={1} xs={6}>
-          <Row align="middle" justify="end">
-            <Badge
-              style={{
-                background: styleVariable.secondaryColor,
-              }}
-              count={num}
-              showZero
-              overflowCount={250}
-            >
-              <ShoppingCartOutlined
+        {!productList && (
+          <Col lg={subBasket ? 6 : 9} md={22} sm={1} xs={6}>
+            <Row align="middle" justify="end">
+              <Badge
                 style={{
-                  fontSize: "20px",
-                  color: styleVariable.secondaryColor,
-                  marginRight: "10px",
+                  background: styleVariable.secondaryColor,
                 }}
-              />
-            </Badge>
-          </Row>
-        </Col>
+                count={num}
+                showZero
+                overflowCount={250}
+              >
+                <ShoppingCartOutlined
+                  style={{
+                    fontSize: "20px",
+                    color: styleVariable.secondaryColor,
+                    marginRight: "10px",
+                  }}
+                />
+              </Badge>
+            </Row>
+          </Col>
+        )}
       </Row>
     </Col>
   );
