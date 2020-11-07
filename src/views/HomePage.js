@@ -42,7 +42,7 @@ const HomePage = ({ history }) => {
         <Row justify="center">
           <h2 style={{ color: styleVariable.mainColor }}>Nos Catégories</h2>
         </Row>
-        <Row style={{ padding: 10 }} justify="center">
+        <Row style={{ padding: 10, marginTop: 15 }} justify="center">
           {categories.list.length > 0 &&
             categories.list.map((category) => (
               <Col

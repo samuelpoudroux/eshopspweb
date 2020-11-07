@@ -94,7 +94,6 @@ const ProductCard = ({ product, history, large }) => {
         padding: 10,
       }}
       key={product.id}
-      // className="testCard"
     >
       <StarFilled
         style={{
