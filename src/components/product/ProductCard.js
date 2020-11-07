@@ -167,7 +167,7 @@ const ProductCard = ({ product, history, large }) => {
           style={{ paddingTop: 5, height: "40px" }}
         >
           <Col lg={24} md={24} sm={24} xs={24}>
-            <Row align="middle">
+            <Row align="middle" onClick={(e) => e.stopPropagation()}>
               <Addandremoveproduct
                 setNum={setNum}
                 productList
