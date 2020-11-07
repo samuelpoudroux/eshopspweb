@@ -24,7 +24,7 @@ const Productlist = () => {
 
   return (
     <Col span={24}>
-      <PageHeader action={() => window.history.back()} title={`NOS PRODUITS`} />
+      <PageHeader action={() => window.history.back()} title={`Nos produits`} />
       <Row
         className="productCard"
         style={{

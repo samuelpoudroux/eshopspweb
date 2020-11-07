@@ -26,6 +26,7 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
     history.push(url);
     setMenuIsOpened(false);
   };
+  const { categories } = useCategory();
   const { isMobile } = useResponsive();
   const { auth } = useContext(AppContext);
 
@@ -90,7 +91,6 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
     );
   };
 
-  const { categories } = useCategory();
   const currentKey = localStorage.getItem("menuActive") || null;
   return (
     <Drawer

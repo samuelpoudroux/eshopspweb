@@ -2,15 +2,18 @@ import React from "react";
 import NewNess from "../components/product/NewNess";
 import { Col, Row } from "antd";
 import styleVariable from "../styleVariable";
+import useCategory from "../customHooks/categoryHook";
 
-const HomePage = () => {
+const HomePage = ({ history }) => {
+  const { categories, setCategories } = useCategory();
+  console.log(categories.list);
   return (
-    <Row style={{ paddingTop: 10 }}>
-      <Col xxl={12} xs={24} style={{ padding: 10 }}>
+    <Row>
+      <Col xxl={12} xs={24} style={{ padding: 10, paddingTop: 0 }}>
         <h1 style={{ textAlign: "center" }}>Nos produits HOMEMADE</h1>
-        <Row justify="center">
+        <Row className="productCard" justify="center" style={{ padding: 20 }}>
           <iframe
-            width="560"
+            width="100%"
             height="315"
             src="https://www.youtube.com/embed/7iOpxGok9ig?autoplay=1&&mute=1"
             frameborder="0"
@@ -34,6 +37,26 @@ const HomePage = () => {
 
       <Col span={24} style={{ marginTop: 15 }}>
         <NewNess />
+      </Col>
+      <Col span={24} style={{ marginTop: 15 }}>
+        <Row justify="center">
+          <h2 style={{ color: styleVariable.mainColor }}>Nos Catégories</h2>
+        </Row>
+        <Row style={{ padding: 10 }} justify="center">
+          {categories.list.length > 0 &&
+            categories.list.map((category) => (
+              <Col
+                className="categoryTag"
+                xs={24}
+                xxl={4}
+                onClick={() => history.push(`/categories/${category.name}`)}
+              >
+                <Row justify="center" align="middle">
+                  {category.name.toUpperCase()}
+                </Row>
+              </Col>
+            ))}
+        </Row>
       </Col>
     </Row>
   );

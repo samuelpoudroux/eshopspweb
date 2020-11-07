@@ -72,7 +72,12 @@ const ProductCard = ({ product, history, large }) => {
         REACT_APP_API_PRODUCT +
         REACT_APP_API_PRODUCT_IS_NEWNESS +
         id,
-      { newNess: value }
+      { newNess: value },
+      {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("jwtData")}`,
+        },
+      }
     );
     products.getAllProducts();
   };
@@ -118,11 +123,11 @@ const ProductCard = ({ product, history, large }) => {
         <Row
           align="middle"
           justify="center"
-          style={{ height: "50%", width: "100%" }}
+          style={{ height: "70px", width: "100%" }}
         >
           <img
             alt="Image du produit"
-            src={`https://www.123gelules.com/6245-cart_default/vitamine-c-acerola-bio-1000-100-comprimes.jpg`}
+            src={`${product.imageUrl}`}
             style={{ maxHeight: "100%", maxWidth: "100%", zIndex: 0 }}
           />
         </Row>

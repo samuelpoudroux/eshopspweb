@@ -290,3 +290,9 @@ background: var(--secondaryColor) !important;
 color:white !important;
 border: none !important
 }
+
+.categoryTag{
+  background:linear-gradient(0deg, #003d2e4d, #003d2e4d),  url('./assets/U455255_Huile-serpent_web.jpg');
+  padding: 80px;
+  color: white;
+}
