@@ -26,7 +26,11 @@ const NewNess = ({ history }) => {
   useEffect(() => {
     const newNessComponents = [];
     newNess.map((product) => {
-      newNessComponents.push(<ProductCard product={product} />);
+      newNessComponents.push(
+        <Col xs={14} xxl={3}>
+          <ProductCard productList product={product} />
+        </Col>
+      );
     });
     setCopy(newNessComponents);
   }, [newNess]);
