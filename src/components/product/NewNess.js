@@ -35,7 +35,7 @@ const NewNess = ({ history }) => {
     <Col lg={24}>
       <PageHeader
         action={() => window.history.back()}
-        title={`Nos nouveautés `}
+        title={`NOS NOUVEAUTÉS `}
       />
       {newNess.length === 0 && (
         <Row style={{ minHeight: "30vh" }} justify="center" align="middle">

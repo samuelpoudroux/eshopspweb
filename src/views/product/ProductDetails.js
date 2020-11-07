@@ -72,14 +72,13 @@ const ProductDetail = ({ match }) => {
 
               <Col span={5}>
                 <Row justify={isMobile ? "center " : "end"}>
-                  <b style={{ fontSize: "2em" }}>{product.productPrice}€</b>
+                  <p style={{ fontSize: "2em" }}>{product.productPrice}€</p>
                 </Row>
               </Col>
             </Row>
           </Col>
 
           <ProductDetailsTabs
-            category={product.category}
             description={upperCase(product.longDescription)}
           />
         </Row>

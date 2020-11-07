@@ -9,11 +9,11 @@ import {
   Col,
   Spin,
   notification,
+  Divider,
 } from "antd";
 import { AppContext } from "../../context/context";
 import styleVariable from "../../styleVariable";
 import { PageHeader } from "../../components/PageHeader";
-import { useEffect } from "react";
 
 const Login = ({ history, match }) => {
   const { auth } = useContext(AppContext);
@@ -49,95 +49,109 @@ const Login = ({ history, match }) => {
   };
 
   return (
-    <Col style={{ textAlign: "center", padding: 40 }}>
-      <PageHeader
-        action={() => window.history.back()}
-        title={`Se connecter `}
-      />
-      <Row
-        justify="center"
-        align="middle"
-        style={{ padding: "2%", height: "50vh" }}
+    <Row
+      justify="center"
+      align="middle"
+      style={{
+        borderRadius: "2px",
+        position: "relative",
+        width: "auto",
+        textAlign: "center",
+      }}
+    >
+      <Col
+        xxl={6}
+        xs={23}
+        style={{
+          boxShadow:
+            "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+          background: "#fff",
+          padding: "2.5%",
+        }}
       >
-        <Row
-          justify="center"
-          align="middle"
-          style={{
-            boxShadow:
-              "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-            background: "#fff",
-            borderRadius: "2px",
-            position: "relative",
-            width: "auto",
-            padding: "2%",
+        <Form
+          name="basic"
+          initialValues={{
+            remember: true,
           }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
         >
-          <Form
-            name="basic"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+          <Col span={24}>
+            <PageHeader
+              action={() => window.history.back()}
+              title={`Connectez-vous `}
+            />
+            <Divider className="dividerAuth" />
+          </Col>
+          <Form.Item
+            label="Mail"
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "Please input your username!",
+              },
+            ]}
           >
-            <Col>
-              <Form.Item
-                label="Mail"
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your username!",
-                  },
-                ]}
-              >
-                <Input className="inputStyle" bordered={false} />
-              </Form.Item>
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your password!",
-                  },
-                ]}
-              >
-                <Input.Password className="inputStyle" bordered={false} />
-              </Form.Item>
-              <Form.Item name="remember" valuePropName="checked">
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
+            <Input className="inputStyle" bordered={false} />
+          </Form.Item>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+            ]}
+          >
+            <Input.Password className="inputStyle" bordered={false} />
+          </Form.Item>
+          <a style={{ color: styleVariable.secondaryColor }}>
+            Mot de passe oublié
+          </a>
+          <Form.Item>
+            <Button
+              style={{
+                background: styleVariable.secondaryColor,
+                border: "none",
+                marginTop: 20,
+              }}
+              type="primary"
+              htmlType="submit"
+            >
+              SE CONNECTER
+            </Button>
+          </Form.Item>
 
-              <Form.Item>
-                <Button
-                  style={{
-                    background: styleVariable.secondaryColor,
-                    border: "none",
-                  }}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Se connecter
-                </Button>
-              </Form.Item>
-              {isLoading && <Spin />}
-              {user && user.error && (
-                <p style={{ color: "red" }}>{user.error}</p>
-              )}
-              <a
-                style={{ color: "grey" }}
-                href={`${
+          <Col span={24}>
+            <h3 style={{ color: styleVariable.mainColor }}>
+              Vous n'êtes pas encore membre ?
+            </h3>
+            <Divider className="dividerAuth" />
+          </Col>
+
+          {isLoading && <Spin />}
+          {user && user.error && <p style={{ color: "red" }}>{user.error}</p>}
+          <Button
+            style={{
+              color: "grey",
+              border: `1px solid ${styleVariable.secondaryColor}`,
+            }}
+            onClick={() =>
+              history.push(
+                `${
                   match.params.paiement ? "/register/orderResume" : "/register"
-                }`}
-              >
-                S'inscrire
-              </a>
-            </Col>
-          </Form>
-        </Row>
-      </Row>
-    </Col>
+                }`
+              )
+            }
+          >
+            CRÉEZ MON COMPTE
+          </Button>
+        </Form>
+      </Col>
+    </Row>
   );
 };
 

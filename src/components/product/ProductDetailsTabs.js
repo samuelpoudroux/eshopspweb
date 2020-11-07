@@ -8,9 +8,6 @@ const { TabPane } = Tabs;
 const ProductDetailsTabs = ({ category, description }) => (
   <Tabs defaultActiveKey="1">
     <TabPane tab="Description" key="1">
-      <Col>
-        <Tag color={styleVariable.secondaryColor}>{upperCase(category)}</Tag>
-      </Col>
       <p style={{ marginTop: 20 }}>
         {description !== "undefined" && description}
       </p>{" "}

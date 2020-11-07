@@ -106,37 +106,20 @@ const ProductCard = ({ product, history, large }) => {
             style={{ maxHeight: "100%", maxWidth: "100%" }}
           />
         </Row>
+        <Row justify="center" style={{ marginTop: 20 }}>
+          <p
+            style={{
+              fontSize: "1.2em",
+              color: styleVariable.mainColor,
+              margin: 0,
+            }}
+          >
+            {productPrice}€
+          </p>
+        </Row>
 
-        <Row align="middle" style={{ marginTop: 20 }}>
-          <Col lg={6} md={6} sm={8} xs={4}>
-            <p
-              style={{
-                fontSize: "1.2em",
-                color: styleVariable.mainColor,
-                margin: 0,
-              }}
-            >
-              {productPrice}€
-            </p>
-          </Col>
-          <Col lg={6} md={6} sm={8} xs={4}>
-            <s
-              style={{
-                fontSize: "1.2em",
-                color: "red",
-              }}
-            >
-              {productPriceReduced && `${productPriceReduced + "€"}`}
-            </s>
-          </Col>
-
-          <Col lg={12} md={12} sm={8} xs={15}>
-            <Row justify="end">
-              <Tag color={styleVariable.secondaryColor}>
-                {upperCase(category)}
-              </Tag>
-            </Row>
-          </Col>
+        <Row justify="center" align="middle" style={{ marginTop: 20 }}>
+          <Tag color={styleVariable.secondaryColor}>{upperCase(category)}</Tag>
         </Row>
 
         <Row style={{ paddingTop: 20 }}>

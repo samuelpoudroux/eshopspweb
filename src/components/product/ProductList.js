@@ -7,16 +7,13 @@ import SortProducts from "./SortProducts";
 import { useEffect } from "react";
 import "../../App.css";
 import styleVariable from "../../styleVariable";
-import useResponsive from "../../customHooks/responsiveHook";
 import { PageHeader } from "../PageHeader";
 
 const Productlist = () => {
   const { products } = useContext(AppContext);
   const [state, updateState] = useState(true);
-  const { isMobile } = useResponsive();
 
   let productList = products.list;
-  // cateorgies select management
   function categoriesHandleChange(values) {
     products.sortByCategories(values, productList);
   }

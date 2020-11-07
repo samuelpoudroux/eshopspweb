@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Row, Space } from "antd";
+import { Col, Row } from "antd";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import ProductCardResume from "./ProductCardResume";
 import styleVariable from "../../styleVariable";
+import { getTotalPrice } from "../../repository/product";
 
 const OrderResume = () => {
   const user = JSON.parse(localStorage.getItem("users"))
@@ -141,6 +142,7 @@ const OrderResume = () => {
                 </Col>
               ))}
           </Row>
+          <Row>Total {getTotalPrice(list)}€</Row>
         </Col>
       </Row>
     </Col>

@@ -2,7 +2,7 @@ import React from "react";
 
 import Validator from "validator";
 import Axios from "axios";
-import { Form, Input, Button, Row, Col, notification } from "antd";
+import { Form, Input, Button, Row, Col, notification, Divider } from "antd";
 import { SmileOutlined } from "@ant-design/icons";
 import {
   setValuesLocalStorage,
@@ -80,245 +80,263 @@ const Register = ({ history, match }) => {
   };
 
   return (
-    <Col style={{ padding: "5px", textAlign: "center" }}>
-      <PageHeader action={() => window.history.back()} title={`S'inscrire `} />
-      <Row justify="center" align="middle" style={{ padding: "2%" }}>
-        <Row
-          justify="center"
-          align="middle"
-          style={{
-            boxShadow:
-              "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-            background: "#fff",
-            borderRadius: "2px",
-            position: "relative",
-            width: "auto",
-            padding: "2%",
-          }}
+    <Row
+      justify="center"
+      align="middle"
+      style={{
+        borderRadius: "2px",
+        position: "relative",
+        width: "auto",
+        textAlign: "center",
+      }}
+    >
+      <Col
+        xxl={6}
+        xs={23}
+        style={{
+          boxShadow:
+            "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
+          background: "#fff",
+          padding: "2.5%",
+        }}
+      >
+        <Form
+          form={form}
+          name="basic"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          initialValues={getInitialValue(itemKey)}
         >
-          <Form
-            form={form}
-            name="basic"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            initialValues={getInitialValue(itemKey)}
+          <Col span={24}>
+            <PageHeader
+              action={() => window.history.back()}
+              title={`S'inscrire `}
+            />
+
+            <Divider className="dividerAuth" />
+          </Col>
+          <Form.Item
+            label="Nom"
+            name="lastName"
+            rules={[
+              {
+                required: true,
+                min: 4,
+                message: "Nom oligatoire avec minimum 4 caractéres",
+              },
+            ]}
+            hasFeedback
           >
-            <Col>
-              <Form.Item
-                label="Nom"
-                name="lastName"
-                rules={[
-                  {
-                    required: true,
-                    min: 4,
-                    message: "Nom oligatoire avec minimum 4 caractéres",
-                  },
-                ]}
-                hasFeedback
-              >
-                <Input
-                  bordered={false}
-                  className="inputStyle"
-                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
-                  name="lastName"
-                  defaultValue={getDefaultValueLocalStorage(
-                    "lastName",
-                    itemKey
-                  )}
-                />
-              </Form.Item>
-              <Form.Item
-                label="Prénom"
-                name="firstName"
-                rules={[
-                  {
-                    required: true,
-                    min: 4,
-                    message: "Prénom oligatoire avec minimum 4 caractéres",
-                  },
-                ]}
-                hasFeedback
-              >
-                <Input
-                  bordered={false}
-                  className="inputStyle"
-                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
-                  name="firstName"
-                  defaultValue={getDefaultValueLocalStorage(
-                    "firstName",
-                    itemKey
-                  )}
-                />
-              </Form.Item>
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                    message: "Merci d'indiquer votre email!",
-                  },
-                  () => ({
-                    validator(rule, value) {
-                      if (!Validator.isEmail(value)) {
-                        return Promise.reject("Email invalide");
-                      }
+            <Input
+              bordered={false}
+              className="inputStyle"
+              onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
+              name="lastName"
+              defaultValue={getDefaultValueLocalStorage("lastName", itemKey)}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Prénom"
+            name="firstName"
+            rules={[
+              {
+                required: true,
+                min: 4,
+                message: "Prénom oligatoire avec minimum 4 caractéres",
+              },
+            ]}
+            hasFeedback
+          >
+            <Input
+              bordered={false}
+              className="inputStyle"
+              onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
+              name="firstName"
+              defaultValue={getDefaultValueLocalStorage("firstName", itemKey)}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "Merci d'indiquer votre email!",
+              },
+              () => ({
+                validator(rule, value) {
+                  if (!Validator.isEmail(value)) {
+                    return Promise.reject("Email invalide");
+                  }
 
-                      return Promise.resolve();
-                    },
-                  }),
-                ]}
-              >
-                <Input
-                  bordered={false}
-                  className="inputStyle"
-                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
-                  name="email"
-                  defaultValue={getDefaultValueLocalStorage("email", itemKey)}
-                />
-              </Form.Item>
-              <Form.Item
-                label="mot de passe"
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Merci d'indiquer un mot de passe",
-                  },
-                ]}
-                hasFeedback
-              >
-                <Input.Password bordered={false} className="inputStyle" />
-              </Form.Item>
-              <Form.Item
-                label="Confirmer mot de passe"
-                name="repeat_password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Merci de confirmer votre mot de passe!",
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(rule, value) {
-                      if (!value || getFieldValue("password") === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(
-                        "Les deux mots de passe ne correspondent pas!"
-                      );
-                    },
-                  }),
-                ]}
-                hasFeedback
-              >
-                <Input.Password bordered={false} className="inputStyle" />
-              </Form.Item>
-              <Form.Item
-                label="Adresse de facturation"
-                name="billsAddress"
-                rules={[
-                  {
-                    required: true,
-                    message: "L'adresse de facturation est requise",
-                  },
-                ]}
-                hasFeedback
-              >
-                <GooglePlacesAutocomplete
-                  selectProps={{
-                    value:
-                      billsAddress ||
-                      getDefaultValueLocalStorage("billsAddress", itemKey),
-                    onChange: (value) => setAdresse(value, "billsAddress"),
-                  }}
-                  apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
-                  autocompletionRequest={{
-                    bounds: [
-                      { lat: 50, lng: 50 },
-                      { lat: 100, lng: 100 },
-                    ],
-                    componentRestrictions: {
-                      country: ["fr"],
-                    },
-                  }}
-                />
-              </Form.Item>
-              <Form.Item
-                label="Adresse de livraison"
-                name="dropAddress"
-                rules={[
-                  {
-                    required: true,
-                    message: "L'adresse de livraison est requise",
-                  },
-                ]}
-                hasFeedback
-              >
-                <GooglePlacesAutocomplete
-                  bordered={false}
-                  className="inputStyle"
-                  selectProps={{
-                    value:
-                      dropAddress ||
-                      getDefaultValueLocalStorage("dropAddress", itemKey),
-                    onChange: (value) => setAdresse(value, "dropAddress"),
-                  }}
-                  apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
-                  autocompletionRequest={{
-                    bounds: [
-                      { lat: 50, lng: 50 },
-                      { lat: 100, lng: 100 },
-                    ],
-                    componentRestrictions: {
-                      country: ["fr"],
-                    },
-                  }}
-                />
-              </Form.Item>
+                  return Promise.resolve();
+                },
+              }),
+            ]}
+          >
+            <Input
+              bordered={false}
+              className="inputStyle"
+              onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
+              name="email"
+              defaultValue={getDefaultValueLocalStorage("email", itemKey)}
+            />
+          </Form.Item>
+          <Form.Item
+            label="mot de passe"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Merci d'indiquer un mot de passe",
+              },
+            ]}
+            hasFeedback
+          >
+            <Input.Password bordered={false} className="inputStyle" />
+          </Form.Item>
+          <Form.Item
+            label="Confirmer mot de passe"
+            name="repeat_password"
+            rules={[
+              {
+                required: true,
+                message: "Merci de confirmer votre mot de passe!",
+              },
+              ({ getFieldValue }) => ({
+                validator(rule, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    "Les deux mots de passe ne correspondent pas!"
+                  );
+                },
+              }),
+            ]}
+            hasFeedback
+          >
+            <Input.Password bordered={false} className="inputStyle" />
+          </Form.Item>
+          <Form.Item
+            label="Adresse de facturation"
+            name="billsAddress"
+            rules={[
+              {
+                required: true,
+                message: "L'adresse de facturation est requise",
+              },
+            ]}
+            hasFeedback
+          >
+            <GooglePlacesAutocomplete
+              selectProps={{
+                value:
+                  billsAddress ||
+                  getDefaultValueLocalStorage("billsAddress", itemKey),
+                onChange: (value) => setAdresse(value, "billsAddress"),
+              }}
+              apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
+              autocompletionRequest={{
+                bounds: [
+                  { lat: 50, lng: 50 },
+                  { lat: 100, lng: 100 },
+                ],
+                componentRestrictions: {
+                  country: ["fr"],
+                },
+              }}
+            />
+          </Form.Item>
+          <Form.Item
+            label="Adresse de livraison"
+            name="dropAddress"
+            rules={[
+              {
+                required: true,
+                message: "L'adresse de livraison est requise",
+              },
+            ]}
+            hasFeedback
+          >
+            <GooglePlacesAutocomplete
+              bordered={false}
+              className="inputStyle"
+              selectProps={{
+                value:
+                  dropAddress ||
+                  getDefaultValueLocalStorage("dropAddress", itemKey),
+                onChange: (value) => setAdresse(value, "dropAddress"),
+              }}
+              apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
+              autocompletionRequest={{
+                bounds: [
+                  { lat: 50, lng: 50 },
+                  { lat: 100, lng: 100 },
+                ],
+                componentRestrictions: {
+                  country: ["fr"],
+                },
+              }}
+            />
+          </Form.Item>
 
-              <Form.Item
-                label="Numéro de téléphone"
-                name="phoneNumber"
-                rules={[
-                  {
-                    required: true,
-                    message:
-                      "Merci de renseigner un numéro de téléphone valide",
-                    pattern: new RegExp(
-                      /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/
-                    ),
-                  },
-                ]}
-                hasFeedback
-              >
-                <Input
-                  bordered={false}
-                  className="inputStyle"
-                  onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
-                  name="phoneNumber"
-                  defaultValue={getDefaultValueLocalStorage("phoneNumber", {
-                    itemKey,
-                  })}
-                />
-              </Form.Item>
+          <Form.Item
+            label="Numéro de téléphone"
+            name="phoneNumber"
+            rules={[
+              {
+                required: true,
+                message: "Merci de renseigner un numéro de téléphone valide",
+                pattern: new RegExp(
+                  /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/
+                ),
+              },
+            ]}
+            hasFeedback
+          >
+            <Input
+              bordered={false}
+              className="inputStyle"
+              onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
+              name="phoneNumber"
+              defaultValue={getDefaultValueLocalStorage("phoneNumber", {
+                itemKey,
+              })}
+            />
+          </Form.Item>
 
-              <Form.Item>
-                <Button
-                  style={{
-                    background: styleVariable.secondaryColor,
-                    border: "none",
-                  }}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  S'enregistrer
-                </Button>
-              </Form.Item>
-            </Col>
-          </Form>
-        </Row>
-      </Row>
-    </Col>
+          <Form.Item>
+            <Button
+              style={{
+                background: styleVariable.secondaryColor,
+                border: "none",
+              }}
+              type="primary"
+              htmlType="submit"
+            >
+              CRÉEZ MON COMPTE
+            </Button>
+          </Form.Item>
+
+          <Col span={24}>
+            <h3 style={{ color: styleVariable.mainColor }}>
+              Vous êtes déjà membre ?
+            </h3>
+            <Divider className="dividerAuth" />
+          </Col>
+          <Button
+            style={{
+              color: "grey",
+              border: `1px solid ${styleVariable.secondaryColor}`,
+            }}
+            onClick={() => history.push("/login")}
+          >
+            IDENTIFIEZ-VOUS
+          </Button>
+        </Form>
+      </Col>
+    </Row>
   );
 };
 

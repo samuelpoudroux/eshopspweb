@@ -4,10 +4,12 @@ import { withRouter } from "react-router";
 import logo from "../assets/iconGrey.svg";
 
 import {
-  HomeOutlined,
+  ThunderboltOutlined,
   ContactsOutlined,
   AppstoreOutlined,
   ShopOutlined,
+  ContainerOutlined,
+  CodeSandboxOutlined,
 } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import styleVariable from "../styleVariable";
@@ -41,7 +43,7 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
   const drawerHeader = () => {
     return (
       <Row justify="space-between" align="middle">
-        <Col span={12}>
+        <Col xxl={12} lg={12} xs={24} sm={12}>
           <img
             alt="logo"
             src={logo}
@@ -52,16 +54,34 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
             }}
           />
         </Col>
-        <Col span={12}>
-          <Button
-            style={{
-              color: styleVariable.secondaryColor,
-              background: "white",
-            }}
-            onClick={() => manageConnection()}
+        <Col xxl={10} lg={12} xs={24} sm={12}>
+          <Row
+            className="menuAction"
+            justify="space-around"
+            style={{ marginTop: isMobile && 20 }}
           >
-            {(user && "Se deconnecter") || "Se connecter"}
-          </Button>
+            {!user && (
+              <Button
+                style={{
+                  color: styleVariable.secondaryColor,
+                  background: "white",
+                }}
+                onClick={() => manageConnection()}
+              >
+                {(user && "Se deconnecter") || "Se connecter"}
+              </Button>
+            )}
+
+            <Button
+              style={{
+                color: styleVariable.secondaryColor,
+                background: "white",
+              }}
+              onClick={() => history.push("/register")}
+            >
+              Créer un compte
+            </Button>
+          </Row>
         </Col>
       </Row>
     );
@@ -81,7 +101,7 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
       key={"top"}
       closable={false}
       bodyStyle={{
-        paddingLeft: "5px",
+        paddingLeft: "0px",
         paddingRight: "5px",
       }}
       style={{ zIndex: 26, overflowY: "scroll" }}
@@ -97,7 +117,7 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
         <Menu.Item
           key="home"
           icon={
-            <HomeOutlined
+            <ThunderboltOutlined
               style={{
                 color:
                   currentKey === "home"
@@ -108,9 +128,9 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
             />
           }
           onClick={(e) => goToPage(e, "/")}
-          style={{ fontSize: "1.1em" }}
+          style={{ marginTop: 20, fontSize: "1.5em" }}
         >
-          Accueil
+          NOS NOUVEAUTÉS
         </Menu.Item>
         <Menu.Item
           key="products"
@@ -126,9 +146,9 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
             />
           }
           onClick={(e) => goToPage(e, "/products")}
-          style={{ fontSize: "1.1em" }}
+          style={{ marginTop: 20, fontSize: "1.5em" }}
         >
-          Nos produits
+          NOS PRODUITS
         </Menu.Item>
         <SubMenu
           key="Categories"
@@ -143,8 +163,12 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
               }}
             />
           }
-          title="Categories"
-          style={{ fontSize: "1.1em", width: !isMobile && "20%" }}
+          title="CATÉGORIES"
+          style={{
+            marginTop: 20,
+            fontSize: "1.5em",
+            width: !isMobile && "30%",
+          }}
         >
           {categories.list.map((category) => (
             <Menu.Item
@@ -164,14 +188,68 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
                   currentKey === "contact"
                     ? "#89ba17"
                     : styleVariable.secondaryColor,
-                fontSize: "1.1em",
+                fontSize: "1em",
               }}
             />
           }
           onClick={(e) => goToPage(e, "/contact")}
-          style={{ fontSize: "1.1em" }}
+          style={{ marginTop: 20, fontSize: "1em" }}
         >
           Contact
+        </Menu.Item>
+        <Menu.Item
+          key="generalCondition"
+          icon={
+            <ContainerOutlined
+              style={{
+                color:
+                  currentKey === "generalCondition"
+                    ? "#89ba17"
+                    : styleVariable.secondaryColor,
+                fontSize: "1em",
+              }}
+            />
+          }
+          onClick={(e) => goToPage(e, "/condition-generales-de-ventes")}
+          style={{ marginTop: 20, fontSize: "1em" }}
+        >
+          Conditions générales de ventes
+        </Menu.Item>
+        <Menu.Item
+          key="confidencePolicy"
+          icon={
+            <CodeSandboxOutlined
+              style={{
+                color:
+                  currentKey === "confidencePolicy"
+                    ? "#89ba17"
+                    : styleVariable.secondaryColor,
+                fontSize: "1em",
+              }}
+            />
+          }
+          onClick={(e) => goToPage(e, "/politique-de-confidentialite")}
+          style={{ marginTop: 20, fontSize: "1em" }}
+        >
+          Politique de confidentialité
+        </Menu.Item>
+        <Menu.Item
+          key="legalNotice"
+          icon={
+            <ContactsOutlined
+              style={{
+                color:
+                  currentKey === "legalNotice"
+                    ? "#89ba17"
+                    : styleVariable.secondaryColor,
+                fontSize: "1em",
+              }}
+            />
+          }
+          onClick={(e) => goToPage(e, "/mention-legales")}
+          style={{ marginTop: 20, fontSize: "1em" }}
+        >
+          Mentions légales
         </Menu.Item>
       </Menu>
     </Drawer>

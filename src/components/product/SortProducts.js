@@ -90,12 +90,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
             style={{ width: "100%" }}
             className="inputStyle"
             bordered={false}
-            dropdownRender={(menu) => (
-              <div>
-                {menu}
-                <Divider style={{ margin: "4px 0" }} />
-              </div>
-            )}
+            dropdownRender={(menu) => <div>{menu}</div>}
             onChange={(value) => selectHandleChange(value)}
             value={value}
           >

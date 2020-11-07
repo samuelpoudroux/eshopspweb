@@ -4,9 +4,7 @@
   --thirdColor: #89ba17;
 }
 
-body {
-  color: var(--mainColor)
-}
+
 
 @keyframes App-logo-spin {
   from {
@@ -156,9 +154,23 @@ input:disabled {
   color:var(--thirdColor) !important
 
 }
+.ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after {
+  border-right: 2px solid var(--thirdColor) !important;
+
+}
+
+.ant-menu-submenu-active span{
+  color:var(--thirdColor) !important;
+  background-color: rgba(63, 62, 62, 0) !important;
+
+}
+
+.ant-menu-submenu-arrow {
+  color:  var(--thirdColor) !important;
+}
 
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  background-color: rgba(63, 62, 62, 0.103) !important;
+  background-color: rgba(63, 62, 62, 0) !important;
 }
 
 .ant-input-suffix{
@@ -259,4 +271,14 @@ input:-webkit-autofill:active  {
 
 .css-2b097c-container {
   width: 100%
+}
+
+.dividerAuth {
+  background-color: #787b7c28;
+}
+
+.menuAction  button:hover {
+background: var(--secondaryColor) !important;
+color:white !important;
+border: none !important
 }
