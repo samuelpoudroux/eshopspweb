@@ -93,7 +93,7 @@ const Addandremoveproduct = ({
             <Input
               style={{
                 textAlign: "center",
-                width: "40%",
+                width: "23%",
                 marginLeft: 4,
                 marginRight: 4,
                 border: 0,

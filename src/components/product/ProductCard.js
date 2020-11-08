@@ -75,7 +75,7 @@ const ProductCard = ({ product, history, large }) => {
       { newNess: value },
       {
         headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("jwtData")}`,
+          Authorization: `Bearer ${localStorage.getItem("jwtData")}`,
         },
       }
     );
@@ -102,7 +102,7 @@ const ProductCard = ({ product, history, large }) => {
           left: 10,
           zIndex: 1,
           fontSize: "28px",
-          color: styleVariable.secondaryColor,
+          color: "yellow",
         }}
       />
       <b
@@ -112,22 +112,18 @@ const ProductCard = ({ product, history, large }) => {
           left: 20,
           zIndex: 2,
           fontSize: "1em",
-          color: "white",
+          color: "red",
         }}
       >
         {notation || 5}
       </b>
 
       <Col onClick={(e) => goToProductDetails(e)}>
-        <Row
-          align="middle"
-          justify="center"
-          style={{ height: "70px", width: "100%" }}
-        >
+        <Row align="middle" justify="center">
           <img
             alt="Image du produit"
             src={`${product.imageUrl}`}
-            style={{ maxHeight: "100%", maxWidth: "100%", zIndex: 0 }}
+            style={{ height: "70px", width: "50%", zIndex: 0 }}
           />
         </Row>
         <Row style={{ paddingTop: 5, height: "25px" }} justify="center">

@@ -9,9 +9,11 @@ const HomePage = ({ history }) => {
   const { categories, setCategories } = useCategory();
   const { isMobile } = useResponsive();
   return (
-    <Row justify="center">
+    <Row justify="center" gutter={[0, 30]}>
       <Col xxl={12} xs={24} style={{ padding: 10, paddingTop: 0 }}>
-        <h1 style={{ textAlign: "center" }}>Nos produits HOMEMADE</h1>
+        <h1 style={{ textAlign: "center" }}>
+          NOTRE MARQUE DE FABRIQUE LE "HOMEMADE"
+        </h1>
         <Row className="productCard" justify="center" style={{ padding: 20 }}>
           <iframe
             width="100%"
@@ -26,7 +28,7 @@ const HomePage = ({ history }) => {
       <Col xxl={12} xs={24} style={{ padding: 10 }}>
         <h1 style={{ textAlign: "center", color: styleVariable.mainColor }}>
           {" "}
-          Qui sommes-nous ?
+          QUI SOMMES-NOUS ?
         </h1>
         <Row justify="center">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum,
@@ -37,8 +39,10 @@ const HomePage = ({ history }) => {
       </Col>
 
       {isMobile && (
-        <Col span={20}>
-          <Divider className="dividerAuth" />
+        <Col span={5}>
+          <Divider
+            style={{ width: "10px", background: styleVariable.secondaryColor }}
+          />
         </Col>
       )}
       <Col span={24}>
@@ -46,14 +50,16 @@ const HomePage = ({ history }) => {
       </Col>
 
       {isMobile && (
-        <Col span={20}>
-          <Divider style={{ width: "10px" }} className="dividerAuth" />
+        <Col span={5}>
+          <Divider
+            style={{ width: "10px", background: styleVariable.secondaryColor }}
+          />
         </Col>
       )}
 
       <Col span={24}>
         <Row justify="center">
-          <h2 style={{ color: styleVariable.mainColor }}>Nos Catégories</h2>
+          <h2 style={{ color: styleVariable.mainColor }}>NOS CATÉGORIES</h2>
         </Row>
         <Row style={{ padding: 10 }} justify="center">
           {categories.list.length > 0 &&
@@ -63,6 +69,7 @@ const HomePage = ({ history }) => {
                 style={{ margin: 20 }}
                 xs={24}
                 xxl={4}
+                key={category.id}
                 onClick={() => history.push(`/categories/${category.name}`)}
               >
                 <Row justify="center" align="middle">

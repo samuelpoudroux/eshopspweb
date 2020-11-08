@@ -58,7 +58,10 @@ const ContactForm = ({ history }) => {
 
   return (
     <Col>
-      <PageHeader action={() => window.history.back()} title={`Contact `} />
+      <PageHeader
+        action={() => window.history.back()}
+        title={<h2 style={{ color: styleVariable.mainColor }}>CONTACT</h2>}
+      />
       <Row
         justify="space-around"
         style={{ height: !isMobile && "50vh", padding: 20 }}
@@ -76,9 +79,7 @@ const ContactForm = ({ history }) => {
             height: "100%",
           }}
         >
-          <h2 style={{ color: styleVariable.mainColor, textAlign: "center" }}>
-            Votre message
-          </h2>
+          <h2 style={{ textAlign: "center" }}>Votre message</h2>
           <Row justify="center" align="middle">
             <Col span={24}>
               <Form
@@ -264,7 +265,8 @@ const ContactForm = ({ history }) => {
           style={{
             boxShadow:
               "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
-            background: "#fff",
+            background: styleVariable.secondaryColor,
+            color: "white",
             borderRadius: "2px",
             position: "relative",
             width: "auto",
@@ -272,9 +274,7 @@ const ContactForm = ({ history }) => {
             height: "100%",
           }}
         >
-          <h2 style={{ color: styleVariable.mainColor, textAlign: "center" }}>
-            Information
-          </h2>
+          <h2 style={{ textAlign: "center", color: "white" }}>Information</h2>
           <Row style={{ padding: "1%" }}>
             <Col lg={12} md={12} xs={24}>
               <address>
@@ -284,7 +284,6 @@ const ContactForm = ({ history }) => {
                       <HomeOutlined
                         style={{
                           fontSize: "1.3em",
-                          color: styleVariable.mainColor,
                         }}
                       />
                     </Row>
@@ -303,7 +302,6 @@ const ContactForm = ({ history }) => {
                       <MailOutlined
                         style={{
                           fontSize: "1.3em",
-                          color: styleVariable.mainColor,
                         }}
                       />
                     </Row>
@@ -311,7 +309,7 @@ const ContactForm = ({ history }) => {
                   <Col lg={18} xs={12}>
                     <Row>
                       <a
-                        style={{ color: styleVariable.secondaryColor }}
+                        style={{ color: styleVariable.thirdColor }}
                         href="mailto:jim@rock.com"
                       >
                         {EMAIL}
@@ -327,7 +325,6 @@ const ContactForm = ({ history }) => {
                       <PhoneOutlined
                         style={{
                           fontSize: "1.3em",
-                          color: styleVariable.mainColor,
                         }}
                       />
                     </Row>
@@ -335,7 +332,7 @@ const ContactForm = ({ history }) => {
                   <Col lg={18} xs={12}>
                     <Row>
                       <a
-                        style={{ color: styleVariable.secondaryColor }}
+                        style={{ color: styleVariable.thirdColor }}
                         href="tel:+13115552368"
                       >
                         {PHONENUMBER}
@@ -347,7 +344,8 @@ const ContactForm = ({ history }) => {
               <Row justify="center">
                 <Button
                   style={{
-                    background: styleVariable.secondaryColor,
+                    background: "white",
+                    color: styleVariable.secondaryColor,
                     border: "none",
                     marginTop: isMobile ? 15 : 50,
                   }}

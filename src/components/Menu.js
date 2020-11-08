@@ -131,7 +131,7 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
             />
           }
           onClick={(e) => goToPage(e, "/")}
-          style={{ marginTop: 20, fontSize: "1.5em" }}
+          style={{ marginTop: 20, fontSize: "1.1em" }}
         >
           NOS NOUVEAUTÉS
         </Menu.Item>
@@ -149,7 +149,7 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
             />
           }
           onClick={(e) => goToPage(e, "/products")}
-          style={{ marginTop: 20, fontSize: "1.5em" }}
+          style={{ marginTop: 20, fontSize: "1.1em" }}
         >
           NOS PRODUITS
         </Menu.Item>
@@ -169,7 +169,7 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
           title="CATÉGORIES"
           style={{
             marginTop: 20,
-            fontSize: "1.5em",
+            fontSize: "1.1em",
             width: !isMobile && "30%",
           }}
         >

@@ -12,7 +12,9 @@ import { PageHeader } from "../PageHeader";
 
 const NewNess = ({ history }) => {
   const { products } = useContext(AppContext);
-  const { isMobile } = useResponsive();
+  const { isMobile, isBigScreen, isDesktopOrLaptop } = useResponsive();
+
+  console.log("isBigScreen", isBigScreen);
   const carrouselRef = useRef();
 
   const [newNess, setNewNess] = useState([]);
@@ -27,7 +29,7 @@ const NewNess = ({ history }) => {
     const newNessComponents = [];
     newNess.map((product) => {
       newNessComponents.push(
-        <Col xs={14} xxl={3}>
+        <Col xs={12} lg={6} md={6} xxl={3} key={product.id}>
           <ProductCard productList product={product} />
         </Col>
       );
@@ -38,7 +40,7 @@ const NewNess = ({ history }) => {
   return (
     <Col lg={24}>
       <h2 style={{ textAlign: "center", color: styleVariable.mainColor }}>
-        Nos nouveautés
+        NOS NOUVEAUTÉS
       </h2>
       {newNess.length === 0 && (
         <Row style={{ minHeight: "30vh" }} justify="center" align="middle">
@@ -60,11 +62,13 @@ const NewNess = ({ history }) => {
           onClick={(e) => e.stopPropagation()}
           arrows={true}
         >
-          {_.chunk(copy, isMobile ? 1 : 4).map((e) => (
-            <Col span={24}>
+          {_.chunk(
+            copy,
+            isMobile ? 2 : isDesktopOrLaptop ? 3 : isBigScreen ? 6 : 6
+          ).map((e) => (
+            <Col span={24} key={e}>
               <Row justify="space-around" align="middle">
-                {" "}
-                {!isMobile && (
+                {!isMobile && isDesktopOrLaptop && (
                   <LeftOutlined
                     style={{
                       fontSize: "30px",
@@ -74,7 +78,7 @@ const NewNess = ({ history }) => {
                   />
                 )}
                 {e}
-                {!isMobile && (
+                {!isMobile && isDesktopOrLaptop && (
                   <RightOutlined
                     style={{
                       fontSize: "30px",

@@ -83,7 +83,7 @@ const Loadnewproduct = ({
         formData,
         {
           headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("jwtData")}`,
+            Authorization: `Bearer ${localStorage.getItem("jwtData")}`,
           },
         }
       );

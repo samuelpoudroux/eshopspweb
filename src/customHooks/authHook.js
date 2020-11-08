@@ -30,7 +30,7 @@ const useAuth = () => {
       { withCredentials: true }
     );
     userData.accessToken &&
-      sessionStorage.setItem("jwtData", userData.accessToken);
+      localStorage.setItem("jwtData", userData.accessToken);
     delete userData.accessToken;
     if (!userData.error) {
       localStorage.setItem(

@@ -29,9 +29,9 @@ const Chat = ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        border: `1px solid ${styleVariable.secondaryColor}`,
         marginTop: 10,
       }}
+      className="productCard"
     >
       <ChatHeader socket={socket} setChatActive={setChatActive} />
       <Row align="middle">

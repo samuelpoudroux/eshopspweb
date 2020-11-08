@@ -4,7 +4,7 @@ import { notification } from "antd";
 
 const logout = (history) => {
   localStorage.removeItem("users");
-  sessionStorage.removeItem("jwtData");
+  localStorage.removeItem("jwtData");
   notification.open({
     message: "Vous êtes deconnecté",
     icon: <SmileOutlined style={{ color: "#89ba17" }} />,

@@ -8,14 +8,26 @@ const ChatFeedComponent = ({
   messages,
   socket,
   history,
-  setChatActive,
   setFavoriteActive,
   setSubBasketVisible,
 }) => {
   const secondTest = useRef(null);
   const [messageEnd, setMessageEnd] = useState();
   const basketList = JSON.parse(localStorage.getItem("basket")) || [];
-  const favoriteList = JSON.parse(localStorage.getItem("favorite")) || [];
+  const jwt = localStorage.getItem("jwtData");
+
+  useEffect(() => {
+    if (jwt) {
+      socket.emit("alreadyRegistered", {
+        id: 1,
+      });
+    } else {
+      socket.emit("notRegistered", {
+        id: 1,
+      });
+    }
+  }, []);
+
   useEffect(() => {
     if (messageEnd !== undefined) {
       messageEnd.scrollIntoView({
@@ -98,13 +110,19 @@ const ChatFeedComponent = ({
         return {
           ...style,
           color: "white",
-          background: styleVariable.secondaryColor,
+          background: styleVariable.mainColor,
+        };
+      case "Nous contacter":
+        return {
+          ...style,
+          color: "white",
+          background: styleVariable.thirdColor,
         };
       case "Finaliser ma commande":
         return {
           ...style,
           color: "white",
-          background: styleVariable.mainColor,
+          background: styleVariable.secondaryColor,
         };
         break;
       case "Modifier mes informations":
