@@ -10,21 +10,6 @@ const HomePage = ({ history }) => {
   const { isMobile } = useResponsive();
   return (
     <Row justify="center" gutter={[0, 30]}>
-      <Col xxl={12} xs={24} style={{ padding: 10, paddingTop: 0 }}>
-        <h1 style={{ textAlign: "center" }}>
-          NOTRE MARQUE DE FABRIQUE LE "HOMEMADE"
-        </h1>
-        <Row className="productCard" justify="center" style={{ padding: 20 }}>
-          <iframe
-            width="100%"
-            height="315"
-            src="https://www.youtube.com/embed/7iOpxGok9ig?autoplay=1&&mute=1"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </Row>
-      </Col>
       <Col xxl={12} xs={24} style={{ padding: 10 }}>
         <h1 style={{ textAlign: "center", color: styleVariable.mainColor }}>
           {" "}

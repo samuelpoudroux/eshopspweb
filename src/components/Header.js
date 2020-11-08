@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import { Row, Col, Popover, Button, Divider } from "antd";
 import logo from "../assets/logoWhite.svg";
+import test from "./videoplayback.mp4";
 import ProductsNumber from "../components/product/ProductsNumber";
 import NavBar from "./Menu";
 import CleanBasket from "../components/basket/CleanBasket";
@@ -21,9 +22,9 @@ import Axios from "axios";
 import { logout } from "../repository/auth";
 import useIsAdmin from "../customHooks/isAdminHooks";
 import AddNewProduct from "../form/product/AddNewProduct";
-import { PlusCircleOutlined } from "@ant-design/icons";
 import styleVariable from "../styleVariable";
 import FavoriteNumber from "./product/FavoriteNumber";
+const { REACT_APP_API_DOMAIN, REACT_APP_API_GLOBAL_SEARCH } = process.env;
 
 const Header = ({
   favoriteIsActive,
@@ -37,16 +38,13 @@ const Header = ({
   const [menuIsOpened, setMenuIsOpened] = useState(false);
   const [visible, setVisible] = useState(false);
   const { isMobile } = useResponsive();
-  const [globalSearchApi, setGlobalSearchApi] = useState();
   const [addProduct, setAddProduct] = useState(false);
   const { products, favorites } = useContext(AppContext);
   const [state, updateState] = useState(true);
   const [update, setUpdate] = useState(false);
   const { isAdmin } = useIsAdmin();
+  const [globalSearchApi, setGlobalSearchApi] = useState();
 
-  const { REACT_APP_API_DOMAIN, REACT_APP_API_GLOBAL_SEARCH } = process.env;
-
-  const iconStyle = { color: "white", marginLeft: "10px" };
   const getGlobalSearchApi = async () => {
     try {
       const { data: globalSearchApi } = await Axios.get(
@@ -63,15 +61,16 @@ const Header = ({
     setChatActive(true);
   };
   useEffect(() => {
+    getGlobalSearchApi();
+  }, []);
+  useEffect(() => {
     products.getAllProducts();
   }, [state]);
 
   const user = JSON.parse(localStorage.getItem("users"))
     ? JSON.parse(localStorage.getItem("users"))
     : undefined;
-  useEffect(() => {
-    getGlobalSearchApi();
-  }, []);
+
   useEffect(() => {
     setUpdate(!update);
   }, [favorites, isAdmin]);
@@ -91,194 +90,219 @@ const Header = ({
   return (
     <header
       style={{
-        padding: isMobile ? "3%" : "1.5%",
-        background: styleVariable.backgroundColorGradient,
-        width: "100%",
-        top: 0,
+        position: "relative",
+        height: "70vh",
         overflow: "hidden",
-        zIndex: 26,
+        objectFit: "contain",
+        background: styleVariable.backgroundColorGradient,
       }}
     >
-      <AddNewProduct
-        forceUpdate={updateState}
-        setAddProduct={setAddProduct}
-        addProduct={addProduct}
-      />
-      {<NavBar setMenuIsOpened={setMenuIsOpened} menuIsOpened={menuIsOpened} />}
-      <Row align="middle" style={{ width: "100%" }}>
-        <Col lg={10} md={11} xs={24} sm={24}>
-          <Row align="middle" justify="center">
-            <Col lg={2} md={5} xs={5} sm={5}>
-              <MenuOutlined
-                onClick={() => setMenuIsOpened(!menuIsOpened)}
-                style={{ float: "left", fontSize: "28px", color: "white" }}
-              />
-            </Col>
-            <Col lg={15} md={11} xs={10} sm={10}>
-              <img
-                alt="logo"
-                src={logo}
-                style={{
-                  maxWidth: isMobile ? "120%" : "60%",
-                  maxHeight: isMobile ? "150%" : "60%",
-                  cursor: "pointer",
-                }}
-                onClick={() => history.push("/")}
-              />
-            </Col>
-            <Col lg={4} md={4} xs={4} sm={4}>
-              <Row justify="center">
-                <Popover title="Besoin d'aide">
-                  <MessageOutlined
-                    onClick={() => goToBot()}
+      <video className="videoTag" autoPlay loop muted>
+        <source src={test} type="video/mp4" />
+      </video>
+
+      <Col
+        className="overlay"
+        style={{
+          height: "100%",
+          zIndex: 2,
+          padding: "2%",
+        }}
+      >
+        <AddNewProduct
+          forceUpdate={updateState}
+          setAddProduct={setAddProduct}
+          addProduct={addProduct}
+        />
+        {
+          <NavBar
+            setMenuIsOpened={setMenuIsOpened}
+            menuIsOpened={menuIsOpened}
+          />
+        }
+        <Row style={{ width: "100%" }} align="middle">
+          <Col lg={10} md={11} xs={24} sm={24} style={{ height: "10vh" }}>
+            <Row align="middle" justify="center">
+              <Col lg={2} md={5} xs={5} sm={5}>
+                <MenuOutlined
+                  onClick={() => setMenuIsOpened(!menuIsOpened)}
+                  style={{ float: "left", fontSize: "28px", color: "white" }}
+                />
+              </Col>
+              <Col lg={15} md={11} xs={10} sm={10}>
+                <img
+                  alt="logo"
+                  src={logo}
+                  style={{
+                    maxWidth: isMobile ? "120%" : "60%",
+                    maxHeight: isMobile ? "150%" : "60%",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => history.push("/")}
+                />
+              </Col>
+              <Col lg={4} md={4} xs={4} sm={4}>
+                <Row justify="center">
+                  <Popover title="Besoin d'aide">
+                    <MessageOutlined
+                      onClick={() => goToBot()}
+                      style={{ fontSize: 20, color: "white" }}
+                    />
+                  </Popover>
+                </Row>
+              </Col>
+              <Col lg={3} md={4} xs={4} sm={4}>
+                <Row justify="center">
+                  <ContactsOutlined
+                    onClick={() => history.push("/contact")}
                     style={{ fontSize: 20, color: "white" }}
                   />
-                </Popover>
-              </Row>
-            </Col>
-            <Col lg={3} md={4} xs={4} sm={4}>
-              <Row justify="center">
-                <ContactsOutlined
-                  onClick={() => history.push("/contact")}
-                  style={{ fontSize: 20, color: "white" }}
-                />
-              </Row>
-            </Col>
-          </Row>
-        </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Col>
 
-        <Col
-          lg={14}
-          md={12}
-          xs={24}
-          sm={24}
-          style={{ marginTop: isMobile && "10%" }}
-        >
-          <Row justify="center" align="middle">
-            <Col lg={3} md={4} xs={6} sm={6}>
-              <ProductsNumber
-                header
-                setSubBasketVisible={setSubBasketVisible}
-                subBasketVisible={subBasketVisible}
-                BadgeStyle={{
-                  backgroundColor: styleVariable.mainColor,
-                  color: "white",
-                }}
-              />
-            </Col>
-            <Col lg={3} md={4} xs={6} sm={6}>
-              <FavoriteNumber
-                BadgeStyle={{
-                  backgroundColor: styleVariable.mainColor,
-                  color: "white",
-                }}
-                setFavoriteActive={setFavoriteActive}
-                favoriteIsActive={favoriteIsActive}
-              />
-            </Col>
-            <Col lg={3} md={4} xs={3} sm={3}>
-              <CleanBasket />
-            </Col>
-            <Col
-              lg={4}
-              md={8}
-              xs={user && user.isLogged ? 24 : 3}
-              sm={user && user.isLogged ? 24 : 3}
-            >
-              <Row
-                align="middle"
-                justify="center"
-                style={{
-                  marginTop: user && user.isLogged && isMobile && 35,
-                }}
-              >
-                <p style={{ color: "white", margin: "0", fontSize: "1em" }}>
-                  {user &&
-                    user.userData &&
-                    user.userData.firstName &&
-                    `Bienvenue ${
-                      user.userData && upperCase(user.userData.firstName)
-                    }`}
-                </p>
-                {user && user.isLogged && (
-                  <Row justify="center">
-                    <LogoutOutlined
-                      style={iconStyle}
-                      onClick={() => logout(history)}
-                    />
-                  </Row>
-                )}
-
-                {!user && (
-                  <Popover
-                    content={
-                      <Col span={24}>
-                        <Row style={{ paddingTop: 4 }}>
-                          <p>MON COMPTE</p>
-                        </Row>
-                        <Row style={{ paddingTop: 4 }} justify="center">
-                          <Button
-                            style={{
-                              width: "100%",
-                              background: styleVariable.secondaryColor,
-                              color: "white",
-                            }}
-                            icon={<UserOutlined />}
-                            onClick={() => goToAuth("login")}
-                          >
-                            Se connecter
-                          </Button>
-                        </Row>
-                        <Divider className="dividerAuth" />
-                        <Row>
-                          <b>Vous n'avez pas encore de compte ?</b>
-                        </Row>
-                        <Row style={{ paddingTop: 4 }} justify="center">
-                          <Button
-                            style={{ width: "100%" }}
-                            onClick={() => goToAuth("register")}
-                          >
-                            Créer un compte
-                          </Button>
-                        </Row>
-                      </Col>
-                    }
-                    trigger="click"
-                    visible={visible}
-                    onVisibleChange={handleVisibleChange}
-                  >
-                    <UserOutlined style={iconStyle} />
-                  </Popover>
-                )}
-              </Row>
-            </Col>
-            {isAdmin && (
-              <Col lg={2} md={24} sm={24} xs={24}>
-                <Row
-                  style={{
-                    marginTop: isMobile && 20,
+          <Col lg={14} md={12} xs={24} sm={24} style={{ height: "7vh" }}>
+            <Row justify="center" align="middle">
+              <Col lg={3} md={4} xs={6} sm={6}>
+                <ProductsNumber
+                  header
+                  setSubBasketVisible={setSubBasketVisible}
+                  subBasketVisible={subBasketVisible}
+                  BadgeStyle={{
+                    backgroundColor: styleVariable.mainColor,
+                    color: "white",
                   }}
-                  justify="center"
-                >
-                  <Popover title="Ajouter un produit">
-                    <PlusCircleOutlined
-                      onClick={() => setAddProduct(true)}
-                      style={{
-                        fontSize: "1.5em",
-                        color: "white",
-                      }}
-                    />
-                  </Popover>
-                  {isAdmin && (
-                    <p style={{ margin: 0, color: "white" }}>Administration</p>
+                />
+              </Col>
+              <Col lg={3} md={4} xs={6} sm={6}>
+                <FavoriteNumber
+                  BadgeStyle={{
+                    backgroundColor: styleVariable.mainColor,
+                    color: "white",
+                  }}
+                  setFavoriteActive={setFavoriteActive}
+                  favoriteIsActive={favoriteIsActive}
+                />
+              </Col>
+              <Col lg={3} md={4} xs={3} sm={3}>
+                <CleanBasket />
+              </Col>
+              <Col lg={4} md={8} xs={3} sm={3}>
+                <Row align="middle" justify="center">
+                  {user && user.isLogged && (
+                    <Popover
+                      content={
+                        <Col span={24}>
+                          <Row style={{ paddingTop: 4 }}>
+                            <p>
+                              Bienvenue{" "}
+                              {user.userData &&
+                                upperCase(user.userData.firstName)}
+                            </p>
+                          </Row>
+                          <Row style={{ paddingTop: 15 }}>
+                            <Button onClick={() => logout(history)}>
+                              {" "}
+                              Se Déconnecter
+                            </Button>
+                            <Button onClick={() => goToAuth("register")}>
+                              Gérer mon compte
+                            </Button>
+                          </Row>
+
+                          {isAdmin && (
+                            <>
+                              <Divider />
+                              <Row
+                                style={{
+                                  marginTop: isMobile && 20,
+                                }}
+                                justify="center"
+                              >
+                                <Button onClick={() => setAddProduct(true)}>
+                                  Ajouter un produit
+                                </Button>
+                              </Row>
+                            </>
+                          )}
+                        </Col>
+                      }
+                      trigger="click"
+                      visible={visible}
+                      onVisibleChange={handleVisibleChange}
+                    >
+                      <UserOutlined
+                        style={{
+                          color: styleVariable.thirdColor,
+                          fontSize: 20,
+                        }}
+                      />
+                    </Popover>
+                  )}
+
+                  {!user && (
+                    <Popover
+                      content={
+                        <Col span={24}>
+                          <Row style={{ paddingTop: 4 }}>
+                            <p>MON COMPTE</p>
+                          </Row>
+                          <Row style={{ paddingTop: 4 }} justify="center">
+                            <Button
+                              style={{
+                                width: "100%",
+                                background: styleVariable.secondaryColor,
+                                color: "white",
+                              }}
+                              icon={<UserOutlined />}
+                              onClick={() => goToAuth("login")}
+                            >
+                              Se connecter
+                            </Button>
+                          </Row>
+                          <Divider className="dividerAuth" />
+                          <Row>
+                            <b>Vous n'avez pas encore de compte ?</b>
+                          </Row>
+                          <Row style={{ paddingTop: 4 }} justify="center">
+                            <Button
+                              style={{ width: "100%" }}
+                              onClick={() => goToAuth("register")}
+                            >
+                              Créer un compte
+                            </Button>
+                          </Row>
+                        </Col>
+                      }
+                      trigger="click"
+                      visible={visible}
+                      onVisibleChange={handleVisibleChange}
+                    >
+                      <UserOutlined style={{ fontSize: 20, color: "white" }} />
+                    </Popover>
                   )}
                 </Row>
               </Col>
-            )}
-          </Row>
-        </Col>
-      </Row>
-      <Globalsearchinput globalSearchApi={globalSearchApi} />
+            </Row>
+          </Col>
+          <Col span={24} style={{ height: "60vh" }}>
+            <Row style={{ height: "1vh" }} align="middle">
+              <Globalsearchinput globalSearchApi={globalSearchApi} />
+            </Row>
+            <Row style={{ height: "59vh" }} align="middle" justify="center">
+              <h1
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
+                VOS HUILES MAISONS
+              </h1>
+            </Row>
+          </Col>
+        </Row>
+      </Col>
     </header>
   );
 };

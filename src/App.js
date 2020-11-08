@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import history from "./history";
 import { Router, Switch, Route } from "react-router-dom";
 import Routes from "./routes";
@@ -12,6 +12,7 @@ import Chat from "./components/Chat/Chat";
 import Footer from "./components/Footer";
 import useResponsive from "./customHooks/responsiveHook";
 import Favorites from "./components/favorite/Favorites";
+import Axios from "axios";
 import styleVariable from "./styleVariable";
 
 function App() {

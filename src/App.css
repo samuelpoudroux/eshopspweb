@@ -86,15 +86,16 @@ outline: none !important;
   margin-top: 28px;
   padding: 10px;
   border: 0;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid rgb(253, 251, 251);
   border-radius: 8px;
   background: none !important;
    color: white;
 }
-.globalSearchInput > input{
 
-   color: white;
+.globalSearchInput > input {
+  color:white
 }
+
 .productCard{
   -webkit-box-shadow:inset 1px 1px 12px 1px#d2d6da;
   -moz-box-shadow:inset 1px 1px 12px 1px#d2d6da;
@@ -296,3 +297,29 @@ border: none !important
   padding: 80px;
   color: white;
 }
+
+.videoTag{
+  width: 100%;
+  position: absolute;
+  top:0;
+  height: 100%;
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+
+}
+
+header {
+  background: '../src/components/videoplayback.mp4';
+}
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.801);
+    z-index: 2;
+  
+  }
