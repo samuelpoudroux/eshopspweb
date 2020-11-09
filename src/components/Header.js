@@ -26,6 +26,8 @@ import styleVariable from "../styleVariable";
 import FavoriteNumber from "./product/FavoriteNumber";
 const { REACT_APP_API_DOMAIN, REACT_APP_API_GLOBAL_SEARCH } = process.env;
 
+const headerHeight = 50;
+
 const Header = ({
   favoriteIsActive,
   setFavoriteActive,
@@ -91,7 +93,7 @@ const Header = ({
     <header
       style={{
         position: "relative",
-        height: "70vh",
+        height: `${headerHeight}vh`,
         overflow: "hidden",
         objectFit: "contain",
         background: styleVariable.backgroundColorGradient,
@@ -106,7 +108,7 @@ const Header = ({
         style={{
           height: "100%",
           zIndex: 2,
-          padding: "2%",
+          padding: 30,
         }}
       >
         <AddNewProduct
@@ -120,9 +122,15 @@ const Header = ({
             menuIsOpened={menuIsOpened}
           />
         }
-        <Row style={{ width: "100%" }} align="middle">
-          <Col lg={10} md={11} xs={24} sm={24} style={{ height: "10vh" }}>
-            <Row align="middle" justify="center">
+        <Row style={{ width: "100%" }}>
+          <Col
+            lg={10}
+            md={11}
+            xs={24}
+            sm={24}
+            style={{ height: `${(25 * headerHeight) / 100}vh` }}
+          >
+            <Row justify="center">
               <Col lg={2} md={5} xs={5} sm={5}>
                 <MenuOutlined
                   onClick={() => setMenuIsOpened(!menuIsOpened)}
@@ -134,8 +142,8 @@ const Header = ({
                   alt="logo"
                   src={logo}
                   style={{
-                    maxWidth: isMobile ? "120%" : "60%",
-                    maxHeight: isMobile ? "150%" : "60%",
+                    maxWidth: isMobile ? "120%" : "70%",
+                    maxHeight: isMobile ? "150%" : "70%",
                     cursor: "pointer",
                   }}
                   onClick={() => history.push("/")}
@@ -162,7 +170,13 @@ const Header = ({
             </Row>
           </Col>
 
-          <Col lg={14} md={12} xs={24} sm={24} style={{ height: "7vh" }}>
+          <Col
+            lg={14}
+            md={12}
+            xs={24}
+            sm={24}
+            style={{ height: `${(20 * headerHeight) / 100}vh` }}
+          >
             <Row justify="center" align="middle">
               <Col lg={3} md={4} xs={6} sm={6}>
                 <ProductsNumber
@@ -286,11 +300,8 @@ const Header = ({
               </Col>
             </Row>
           </Col>
-          <Col span={24} style={{ height: "60vh" }}>
-            <Row style={{ height: "1vh" }} align="middle">
-              <Globalsearchinput globalSearchApi={globalSearchApi} />
-            </Row>
-            <Row style={{ height: "59vh" }} align="middle" justify="center">
+          <Col span={24} style={{ height: `${(40 * headerHeight) / 100}vh` }}>
+            <Row align="middle" justify="center">
               <h1
                 style={{
                   textAlign: "center",
@@ -299,6 +310,9 @@ const Header = ({
               >
                 VOS HUILES MAISONS
               </h1>
+            </Row>
+            <Row>
+              <Globalsearchinput globalSearchApi={globalSearchApi} />
             </Row>
           </Col>
         </Row>

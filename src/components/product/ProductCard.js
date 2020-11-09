@@ -21,6 +21,7 @@ import useBasket from "../../customHooks/basketHook";
 import { upperCase } from "../../helpers/UpperCase";
 import useResponsive from "../../customHooks/responsiveHook";
 import { useState } from "react";
+import NewNessIcon from "./NewNessIcon";
 
 const {
   REACT_APP_API_DOMAIN,
@@ -51,6 +52,7 @@ const ProductCard = ({ product, history, large }) => {
     notation,
     productPrice,
     shortDescription,
+    newNess,
     productPriceReduced,
   } = product;
 
@@ -81,7 +83,7 @@ const ProductCard = ({ product, history, large }) => {
     );
     products.getAllProducts();
   };
-
+  console.log(product);
   return (
     <Col
       style={{
@@ -95,28 +97,57 @@ const ProductCard = ({ product, history, large }) => {
       }}
       key={product.id}
     >
-      <StarFilled
-        style={{
-          position: "absolute",
-          top: 10,
-          left: 10,
-          zIndex: 1,
-          fontSize: "28px",
-          color: "yellow",
-        }}
-      />
-      <b
-        style={{
-          position: "absolute",
-          top: 13,
-          left: 20,
-          zIndex: 2,
-          fontSize: "1em",
-          color: "red",
-        }}
-      >
-        {notation || 5}
-      </b>
+      {newNess === 0 ? (
+        <>
+          <StarFilled
+            style={{
+              position: "absolute",
+              top: 10,
+              left: 10,
+              zIndex: 1,
+              fontSize: "28px",
+              color: styleVariable.secondaryColor,
+            }}
+          />
+          <b
+            style={{
+              position: "absolute",
+              top: 18,
+              left: 18,
+              zIndex: 2,
+              fontSize: "8px",
+              color: "white",
+            }}
+          >
+            {(notation && `${notation}/5`) || `5/5`}
+          </b>
+        </>
+      ) : (
+        <>
+          <NewNessIcon
+            height={"50px"}
+            style={{
+              position: "absolute",
+              top: 1,
+              left: 10,
+              zIndex: 1,
+              color: "yellow",
+            }}
+          />
+          <b
+            style={{
+              position: "absolute",
+              top: 20,
+              left: 27,
+              zIndex: 2,
+              fontSize: "8px",
+              color: "white",
+            }}
+          >
+            {"New"}
+          </b>
+        </>
+      )}
 
       <Col onClick={(e) => goToProductDetails(e)}>
         <Row align="middle" justify="center">

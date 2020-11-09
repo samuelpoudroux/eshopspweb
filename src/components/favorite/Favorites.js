@@ -189,7 +189,7 @@ const Favorites = ({
                     justify="space-between"
                     align="middle"
                   >
-                    <Col span={18}>
+                    <Col span={21}>
                       <Addandremoveproduct
                         notification={notificationInfo}
                         addNotification={addNotification}
@@ -199,7 +199,7 @@ const Favorites = ({
                       />
                     </Col>
 
-                    <Col xl={1} xs={5} sm={1}>
+                    <Col xl={1} xs={3} sm={1}>
                       <Row>
                         <Popconfirm
                           title={`Souhaitez vous supprimer ce produit de vos coups de coeur`}

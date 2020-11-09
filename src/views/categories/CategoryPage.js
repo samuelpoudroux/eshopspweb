@@ -93,7 +93,11 @@ const CategoryPage = ({ match }) => {
         {!isLoading &&
           !searchResult.active &&
           products.length > 0 &&
-          products.map((product) => <ProductCard product={product} />)}
+          products.map((product) => (
+            <Col xxl={3} xs={12} md={7}>
+              <ProductCard product={product} />{" "}
+            </Col>
+          ))}
         {!isLoading && !searchResult.active && products.length === 0 && (
           <i style={{ textAlign: "center" }}>
             Pas de produits pour cette catégorie
@@ -102,7 +106,11 @@ const CategoryPage = ({ match }) => {
         {!isLoading &&
           searchResult.active &&
           searchResult.list.length > 0 &&
-          searchResult.list.map((product) => <ProductCard product={product} />)}
+          searchResult.list.map((product) => (
+            <Col xxl={3} xs={12} md={7}>
+              <ProductCard product={product} />
+            </Col>
+          ))}
         {!isLoading &&
           searchResult.list.length === 0 &&
           searchResult.active && (

@@ -69,7 +69,7 @@ const Productlist = () => {
               productList.length > 0 &&
               !products.notFound &&
               productList.map((product) => (
-                <Col xxl={3} xs={12}>
+                <Col xxl={4} lg={6} xs={12} md={7}>
                   <ProductCard key={product.id} product={product} />
                 </Col>
               ))}
