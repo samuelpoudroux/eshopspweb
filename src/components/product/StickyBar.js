@@ -1,7 +1,7 @@
 import { Col, Row } from "antd";
 import React, { useContext } from "react";
 import styleVariable from "../../styleVariable";
-import { ArrowLeftOutlined, MenuOutlined } from "@ant-design/icons";
+import { MenuOutlined } from "@ant-design/icons";
 import { AppContext } from "../../context/context";
 import ProductsNumber from "./ProductsNumber";
 import FavoriteNumber from "./FavoriteNumber";

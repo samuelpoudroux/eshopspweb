@@ -20,7 +20,6 @@ function App() {
   const { state: globalSearchState } = globalSearch;
   const botRef = useRef(null);
   const { isMobile } = useResponsive();
-
   const { favoriteIsActive, chatActive } = popup;
 
   return (
