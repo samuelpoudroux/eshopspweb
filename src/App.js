@@ -23,7 +23,10 @@ function App() {
   const { favoriteIsActive, chatActive } = popup;
 
   return (
-    <div style={{ minHeight: "100vh", color: styleVariable.mainColor }}>
+    <div
+      style={{ minHeight: "100vh", color: styleVariable.mainColor }}
+      ref={appRef}
+    >
       <div style={{ minHeight: "100vh" }}>
         <Router history={history}>
           <Header botRef={botRef} />
@@ -37,7 +40,6 @@ function App() {
               justifyContent: "center",
               paddingTop: 20,
             }}
-            ref={appRef}
           >
             {globalSearchState.active && (
               <GlobalSearchResult state={globalSearchState} />
