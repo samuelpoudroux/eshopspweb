@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Col, Row } from "antd";
+import { Col, Divider, Row } from "antd";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import ProductCardResume from "./ProductCardResume";
 import styleVariable from "../../styleVariable";
 import { getTotalPrice } from "../../repository/product";
+import StickyBar from "../../components/product/StickyBar";
 
 const OrderResume = () => {
   const user = JSON.parse(localStorage.getItem("users"))
@@ -127,7 +128,7 @@ const OrderResume = () => {
             }}
             justify="space-between"
             align="middle"
-            gutter={[0, 10]}
+            gutter={[0, 5]}
           >
             {list &&
               list.length > 0 &&
@@ -142,7 +143,20 @@ const OrderResume = () => {
                 </Col>
               ))}
           </Row>
-          <Row>Total {getTotalPrice(list)}€</Row>
+          <Divider className="dividerAuth" />
+          <Row
+            style={{ padding: 20 }}
+            justify="center"
+            align="middle"
+            gutter={[15, 15]}
+          >
+            <Col>
+              <b style={{ fontSize: "1.5em" }}>Total: </b>{" "}
+            </Col>
+            <Col>
+              <span style={{ fontSize: "1.5em" }}>{getTotalPrice(list)}€</span>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Col>

@@ -18,6 +18,7 @@ import {
 import { PHONENUMBER, EMAIL, ADDRESS } from "../../constants/contact";
 import styleVariable from "../../styleVariable";
 import { PageHeader } from "../../components/PageHeader";
+import StickyBar from "../../components/product/StickyBar";
 
 const ContactForm = ({ history }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -62,6 +63,8 @@ const ContactForm = ({ history }) => {
         action={() => window.history.back()}
         title={<h2 style={{ color: styleVariable.mainColor }}>CONTACT</h2>}
       />
+      <StickyBar title={`CONTACT`} />
+
       <Row
         justify="space-around"
         style={{ height: !isMobile && "50vh", padding: 20 }}
@@ -79,7 +82,6 @@ const ContactForm = ({ history }) => {
             height: "100%",
           }}
         >
-          <h2 style={{ textAlign: "center" }}>Votre message</h2>
           <Row justify="center" align="middle">
             <Col span={24}>
               <Form

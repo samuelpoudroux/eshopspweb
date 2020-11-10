@@ -12,43 +12,34 @@ import Chat from "./components/Chat/Chat";
 import Footer from "./components/Footer";
 import useResponsive from "./customHooks/responsiveHook";
 import Favorites from "./components/favorite/Favorites";
-import Axios from "axios";
+import NavBar from "./components/Menu";
 import styleVariable from "./styleVariable";
 
 function App() {
-  const { globalSearch } = useContext(AppContext);
+  const { globalSearch, popup } = useContext(AppContext);
   const { state: globalSearchState } = globalSearch;
-  const [favoriteIsActive, setFavoriteActive] = useState(false);
-  const [subBasketVisible, setSubBasketVisible] = useState(false);
-  const [chatActive, setChatActive] = useState(false);
   const botRef = useRef(null);
   const appRef = useRef(null);
   const { isMobile } = useResponsive();
+
+  const { favoriteIsActive, chatActive } = popup;
 
   return (
     <div
       ref={appRef}
       style={{ minHeight: "100vh", color: styleVariable.mainColor }}
     >
-      <div style={{ minHeight: "100vh" }}>
-        <Router history={history}>
-          <Header
-            botRef={botRef}
-            setFavoriteActive={setFavoriteActive}
-            favoriteIsActive={favoriteIsActive}
-            setChatActive={setChatActive}
-            setSubBasketVisible={setSubBasketVisible}
-          />
-
-          <SubBasket
-            subBasketVisible={subBasketVisible}
-            setSubBasketVisible={setSubBasketVisible}
-          />
+      <div style={{ minHeight: "100vh" }} style={{ position: "relative" }}>
+        <Router history={history} style={{ position: "relative" }}>
+          <Header botRef={botRef} />
+          <NavBar />
+          <SubBasket />
 
           <Col
             span={24}
             style={{
               position: "relative",
+              zIndex: 1,
               paddingTop: 20,
             }}
           >
@@ -83,25 +74,14 @@ function App() {
                   <Row justify="start" align="middle">
                     <Col lg={6} md={12} xs={24} sm={24}></Col>
                     <Col span={24}>
-                      <Chat
-                        appRef={appRef}
-                        setChatActive={setChatActive}
-                        history={history}
-                        setFavoriteActive={setFavoriteActive}
-                        setSubBasketVisible={setSubBasketVisible}
-                      />
+                      <Chat appRef={appRef} history={history} />
                     </Col>
                   </Row>
                 </Col>
               )}
             </Col>
           </Col>
-          {favoriteIsActive && (
-            <Favorites
-              favoriteIsActive={favoriteIsActive}
-              setFavoriteActive={setFavoriteActive}
-            />
-          )}
+          {favoriteIsActive && <Favorites />}
           <Footer history={history} />
         </Router>
       </div>

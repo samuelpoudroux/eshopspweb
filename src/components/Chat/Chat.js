@@ -4,16 +4,18 @@ import ChatHeader from "./ChatHeader";
 import { Col, Row, Spin } from "antd";
 import useResponsive from "../../customHooks/responsiveHook";
 import * as io from "socket.io-client";
-import styleVariable from "../../styleVariable";
-const Chat = ({
-  setChatActive,
-  history,
-  appRef,
-  setFavoriteActive,
-  setBasketActive,
-  setSubBasketVisible,
-}) => {
+import { useContext } from "react";
+import { AppContext } from "../../context/context";
+const Chat = ({ history, appRef }) => {
   const [messages, setMessages] = useState([]);
+  const { popup } = useContext(AppContext);
+
+  const {
+    setChatActive,
+    setFavoriteActive,
+    setBasketActive,
+    setSubBasketVisible,
+  } = popup;
   const [socket, setSocket] = useState(io(process.env.REACT_APP_API_DOMAIN));
   const { isMobile } = useResponsive();
   useEffect(() => {}, []);

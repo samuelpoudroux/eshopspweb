@@ -14,6 +14,7 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import styleVariable from "../../styleVariable";
 import { useState } from "react";
 import { useForm } from "antd/lib/form/Form";
+import StickyBar from "../../components/product/StickyBar";
 const {
   REACT_APP_API_DOMAIN,
   REACT_APP_API_AUTH,
@@ -89,6 +90,8 @@ const Register = ({ history, match }) => {
         textAlign: "center",
       }}
     >
+      <StickyBar title={`CRÉER UN COMPTE`} />
+
       <Col
         xxl={6}
         xs={23}
@@ -98,6 +101,7 @@ const Register = ({ history, match }) => {
           background: "#fff",
           padding: "4%",
           paddingTop: "2%",
+          marginTop: 20,
         }}
       >
         <Row justify="space-between" align="middle">

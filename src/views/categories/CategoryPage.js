@@ -6,6 +6,7 @@ import { PageHeader } from "../../components/PageHeader";
 import styleVariable from "../../styleVariable";
 import { SearchOutlined } from "@ant-design/icons";
 import useResponsive from "../../customHooks/responsiveHook";
+import StickyBar from "../../components/product/StickyBar";
 
 const CategoryPage = ({ match }) => {
   const [products, setProducts] = useState([]);
@@ -62,6 +63,7 @@ const CategoryPage = ({ match }) => {
         action={() => window.history.back()}
         title={`Nos produits dans la catégorie ${categoryName}`}
       />
+      <StickyBar title={`Catégorie ${categoryName}`} />
 
       <Col span={24} style={{ margin: 20 }}>
         <form
@@ -107,7 +109,7 @@ const CategoryPage = ({ match }) => {
           searchResult.active &&
           searchResult.list.length > 0 &&
           searchResult.list.map((product) => (
-            <Col xxl={3} xs={12} md={7}>
+            <Col xxl={3} xs={17} md={7}>
               <ProductCard product={product} />
             </Col>
           ))}

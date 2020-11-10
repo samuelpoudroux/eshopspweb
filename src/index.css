@@ -9,9 +9,8 @@ code {
     monospace;
 }
 
-body, html {
-overflow-x: hidden; 
 
+
+::-webkit-scrollbar {
+  display: none;
 }
-
-

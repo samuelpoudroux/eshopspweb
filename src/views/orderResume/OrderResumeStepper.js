@@ -60,12 +60,12 @@ const OrderResumeStepper = ({ history, match }) => {
           <Button
             className="buttonResume"
             style={{
-              background: "none",
-              color: styleVariable.secondaryColor,
+              background: styleVariable.secondaryColor,
+              color: "white",
             }}
             onClick={() => redirectToLoginFormPaiement()}
           >
-            Finaliser mes achats
+            Payer maintenant
           </Button>
         )}
         {current === steps.length - 1 && (

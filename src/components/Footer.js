@@ -17,7 +17,7 @@ const Footer = ({ history }) => {
         width: "100%",
         padding: "2%",
         paddingBottom: "1%",
-        marginTop: "2%",
+        // marginTop: "2%",
       }}
     >
       <Row>

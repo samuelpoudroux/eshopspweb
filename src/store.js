@@ -5,6 +5,7 @@ import useGlobalSearchResult from "./customHooks/globalSearchHook";
 import { AppContext } from "./context/context";
 import useAuth from "./customHooks/authHook";
 import useFavorites from "./customHooks/favoritesHook";
+import usePopup from "./customHooks/popupHook";
 
 // the global store we give acces to our hooks to all appplication by this global store through appcontext provider
 const GlobalStore = ({ children }) => {
@@ -32,6 +33,16 @@ const GlobalStore = ({ children }) => {
     removeProductFromFavorites,
     removeAllProductFromFavorites,
   } = useFavorites();
+  const {
+    favoriteIsActive,
+    setFavoriteActive,
+    subBasketVisible,
+    setSubBasketVisible,
+    menuIsOpened,
+    setMenuIsOpened,
+    chatActive,
+    setChatActive,
+  } = usePopup();
   const { auth, login, logout, register, userData } = useAuth();
   const store = {
     basket: {
@@ -71,6 +82,17 @@ const GlobalStore = ({ children }) => {
       removeProductFromFavorites,
       removeAllProductFromFavorites,
       favorites,
+    },
+
+    popup: {
+      favoriteIsActive,
+      setFavoriteActive,
+      subBasketVisible,
+      setSubBasketVisible,
+      menuIsOpened,
+      setMenuIsOpened,
+      chatActive,
+      setChatActive,
     },
   };
   return <AppContext.Provider value={store}> {children} </AppContext.Provider>;

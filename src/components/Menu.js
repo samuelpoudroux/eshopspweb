@@ -20,7 +20,7 @@ import { useContext } from "react";
 import { AppContext } from "../context/context";
 const { SubMenu } = Menu;
 
-const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
+const NavBar = ({ history }) => {
   const goToPage = (e, url) => {
     localStorage.setItem("menuActive", e.key);
     history.push(url);
@@ -28,7 +28,8 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
   };
   const { categories } = useCategory();
   const { isMobile } = useResponsive();
-  const { auth } = useContext(AppContext);
+  const { auth, popup } = useContext(AppContext);
+  const { setMenuIsOpened, menuIsOpened } = popup;
 
   const user = localStorage.getItem("users") || null;
 
@@ -44,6 +45,11 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
     }
   };
 
+  const goHome = () => {
+    history.push("/");
+    setMenuIsOpened(false);
+  };
+
   const drawerHeader = () => {
     return (
       <Row justify="space-between" align="middle">
@@ -56,6 +62,7 @@ const NavBar = ({ setMenuIsOpened, menuIsOpened, history }) => {
               maxHeight: isMobile ? "120%" : "40%",
               cursor: "pointer",
             }}
+            onClick={() => goHome()}
           />
         </Col>
         <Col xxl={10} lg={12} xs={24} sm={12}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Row, Col, Drawer, Button } from "antd";
 import ProductsNumber from "../product/ProductsNumber";
 import TotalPrice from "./TotalPrice";
@@ -9,14 +9,17 @@ import { withRouter } from "react-router";
 import styleVariable from "../../styleVariable";
 import CleanBasket from "./CleanBasket";
 import { getTotalPrice } from "../../repository/product";
+import { AppContext } from "../../context/context";
 
-const SubBasket = ({ history, subBasketVisible, setSubBasketVisible }) => {
+const SubBasket = ({ history }) => {
   let num = 0;
   const list = JSON.parse(localStorage.getItem("basket")) || [];
   const { isMobile } = useResponsive();
   const user = JSON.parse(localStorage.getItem("users"))
     ? JSON.parse(localStorage.getItem("users"))
     : undefined;
+  const { popup } = useContext(AppContext);
+  const { subBasketVisible, setSubBasketVisible } = popup;
   const drawerHeader = () => {
     return (
       <Row style={{ paddingTop: "2%" }}>

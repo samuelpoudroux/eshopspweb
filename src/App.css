@@ -60,6 +60,12 @@ outline: none !important;
 .maxBudget::placeholder {
   color:var(--thirdColor)
 }
+.maxBudget{
+  border: 1px solid grey;
+  border-radius: 4px;
+  background: none !important;
+
+}
 
 .inputStyle{
   border: 0;
@@ -320,6 +326,6 @@ header {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.801);
-    z-index: 2;
+    z-index: 3;
   
   }

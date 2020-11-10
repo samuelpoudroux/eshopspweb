@@ -9,6 +9,7 @@ import ProductCard from "./ProductCard";
 import useResponsive from "../../customHooks/responsiveHook";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 import { PageHeader } from "../PageHeader";
+import StickyBar from "./StickyBar";
 
 const NewNess = ({ history }) => {
   const { products } = useContext(AppContext);
@@ -29,7 +30,7 @@ const NewNess = ({ history }) => {
     const newNessComponents = [];
     newNess.map((product) => {
       newNessComponents.push(
-        <Col xs={12} lg={6} md={6} xxl={3} key={product.id}>
+        <Col xs={17} lg={6} md={6} xxl={3} key={product.id}>
           <ProductCard productList product={product} />
         </Col>
       );
@@ -42,6 +43,7 @@ const NewNess = ({ history }) => {
       <h2 style={{ textAlign: "center", color: styleVariable.mainColor }}>
         NOS NOUVEAUTÉS
       </h2>
+      <StickyBar title="ACCUEIL" />
       {newNess.length === 0 && (
         <Row style={{ minHeight: "30vh" }} justify="center" align="middle">
           <Spin />

@@ -17,13 +17,8 @@ import useResponsive from "../../customHooks/responsiveHook";
 import useBasket from "../../customHooks/basketHook";
 import { upperCase } from "../../helpers/UpperCase";
 
-const Favorites = ({
-  setFavoriteActive,
-  history,
-  favoriteIsActive,
-  notClickable,
-}) => {
-  const { favorites, basket } = useContext(AppContext);
+const Favorites = ({ history, notClickable }) => {
+  const { favorites, basket, popup } = useContext(AppContext);
   const { notificationInfo, addNotification } = useBasket();
   const { isMobile } = useResponsive();
   const { addAllFavoritesToBasket } = basket;
@@ -31,6 +26,8 @@ const Favorites = ({
     removeAllProductFromFavorites,
     removeProductFromFavorites,
   } = favorites;
+
+  const { setFavoriteActive, favoriteIsActive } = popup;
   const list = JSON.parse(localStorage.getItem("favorites")) || [];
 
   const drawerHeader = () => {

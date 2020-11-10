@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { AppContext } from "../../context/context";
 import styleVariable from "../../styleVariable";
+import StickyBar from "../../components/product/StickyBar";
 
 const Login = ({ history, match }) => {
   const { auth } = useContext(AppContext);
@@ -58,6 +59,8 @@ const Login = ({ history, match }) => {
         textAlign: "center",
       }}
     >
+      <StickyBar title={`SE CONNECTER`} />
+
       <Col
         xxl={6}
         xs={23}
@@ -66,7 +69,7 @@ const Login = ({ history, match }) => {
             "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
           background: "#fff",
           padding: "4%",
-          paddingTop: "2%",
+          margin: 35,
         }}
       >
         <Row justify="space-between" align="middle">

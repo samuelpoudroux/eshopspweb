@@ -1,44 +1,40 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../context/context";
 import { withRouter } from "react-router";
-import { upperCase } from "../helpers/UpperCase";
 
 import {
   MenuOutlined,
-  UserOutlined,
-  LogoutOutlined,
   MessageOutlined,
   ContactsOutlined,
 } from "@ant-design/icons";
-import { Row, Col, Popover, Button, Divider } from "antd";
+import { Row, Col, Popover } from "antd";
 import logo from "../assets/logoWhite.svg";
 import test from "./videoplayback.mp4";
 import ProductsNumber from "../components/product/ProductsNumber";
-import NavBar from "./Menu";
 import CleanBasket from "../components/basket/CleanBasket";
 import Globalsearchinput from "../components/globalSearch/GlobalSearchInput";
 import useResponsive from "../customHooks/responsiveHook";
 import Axios from "axios";
-import { logout } from "../repository/auth";
 import useIsAdmin from "../customHooks/isAdminHooks";
 import AddNewProduct from "../form/product/AddNewProduct";
 import styleVariable from "../styleVariable";
 import FavoriteNumber from "./product/FavoriteNumber";
+import LogButton from "./LogButton";
 const { REACT_APP_API_DOMAIN, REACT_APP_API_GLOBAL_SEARCH } = process.env;
 
 const headerHeight = 50;
 
-const Header = ({
-  favoriteIsActive,
-  setFavoriteActive,
-  history,
-  setChatActive,
-  setSubBasketVisible,
-  subBasketVisible,
-  botRef,
-}) => {
-  const [menuIsOpened, setMenuIsOpened] = useState(false);
-  const [visible, setVisible] = useState(false);
+const Header = ({ history, botRef }) => {
+  const { popup } = useContext(AppContext);
+  const {
+    setChatActive,
+    setMenuIsOpened,
+    menuIsOpened,
+    setSubBasketVisible,
+    subBasketVisible,
+    setFavoriteActive,
+    favoriteIsActive,
+  } = popup;
   const { isMobile } = useResponsive();
   const [addProduct, setAddProduct] = useState(false);
   const { products, favorites } = useContext(AppContext);
@@ -69,26 +65,10 @@ const Header = ({
     products.getAllProducts();
   }, [state]);
 
-  const user = JSON.parse(localStorage.getItem("users"))
-    ? JSON.parse(localStorage.getItem("users"))
-    : undefined;
-
   useEffect(() => {
     setUpdate(!update);
   }, [favorites, isAdmin]);
 
-  const handleVisibleChange = (visible) => {
-    setVisible(visible);
-  };
-
-  const goToAuth = (auth) => {
-    if (auth === "login") {
-      history.push("/login");
-    } else if (auth === "register") {
-      history.push("/register");
-    }
-    setVisible(false);
-  };
   return (
     <header
       style={{
@@ -96,6 +76,7 @@ const Header = ({
         height: `${headerHeight}vh`,
         overflow: "hidden",
         objectFit: "contain",
+        zIndex: 3,
         background: styleVariable.backgroundColorGradient,
       }}
     >
@@ -107,7 +88,7 @@ const Header = ({
         className="overlay"
         style={{
           height: "100%",
-          zIndex: 2,
+          zIndex: 3,
           padding: 30,
         }}
       >
@@ -116,12 +97,7 @@ const Header = ({
           setAddProduct={setAddProduct}
           addProduct={addProduct}
         />
-        {
-          <NavBar
-            setMenuIsOpened={setMenuIsOpened}
-            menuIsOpened={menuIsOpened}
-          />
-        }
+
         <Row style={{ width: "100%" }}>
           <Col
             lg={10}
@@ -202,101 +178,8 @@ const Header = ({
               <Col lg={3} md={4} xs={3} sm={3}>
                 <CleanBasket />
               </Col>
-              <Col lg={4} md={8} xs={3} sm={3}>
-                <Row align="middle" justify="center">
-                  {user && user.isLogged && (
-                    <Popover
-                      content={
-                        <Col span={24}>
-                          <Row style={{ paddingTop: 4 }}>
-                            <p>
-                              Bienvenue{" "}
-                              {user.userData &&
-                                upperCase(user.userData.firstName)}
-                            </p>
-                          </Row>
-                          <Row style={{ paddingTop: 15 }}>
-                            <Button onClick={() => logout(history)}>
-                              {" "}
-                              Se Déconnecter
-                            </Button>
-                            <Button onClick={() => goToAuth("register")}>
-                              Gérer mon compte
-                            </Button>
-                          </Row>
-
-                          {isAdmin && (
-                            <>
-                              <Divider />
-                              <Row
-                                style={{
-                                  marginTop: isMobile && 20,
-                                }}
-                                justify="center"
-                              >
-                                <Button onClick={() => setAddProduct(true)}>
-                                  Ajouter un produit
-                                </Button>
-                              </Row>
-                            </>
-                          )}
-                        </Col>
-                      }
-                      trigger="click"
-                      visible={visible}
-                      onVisibleChange={handleVisibleChange}
-                    >
-                      <UserOutlined
-                        style={{
-                          color: styleVariable.thirdColor,
-                          fontSize: 20,
-                        }}
-                      />
-                    </Popover>
-                  )}
-
-                  {!user && (
-                    <Popover
-                      content={
-                        <Col span={24}>
-                          <Row style={{ paddingTop: 4 }}>
-                            <p>MON COMPTE</p>
-                          </Row>
-                          <Row style={{ paddingTop: 4 }} justify="center">
-                            <Button
-                              style={{
-                                width: "100%",
-                                background: styleVariable.secondaryColor,
-                                color: "white",
-                              }}
-                              icon={<UserOutlined />}
-                              onClick={() => goToAuth("login")}
-                            >
-                              Se connecter
-                            </Button>
-                          </Row>
-                          <Divider className="dividerAuth" />
-                          <Row>
-                            <b>Vous n'avez pas encore de compte ?</b>
-                          </Row>
-                          <Row style={{ paddingTop: 4 }} justify="center">
-                            <Button
-                              style={{ width: "100%" }}
-                              onClick={() => goToAuth("register")}
-                            >
-                              Créer un compte
-                            </Button>
-                          </Row>
-                        </Col>
-                      }
-                      trigger="click"
-                      visible={visible}
-                      onVisibleChange={handleVisibleChange}
-                    >
-                      <UserOutlined style={{ fontSize: 20, color: "white" }} />
-                    </Popover>
-                  )}
-                </Row>
+              <Col lg={3} md={4} xs={3} sm={3}>
+                <LogButton />
               </Col>
             </Row>
           </Col>

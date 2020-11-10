@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import "../../App.css";
 import styleVariable from "../../styleVariable";
 import { PageHeader } from "../PageHeader";
+import StickyBar from "./StickyBar";
 
 const Productlist = () => {
   const { products } = useContext(AppContext);
@@ -23,15 +24,19 @@ const Productlist = () => {
   }, [state]);
 
   return (
-    <Col span={24}>
+    <Col span={24} style={{}}>
       <PageHeader
         action={() => window.history.back()}
         title={<h2 style={{ color: styleVariable.mainColor }}>NOS PRODUITS</h2>}
       />
+      <StickyBar title="NOS PRODUITS" />
+
       <Row
         className="productCard"
         style={{
-          marginTop: 20,
+          marginTop: 40,
+          position: "relative",
+          zIndex: 1,
         }}
       >
         <SortProducts
@@ -69,7 +74,7 @@ const Productlist = () => {
               productList.length > 0 &&
               !products.notFound &&
               productList.map((product) => (
-                <Col xxl={4} lg={6} xs={12} md={7}>
+                <Col xxl={4} lg={6} xs={17} md={7}>
                   <ProductCard key={product.id} product={product} />
                 </Col>
               ))}
