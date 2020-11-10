@@ -36,7 +36,9 @@ const HomePage = ({ history }) => {
             />
           </Col>
         )}
-        <NewNess />
+        <Col span={24}>
+          <NewNess />
+        </Col>
 
         {isMobile && (
           <Col span={5}>
