@@ -23,24 +23,21 @@ function App() {
   const { favoriteIsActive, chatActive } = popup;
 
   return (
-    <div
-      id="topApp"
-      ref={appRef}
-      style={{ minHeight: "100vh", color: styleVariable.mainColor }}
-    >
-      <div style={{ minHeight: "100vh" }} style={{ position: "relative" }}>
-        <Router history={history} style={{ position: "relative" }}>
+    <div style={{ minHeight: "100vh", color: styleVariable.mainColor }}>
+      <div style={{ minHeight: "100vh" }}>
+        <Router history={history}>
           <Header botRef={botRef} />
           <NavBar />
           <SubBasket />
 
           <Col
-            span={24}
             style={{
               position: "relative",
               zIndex: 1,
+              justifyContent: "center",
               paddingTop: 20,
             }}
+            ref={appRef}
           >
             {globalSearchState.active && (
               <GlobalSearchResult state={globalSearchState} />

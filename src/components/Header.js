@@ -22,7 +22,7 @@ import FavoriteNumber from "./product/FavoriteNumber";
 import LogButton from "./LogButton";
 const { REACT_APP_API_DOMAIN, REACT_APP_API_GLOBAL_SEARCH } = process.env;
 
-const headerHeight = 50;
+const headerHeight = 40;
 
 const Header = ({ history, botRef }) => {
   const { popup, appRef } = useContext(AppContext);
@@ -78,7 +78,6 @@ const Header = ({ history, botRef }) => {
       style={{
         position: "relative",
         height: `${headerHeight}vh`,
-        overflow: "hidden",
         objectFit: "contain",
         zIndex: 3,
         background: styleVariable.backgroundColorGradient,

@@ -83,7 +83,6 @@ const ProductCard = ({ product, history, large }) => {
     );
     products.getAllProducts();
   };
-  console.log(product);
   return (
     <Col
       style={{

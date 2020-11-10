@@ -61,7 +61,7 @@ const StickyBar = ({ title }) => {
           </Col>
 
           <Col xxl={8} lg={8} md={8} xs={6} sm={3}>
-            <CleanBasket />
+            <CleanBasket placement="bottom" />
           </Col>
           <Col xxl={8} lg={8} md={8} xs={6} sm={3}>
             <LogButton placement="bottom" />

@@ -29,7 +29,7 @@ const NewNess = ({ history }) => {
     const newNessComponents = [];
     newNess.map((product) => {
       newNessComponents.push(
-        <Col xs={17} lg={6} md={6} xxl={3} key={product.id}>
+        <Col xs={12} lg={6} md={6} xxl={3} key={product.id}>
           <ProductCard productList product={product} />
         </Col>
       );
@@ -38,7 +38,7 @@ const NewNess = ({ history }) => {
   }, [newNess]);
 
   return (
-    <Col lg={23}>
+    <Col style={{ margin: 0, overflow: "hidden" }}>
       <h2 style={{ textAlign: "center", color: styleVariable.mainColor }}>
         NOS NOUVEAUTÉS
       </h2>

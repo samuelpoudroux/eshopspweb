@@ -65,10 +65,7 @@ const ContactForm = ({ history }) => {
       />
       <StickyBar title={`CONTACT`} />
 
-      <Row
-        justify="space-around"
-        style={{ height: !isMobile && "50vh", padding: 20 }}
-      >
+      <Row justify="space-around" style={{ padding: 20 }}>
         <Col
           lg={11}
           sm={24}
