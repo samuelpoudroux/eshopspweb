@@ -25,7 +25,7 @@ const { REACT_APP_API_DOMAIN, REACT_APP_API_GLOBAL_SEARCH } = process.env;
 const headerHeight = 50;
 
 const Header = ({ history, botRef }) => {
-  const { popup } = useContext(AppContext);
+  const { popup, appRef } = useContext(AppContext);
   const {
     setChatActive,
     setMenuIsOpened,
@@ -57,6 +57,10 @@ const Header = ({ history, botRef }) => {
   const goToBot = () => {
     botRef.current.scrollIntoView();
     setChatActive(true);
+  };
+  const goContact = () => {
+    appRef.current.scrollIntoView();
+    history.push("/contact");
   };
   useEffect(() => {
     getGlobalSearchApi();
@@ -138,7 +142,7 @@ const Header = ({ history, botRef }) => {
               <Col lg={3} md={4} xs={4} sm={4}>
                 <Row justify="center">
                   <ContactsOutlined
-                    onClick={() => history.push("/contact")}
+                    onClick={() => goContact()}
                     style={{ fontSize: 20, color: "white" }}
                   />
                 </Row>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import useBasket from "./customHooks/basketHook";
 import useProductList from "./customHooks/productListHook";
 import useGlobalSearchResult from "./customHooks/globalSearchHook";
@@ -27,6 +27,7 @@ const GlobalStore = ({ children }) => {
     getAllProducts,
   } = useProductList();
   const { globalSearch, search } = useGlobalSearchResult();
+  const appRef = useRef(null);
   const {
     favorites,
     addProductToFavorites,
@@ -94,6 +95,8 @@ const GlobalStore = ({ children }) => {
       chatActive,
       setChatActive,
     },
+
+    appRef: appRef,
   };
   return <AppContext.Provider value={store}> {children} </AppContext.Provider>;
 };

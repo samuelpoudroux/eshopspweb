@@ -30,14 +30,16 @@ const StickyBar = ({ title }) => {
         backgroundColor: "rgba(0, 0, 0, 0.801)",
       }}
     >
-      <Col xxl={1} xs={1}>
-        <MenuOutlined
-          onClick={() => setMenuIsOpened(!menuIsOpened)}
-          style={{ float: "left", fontSize: "28px", color: "white" }}
-        />
+      <Col xxl={1} xs={3}>
+        <Row justify="center">
+          <MenuOutlined
+            onClick={() => setMenuIsOpened(!menuIsOpened)}
+            style={{ float: "left", fontSize: "28px", color: "white" }}
+          />
+        </Row>
       </Col>
 
-      <Col xxl={17} xs={13}>
+      <Col xxl={17} xs={11}>
         <Row align="middle" justify="center" gutter={[0, 0]}>
           <Col>
             <h3 style={{ color: "white", margin: 0 }}>{title}</h3>

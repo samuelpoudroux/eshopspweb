@@ -4,12 +4,14 @@ import { Col, Divider, Row } from "antd";
 import styleVariable from "../styleVariable";
 import useCategory from "../customHooks/categoryHook";
 import useResponsive from "../customHooks/responsiveHook";
+import StickyBar from "../components/product/StickyBar";
 
 const HomePage = ({ history }) => {
   const { categories, setCategories } = useCategory();
   const { isMobile } = useResponsive();
   return (
     <Row justify="center" gutter={[0, 30]}>
+      <StickyBar title="ACCUEIL" />
       <Col xxl={12} xs={24} style={{ padding: 10 }}>
         <h1 style={{ textAlign: "center", color: styleVariable.mainColor }}>
           {" "}

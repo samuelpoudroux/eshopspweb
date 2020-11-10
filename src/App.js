@@ -16,16 +16,16 @@ import NavBar from "./components/Menu";
 import styleVariable from "./styleVariable";
 
 function App() {
-  const { globalSearch, popup } = useContext(AppContext);
+  const { globalSearch, popup, appRef } = useContext(AppContext);
   const { state: globalSearchState } = globalSearch;
   const botRef = useRef(null);
-  const appRef = useRef(null);
   const { isMobile } = useResponsive();
 
   const { favoriteIsActive, chatActive } = popup;
 
   return (
     <div
+      id="topApp"
       ref={appRef}
       style={{ minHeight: "100vh", color: styleVariable.mainColor }}
     >

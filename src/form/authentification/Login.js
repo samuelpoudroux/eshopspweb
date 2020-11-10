@@ -19,6 +19,19 @@ const Login = ({ history, match }) => {
   const { auth } = useContext(AppContext);
   const { login, user, userData } = auth;
   const [isLoading, setIsLoading] = useState(false);
+  const { appRef } = useContext(AppContext);
+
+  const goRegister = () => {
+    appRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
+
+    history.push(
+      `${match.params.paiement ? "/register/orderResume" : "/register"}`
+    );
+  };
 
   const onFinish = async (values) => {
     setIsLoading(true);
@@ -146,13 +159,7 @@ const Login = ({ history, match }) => {
               color: "grey",
               border: `1px solid ${styleVariable.secondaryColor}`,
             }}
-            onClick={() =>
-              history.push(
-                `${
-                  match.params.paiement ? "/register/orderResume" : "/register"
-                }`
-              )
-            }
+            onClick={() => goRegister()}
           >
             CRÉEZ MON COMPTE
           </Button>

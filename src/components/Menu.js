@@ -25,10 +25,15 @@ const NavBar = ({ history }) => {
     localStorage.setItem("menuActive", e.key);
     history.push(url);
     setMenuIsOpened(false);
+    appRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
   };
   const { categories } = useCategory();
   const { isMobile } = useResponsive();
-  const { auth, popup } = useContext(AppContext);
+  const { auth, popup, appRef } = useContext(AppContext);
   const { setMenuIsOpened, menuIsOpened } = popup;
 
   const user = localStorage.getItem("users") || null;
@@ -37,16 +42,36 @@ const NavBar = ({ history }) => {
     if (register) {
       history.push("/register");
       setMenuIsOpened(false);
+      appRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
     } else if (!register && user) {
       auth.logout(history);
+      appRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
     } else {
       history.push("/login");
       setMenuIsOpened(false);
+      appRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
     }
   };
 
   const goHome = () => {
     history.push("/");
+    appRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
     setMenuIsOpened(false);
   };
 

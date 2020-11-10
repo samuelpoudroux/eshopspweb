@@ -15,6 +15,8 @@ import styleVariable from "../../styleVariable";
 import { useState } from "react";
 import { useForm } from "antd/lib/form/Form";
 import StickyBar from "../../components/product/StickyBar";
+import { useContext } from "react";
+import { AppContext } from "../../context/context";
 const {
   REACT_APP_API_DOMAIN,
   REACT_APP_API_AUTH,
@@ -24,6 +26,7 @@ const {
 const Register = ({ history, match }) => {
   const [billsAddress, setBillsAddress] = useState(null);
   const [dropAddress, setDropAddress] = useState(null);
+  const { appRef } = useContext(AppContext);
   const [form] = useForm();
 
   const onFinish = async (values) => {
@@ -58,6 +61,16 @@ const Register = ({ history, match }) => {
   };
 
   const itemKey = "userData";
+
+  const goLogin = () => {
+    appRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
+
+    history.push("/login");
+  };
 
   const setAdresse = (value, type) => {
     if (type === "billsAddress") {
@@ -337,7 +350,7 @@ const Register = ({ history, match }) => {
               color: "grey",
               border: `1px solid ${styleVariable.secondaryColor}`,
             }}
-            onClick={() => history.push("/login")}
+            onClick={() => goLogin()}
           >
             IDENTIFIEZ-VOUS
           </Button>
