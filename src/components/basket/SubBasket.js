@@ -64,6 +64,7 @@ const SubBasket = ({ history }) => {
                 <CleanBasket
                   color={styleVariable.secondaryColor}
                   fontSize={"20px"}
+                  placement={"bottom"}
                 />
               </Row>
             </Col>
