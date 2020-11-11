@@ -25,7 +25,7 @@ const StickyBar = ({ title }) => {
         position: "fixed",
         top: 0,
         zIndex: 2,
-        padding: 13,
+        padding: 18,
         width: "100%",
         backgroundColor: "rgba(0, 0, 0, 0.801)",
       }}
@@ -42,7 +42,7 @@ const StickyBar = ({ title }) => {
       <Col xxl={17} xs={11}>
         <Row align="middle" justify="center" gutter={[0, 0]}>
           <Col>
-            <h3 style={{ color: "white", margin: 0 }}>{title}</h3>
+            <b style={{ color: "white", margin: 0 }}>{title}</b>
           </Col>
         </Row>
       </Col>

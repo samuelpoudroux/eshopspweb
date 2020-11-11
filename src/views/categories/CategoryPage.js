@@ -61,9 +61,9 @@ const CategoryPage = ({ match }) => {
     <Col lg={24}>
       <PageHeader
         action={() => window.history.back()}
-        title={`Catégorie ${categoryName}`}
+        title={`${categoryName}`}
       />
-      <StickyBar title={`Catégorie ${categoryName}`} />
+      <StickyBar title={categoryName} />
 
       <Col span={24} style={{ margin: 20 }}>
         <form

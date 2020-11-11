@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import NewNess from "../components/product/NewNess";
 import { Col, Divider, Row } from "antd";
 import styleVariable from "../styleVariable";
 import useCategory from "../customHooks/categoryHook";
 import useResponsive from "../customHooks/responsiveHook";
 import StickyBar from "../components/product/StickyBar";
+import { AppContext } from "../context/context";
 
 const HomePage = ({ history }) => {
+  const { appRef } = useContext(AppContext);
   const { categories, setCategories } = useCategory();
   const { isMobile } = useResponsive();
+
+  const goToCategory = (category) => {
+    appRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
+    history.push(`/categories/${category.name}`);
+  };
   return (
     <Col>
       <StickyBar title="ACCUEIL" />
@@ -36,6 +47,7 @@ const HomePage = ({ history }) => {
             />
           </Col>
         )}
+
         <Col span={24}>
           <NewNess />
         </Col>
@@ -64,7 +76,7 @@ const HomePage = ({ history }) => {
                   xs={24}
                   xxl={4}
                   key={category.id}
-                  onClick={() => history.push(`/categories/${category.name}`)}
+                  onClick={() => goToCategory(category)}
                 >
                   <Row justify="center" align="middle">
                     <b style={{ fontSize: "1.2em" }}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Col, Row } from "antd";
 import logo from "../assets/logoWhite.svg";
@@ -6,10 +6,20 @@ import useResponsive from "../customHooks/responsiveHook";
 import { PHONENUMBER, EMAIL, ADDRESS } from "../constants/contact";
 import { HomeOutlined, PhoneOutlined, MailOutlined } from "@ant-design/icons";
 import styleVariable from "../styleVariable";
+import { AppContext } from "../context/context";
 
 const Footer = ({ history }) => {
   const { isMobile } = useResponsive();
+  const { appRef } = useContext(AppContext);
 
+  const goHome = () => {
+    appRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
+    history.push("/");
+  };
   return (
     <Col
       style={{
@@ -17,7 +27,6 @@ const Footer = ({ history }) => {
         width: "100%",
         padding: "2%",
         paddingBottom: "1%",
-        // marginTop: "2%",
       }}
     >
       <Row>
@@ -26,7 +35,7 @@ const Footer = ({ history }) => {
             <img
               alt="logo"
               src={logo}
-              onClick={() => history.push("/")}
+              onClick={() => goHome()}
               style={{
                 maxWidth: isMobile ? "50%" : "25%",
                 maxHeight: isMobile ? "50%" : "25%",

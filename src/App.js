@@ -40,6 +40,7 @@ function App() {
               justifyContent: "center",
               paddingTop: 20,
             }}
+            className="content"
           >
             {globalSearchState.active && (
               <GlobalSearchResult state={globalSearchState} />

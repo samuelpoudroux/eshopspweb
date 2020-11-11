@@ -22,8 +22,6 @@ import FavoriteNumber from "./product/FavoriteNumber";
 import LogButton from "./LogButton";
 const { REACT_APP_API_DOMAIN, REACT_APP_API_GLOBAL_SEARCH } = process.env;
 
-const headerHeight = 40;
-
 const Header = ({ history, botRef }) => {
   const { popup, appRef } = useContext(AppContext);
   const {
@@ -35,7 +33,7 @@ const Header = ({ history, botRef }) => {
     setFavoriteActive,
     favoriteIsActive,
   } = popup;
-  const { isMobile } = useResponsive();
+  const { isMobile, isBigScreen } = useResponsive();
   const [addProduct, setAddProduct] = useState(false);
   const { products, favorites } = useContext(AppContext);
   const [state, updateState] = useState(true);
@@ -43,6 +41,7 @@ const Header = ({ history, botRef }) => {
   const { isAdmin } = useIsAdmin();
   const [globalSearchApi, setGlobalSearchApi] = useState();
 
+  const headerHeight = isBigScreen || isMobile ? 60 : 30;
   const getGlobalSearchApi = async () => {
     try {
       const { data: globalSearchApi } = await Axios.get(
