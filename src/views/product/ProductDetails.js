@@ -70,6 +70,7 @@ const ProductDetail = ({ match }) => {
               />
               <Carousel>
                 {images &&
+                  images.length > 0 &&
                   images.map((image) => (
                     <Col key={iùage.url} span={24}>
                       <Row justify="center" style={{ cursor: "zoom-in" }}>
