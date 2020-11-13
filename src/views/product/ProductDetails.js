@@ -33,14 +33,14 @@ const ProductDetail = ({ match }) => {
       REACT_APP_API_DOMAIN +
         REACT_APP_API_PRODUCT +
         REACT_APP_API_IMAGES +
-        `${id}`
+        `${product.uid}`
     );
     setImages(data);
   };
   useEffect(() => {
     getProduct();
     getImages();
-  }, []);
+  }, [product]);
 
   return (
     <Col span={24} style={{}}>

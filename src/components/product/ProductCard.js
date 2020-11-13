@@ -92,7 +92,7 @@ const ProductCard = ({ product, history, large }) => {
       REACT_APP_API_DOMAIN +
         REACT_APP_API_PRODUCT +
         REACT_APP_API_IMAGES +
-        `${product.id}`
+        `${product.uid}`
     );
     setImages(data);
   };
