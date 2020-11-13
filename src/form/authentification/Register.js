@@ -17,6 +17,9 @@ import { useForm } from "antd/lib/form/Form";
 import StickyBar from "../../components/product/StickyBar";
 import { useContext } from "react";
 import { AppContext } from "../../context/context";
+import scrollTop from "../../repository/scrollTop";
+import PageHeader from "../../components/PageHeader";
+import useResponsive from "../../customHooks/responsiveHook";
 const {
   REACT_APP_API_DOMAIN,
   REACT_APP_API_AUTH,
@@ -27,6 +30,7 @@ const Register = ({ history, match }) => {
   const [billsAddress, setBillsAddress] = useState(null);
   const [dropAddress, setDropAddress] = useState(null);
   const { appRef } = useContext(AppContext);
+  const { isMobile } = useResponsive();
   const [form] = useForm();
 
   const onFinish = async (values) => {
@@ -63,11 +67,7 @@ const Register = ({ history, match }) => {
   const itemKey = "userData";
 
   const goLogin = () => {
-    appRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
+    scrollTop(appRef);
 
     history.push("/login");
   };
@@ -104,7 +104,6 @@ const Register = ({ history, match }) => {
       }}
     >
       <StickyBar title={`CRÉER UN COMPTE`} />
-
       <Col
         xxl={6}
         xs={23}
@@ -114,7 +113,7 @@ const Register = ({ history, match }) => {
           background: "#fff",
           padding: "4%",
           paddingTop: "2%",
-          marginTop: 20,
+          marginTop: isMobile ? 40 : 120,
         }}
       >
         <Row justify="space-between" align="middle">
@@ -150,8 +149,8 @@ const Register = ({ history, match }) => {
             <Input
               bordered={false}
               className="inputStyle"
-              onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
               name="lastName"
+              onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
               defaultValue={getDefaultValueLocalStorage("lastName", itemKey)}
             />
           </Form.Item>

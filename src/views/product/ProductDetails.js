@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Col, Row, Tag } from "antd";
+import { Col, Row, Carousel, Image } from "antd";
 import Addandremoveproduct from "../../components/product/AddAndRemoveProduct";
 import ProductDetailsTabs from "../../components/product/ProductDetailsTabs";
 import useBasket from "../../customHooks/basketHook";
-import styleVariable from "../../styleVariable";
 import { PaperClipOutlined } from "@ant-design/icons";
 import { upperCase } from "../../helpers/UpperCase";
-import { PageHeader } from "../../components/PageHeader";
 import useResponsive from "../../customHooks/responsiveHook";
 import StickyBar from "../../components/product/StickyBar";
 
 const ProductDetail = ({ match }) => {
   const [product, setProduct] = useState({});
+  const [images, setImages] = useState([]);
   const { notification, addNotification } = useBasket();
   const { isMobile, isTabletOrMobile } = useResponsive();
   const { id } = match.params;
-  const { REACT_APP_API_DOMAIN, REACT_APP_API_PRODUCT } = process.env;
+  const {
+    REACT_APP_API_DOMAIN,
+    REACT_APP_API_PRODUCT,
+    REACT_APP_API_IMAGES,
+  } = process.env;
 
   const getProduct = async () => {
     const { data } = await axios.get(
@@ -24,22 +27,26 @@ const ProductDetail = ({ match }) => {
     );
     setProduct(data);
   };
+
+  const getImages = async () => {
+    const { data } = await axios.get(
+      REACT_APP_API_DOMAIN +
+        REACT_APP_API_PRODUCT +
+        REACT_APP_API_IMAGES +
+        `${id}`
+    );
+    setImages(data);
+  };
   useEffect(() => {
     getProduct();
+    getImages();
   }, []);
 
   return (
-    <Col span={24}>
-      <PageHeader
-        action={() => window.history.back()}
-        title={`${product.name && product.name.toUpperCase()} `}
-      />
+    <Col span={24} style={{}}>
       <StickyBar title={`${product.name && product.name.toUpperCase()}`} />
 
-      <Row
-        justify="center"
-        style={{ padding: 20, marginTop: isMobile ? 50 : 60 }}
-      >
+      <Row justify="center" style={{ padding: 20, paddingTop: 60 }}>
         <Col xxl={12} lg={12} md={12} xs={24}>
           <Row justify="center">
             <Col
@@ -59,11 +66,20 @@ const ProductDetail = ({ match }) => {
                   fontSize: "4em",
                 }}
               />
-              <img
-                alt="Image du produit"
-                src={`${product.imageUrl}`}
-                style={{ maxHeight: "250px", maxWidth: "100%" }}
-              />
+              <Carousel>
+                {images.map((image) => (
+                  <Col span={24}>
+                    <Row justify="center" style={{ cursor: "zoom-in" }}>
+                      <Image
+                        alt="Image du produit"
+                        src={`${image.url}`}
+                        style={{ maxHeight: "250px", maxWidth: "250px" }}
+                      />
+                    </Row>
+                  </Col>
+                ))}
+              </Carousel>
+
               <Row justify="center" align="middle">
                 <h1 style={{ fontStyle: "italic" }}>
                   {product.name && upperCase(product.name)}

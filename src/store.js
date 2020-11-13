@@ -43,6 +43,10 @@ const GlobalStore = ({ children }) => {
     setMenuIsOpened,
     chatActive,
     setChatActive,
+    addProduct,
+    setAddProduct,
+    addCategory,
+    setAddCategory,
   } = usePopup();
   const { auth, login, logout, register, userData } = useAuth();
   const store = {
@@ -60,22 +64,22 @@ const GlobalStore = ({ children }) => {
       list: state.sortedProducts,
       notFound: state.notFound,
       get: getProducts,
-      getAllProducts: getAllProducts,
+      getAllProducts,
       sort: sortProducts,
       sortByCategories: sortProductsByCategories,
     },
 
     globalSearch: {
       state: globalSearch,
-      search: search,
+      search,
     },
 
     auth: {
-      login: login,
-      logout: logout,
-      register: register,
+      login,
+      logout,
+      register,
       user: auth,
-      userData: userData,
+      userData,
     },
 
     favorites: {
@@ -94,6 +98,10 @@ const GlobalStore = ({ children }) => {
       setMenuIsOpened,
       chatActive,
       setChatActive,
+      addProduct,
+      setAddProduct,
+      addCategory,
+      setAddCategory,
     },
 
     appRef: appRef,

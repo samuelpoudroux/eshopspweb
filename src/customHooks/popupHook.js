@@ -1,7 +1,4 @@
-import { useCallback, useState } from "react";
-import globalSearchReducer from "../reducers/globalSearchReducer";
-
-import { GLOBAL_SEARCH } from "../constants/globalSearch";
+import { useState } from "react";
 
 // this customhooks manage the logic of my basket and give us acces to the function to add to remove
 const usePopup = (props) => {
@@ -9,6 +6,8 @@ const usePopup = (props) => {
   const [subBasketVisible, setSubBasketVisible] = useState(false);
   const [menuIsOpened, setMenuIsOpened] = useState(false);
   const [chatActive, setChatActive] = useState(false);
+  const [addProduct, setAddProduct] = useState(false);
+  const [addCategory, setAddCategory] = useState(false);
 
   return {
     favoriteIsActive,
@@ -19,6 +18,10 @@ const usePopup = (props) => {
     setMenuIsOpened,
     chatActive,
     setChatActive,
+    addProduct,
+    setAddProduct,
+    addCategory,
+    setAddCategory,
   };
 };
 usePopup.propTypes = {};

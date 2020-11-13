@@ -10,13 +10,15 @@ import styleVariable from "../styleVariable";
 import { withRouter } from "react-router";
 import { useContext } from "react";
 import { AppContext } from "../context/context";
+import scrollTop from "../repository/scrollTop";
 
 const LogButton = ({ history, placement }) => {
   const [visible, setVisible] = useState(false);
   const { isAdmin } = useIsAdmin();
   const { isMobile } = useResponsive();
-  const [addProduct, setAddProduct] = useState(false);
-  const { appRef } = useContext(AppContext);
+  const { appRef, popup } = useContext(AppContext);
+
+  const { setAddProduct, setAddCategory } = popup;
 
   const user = JSON.parse(localStorage.getItem("users"))
     ? JSON.parse(localStorage.getItem("users"))
@@ -32,11 +34,7 @@ const LogButton = ({ history, placement }) => {
       history.push("/register");
     }
     setVisible(false);
-    appRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
+    scrollTop(appRef);
   };
   return (
     <Row align="middle" justify="center">
@@ -69,6 +67,9 @@ const LogButton = ({ history, placement }) => {
                   >
                     <Button onClick={() => setAddProduct(true)}>
                       Ajouter un produit
+                    </Button>
+                    <Button onClick={() => setAddCategory(true)}>
+                      Ajouter une categorie
                     </Button>
                   </Row>
                 </>

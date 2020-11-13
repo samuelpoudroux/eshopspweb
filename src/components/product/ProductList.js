@@ -7,8 +7,8 @@ import SortProducts from "./SortProducts";
 import { useEffect } from "react";
 import "../../App.css";
 import styleVariable from "../../styleVariable";
-import { PageHeader } from "../PageHeader";
 import StickyBar from "./StickyBar";
+import PageHeader from "../PageHeader";
 
 const Productlist = () => {
   const { products } = useContext(AppContext);
@@ -25,12 +25,8 @@ const Productlist = () => {
 
   return (
     <Col span={24} style={{}}>
-      <PageHeader
-        action={() => window.history.back()}
-        title={<h2 style={{ color: styleVariable.mainColor }}>NOS PRODUITS</h2>}
-      />
+      <PageHeader title={"NOS PRODUITS"} />
       <StickyBar title="NOS PRODUITS" />
-
       <Row
         className="productCard"
         style={{

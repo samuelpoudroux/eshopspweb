@@ -8,13 +8,12 @@ import styleVariable from "../../styleVariable";
 import ProductCard from "./ProductCard";
 import useResponsive from "../../customHooks/responsiveHook";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
-import { PageHeader } from "../PageHeader";
+import scrollTop from "../../repository/scrollTop";
 
 const NewNess = ({ history }) => {
-  const { products } = useContext(AppContext);
+  const { products, appRef } = useContext(AppContext);
   const { isMobile, isBigScreen, isDesktopOrLaptop } = useResponsive();
 
-  console.log("isBigScreen", isBigScreen);
   const carrouselRef = useRef();
 
   const [newNess, setNewNess] = useState([]);
@@ -36,6 +35,11 @@ const NewNess = ({ history }) => {
     });
     setCopy(newNessComponents);
   }, [newNess]);
+
+  const goProductPage = () => {
+    history.push("/products");
+    scrollTop(appRef);
+  };
 
   return (
     <Col style={{ margin: 0, overflow: "hidden" }}>
@@ -94,7 +98,7 @@ const NewNess = ({ history }) => {
       )}
       <Row justify="center">
         <Button
-          onClick={() => history.push("/products")}
+          onClick={() => goProductPage()}
           style={{ background: styleVariable.secondaryColor, color: "white" }}
         >
           + de produits

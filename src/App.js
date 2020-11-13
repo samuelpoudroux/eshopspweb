@@ -14,26 +14,43 @@ import useResponsive from "./customHooks/responsiveHook";
 import Favorites from "./components/favorite/Favorites";
 import NavBar from "./components/Menu";
 import styleVariable from "./styleVariable";
+import AddNewProduct from "./form/product/AddNewProduct";
+import AddCategory from "./form/category/AddCategory";
 
 function App() {
   const { globalSearch, popup, appRef } = useContext(AppContext);
   const { state: globalSearchState } = globalSearch;
   const botRef = useRef(null);
   const { isMobile } = useResponsive();
-  const { favoriteIsActive, chatActive } = popup;
+  const {
+    favoriteIsActive,
+    chatActive,
+    setUpdate,
+    update,
+    addProduct,
+    setAddProduct,
+    addCategory,
+    setAddCategory,
+  } = popup;
 
   return (
-    <div
-      style={{ minHeight: "100vh", color: styleVariable.mainColor }}
-      ref={appRef}
-    >
+    <div style={{ minHeight: "100vh", color: styleVariable.mainColor }}>
       <div style={{ minHeight: "100vh" }}>
         <Router history={history}>
           <Header botRef={botRef} />
           <NavBar />
           <SubBasket />
+          <AddNewProduct
+            setAddProduct={setAddProduct}
+            addProduct={addProduct}
+          />
+          <AddCategory
+            setAddCategory={setAddCategory}
+            addCategory={addCategory}
+          />
 
           <Col
+            ref={appRef}
             style={{
               position: "relative",
               zIndex: 1,

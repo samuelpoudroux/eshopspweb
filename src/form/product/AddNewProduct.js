@@ -12,6 +12,7 @@ import {
   Select,
   Upload,
   Drawer,
+  message,
 } from "antd";
 import {
   setValuesLocalStorage,
@@ -22,6 +23,7 @@ import {
   SmileOutlined,
   UploadOutlined,
   CloseCircleOutlined,
+  InboxOutlined,
 } from "@ant-design/icons";
 import TextArea from "antd/lib/input/TextArea";
 import styleVariable from "../../styleVariable";
@@ -38,16 +40,11 @@ const {
   REACT_APP_API_CATEGORIES,
 } = process.env;
 
-const Loadnewproduct = ({
-  setAddProduct,
-  forceUpdate,
-  addProduct,
-  history,
-}) => {
+const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
   const [categories, setCategories] = useState([]);
-  const [files, setFiles] = useState();
-  const { isMobile } = useResponsive();
+  const [files, setFiles] = useState([]);
 
+  const { isMobile } = useResponsive();
   const drawerHeader = () => {
     return (
       <Row justify="space-between" align="middle">
@@ -67,14 +64,46 @@ const Loadnewproduct = ({
     );
   };
 
+  const beforeUploadManage = (file) => {
+    setFiles([...files, file]);
+    return false;
+  };
+
+  const props = {
+    beforeUpload: (file) => beforeUploadManage(file),
+
+    onChange(info) {
+      setFiles([...files, info.file]);
+      if (info.file.status !== "uploading") {
+        // console.log(info.file, info.fileList);
+      }
+      if (info.file.status === "done") {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    progress: {
+      strokeColor: {
+        "0%": "#108ee9",
+        "100%": "#87d068",
+      },
+      strokeWidth: 3,
+      format: (percent) => `${parseFloat(percent.toFixed(2))}%`,
+    },
+  };
+
   const onFinish = async (values) => {
     const formData = new FormData();
-    formData.append("upload", files);
-
+    files.forEach((file) => {
+      delete file.originFileObj;
+      delete file.percent;
+      delete file.uid;
+      formData.append("upload", file);
+    });
     for (const [key, value] of Object.entries(values)) {
       formData.append(`${key}`, value);
     }
-
     try {
       const { data } = await Axios.post(
         REACT_APP_API_DOMAIN +
@@ -94,7 +123,6 @@ const Loadnewproduct = ({
           icon: <SmileOutlined style={{ color: "#89ba17" }} />,
         });
         setAddProduct(false);
-        forceUpdate({});
       }
       if (error && !message) {
         notification.open({
@@ -103,12 +131,12 @@ const Loadnewproduct = ({
         });
       }
     } catch (error) {
-      console.log(error.message);
       if (error.message === "Request failed with status code 401") {
         notification.open({
           message: "Merci de vous reconnecter",
         });
         history.push("/login");
+        setAddProduct(false);
       }
     }
   };
@@ -165,6 +193,7 @@ const Loadnewproduct = ({
               <CloseCircleOutlined onClick={() => setAddProduct(false)} />
             </Row>
             <Form
+              enctype="multipart/form-data"
               style={{ marginTop: "3%", overflowY: "scroll" }}
               name="basic"
               onFinish={onFinish}
@@ -188,9 +217,7 @@ const Loadnewproduct = ({
                     className="inputStyle"
                     onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                     name="name"
-                    defaultValue={getDefaultValueLocalStorage("name", {
-                      itemKey,
-                    })}
+                    defaultValue={getDefaultValueLocalStorage("name", itemKey)}
                   />
                 </Form.Item>
                 <Form.Item
@@ -311,22 +338,17 @@ const Loadnewproduct = ({
                     <Option value="false">non</Option>
                   </Select>
                 </Form.Item>
-                <div style={{ textAlign: "center" }}>
-                  <Upload
-                    beforeUpload={(file) => {
-                      setFiles(file);
-                      return false;
-                    }}
-                    onRemove={(file) => setFiles(null)}
-                  >
-                    <Button
-                      disabled={files ? true : false}
-                      icon={<UploadOutlined />}
-                    >
-                      Charger l'image du produit
-                    </Button>
-                  </Upload>
-                </div>
+
+                <Form.Item label="Images produits">
+                  <Form.Item>
+                    <Upload {...props} multiple={true}>
+                      <Button icon={<UploadOutlined />}>
+                        Insérer des images
+                      </Button>
+                    </Upload>
+                    ,
+                  </Form.Item>
+                </Form.Item>
 
                 <Form.Item style={{ textAlign: "center" }}>
                   <Button
@@ -338,7 +360,7 @@ const Loadnewproduct = ({
                     type="primary"
                     htmlType="submit"
                   >
-                    S'enregistrer
+                    Créer le produit
                   </Button>
                 </Form.Item>
               </Col>

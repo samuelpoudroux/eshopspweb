@@ -27,7 +27,7 @@ const StickyBar = ({ title }) => {
         zIndex: 2,
         padding: 18,
         width: "100%",
-        backgroundColor: "rgba(0, 0, 0, 0.801)",
+        backgroundColor: "rgba(0, 0, 0, 1)",
       }}
     >
       <Col xxl={1} xs={3}>

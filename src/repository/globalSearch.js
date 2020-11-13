@@ -1,4 +1,5 @@
 const globalSearch = (state, searchValue, globalSearchApi) => {
+  console.log(globalSearchApi);
   const productSorted =
     globalSearchApi &&
     Object.fromEntries(
@@ -15,13 +16,13 @@ const globalSearch = (state, searchValue, globalSearchApi) => {
                 (e.category &&
                   e.category.toLowerCase().includes(searchValue.toLowerCase()))
             )
-          : null
+          : null,
       ])
     );
 
   const searchResult = {
     ...state,
-    ...productSorted
+    ...productSorted,
   };
 
   if (searchValue.length !== 0) {

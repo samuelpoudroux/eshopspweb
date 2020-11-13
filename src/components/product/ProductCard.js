@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../context/context";
 import { Badge, Tag } from "antd";
 import { withRouter } from "react-router";
+import axios from "axios";
 import { Row, Col } from "antd";
 import PropTypes from "prop-types";
 import ReactStars from "react-rating-stars-component";
@@ -22,20 +23,23 @@ import { upperCase } from "../../helpers/UpperCase";
 import useResponsive from "../../customHooks/responsiveHook";
 import { useState } from "react";
 import NewNessIcon from "./NewNessIcon";
+import scrollTop from "../../repository/scrollTop";
 
 const {
   REACT_APP_API_DOMAIN,
   REACT_APP_API_PRODUCT_IS_NEWNESS,
   REACT_APP_API_PRODUCT,
+  REACT_APP_API_IMAGES,
 } = process.env;
 
 const ProductCard = ({ product, history, large }) => {
-  const { globalSearch, favorites, products } = useContext(AppContext);
+  const { globalSearch, favorites, products, appRef } = useContext(AppContext);
   const { isAdmin } = useIsAdmin();
   const { search } = globalSearch;
   const { isMobile } = useResponsive();
   const [num, setNum] = useState(0);
   const { notification, addNotification, renderNotification } = useBasket();
+  const [images, setImages] = useState([]);
 
   const isFavorites =
     JSON.parse(localStorage.getItem("favorites")) &&
@@ -48,16 +52,15 @@ const ProductCard = ({ product, history, large }) => {
   const {
     id,
     name,
-    category,
     notation,
     productPrice,
     shortDescription,
     newNess,
-    productPriceReduced,
   } = product;
 
   const goToProductDetails = (e) => {
     search("");
+    scrollTop(appRef);
     history.push(`/productDetails/${id}`);
   };
 
@@ -83,6 +86,22 @@ const ProductCard = ({ product, history, large }) => {
     );
     products.getAllProducts();
   };
+
+  const getImages = async () => {
+    const { data } = await axios.get(
+      REACT_APP_API_DOMAIN +
+        REACT_APP_API_PRODUCT +
+        REACT_APP_API_IMAGES +
+        `${product.id}`
+    );
+    setImages(data);
+  };
+
+  useEffect(() => {
+    getImages();
+  }, []);
+
+  console.log("images", images);
   return (
     <Col
       style={{
@@ -138,7 +157,7 @@ const ProductCard = ({ product, history, large }) => {
               position: "absolute",
               top: 20,
               left: 27,
-              zIndex: 2,
+              zIndex: 1,
               fontSize: "8px",
               color: "white",
             }}
@@ -152,7 +171,7 @@ const ProductCard = ({ product, history, large }) => {
         <Row align="middle" justify="center">
           <img
             alt="Image du produit"
-            src={`${product.imageUrl}`}
+            src={`${images.length > 0 && images[0].url}`}
             style={{ height: "70px", width: "50%", zIndex: 0 }}
           />
         </Row>

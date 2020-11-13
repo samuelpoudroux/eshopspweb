@@ -18,6 +18,7 @@ import useResponsive from "../customHooks/responsiveHook";
 import { upperCase } from "../helpers/UpperCase";
 import { useContext } from "react";
 import { AppContext } from "../context/context";
+import scrollTop from "../repository/scrollTop";
 const { SubMenu } = Menu;
 
 const NavBar = ({ history }) => {
@@ -25,11 +26,7 @@ const NavBar = ({ history }) => {
     localStorage.setItem("menuActive", e.key);
     history.push(url);
     setMenuIsOpened(false);
-    appRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
+    scrollTop(appRef);
   };
   const { categories } = useCategory();
   const { isMobile } = useResponsive();
@@ -42,36 +39,20 @@ const NavBar = ({ history }) => {
     if (register) {
       history.push("/register");
       setMenuIsOpened(false);
-      appRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
+      scrollTop(appRef);
     } else if (!register && user) {
       auth.logout(history);
-      appRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
+      scrollTop(appRef);
     } else {
       history.push("/login");
       setMenuIsOpened(false);
-      appRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
+      scrollTop(appRef);
     }
   };
 
   const goHome = () => {
     history.push("/");
-    appRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
+    scrollTop(appRef);
     setMenuIsOpened(false);
   };
 

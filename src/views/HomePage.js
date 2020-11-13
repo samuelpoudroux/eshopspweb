@@ -6,6 +6,8 @@ import useCategory from "../customHooks/categoryHook";
 import useResponsive from "../customHooks/responsiveHook";
 import StickyBar from "../components/product/StickyBar";
 import { AppContext } from "../context/context";
+import scrollTop from "../repository/scrollTop";
+import PageHeader from "../components/PageHeader";
 
 const HomePage = ({ history }) => {
   const { appRef } = useContext(AppContext);
@@ -13,17 +15,14 @@ const HomePage = ({ history }) => {
   const { isMobile } = useResponsive();
 
   const goToCategory = (category) => {
-    appRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
+    scrollTop(appRef);
     history.push(`/categories/${category.name}`);
   };
   return (
     <Col>
       <StickyBar title="ACCUEIL" />
-      <Row justify="center" gutter={[0, 30]}>
+      <PageHeader title={"ACCUEIL"} />
+      <Row justify="center" gutter={[0, 30]} style={{ marginTop: 40 }}>
         <Col xxl={12} xs={24} style={{ padding: 10 }}>
           <h1 style={{ textAlign: "center", color: styleVariable.mainColor }}>
             {" "}
@@ -72,8 +71,15 @@ const HomePage = ({ history }) => {
               categories.list.map((category) => (
                 <Col
                   className="categoryTag"
-                  style={{ margin: 20 }}
+                  style={{
+                    margin: 20,
+                    background: `linear-gradient(0deg, #0000008a, #89ba17), url(${category.imageUrl})`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                  }}
                   xs={24}
+                  md={12}
                   xxl={4}
                   key={category.id}
                   onClick={() => goToCategory(category)}

@@ -36,7 +36,6 @@ const Header = ({ history, botRef }) => {
   const { isMobile, isBigScreen } = useResponsive();
   const [addProduct, setAddProduct] = useState(false);
   const { products, favorites } = useContext(AppContext);
-  const [state, updateState] = useState(true);
   const [update, setUpdate] = useState(false);
   const { isAdmin } = useIsAdmin();
   const [globalSearchApi, setGlobalSearchApi] = useState();
@@ -64,9 +63,6 @@ const Header = ({ history, botRef }) => {
   useEffect(() => {
     getGlobalSearchApi();
   }, []);
-  useEffect(() => {
-    products.getAllProducts();
-  }, [state]);
 
   useEffect(() => {
     setUpdate(!update);
@@ -94,12 +90,6 @@ const Header = ({ history, botRef }) => {
           padding: 30,
         }}
       >
-        <AddNewProduct
-          forceUpdate={updateState}
-          setAddProduct={setAddProduct}
-          addProduct={addProduct}
-        />
-
         <Row style={{ width: "100%" }}>
           <Col
             lg={10}

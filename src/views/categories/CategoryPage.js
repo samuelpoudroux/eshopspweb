@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { Col, Input, Row, Spin } from "antd";
 import ProductCard from "../../components/product/ProductCard";
-import { PageHeader } from "../../components/PageHeader";
 import styleVariable from "../../styleVariable";
 import { SearchOutlined } from "@ant-design/icons";
 import useResponsive from "../../customHooks/responsiveHook";
 import StickyBar from "../../components/product/StickyBar";
+import PageHeader from "../../components/PageHeader";
 
 const CategoryPage = ({ match }) => {
   const [products, setProducts] = useState([]);
   const [searchResult, setSearchResult] = useState({ active: false, list: [] });
   const [isLoading, setIsLoading] = useState(false);
-  const { isMobile } = useResponsive();
 
   const { name: categoryName } = match.params;
   const {
@@ -59,13 +58,9 @@ const CategoryPage = ({ match }) => {
   }, [match.params.name]);
   return (
     <Col lg={24}>
-      <PageHeader
-        action={() => window.history.back()}
-        title={`${categoryName}`}
-      />
       <StickyBar title={categoryName} />
-
-      <Col span={24} style={{ margin: 20 }}>
+      <PageHeader title={categoryName} />
+      <Col span={24} style={{ margin: 40 }}>
         <form
           onSubmit={(e) => console.log(e)}
           className=""

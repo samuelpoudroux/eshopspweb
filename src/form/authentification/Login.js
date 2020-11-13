@@ -14,24 +14,30 @@ import {
 import { AppContext } from "../../context/context";
 import styleVariable from "../../styleVariable";
 import StickyBar from "../../components/product/StickyBar";
+import scrollTop from "../../repository/scrollTop";
+import PageHeader from "../../components/PageHeader";
+import useResponsive from "../../customHooks/responsiveHook";
+import {
+  getDefaultValueLocalStorage,
+  setValuesLocalStorage,
+} from "../../repository/localStorage";
 
 const Login = ({ history, match }) => {
   const { auth } = useContext(AppContext);
   const { login, user, userData } = auth;
   const [isLoading, setIsLoading] = useState(false);
   const { appRef } = useContext(AppContext);
+  const { isMobile } = useResponsive();
 
   const goRegister = () => {
-    appRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
+    scrollTop(appRef);
 
     history.push(
       `${match.params.paiement ? "/register/orderResume" : "/register"}`
     );
   };
+
+  const itemKey = "login";
 
   const onFinish = async (values) => {
     setIsLoading(true);
@@ -82,7 +88,7 @@ const Login = ({ history, match }) => {
             "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
           background: "#fff",
           padding: "4%",
-          margin: 35,
+          marginTop: isMobile ? 40 : 120,
         }}
       >
         <Row justify="space-between" align="middle">
@@ -114,7 +120,13 @@ const Login = ({ history, match }) => {
               },
             ]}
           >
-            <Input className="inputStyle" bordered={false} />
+            <Input
+              onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
+              defaultValue={getDefaultValueLocalStorage("email", itemKey)}
+              name="email"
+              className="inputStyle"
+              bordered={false}
+            />
           </Form.Item>
           <Form.Item
             label="Password"
