@@ -39,6 +39,8 @@ const ProductDetail = ({ match }) => {
   };
   useEffect(() => {
     getProduct();
+  }, []);
+  useEffect(() => {
     getImages();
   }, [product]);
 
@@ -67,17 +69,18 @@ const ProductDetail = ({ match }) => {
                 }}
               />
               <Carousel>
-                {images.map((image) => (
-                  <Col span={24}>
-                    <Row justify="center" style={{ cursor: "zoom-in" }}>
-                      <Image
-                        alt="Image du produit"
-                        src={`${image.url}`}
-                        style={{ maxHeight: "250px", maxWidth: "250px" }}
-                      />
-                    </Row>
-                  </Col>
-                ))}
+                {images &&
+                  images.map((image) => (
+                    <Col key={iùage.url} span={24}>
+                      <Row justify="center" style={{ cursor: "zoom-in" }}>
+                        <Image
+                          alt="Image du produit"
+                          src={`${image.url}`}
+                          style={{ maxHeight: "250px", maxWidth: "250px" }}
+                        />
+                      </Row>
+                    </Col>
+                  ))}
               </Carousel>
 
               <Row justify="center" align="middle">
