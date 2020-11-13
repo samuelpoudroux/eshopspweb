@@ -10,7 +10,7 @@ import useResponsive from "../../customHooks/responsiveHook";
 import StickyBar from "../../components/product/StickyBar";
 
 const ProductDetail = ({ match }) => {
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState({});
   const [images, setImages] = useState([]);
   const { notification, addNotification } = useBasket();
   const { isMobile, isTabletOrMobile } = useResponsive();
@@ -25,6 +25,7 @@ const ProductDetail = ({ match }) => {
     const { data } = await axios.get(
       REACT_APP_API_DOMAIN + REACT_APP_API_PRODUCT + `${id}`
     );
+    console.log("dataproduct", data);
     setProduct(data);
   };
 
@@ -35,17 +36,17 @@ const ProductDetail = ({ match }) => {
         REACT_APP_API_IMAGES +
         `${product.uid}`
     );
+    console.log("dataimage", data);
     setImages(data);
   };
   useEffect(() => {
     getProduct();
   }, []);
   useEffect(() => {
-    if (product) {
-      getImages();
-    }
+    getImages();
   }, [product]);
 
+  console.log("images", images);
   return (
     <Col span={24} style={{}}>
       <StickyBar title={`${product.name && product.name.toUpperCase()}`} />

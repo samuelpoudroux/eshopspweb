@@ -94,6 +94,7 @@ const ProductCard = ({ product, history, large }) => {
         REACT_APP_API_IMAGES +
         `${product.uid}`
     );
+    console.log("dataget", data);
     setImages(data);
   };
 
@@ -102,6 +103,7 @@ const ProductCard = ({ product, history, large }) => {
   }, []);
 
   console.log("images", images);
+
   return (
     <Col
       style={{
