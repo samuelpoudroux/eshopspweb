@@ -10,7 +10,7 @@ import useResponsive from "../../customHooks/responsiveHook";
 import StickyBar from "../../components/product/StickyBar";
 
 const ProductDetail = ({ match }) => {
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(null);
   const [images, setImages] = useState([]);
   const { notification, addNotification } = useBasket();
   const { isMobile, isTabletOrMobile } = useResponsive();
@@ -41,7 +41,9 @@ const ProductDetail = ({ match }) => {
     getProduct();
   }, []);
   useEffect(() => {
-    getImages();
+    if (product) {
+      getImages();
+    }
   }, [product]);
 
   return (
