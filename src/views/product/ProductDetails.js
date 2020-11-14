@@ -68,7 +68,7 @@ const ProductDetail = ({ match }) => {
                   fontSize: "4em",
                 }}
               />
-              <Carousel>
+              <Carousel autoplay style={{ padding: 40 }}>
                 {images &&
                   images.length > 0 &&
                   images.map((image) => (

@@ -70,10 +70,11 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
   };
 
   const props = {
-    beforeUpload: (file) => beforeUploadManage(file),
+    beforeUpload: (file) => false,
 
     onChange(info) {
-      setFiles([...files, info.file]);
+      console.log(info);
+      setFiles([...files, ...info.fileList.map((file) => file.originFileObj)]);
       if (info.file.status !== "uploading") {
       }
       if (info.file.status === "done") {
@@ -94,6 +95,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
 
   const onFinish = async (values) => {
     const formData = new FormData();
+    console.log(files);
     files.forEach((file) => {
       delete file.originFileObj;
       delete file.percent;
