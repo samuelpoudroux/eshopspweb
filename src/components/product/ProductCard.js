@@ -174,7 +174,7 @@ const ProductCard = ({ product, history, large }) => {
             style={{ height: "70px", width: "50%", zIndex: 0 }}
           />
         </Row>
-        <Row style={{ paddingTop: 5, height: "25px" }} justify="center">
+        <Row style={{ paddingTop: 5, height: "40px" }} justify="center">
           <b
             style={{
               color: styleVariable.secondaryColor,

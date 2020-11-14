@@ -27,7 +27,7 @@ const HomePage = ({ history }) => {
         gutter={[0, 30]}
         style={{ marginTop: isMobile ? 20 : 40 }}
       >
-        <Col xxl={12} xs={24}>
+        <Col xxl={12} xs={24} style={{ paddingLeft: 20, paddingRight: 20 }}>
           <h1 style={{ textAlign: "center", color: styleVariable.mainColor }}>
             {" "}
             QUI SOMMES-NOUS ?
@@ -70,7 +70,7 @@ const HomePage = ({ history }) => {
           <Row justify="center">
             <h2 style={{ color: styleVariable.mainColor }}>NOS CATÉGORIES</h2>
           </Row>
-          <Row style={{ padding: 10 }} justify="center">
+          <Row style={{ padding: 20 }} justify="center">
             {categories.list.length > 0 &&
               categories.list.map((category) => (
                 <CategoryCard id={category.id} />

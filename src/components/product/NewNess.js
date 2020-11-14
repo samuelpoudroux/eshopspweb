@@ -28,7 +28,7 @@ const NewNess = ({ history }) => {
     const newNessComponents = [];
     newNess.map((product) => {
       newNessComponents.push(
-        <Col xs={12} lg={6} md={6} xxl={3} key={product.id}>
+        <Col xs={12} lg={8} md={10} xxl={3} key={product.id}>
           <ProductCard productList product={product} />
         </Col>
       );

@@ -39,6 +39,7 @@ const CategoryCard = ({ history, id }) => {
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        margin: 10,
       }}
       xs={24}
       md={12}
