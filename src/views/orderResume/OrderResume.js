@@ -6,10 +6,6 @@ import styleVariable from "../../styleVariable";
 import { getTotalPrice } from "../../repository/product";
 
 const OrderResume = () => {
-  const user = JSON.parse(localStorage.getItem("users"))
-    ? JSON.parse(localStorage.getItem("users"))
-    : undefined;
-
   const [billsAddress, setBillsAddress] = useState();
   const [dropAddress, setDropAddress] = useState();
 
@@ -154,6 +150,7 @@ const OrderResume = () => {
                 <Col span={24}>
                   <ProductCardResume
                     id={item.id}
+                    key={item.id}
                     productName={item.name}
                     productPrice={item.productPrice}
                     num={item.num}
