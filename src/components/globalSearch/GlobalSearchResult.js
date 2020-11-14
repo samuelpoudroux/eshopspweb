@@ -54,11 +54,7 @@ const GlobalsearchResult = ({ state, history }) => {
                     {value.name}
                   </Row>
                 )}
-                {key === "products" && (
-                  <Col xxl={4} lg={6} xs={17} md={7}>
-                    <Productcard product={value} />
-                  </Col>
-                )}
+                {key === "products" && <Productcard product={value} />}
                 {key === "categories" && <CategoryCard id={value.id} />}
               </Row>
             ))}
