@@ -18,6 +18,7 @@ const OrderResume = () => {
     ) {
       const user = JSON.parse(localStorage.getItem("users"));
       if (user && user.userData) {
+        console.log("totobillsAddress", JSON.parse(user.userData.billsAddress));
         setBillsAddress(JSON.parse(user.userData.billsAddress));
       }
     }
@@ -30,6 +31,7 @@ const OrderResume = () => {
     ) {
       const user = JSON.parse(localStorage.getItem("users"));
       if (user && user.userData) {
+        console.log("totodropAddress", JSON.parse(user.userData.dropAddress));
         setDropAddress(JSON.parse(user.userData.dropAddress));
       }
     }
