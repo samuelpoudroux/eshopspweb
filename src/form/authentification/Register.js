@@ -18,7 +18,6 @@ import StickyBar from "../../components/product/StickyBar";
 import { useContext } from "react";
 import { AppContext } from "../../context/context";
 import scrollTop from "../../repository/scrollTop";
-import PageHeader from "../../components/PageHeader";
 import useResponsive from "../../customHooks/responsiveHook";
 const {
   REACT_APP_API_DOMAIN,

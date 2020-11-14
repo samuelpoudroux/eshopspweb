@@ -9,16 +9,24 @@ const OrderResume = () => {
   const [billsAddress, setBillsAddress] = useState();
   const [dropAddress, setDropAddress] = useState();
 
-  useEffect(() => {
+  const addBillsAddress = (value) => {
+    setBillsAddress(value);
+    localStorage.setItem("billsAddress", JSON.stringify(value));
+  };
+  const addDropAddress = (value) => {
+    setDropAddress(value);
+    localStorage.setItem("dropAddress", JSON.stringify(value));
+  };
+
+  const getInitialAddressData = async () => {
     if (localStorage.getItem("billsAddress")) {
       setBillsAddress(JSON.parse(localStorage.getItem("billsAddress")));
     } else if (
       localStorage.getItem("users") &&
       !localStorage.getItem("billsAddress")
     ) {
-      const user = JSON.parse(localStorage.getItem("users"));
+      const user = await JSON.parse(localStorage.getItem("users"));
       if (user && user.userData) {
-        console.log("totobillsAddress", JSON.parse(user.userData.billsAddress));
         setBillsAddress(JSON.parse(user.userData.billsAddress));
       }
     }
@@ -29,25 +37,16 @@ const OrderResume = () => {
       localStorage.getItem("users") &&
       !localStorage.getItem("dropAddress")
     ) {
-      const user = JSON.parse(localStorage.getItem("users"));
+      const user = await JSON.parse(localStorage.getItem("users"));
       if (user && user.userData) {
-        console.log("totodropAddress", JSON.parse(user.userData.dropAddress));
         setDropAddress(JSON.parse(user.userData.dropAddress));
       }
     }
+  };
+
+  useEffect(() => {
+    getInitialAddressData();
   }, []);
-
-  useEffect(() => {
-    if (billsAddress) {
-      localStorage.setItem("billsAddress", JSON.stringify(billsAddress));
-    }
-  }, [billsAddress]);
-
-  useEffect(() => {
-    if (dropAddress) {
-      localStorage.setItem("dropAddress", JSON.stringify(dropAddress));
-    }
-  }, [dropAddress]);
 
   const list = JSON.parse(localStorage.getItem("basket")) || [];
   return (
@@ -82,7 +81,7 @@ const OrderResume = () => {
                 <GooglePlacesAutocomplete
                   selectProps={{
                     value: dropAddress,
-                    onChange: (value) => setDropAddress(value),
+                    onChange: (value) => addDropAddress(value),
                   }}
                   apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
                   autocompletionRequest={{
@@ -108,7 +107,7 @@ const OrderResume = () => {
                   style={{ width: "100%" }}
                   selectProps={{
                     value: billsAddress,
-                    onChange: (value) => setBillsAddress(value),
+                    onChange: (value) => addBillsAddress(value),
                   }}
                   apiKey={process.env.REACT_APP_API_GOOGLE_MAP}
                   autocompletionRequest={{
@@ -149,10 +148,9 @@ const OrderResume = () => {
             {list &&
               list.length > 0 &&
               list.map((item) => (
-                <Col span={24}>
+                <Col span={24} key={item.id}>
                   <ProductCardResume
                     id={item.id}
-                    key={item.id}
                     productName={item.name}
                     productPrice={item.productPrice}
                     num={item.num}
