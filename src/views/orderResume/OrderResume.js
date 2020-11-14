@@ -21,7 +21,9 @@ const OrderResume = () => {
       !localStorage.getItem("billsAddress")
     ) {
       const user = JSON.parse(localStorage.getItem("users"));
-      setBillsAddress(JSON.parse(user.userData.billsAddress));
+      setBillsAddress(
+        user && user.userData && JSON.parse(user.userData.billsAddress)
+      );
     }
 
     if (localStorage.getItem("dropAddress")) {
@@ -31,7 +33,9 @@ const OrderResume = () => {
       !localStorage.getItem("dropAddress")
     ) {
       const user = JSON.parse(localStorage.getItem("users"));
-      setDropAddress(JSON.parse(user.userData.dropAddress));
+      setDropAddress(
+        user && user.userData && JSON.parse(user.userData.dropAddress)
+      );
     }
   }, []);
 
