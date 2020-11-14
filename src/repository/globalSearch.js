@@ -7,13 +7,18 @@ const globalSearch = (state, searchValue, globalSearchApi) => {
         Array.isArray(value)
           ? value.filter(
               (e) =>
-                e.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+                (e.name &&
+                  e.name
+                    .toLowerCase()
+                    .includes(searchValue && searchValue.toLowerCase())) ||
                 (e.shortDescription &&
                   e.shortDescription
                     .toLowerCase()
-                    .includes(searchValue.toLowerCase())) ||
+                    .includes(searchValue && searchValue.toLowerCase())) ||
                 (e.category &&
-                  e.category.toLowerCase().includes(searchValue.toLowerCase()))
+                  e.category
+                    .toLowerCase()
+                    .includes(searchValue && searchValue.toLowerCase()))
             )
           : null,
       ])
