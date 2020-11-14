@@ -22,37 +22,43 @@ import scrollTop from "../repository/scrollTop";
 const { SubMenu } = Menu;
 
 const NavBar = ({ history }) => {
+  const { categories } = useCategory();
+  const { isMobile } = useResponsive();
+  const { auth, popup, appRef, globalSearch } = useContext(AppContext);
+  const { setMenuIsOpened, menuIsOpened } = popup;
+  const { search } = globalSearch;
+
+  const user = localStorage.getItem("users") || null;
+
   const goToPage = (e, url) => {
     localStorage.setItem("menuActive", e.key);
     history.push(url);
     setMenuIsOpened(false);
     scrollTop(appRef);
+    search("");
   };
-  const { categories } = useCategory();
-  const { isMobile } = useResponsive();
-  const { auth, popup, appRef } = useContext(AppContext);
-  const { setMenuIsOpened, menuIsOpened } = popup;
-
-  const user = localStorage.getItem("users") || null;
-
   const manageConnection = (register) => {
     if (register) {
       history.push("/register");
       setMenuIsOpened(false);
       scrollTop(appRef);
+      search("");
     } else if (!register && user) {
       auth.logout(history);
       scrollTop(appRef);
+      search("");
     } else {
       history.push("/login");
       setMenuIsOpened(false);
       scrollTop(appRef);
+      search("");
     }
   };
 
   const goHome = () => {
     history.push("/");
     scrollTop(appRef);
+    search("");
     setMenuIsOpened(false);
   };
 

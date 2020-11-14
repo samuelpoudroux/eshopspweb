@@ -22,7 +22,12 @@ const Globalsearchinput = ({ globalSearchApi }) => {
       placeholder="Rechercher"
       name="search"
       onChange={(e) => globalSearchHandleChange(e.target.value)}
-      suffix={<SearchOutlined style={{ color: styleVariable.thirdColor }} />}
+      suffix={
+        <SearchOutlined
+          onClick={() => globalSearchHandleChange(searchValue)}
+          style={{ color: styleVariable.thirdColor }}
+        />
+      }
     />
   );
 };

@@ -1,5 +1,4 @@
 const globalSearch = (state, searchValue, globalSearchApi) => {
-  console.log(globalSearchApi);
   const productSorted =
     globalSearchApi &&
     Object.fromEntries(

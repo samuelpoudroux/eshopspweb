@@ -68,7 +68,6 @@ const Register = ({ history, match }) => {
 
   const goLogin = () => {
     scrollTop(appRef);
-
     history.push("/login");
   };
 

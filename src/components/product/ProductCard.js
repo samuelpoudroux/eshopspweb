@@ -94,15 +94,12 @@ const ProductCard = ({ product, history, large }) => {
         REACT_APP_API_IMAGES +
         `${product.uid}`
     );
-    console.log("dataget", data);
     setImages(data);
   };
 
   useEffect(() => {
     getImages();
   }, []);
-
-  console.log("images", images);
 
   return (
     <Col

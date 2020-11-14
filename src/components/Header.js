@@ -23,7 +23,7 @@ import LogButton from "./LogButton";
 const { REACT_APP_API_DOMAIN, REACT_APP_API_GLOBAL_SEARCH } = process.env;
 
 const Header = ({ history, botRef }) => {
-  const { popup, appRef } = useContext(AppContext);
+  const { popup, appRef, globalSearch } = useContext(AppContext);
   const {
     setChatActive,
     setMenuIsOpened,
@@ -39,7 +39,7 @@ const Header = ({ history, botRef }) => {
   const [update, setUpdate] = useState(false);
   const { isAdmin } = useIsAdmin();
   const [globalSearchApi, setGlobalSearchApi] = useState();
-
+  const { search } = globalSearch;
   const headerHeight = isBigScreen || isMobile ? 60 : 30;
   const getGlobalSearchApi = async () => {
     try {
@@ -58,6 +58,7 @@ const Header = ({ history, botRef }) => {
   };
   const goContact = () => {
     appRef.current.scrollIntoView();
+    search("");
     history.push("/contact");
   };
   useEffect(() => {
@@ -68,6 +69,10 @@ const Header = ({ history, botRef }) => {
     setUpdate(!update);
   }, [favorites, isAdmin]);
 
+  const goHome = () => {
+    history.push("/");
+    search("");
+  };
   return (
     <header
       style={{
@@ -114,7 +119,7 @@ const Header = ({ history, botRef }) => {
                     maxHeight: isMobile ? "150%" : "70%",
                     cursor: "pointer",
                   }}
-                  onClick={() => history.push("/")}
+                  onClick={() => goHome()}
                 />
               </Col>
               <Col lg={4} md={4} xs={4} sm={4}>

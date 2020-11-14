@@ -4,14 +4,17 @@ import { Col, Input, Row, Spin } from "antd";
 import ProductCard from "../../components/product/ProductCard";
 import styleVariable from "../../styleVariable";
 import { SearchOutlined } from "@ant-design/icons";
-import useResponsive from "../../customHooks/responsiveHook";
 import StickyBar from "../../components/product/StickyBar";
 import PageHeader from "../../components/PageHeader";
+import { AppContext } from "../../context/context";
+import { useContext } from "react";
 
 const CategoryPage = ({ match }) => {
   const [products, setProducts] = useState([]);
   const [searchResult, setSearchResult] = useState({ active: false, list: [] });
   const [isLoading, setIsLoading] = useState(false);
+  const { globalSearch } = useContext(AppContext);
+  const { search } = globalSearch;
 
   const { name: categoryName } = match.params;
   const {
@@ -55,6 +58,7 @@ const CategoryPage = ({ match }) => {
   };
   useEffect(() => {
     getProductsByCategories();
+    search("");
   }, [match.params.name]);
   return (
     <Col lg={24}>

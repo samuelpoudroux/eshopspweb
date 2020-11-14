@@ -19,19 +19,19 @@ import PageHeader from "../../components/PageHeader";
 import useResponsive from "../../customHooks/responsiveHook";
 import {
   getDefaultValueLocalStorage,
+  getInitialValue,
   setValuesLocalStorage,
 } from "../../repository/localStorage";
 
 const Login = ({ history, match }) => {
   const { auth } = useContext(AppContext);
-  const { login, user, userData } = auth;
+  const { login, user } = auth;
   const [isLoading, setIsLoading] = useState(false);
   const { appRef } = useContext(AppContext);
   const { isMobile } = useResponsive();
 
   const goRegister = () => {
     scrollTop(appRef);
-
     history.push(
       `${match.params.paiement ? "/register/orderResume" : "/register"}`
     );
@@ -79,7 +79,6 @@ const Login = ({ history, match }) => {
       }}
     >
       <StickyBar title={`SE CONNECTER`} />
-
       <Col
         xxl={6}
         xs={23}
@@ -106,6 +105,7 @@ const Login = ({ history, match }) => {
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
+          initialValues={getInitialValue(itemKey)}
         >
           <Col>
             <Divider className="dividerAuth" />

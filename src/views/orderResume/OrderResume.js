@@ -4,35 +4,49 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import ProductCardResume from "./ProductCardResume";
 import styleVariable from "../../styleVariable";
 import { getTotalPrice } from "../../repository/product";
-import StickyBar from "../../components/product/StickyBar";
 
 const OrderResume = () => {
   const user = JSON.parse(localStorage.getItem("users"))
     ? JSON.parse(localStorage.getItem("users"))
     : undefined;
 
-  const [billsAddress, setBillsAddress] = useState(
-    localStorage.getItem("billsAddress")
-      ? JSON.parse(localStorage.getItem("billsAddress"))
-      : user && user.userData.billsAddress
-      ? JSON.parse(user.userData.billsAddress)
-      : null
-  );
-  const [dropAddress, setDropAddress] = useState(
-    localStorage.getItem("dropAddress")
-      ? JSON.parse(localStorage.getItem("dropAddress"))
-      : user && user.userData.dropAddress
-      ? JSON.parse(user.userData.dropAddress)
-      : null
-  );
+  const [billsAddress, setBillsAddress] = useState();
+  const [dropAddress, setDropAddress] = useState();
+
   useEffect(() => {
-    billsAddress &&
+    if (localStorage.getItem("billsAddress")) {
+      setBillsAddress(JSON.parse(localStorage.getItem("billsAddress")));
+    } else if (
+      localStorage.getItem("users") &&
+      !localStorage.getItem("billsAddress")
+    ) {
+      const user = JSON.parse(localStorage.getItem("users"));
+      setBillsAddress(JSON.parse(user.userData.billsAddress));
+    }
+
+    if (localStorage.getItem("dropAddress")) {
+      setDropAddress(JSON.parse(localStorage.getItem("dropAddress")));
+    } else if (
+      localStorage.getItem("users") &&
+      !localStorage.getItem("dropAddress")
+    ) {
+      const user = JSON.parse(localStorage.getItem("users"));
+      setDropAddress(JSON.parse(user.userData.dropAddress));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (billsAddress) {
       localStorage.setItem("billsAddress", JSON.stringify(billsAddress));
+    }
   }, [billsAddress]);
+
   useEffect(() => {
-    dropAddress &&
+    if (dropAddress) {
       localStorage.setItem("dropAddress", JSON.stringify(dropAddress));
+    }
   }, [dropAddress]);
+
   const list = JSON.parse(localStorage.getItem("basket")) || [];
   return (
     <Col style={{ padding: 10 }}>

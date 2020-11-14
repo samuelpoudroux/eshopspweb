@@ -17,6 +17,7 @@ const TotalPrice = ({ history, setSubBasketVisible, notClickable }) => {
   };
   return (
     <Popconfirm
+      placement={"bottom"}
       disabled={totalPrice === 0}
       style={{ cursor: "pointer" }}
       title="Souhaitez vous finaliser vos achats ？"

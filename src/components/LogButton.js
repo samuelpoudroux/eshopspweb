@@ -16,8 +16,8 @@ const LogButton = ({ history, placement }) => {
   const [visible, setVisible] = useState(false);
   const { isAdmin } = useIsAdmin();
   const { isMobile } = useResponsive();
-  const { appRef, popup } = useContext(AppContext);
-
+  const { appRef, popup, globalSearch } = useContext(AppContext);
+  const { search } = globalSearch;
   const { setAddProduct, setAddCategory } = popup;
 
   const user = JSON.parse(localStorage.getItem("users"))
@@ -34,6 +34,7 @@ const LogButton = ({ history, placement }) => {
       history.push("/register");
     }
     setVisible(false);
+    search("");
     scrollTop(appRef);
   };
   return (

@@ -5,6 +5,7 @@ import { withRouter } from "react-router";
 import { Row, Col, Divider, Tag } from "antd";
 import styleVariable from "../../styleVariable";
 import { AppContext } from "../../context/context";
+import CategoryCard from "../../views/categories/CategoryCard";
 
 const GlobalsearchResult = ({ state, history }) => {
   const items = [];
@@ -12,13 +13,12 @@ const GlobalsearchResult = ({ state, history }) => {
   const { search } = globalSearch;
 
   const goToPage = (key, value) => {
-    history.push(key === "categories" && `/categories/${value.name}`);
     search("");
   };
   for (const [key, values] of Object.entries(state)) {
     if (Array.isArray(values) && values.length > 0) {
       items.push(
-        <Col span={24} key={key} style={{ margin: "2%" }}>
+        <Col span={24} key={key}>
           <Row justify="center">
             <Tag
               color={styleVariable.secondaryColor}
@@ -37,13 +37,11 @@ const GlobalsearchResult = ({ state, history }) => {
             }}
           >
             {values.map((value) => (
-              <React.Fragment key={value.id}>
-                {key !== "products" && (
-                  <div
+              <Row key={value.id} justify="center" style={{ padding: "2%" }}>
+                {key !== "products" && key !== "categories" && (
+                  <Row
                     key={value.name}
                     style={{
-                      marginTop: "1%",
-                      padding: "1% 2%",
                       boxShadow:
                         "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
                       background: "#fff",
@@ -54,10 +52,15 @@ const GlobalsearchResult = ({ state, history }) => {
                     onClick={() => goToPage(key, value)}
                   >
                     {value.name}
-                  </div>
+                  </Row>
                 )}
-                {key === "products" && <Productcard product={value} />}
-              </React.Fragment>
+                {key === "products" && (
+                  <Col xxl={4} lg={6} xs={17} md={7}>
+                    <Productcard product={value} />
+                  </Col>
+                )}
+                {key === "categories" && <CategoryCard id={value.id} />}
+              </Row>
             ))}
           </Row>
           <Divider />

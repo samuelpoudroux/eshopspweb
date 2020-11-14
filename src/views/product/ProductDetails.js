@@ -25,7 +25,6 @@ const ProductDetail = ({ match }) => {
     const { data } = await axios.get(
       REACT_APP_API_DOMAIN + REACT_APP_API_PRODUCT + `${id}`
     );
-    console.log("dataproduct", data);
     setProduct(data);
   };
 
@@ -36,7 +35,6 @@ const ProductDetail = ({ match }) => {
         REACT_APP_API_IMAGES +
         `${product.uid}`
     );
-    console.log("dataimage", data);
     setImages(data);
   };
   useEffect(() => {
@@ -46,7 +44,6 @@ const ProductDetail = ({ match }) => {
     getImages();
   }, [product]);
 
-  console.log("images", images);
   return (
     <Col span={24} style={{}}>
       <StickyBar title={`${product.name && product.name.toUpperCase()}`} />
