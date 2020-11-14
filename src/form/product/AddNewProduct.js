@@ -247,7 +247,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                   name="longDescription"
                   rules={[
                     {
-                      required: false,
+                      required: true,
                       min: 10,
                       message: "Nom avec minimum 10 caractéres",
                     },
@@ -269,7 +269,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                   name="shortDescription"
                   rules={[
                     {
-                      required: false,
+                      required: true,
                       min: 10,
                       message: "Nom oligatoire avec minimum 10 caractéres",
                     },
