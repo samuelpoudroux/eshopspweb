@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Row, Col, Drawer, Button } from "antd";
 import ProductsNumber from "../product/ProductsNumber";
 import TotalPrice from "./TotalPrice";
-import { DownOutlined } from "@ant-design/icons";
 import useResponsive from "../../customHooks/responsiveHook";
 import ProductCardSubBasket from "./ProductCardSubBasket";
 import { withRouter } from "react-router";
@@ -12,7 +11,6 @@ import { getTotalPrice } from "../../repository/product";
 import { AppContext } from "../../context/context";
 
 const SubBasket = ({ history }) => {
-  let num = 0;
   const list = JSON.parse(localStorage.getItem("basket")) || [];
   const { isMobile } = useResponsive();
   const user = JSON.parse(localStorage.getItem("users"))

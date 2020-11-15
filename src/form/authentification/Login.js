@@ -43,7 +43,7 @@ const Login = ({ history, match }) => {
     setIsLoading(true);
     const data = await login(values, history);
     if (!data.error && match.params.commandResume) {
-      history.push(`/orderResume/${data.userData.id}`);
+      history.push(`/orderResume/paiement`);
       notification.open({
         message: "Vous êtes connecté",
         icon: <SmileOutlined style={{ color: "#89ba17" }} />,

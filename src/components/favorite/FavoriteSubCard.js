@@ -1,17 +1,25 @@
 import React from "react";
-import { Col, Image, Row } from "antd";
-import useBasket from "../../customHooks/basketHook";
-import Addandremoveproduct from "../product/AddAndRemoveProduct";
-import styleVariable from "../../styleVariable";
 import { upperCase } from "../../helpers/UpperCase";
+import Addandremoveproduct from "../product/AddAndRemoveProduct";
+import { Col, Popconfirm, Row, Image } from "antd";
+import { QuestionCircleOutlined, DeleteOutlined } from "@ant-design/icons";
+
+import useBasket from "../../customHooks/basketHook";
+import styleVariable from "../../styleVariable";
 import useProductImages from "../../customHooks/productImage";
 
-const ProductCardSubBasket = ({ product, history, list }) => {
-  const { notification, addNotification, renderNotification } = useBasket();
+export const FavoriteSubCard = ({
+  product,
+  history,
+  notClickable,
+  removeProductFromFavorites,
+}) => {
+  const { notificationInfo, addNotification } = useBasket();
   const { images } = useProductImages(product.uid);
+
   return (
     <Col
-      lg={8}
+      lg={9}
       md={11}
       xs={24}
       sm={24}
@@ -26,25 +34,21 @@ const ProductCardSubBasket = ({ product, history, list }) => {
         key={product.id}
         align="middle"
         style={{
-          cursor: "pointer",
+          cursor: !notClickable && "pointer",
         }}
       >
         <Col lg={3} md={6} sm={6} xs={6}>
           {images && images.length > 0 && (
-            <Image src={images[0].url} alt="image du produit" />
+            <Image
+              src={images[0].url}
+              alt={`image du produit ${product.name}`}
+            />
           )}
         </Col>
         <Col lg={21} md={18} sm={18} xs={18}>
           <Row>
             <Col lg={20} md={18} sm={18} xs={18}>
-              <Row
-                justify="center"
-                align="middle"
-                style={{
-                  wordBreak: "break-word",
-                  marginLeft: 15,
-                }}
-              >
+              <Row justify="center" align="middle">
                 <b
                   style={{
                     color: styleVariable.secondaryColor,
@@ -71,19 +75,29 @@ const ProductCardSubBasket = ({ product, history, list }) => {
         </Col>
       </Row>
 
-      <Row style={{ paddingTop: 20 }} align="middle" justify="space-between">
-        <Addandremoveproduct
-          notification={notification}
-          addNotification={addNotification}
-          product={product}
-          subBasket
-        />
-      </Row>
-      <Row justify="end" style={{ padding: 10 }}>
-        <b>Sous Total: {product.num * product.productPrice}€</b>
+      <Row style={{ paddingTop: 5 }} justify="space-between" align="middle">
+        <Col span={21}>
+          <Addandremoveproduct
+            notification={notificationInfo}
+            addNotification={addNotification}
+            product={product}
+            notClickable
+            favorite
+          />
+        </Col>
+
+        <Col xl={1} xs={3} sm={1}>
+          <Row>
+            <Popconfirm
+              title={`Souhaitez vous supprimer ce produit de vos coups de coeur`}
+              icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+              onConfirm={() => removeProductFromFavorites(product)}
+            >
+              <DeleteOutlined style={{ color: styleVariable.secondaryColor }} />
+            </Popconfirm>
+          </Row>
+        </Col>
       </Row>
     </Col>
   );
 };
-
-export default ProductCardSubBasket;

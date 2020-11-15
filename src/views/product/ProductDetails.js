@@ -8,18 +8,15 @@ import { PaperClipOutlined } from "@ant-design/icons";
 import { upperCase } from "../../helpers/UpperCase";
 import useResponsive from "../../customHooks/responsiveHook";
 import StickyBar from "../../components/product/StickyBar";
+import useProductImages from "../../customHooks/productImage";
 
 const ProductDetail = ({ match }) => {
   const [product, setProduct] = useState({});
-  const [images, setImages] = useState([]);
+  const { images } = useProductImages(product.uid);
   const { notification, addNotification } = useBasket();
   const { isMobile, isTabletOrMobile } = useResponsive();
   const { id } = match.params;
-  const {
-    REACT_APP_API_DOMAIN,
-    REACT_APP_API_PRODUCT,
-    REACT_APP_API_IMAGES,
-  } = process.env;
+  const { REACT_APP_API_DOMAIN, REACT_APP_API_PRODUCT } = process.env;
 
   const getProduct = async () => {
     const { data } = await axios.get(
@@ -28,21 +25,9 @@ const ProductDetail = ({ match }) => {
     setProduct(data);
   };
 
-  const getImages = async () => {
-    const { data } = await axios.get(
-      REACT_APP_API_DOMAIN +
-        REACT_APP_API_PRODUCT +
-        REACT_APP_API_IMAGES +
-        `${product.uid}`
-    );
-    setImages(data);
-  };
   useEffect(() => {
     getProduct();
   }, []);
-  useEffect(() => {
-    getImages();
-  }, [product]);
 
   return (
     <Col span={24} style={{}}>
@@ -75,9 +60,8 @@ const ProductDetail = ({ match }) => {
                     <Col key={image.url} span={24}>
                       <Row justify="center" style={{ cursor: "zoom-in" }}>
                         <Image
-                          alt="Image du produit"
+                          alt={`image du produit ${product.name}`}
                           src={`${image.url}`}
-                          style={{ maxHeight: "250px", maxWidth: "250px" }}
                         />
                       </Row>
                     </Col>

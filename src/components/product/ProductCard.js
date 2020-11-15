@@ -1,11 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../../context/context";
-import { Badge, Tag } from "antd";
+import { Badge, Image } from "antd";
 import { withRouter } from "react-router";
-import axios from "axios";
 import { Row, Col } from "antd";
 import PropTypes from "prop-types";
-import ReactStars from "react-rating-stars-component";
 import Addandremoveproduct from "./AddAndRemoveProduct";
 import {
   HeartFilled,
@@ -24,12 +22,12 @@ import useResponsive from "../../customHooks/responsiveHook";
 import { useState } from "react";
 import NewNessIcon from "./NewNessIcon";
 import scrollTop from "../../repository/scrollTop";
+import useProductImages from "../../customHooks/productImage";
 
 const {
   REACT_APP_API_DOMAIN,
   REACT_APP_API_PRODUCT_IS_NEWNESS,
   REACT_APP_API_PRODUCT,
-  REACT_APP_API_IMAGES,
 } = process.env;
 
 const ProductCard = ({ product, history, large }) => {
@@ -39,7 +37,7 @@ const ProductCard = ({ product, history, large }) => {
   const { isMobile } = useResponsive();
   const [num, setNum] = useState(0);
   const { notification, addNotification, renderNotification } = useBasket();
-  const [images, setImages] = useState([]);
+  const { images } = useProductImages(product.uid);
 
   const isFavorites =
     JSON.parse(localStorage.getItem("favorites")) &&
@@ -86,20 +84,6 @@ const ProductCard = ({ product, history, large }) => {
     );
     products.getAllProducts();
   };
-
-  const getImages = async () => {
-    const { data } = await axios.get(
-      REACT_APP_API_DOMAIN +
-        REACT_APP_API_PRODUCT +
-        REACT_APP_API_IMAGES +
-        `${product.uid}`
-    );
-    setImages(data);
-  };
-
-  useEffect(() => {
-    getImages();
-  }, []);
 
   return (
     <Col
@@ -167,14 +151,16 @@ const ProductCard = ({ product, history, large }) => {
       )}
 
       <Col onClick={(e) => goToProductDetails(e)}>
-        <Row align="middle" justify="center">
-          <img
-            alt="Image du produit"
-            src={`${images.length > 0 && images[0].url}`}
-            style={{ height: "70px", width: "50%", zIndex: 0 }}
-          />
+        <Row align="middle" justify="center" style={{ height: "150px" }}>
+          {images && images.length > 0 && (
+            <Image
+              alt={`image du produit ${product.name}`}
+              src={`${images[0].url}`}
+              style={{ zIndex: 0 }}
+            />
+          )}
         </Row>
-        <Row style={{ paddingTop: 5, height: "40px" }} justify="center">
+        <Row style={{ paddingTop: 20, height: "40px" }} justify="center">
           <b
             style={{
               color: styleVariable.secondaryColor,
