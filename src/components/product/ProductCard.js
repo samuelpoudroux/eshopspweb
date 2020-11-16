@@ -151,7 +151,11 @@ const ProductCard = ({ product, history, large }) => {
       )}
 
       <Col onClick={(e) => goToProductDetails(e)}>
-        <Row align="middle" justify="center" style={{ height: "150px" }}>
+        <Row
+          align="middle"
+          justify="center"
+          style={{ height: "150px", paddingTop: 10 }}
+        >
           {images && images.length > 0 && (
             <Image
               alt={`image du produit ${product.name}`}

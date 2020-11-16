@@ -34,7 +34,6 @@ const Header = ({ history, botRef }) => {
     favoriteIsActive,
   } = popup;
   const { isMobile, isBigScreen } = useResponsive();
-  const [addProduct, setAddProduct] = useState(false);
   const { products, favorites } = useContext(AppContext);
   const [update, setUpdate] = useState(false);
   const { isAdmin } = useIsAdmin();

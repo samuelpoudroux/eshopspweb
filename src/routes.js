@@ -6,9 +6,9 @@ import ContactForm from "./form/contact/contactForm";
 import CategoryPage from "./views/categories/CategoryPage";
 import ProductDetail from "./views/product/ProductDetails";
 import OrderResumeStepper from "./views/orderResume/OrderResumeStepper";
+import UserData from "./components/user/UserData";
+import ResetPassword from "./components/ResetPassword";
 const { default: HomePage } = require("./views/HomePage");
-export const test = () => <h1>ProductDetails</h1>;
-export const test2 = () => <h1>modifier mes informations</h1>;
 const Routes = [
   {
     path: "/",
@@ -57,7 +57,7 @@ const Routes = [
   },
   {
     path: "/informations",
-    component: test2,
+    component: UserData,
   },
 ];
 

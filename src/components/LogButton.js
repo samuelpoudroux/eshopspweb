@@ -27,13 +27,8 @@ const LogButton = ({ history, placement }) => {
     setVisible(visible);
   };
 
-  const goToAuth = (auth) => {
-    if (auth === "login") {
-      history.push("/login");
-    } else if (auth === "register") {
-      history.push("/register");
-    }
-    setVisible(false);
+  const goToAuth = (url) => {
+    history.push(url);
     search("");
     scrollTop(appRef);
   };
@@ -52,7 +47,7 @@ const LogButton = ({ history, placement }) => {
               </Row>
               <Row style={{ paddingTop: 15 }}>
                 <Button onClick={() => logout(history)}> Se Déconnecter</Button>
-                <Button onClick={() => goToAuth("register")}>
+                <Button onClick={() => goToAuth("/informations")}>
                   Gérer mon compte
                 </Button>
               </Row>

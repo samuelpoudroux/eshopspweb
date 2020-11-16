@@ -328,8 +328,8 @@ const Register = ({ history, match }) => {
               style={{
                 background: styleVariable.secondaryColor,
                 border: "none",
+                color: "white",
               }}
-              type="primary"
               htmlType="submit"
             >
               CRÉEZ MON COMPTE

@@ -10,6 +10,7 @@ import {
   ShopOutlined,
   ContainerOutlined,
   CodeSandboxOutlined,
+  AccountBookOutlined,
 } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import styleVariable from "../styleVariable";
@@ -55,6 +56,13 @@ const NavBar = ({ history }) => {
     }
   };
 
+  const goToInformationManagement = () => {
+    history.push("/informations");
+    setMenuIsOpened(false);
+    scrollTop(appRef);
+    search("");
+  };
+
   const goHome = () => {
     history.push("/");
     scrollTop(appRef);
@@ -83,27 +91,50 @@ const NavBar = ({ history }) => {
             justify="space-around"
             style={{ marginTop: isMobile && 20 }}
           >
-            {!user && (
-              <Button
-                style={{
-                  color: styleVariable.secondaryColor,
-                  background: "white",
-                }}
-                onClick={() => manageConnection()}
-              >
-                {(user && "Se deconnecter") || "Se connecter"}
-              </Button>
+            {user && (
+              <>
+                <Button
+                  style={{
+                    color: styleVariable.secondaryColor,
+                    background: "white",
+                  }}
+                  onClick={() => manageConnection()}
+                >
+                  {user && "Se deconnecter"}
+                </Button>
+                <Button
+                  style={{
+                    color: styleVariable.secondaryColor,
+                    background: "white",
+                  }}
+                  onClick={() => goToInformationManagement()}
+                >
+                  Gérer mon compte
+                </Button>
+              </>
             )}
-
-            <Button
-              style={{
-                color: styleVariable.secondaryColor,
-                background: "white",
-              }}
-              onClick={() => manageConnection("register")}
-            >
-              Créer un compte
-            </Button>
+            {!user && (
+              <>
+                <Button
+                  style={{
+                    color: styleVariable.secondaryColor,
+                    background: "white",
+                  }}
+                  onClick={() => manageConnection()}
+                >
+                  {(user && "Se deconnecter") || "Se connecter"}
+                </Button>
+                <Button
+                  style={{
+                    color: styleVariable.secondaryColor,
+                    background: "white",
+                  }}
+                  onClick={() => manageConnection("register")}
+                >
+                  Créer un compte
+                </Button>
+              </>
+            )}
           </Row>
         </Col>
       </Row>
@@ -219,6 +250,27 @@ const NavBar = ({ history }) => {
         >
           Contact
         </Menu.Item>
+        {user && (
+          <Menu.Item
+            key="accountManagement"
+            icon={
+              <AccountBookOutlined
+                style={{
+                  color:
+                    currentKey === "accountManagement"
+                      ? "#89ba17"
+                      : styleVariable.secondaryColor,
+                  fontSize: "1em",
+                }}
+              />
+            }
+            onClick={(e) => goToPage(e, "/informations")}
+            style={{ marginTop: 20, fontSize: "1em" }}
+          >
+            Gérer mon compte
+          </Menu.Item>
+        )}
+
         <Menu.Item
           key="generalCondition"
           icon={
