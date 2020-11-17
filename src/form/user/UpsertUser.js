@@ -20,14 +20,11 @@ import { withRouter } from "react-router";
 
 const { REACT_APP_API_DOMAIN, REACT_APP_API_USER } = process.env;
 
-const UpsertUser = ({ history }) => {
+const UpsertUser = ({ history, userId }) => {
   const [dataForm, setDataForm] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { isMobile } = useResponsive();
   const [form] = useForm();
-  const user = JSON.parse(localStorage.getItem("users"))
-    ? JSON.parse(localStorage.getItem("users"))
-    : undefined;
 
   const handleChange = ({ value, name }) => {
     // copy de laddress car linitial value de form garde le state initial
@@ -52,7 +49,7 @@ const UpsertUser = ({ history }) => {
 
     try {
       await axios.put(
-        REACT_APP_API_DOMAIN + REACT_APP_API_USER + user.userData.id,
+        REACT_APP_API_DOMAIN + REACT_APP_API_USER + userId,
         values
       );
 
@@ -71,7 +68,7 @@ const UpsertUser = ({ history }) => {
   const getUserData = async () => {
     setIsLoading(true);
     const { data } = await axios.get(
-      REACT_APP_API_DOMAIN + REACT_APP_API_USER + user.userData.id
+      REACT_APP_API_DOMAIN + REACT_APP_API_USER + userId
     );
 
     for (const [key, value] of Object.entries(data)) {

@@ -13,9 +13,15 @@ export const FavoriteSubCard = ({
   history,
   notClickable,
   removeProductFromFavorites,
+  setFavoriteActive,
 }) => {
   const { notificationInfo, addNotification } = useBasket();
   const { images } = useProductImages(product.uid);
+
+  const goToProductDetails = async () => {
+    history.push(`/productDetails/${product.id}`);
+    setFavoriteActive(false);
+  };
 
   return (
     <Col
@@ -30,7 +36,7 @@ export const FavoriteSubCard = ({
       }}
     >
       <Row
-        onClick={() => history.push(`/productDetails/${product.id}`)}
+        onClick={() => goToProductDetails()}
         key={product.id}
         align="middle"
         style={{

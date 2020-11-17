@@ -3,7 +3,7 @@ import { Row, Col, Drawer, Button } from "antd";
 import ProductsNumber from "../product/ProductsNumber";
 import TotalPrice from "./TotalPrice";
 import useResponsive from "../../customHooks/responsiveHook";
-import ProductCardSubBasket from "./ProductCardSubBasket";
+import PopupProductCard from "../product/PopupProductCard";
 import { withRouter } from "react-router";
 import styleVariable from "../../styleVariable";
 import CleanBasket from "./CleanBasket";
@@ -108,7 +108,7 @@ const SubBasket = ({ history }) => {
               list.map(
                 (product) =>
                   product.num !== 0 && (
-                    <ProductCardSubBasket
+                    <PopupProductCard
                       history={history}
                       key={product.id}
                       product={product}
@@ -127,14 +127,17 @@ const SubBasket = ({ history }) => {
           <Row
             align="middle"
             justify="start"
-            style={{ padding: "10px", marginTop: 30 }}
+            style={{
+              color: "white",
+              background: styleVariable.secondaryColor,
+              padding: 20,
+              marginTop: 20,
+            }}
             gutter={(20, 50)}
           >
-            <Col lg={6} xs={24}>
+            <Col lg={7} xs={24}>
               <Row justify={isMobile && "center"}>
-                <b style={{ color: styleVariable.mainColor }}>
-                  Total de mon panier: {getTotalPrice(list)}€
-                </b>
+                <b>Total de mon panier: {getTotalPrice(list)}€</b>
               </Row>
             </Col>
             <Col lg={6} xs={24} style={{ marginTop: isMobile && 30 }}>

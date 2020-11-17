@@ -5,9 +5,8 @@ import Register from "./form/authentification/Register";
 import ContactForm from "./form/contact/contactForm";
 import CategoryPage from "./views/categories/CategoryPage";
 import ProductDetail from "./views/product/ProductDetails";
-import OrderResumeStepper from "./views/orderResume/OrderResumeStepper";
-import UserData from "./components/user/UserData";
-import ResetPassword from "./components/ResetPassword";
+import OrderResumeStepper from "./components/orderResume/OrderResumeStepper";
+import AccountManagement from "./components/accountManagement/AccountManagement";
 const { default: HomePage } = require("./views/HomePage");
 const Routes = [
   {
@@ -57,7 +56,7 @@ const Routes = [
   },
   {
     path: "/informations",
-    component: UserData,
+    component: AccountManagement,
   },
 ];
 

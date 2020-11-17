@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context/context";
 import useResponsive from "../../customHooks/responsiveHook";
 import { FavoriteSubCard } from "./FavoriteSubCard";
+import { withRouter } from "react-router";
 
 const Favorites = ({ history, notClickable }) => {
   const { favorites, basket, popup } = useContext(AppContext);
@@ -118,10 +119,12 @@ const Favorites = ({ history, notClickable }) => {
             (product) =>
               product.num !== 0 && (
                 <FavoriteSubCard
+                  key={product.id}
                   product={product}
                   history={history}
                   notClickable={notClickable}
                   removeProductFromFavorites={removeProductFromFavorites}
+                  setFavoriteActive={setFavoriteActive}
                 />
               )
           )}
@@ -163,4 +166,4 @@ Favorites.propTypes = {
   setFavoritesActive: PropTypes.func,
 };
 
-export default Favorites;
+export default withRouter(Favorites);

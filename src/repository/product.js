@@ -58,8 +58,8 @@ const getNumberOfProducts = (basketList) => {
   return totalOfProducts;
 };
 
-const getTotalPrice = (basketList) => {
-  const copy = basketList !== null ? _.cloneDeep(basketList) : [];
+const getTotalPrice = (productList) => {
+  const copy = productList !== null ? _.cloneDeep(productList) : [];
   let num = 0;
   const totalPrice =
     copy !== undefined &&

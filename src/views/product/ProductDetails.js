@@ -27,7 +27,7 @@ const ProductDetail = ({ match }) => {
 
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [id]);
 
   return (
     <Col span={24} style={{}}>

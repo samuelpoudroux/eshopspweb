@@ -66,7 +66,7 @@ const Addandremoveproduct = ({
   }, [basket.list]);
 
   return (
-    <Row align="middle">
+    <Row align="middle" onClick={(e) => e.stopPropagation()}>
       <Col
         lg={subBasket ? 15 : !productList ? 14 : 23}
         md={23}
