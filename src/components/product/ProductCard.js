@@ -23,6 +23,7 @@ import { useState } from "react";
 import NewNessIcon from "./NewNessIcon";
 import scrollTop from "../../repository/scrollTop";
 import useProductImages from "../../customHooks/productImage";
+import { Unavailable } from "./Unavailable";
 
 const {
   REACT_APP_API_DOMAIN,
@@ -54,6 +55,7 @@ const ProductCard = ({ product, history, large }) => {
     productPrice,
     shortDescription,
     newNess,
+    stockNumber,
   } = product;
 
   const goToProductDetails = (e) => {
@@ -150,6 +152,10 @@ const ProductCard = ({ product, history, large }) => {
         </>
       )}
 
+      <Unavailable
+        placement={{ top: 20, right: 10 }}
+        stockNumber={stockNumber}
+      />
       <Col onClick={(e) => goToProductDetails(e)}>
         <Row
           align="middle"

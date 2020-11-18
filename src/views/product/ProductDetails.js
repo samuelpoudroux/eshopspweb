@@ -9,6 +9,7 @@ import { upperCase } from "../../helpers/UpperCase";
 import useResponsive from "../../customHooks/responsiveHook";
 import StickyBar from "../../components/product/StickyBar";
 import useProductImages from "../../customHooks/productImage";
+import { Unavailable } from "../../components/product/Unavailable";
 
 const ProductDetail = ({ match }) => {
   const [product, setProduct] = useState({});
@@ -30,9 +31,8 @@ const ProductDetail = ({ match }) => {
   }, [id]);
 
   return (
-    <Col span={24} style={{}}>
+    <Col span={24}>
       <StickyBar title={`${product.name && product.name.toUpperCase()}`} />
-
       <Row justify="center" style={{ padding: 20, paddingTop: 60 }}>
         <Col xxl={12} lg={12} md={12} xs={24}>
           <Row justify="center">
@@ -52,6 +52,10 @@ const ProductDetail = ({ match }) => {
                   left: 10,
                   fontSize: "4em",
                 }}
+              />
+              <Unavailable
+                placement={{ top: 20, right: 10 }}
+                stockNumber={product.stockNumber}
               />
               <Carousel autoplay style={{ padding: 40 }}>
                 {images &&

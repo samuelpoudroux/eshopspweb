@@ -1,5 +1,4 @@
 import _ from "lodash";
-import SortProducts from "../components/product/SortProducts";
 
 // sort product from higher to lowest  price
 const sortProductsByHigher = (state) => {
@@ -64,7 +63,13 @@ const getTotalPrice = (productList) => {
   const totalPrice =
     copy !== undefined &&
     copy.reduce((accumulateur, valeurCourante) => {
-      return accumulateur + valeurCourante.num * valeurCourante.productPrice;
+      let currentValue;
+      if (valeurCourante.stockAvailable) {
+        currentValue = valeurCourante.stockAvailable;
+      } else {
+        currentValue = valeurCourante.num;
+      }
+      return accumulateur + currentValue * valeurCourante.productPrice;
     }, num);
   return totalPrice;
 };

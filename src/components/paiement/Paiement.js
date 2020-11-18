@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import { Col, Row, Button } from "antd";
 import moment from "moment";
 
-const Paiement = ({ current, setCurrent }) => {
-  const list = JSON.parse(localStorage.getItem("basket")) || [];
+const Paiement = ({ current, setCurrent, basketList }) => {
   const { userData } = JSON.parse(localStorage.getItem("users")) || {};
 
   const { REACT_APP_API_DOMAIN, REACT_APP_API_ORDER } = process.env;
@@ -12,6 +11,7 @@ const Paiement = ({ current, setCurrent }) => {
   const prev = () => {
     setCurrent(current - 1);
   };
+
   const sendorder = async () => {
     let orderDate;
     orderDate = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
@@ -19,13 +19,10 @@ const Paiement = ({ current, setCurrent }) => {
     try {
       const body = {
         products: JSON.stringify(
-          list.map((product) => {
+          basketList.map((product) => {
             return {
               id: product.id,
               num: product.num,
-              uid: product.uid,
-              productPrice: product.productPrice,
-              name: product.name,
             };
           })
         ),
@@ -41,6 +38,8 @@ const Paiement = ({ current, setCurrent }) => {
       console.log(error);
     }
   };
+  console.log("basketList", basketList);
+
   return (
     <Col>
       <Row justify="center">

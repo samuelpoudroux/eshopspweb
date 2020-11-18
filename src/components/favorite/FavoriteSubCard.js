@@ -7,6 +7,7 @@ import { QuestionCircleOutlined, DeleteOutlined } from "@ant-design/icons";
 import useBasket from "../../customHooks/basketHook";
 import styleVariable from "../../styleVariable";
 import useProductImages from "../../customHooks/productImage";
+import { Unavailable } from "../product/Unavailable";
 
 export const FavoriteSubCard = ({
   product,
@@ -31,10 +32,14 @@ export const FavoriteSubCard = ({
       sm={24}
       style={{
         boxShadow: " 0px  10px 10px rgba(90, 97, 101, 0.7)",
-        padding: 5,
+        padding: 15,
         margin: 10,
       }}
     >
+      <Unavailable
+        placement={{ top: 30, right: 30 }}
+        stockNumber={product.stockNumber}
+      />
       <Row
         onClick={() => goToProductDetails()}
         key={product.id}
@@ -82,18 +87,8 @@ export const FavoriteSubCard = ({
       </Row>
 
       <Row style={{ paddingTop: 5 }} justify="space-between" align="middle">
-        <Col span={21}>
-          <Addandremoveproduct
-            notification={notificationInfo}
-            addNotification={addNotification}
-            product={product}
-            notClickable
-            favorite
-          />
-        </Col>
-
-        <Col xl={1} xs={3} sm={1}>
-          <Row>
+        <Col xl={24}>
+          <Row justify={"end"}>
             <Popconfirm
               title={`Souhaitez vous supprimer ce produit de vos coups de coeur`}
               icon={<QuestionCircleOutlined style={{ color: "red" }} />}

@@ -41,11 +41,13 @@ const addAllFavoritesToBasket = async (currentState, action) => {
   const currentBasket = JSON.parse(localStorage.getItem("basket")) || [];
   const favorites = action.favorites;
   favorites.map((favorite) => {
-    const productAlreadyInBasket = currentBasket.find(
-      (e) => e.id === favorite.id
-    );
-    if (!productAlreadyInBasket) {
-      currentBasket.push({ ...favorite, num: 1 });
+    if (favorite.stockNumber !== 0) {
+      const productAlreadyInBasket = currentBasket.find(
+        (e) => e.id === favorite.id
+      );
+      if (!productAlreadyInBasket) {
+        currentBasket.push({ ...favorite, num: 1 });
+      }
     }
   });
   localStorage.setItem("basket", JSON.stringify([...currentBasket]));

@@ -13,6 +13,7 @@ import {
   Upload,
   Drawer,
   message,
+  Spin,
 } from "antd";
 import {
   setValuesLocalStorage,
@@ -23,7 +24,6 @@ import {
   SmileOutlined,
   UploadOutlined,
   CloseCircleOutlined,
-  InboxOutlined,
 } from "@ant-design/icons";
 import TextArea from "antd/lib/input/TextArea";
 import styleVariable from "../../styleVariable";
@@ -43,6 +43,7 @@ const {
 const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
   const [categories, setCategories] = useState([]);
   const [files, setFiles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { isMobile } = useResponsive();
   const drawerHeader = () => {
@@ -73,7 +74,6 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
     beforeUpload: (file) => false,
 
     onChange(info) {
-      console.log(info);
       setFiles([...files, ...info.fileList.map((file) => file.originFileObj)]);
       if (info.file.status !== "uploading") {
       }
@@ -95,7 +95,6 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
 
   const onFinish = async (values) => {
     const formData = new FormData();
-    console.log(files);
     files.forEach((file) => {
       delete file.originFileObj;
       delete file.percent;
@@ -106,6 +105,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
       formData.append(`${key}`, value);
     }
     try {
+      setIsLoading(true);
       const { data } = await Axios.post(
         REACT_APP_API_DOMAIN +
           REACT_APP_API_PRODUCT +
@@ -117,20 +117,12 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
           },
         }
       );
-      const { error, message } = data;
-      if (!error && message) {
-        notification.open({
-          message: message,
-          icon: <SmileOutlined style={{ color: "#89ba17" }} />,
-        });
-        setAddProduct(false);
-      }
-      if (error && !message) {
-        notification.open({
-          message: error,
-          icon: <SmileOutlined style={{ color: "red" }} />,
-        });
-      }
+
+      notification.open({
+        message: data,
+        icon: <SmileOutlined style={{ color: "#89ba17" }} />,
+      });
+      setAddProduct(false);
     } catch (error) {
       if (error.message === "Request failed with status code 401") {
         notification.open({
@@ -245,6 +237,29 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                   />
                 </Form.Item>
                 <Form.Item
+                  label="Nombre en stock"
+                  name="stockNumber"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Merci d'indiquer le nombre de produit en stock",
+                    },
+                  ]}
+                  hasFeedback
+                >
+                  <Input
+                    className="inputStyle"
+                    type="number"
+                    min={0}
+                    onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
+                    name="stockNumber"
+                    defaultValue={getDefaultValueLocalStorage(
+                      "stockNumber",
+                      itemKey
+                    )}
+                  />
+                </Form.Item>
+                <Form.Item
                   label="Longue description"
                   name="longDescription"
                   rules={[
@@ -288,22 +303,6 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                   />
                 </Form.Item>
 
-                <Form.Item
-                  label="En stock"
-                  name="inStock"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Merci de renseigner si en stock ou non",
-                    },
-                  ]}
-                  hasFeedback
-                >
-                  <Select>
-                    <Option value="true">oui</Option>
-                    <Option value="false">non</Option>
-                  </Select>
-                </Form.Item>
                 <Form.Item
                   label="Catégorie"
                   name="category"
@@ -366,6 +365,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     Créer le produit
                   </Button>
                 </Form.Item>
+                <Row justify="center">{isLoading && <Spin />}</Row>
               </Col>
             </Form>
           </Col>

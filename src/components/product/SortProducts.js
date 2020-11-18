@@ -73,7 +73,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
 
   return (
     <Col span={24} style={{ padding: 15 }}>
-      <Row align="middle" justify="start" gutter={[0, isMobile && 15]}>
+      <Row align="middle" justify="start" gutter={[8, 15]}>
         <Col
           xl={{ span: 1 }}
           md={{ span: 1 }}

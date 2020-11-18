@@ -75,7 +75,7 @@ const Favorites = ({ history, notClickable }) => {
   const addAllProductToBasket = async () => {
     await addAllFavoritesToBasket(list);
     notification.open({
-      message: `Tous vos coup de coeurs sont désormais dans mon panier`,
+      message: `Tous mes coup de coeurs en stock sont désormais dans mon panier`,
       icon: <SmileOutlined style={{ color: styleVariable.secondaryColor }} />,
       duration: 4,
     });
