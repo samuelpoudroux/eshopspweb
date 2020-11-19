@@ -46,7 +46,7 @@ const ChatFeedComponent = ({
   const goToPage = (page) => {
     if (basketList.length === 0 && page === "/orderResume") {
       notification.open({
-        message: "Votre panier est vide",
+        message: "Aucun commande en cours",
       });
     } else {
       appRef.scrollIntoView(true);

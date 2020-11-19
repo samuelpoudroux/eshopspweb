@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Col, Row, Button } from "antd";
 import moment from "moment";
+import { getTotalPrice } from "../../repository/product";
 
 const Paiement = ({ current, setCurrent, basketList }) => {
   const { userData } = JSON.parse(localStorage.getItem("users")) || {};
@@ -38,8 +39,8 @@ const Paiement = ({ current, setCurrent, basketList }) => {
       console.log(error);
     }
   };
-  console.log("basketList", basketList);
 
+  console.log("basket", getTotalPrice(basketList));
   return (
     <Col>
       <Row justify="center">

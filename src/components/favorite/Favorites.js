@@ -72,7 +72,8 @@ const Favorites = ({ history, notClickable }) => {
   const closeFavorites = (e) => {
     setFavoriteActive(false);
   };
-  const addAllProductToBasket = async () => {
+  const addAllProductToBasket = async (e) => {
+    e.stopPropagation();
     await addAllFavoritesToBasket(list);
     notification.open({
       message: `Tous mes coup de coeurs en stock sont désormais dans mon panier`,
@@ -114,7 +115,10 @@ const Favorites = ({ history, notClickable }) => {
           </Row>
         )}
 
-        <Row justify={isMobile && "center"}>
+        <Row
+          justify={isMobile && "center"}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
           {list.map(
             (product) =>
               product.num !== 0 && (
@@ -137,7 +141,10 @@ const Favorites = ({ history, notClickable }) => {
         >
           <Col span={24}>
             {list.length > 0 && (
-              <Row justify="center">
+              <Row
+                justify="center"
+                onTouchMove={() => setFavoriteActive(false)}
+              >
                 <Button
                   icon={
                     <ShoppingCartOutlined
@@ -149,7 +156,7 @@ const Favorites = ({ history, notClickable }) => {
                     background: "white",
                     maxWidth: "100%",
                   }}
-                  onClick={() => addAllProductToBasket()}
+                  onClick={(e) => addAllProductToBasket(e)}
                 >
                   Ajouter au panier
                 </Button>

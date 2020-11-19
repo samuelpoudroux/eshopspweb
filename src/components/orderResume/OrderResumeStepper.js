@@ -5,6 +5,7 @@ import styleVariable from "../../styleVariable";
 import { SmileOutlined } from "@ant-design/icons";
 import useResponsive from "../../customHooks/responsiveHook";
 import Paiement from "../paiement/Paiement";
+import StickyBar from "../product/StickyBar";
 
 const { Step } = Steps;
 
@@ -57,13 +58,20 @@ const OrderResumeStepper = ({ history, match }) => {
   };
 
   return (
-    <Col span={24} style={{ padding: 20 }}>
-      <Steps current={current} direction={isMobile ? "vertical" : "horizontal"}>
+    <Col span={24}>
+      <StickyBar title={`RESUMÉ COMMANDE`} />
+      <Steps
+        style={{ padding: 15 }}
+        current={current}
+        direction={isMobile ? "vertical" : "horizontal"}
+      >
         {steps.map((item) => (
           <Step key={item.title} title={item.title} />
         ))}
       </Steps>
-      <Col span={24}>{steps[current].content}</Col>
+      <Col style={{ padding: 15 }} span={24}>
+        {steps[current].content}
+      </Col>
       <Row justify="center" className="steps-action">
         {current < steps.length - 1 && (
           <Button

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Row, Col, Popover, Button, Divider } from "antd";
+import { Row, Col, Popover, Button, Divider, Popconfirm } from "antd";
 import { upperCase } from "../helpers/UpperCase";
 import { logout } from "../repository/auth";
 
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import useIsAdmin from "../customHooks/isAdminHooks";
 import useResponsive from "../customHooks/responsiveHook";
 import styleVariable from "../styleVariable";
@@ -46,7 +46,20 @@ const LogButton = ({ history, placement }) => {
                 </p>
               </Row>
               <Row style={{ paddingTop: 15 }}>
-                <Button onClick={() => logout(history)}> Se Déconnecter</Button>
+                <Popconfirm
+                  title="Souhaitez vous vous déconnecter？"
+                  placement={placement || "top"}
+                  icon={
+                    <QuestionCircleOutlined
+                      style={{
+                        color: "red",
+                      }}
+                    />
+                  }
+                  onConfirm={() => logout()}
+                >
+                  <Button>Se déconnecter</Button>
+                </Popconfirm>
                 <Button onClick={() => goToAuth("/informations")}>
                   Gérer mon compte
                 </Button>

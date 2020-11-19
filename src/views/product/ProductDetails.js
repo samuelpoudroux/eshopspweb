@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Col, Row, Carousel, Image } from "antd";
 import Addandremoveproduct from "../../components/product/AddAndRemoveProduct";
 import ProductDetailsTabs from "../../components/product/ProductDetailsTabs";
 import useBasket from "../../customHooks/basketHook";
-import { PaperClipOutlined } from "@ant-design/icons";
+import {
+  PaperClipOutlined,
+  HeartFilled,
+  HeartOutlined,
+} from "@ant-design/icons";
 import { upperCase } from "../../helpers/UpperCase";
 import useResponsive from "../../customHooks/responsiveHook";
 import StickyBar from "../../components/product/StickyBar";
 import useProductImages from "../../customHooks/productImage";
 import { Unavailable } from "../../components/product/Unavailable";
+import styleVariable from "../../styleVariable";
+import { AppContext } from "../../context/context";
 
 const ProductDetail = ({ match }) => {
   const [product, setProduct] = useState({});
   const { images } = useProductImages(product.uid);
   const { notification, addNotification } = useBasket();
   const { isMobile, isTabletOrMobile } = useResponsive();
+  const { favorites } = useContext(AppContext);
   const { id } = match.params;
   const { REACT_APP_API_DOMAIN, REACT_APP_API_PRODUCT } = process.env;
 
@@ -25,6 +32,15 @@ const ProductDetail = ({ match }) => {
     );
     setProduct(data);
   };
+
+  const isFavorites =
+    JSON.parse(localStorage.getItem("favorites")) &&
+    JSON.parse(localStorage.getItem("favorites")).length > 0 &&
+    JSON.parse(localStorage.getItem("favorites")).find(
+      (e) => e.id === product.id
+    )
+      ? true
+      : false;
 
   useEffect(() => {
     getProduct();
@@ -51,13 +67,40 @@ const ProductDetail = ({ match }) => {
                   top: -3,
                   left: 10,
                   fontSize: "4em",
+                  zIndex: 1,
                 }}
               />
+              {isFavorites && (
+                <HeartFilled
+                  style={{
+                    fontSize: 24,
+                    color: styleVariable.secondaryColor,
+                    position: "absolute",
+                    top: 10,
+                    right: 10,
+                    zIndex: 1,
+                  }}
+                  onClick={() => favorites.removeProductFromFavorites(product)}
+                />
+              )}
+              {!isFavorites && (
+                <HeartOutlined
+                  style={{
+                    fontSize: 24,
+                    position: "absolute",
+                    top: 10,
+                    right: 10,
+                    color: styleVariable.secondaryColor,
+                    zIndex: 1,
+                  }}
+                  onClick={() => favorites.addProductToFavorites(product)}
+                />
+              )}
               <Unavailable
                 placement={{ top: 20, right: 10 }}
                 stockNumber={product.stockNumber}
               />
-              <Carousel autoplay style={{ padding: 40 }}>
+              <Carousel autoplay style={{ padding: 40, marginTop: 50 }}>
                 {images &&
                   images.length > 0 &&
                   images.map((image) => (
@@ -66,6 +109,7 @@ const ProductDetail = ({ match }) => {
                         <Image
                           alt={`image du produit ${product.name}`}
                           src={`${image.url}`}
+                          style={{ zIndex: 0 }}
                         />
                       </Row>
                     </Col>

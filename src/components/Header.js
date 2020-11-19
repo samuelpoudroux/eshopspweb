@@ -4,7 +4,7 @@ import { withRouter } from "react-router";
 
 import {
   MenuOutlined,
-  MessageOutlined,
+  WechatOutlined,
   ContactsOutlined,
 } from "@ant-design/icons";
 import { Row, Col, Popover } from "antd";
@@ -124,7 +124,7 @@ const Header = ({ history, botRef }) => {
               <Col lg={4} md={4} xs={4} sm={4}>
                 <Row justify="center">
                   <Popover title="Besoin d'aide">
-                    <MessageOutlined
+                    <WechatOutlined
                       onClick={() => goToBot()}
                       style={{ fontSize: 20, color: "white" }}
                     />

@@ -72,7 +72,8 @@ const SubBasket = ({ history }) => {
     );
   };
 
-  const goToPaiement = () => {
+  const goToPaiement = (e) => {
+    e.stopPropagation();
     user && user.userData.id
       ? history.push(`/orderResume/${user && user.userData.id}`)
       : history.push(`/orderResume/`);
@@ -80,7 +81,10 @@ const SubBasket = ({ history }) => {
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div
+      style={{ textAlign: "center" }}
+      onTouchMove={(e) => setSubBasketVisible(false)}
+    >
       <Drawer
         title={drawerHeader()}
         closable={true}
@@ -97,13 +101,15 @@ const SubBasket = ({ history }) => {
         }}
         style={{ zIndex: 26, height: "100%", overflowY: "scroll" }}
         footerStyle={{ padding: "0px" }}
-        onTouchMove={() => setSubBasketVisible(false)}
       >
         <Col lg={24} style={{ padding: "10px" }}>
           <h3 style={{ textAlign: "center", color: styleVariable.mainColor }}>
             Produits dans le panier
           </h3>
-          <Row justify={isMobile && "center"}>
+          <Row
+            justify={isMobile && "center"}
+            onTouchMove={(e) => e.stopPropagation()}
+          >
             {list && list.length > 0 ? (
               list.map(
                 (product) =>
@@ -148,7 +154,7 @@ const SubBasket = ({ history }) => {
                     background: styleVariable.secondaryColor,
                   }}
                   disabled={list.length === 0}
-                  onClick={() => goToPaiement()}
+                  onClick={(e) => goToPaiement(e)}
                 >
                   Finaliser ma commande
                 </Button>
