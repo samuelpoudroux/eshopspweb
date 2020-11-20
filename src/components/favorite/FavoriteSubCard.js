@@ -37,7 +37,7 @@ export const FavoriteSubCard = ({
       }}
     >
       <Unavailable
-        placement={{ top: 30, right: 30 }}
+        placement={{ top: 45, left: 10, transform: "rotate(-5deg)" }}
         stockNumber={product.stockNumber}
       />
       <Row
@@ -86,17 +86,15 @@ export const FavoriteSubCard = ({
         </Col>
       </Row>
 
-      <Row style={{ paddingTop: 5 }} justify="space-between" align="middle">
+      <Row style={{ paddingTop: 15 }} justify="end" align="bottom">
         <Col xl={24}>
-          <Row justify={"end"}>
-            <Popconfirm
-              title={`Souhaitez vous supprimer ce produit de vos coups de coeur`}
-              icon={<QuestionCircleOutlined style={{ color: "red" }} />}
-              onConfirm={() => removeProductFromFavorites(product)}
-            >
-              <DeleteOutlined style={{ color: styleVariable.secondaryColor }} />
-            </Popconfirm>
-          </Row>
+          <Popconfirm
+            title={`Souhaitez vous supprimer ce produit de vos coups de coeur`}
+            icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+            onConfirm={() => removeProductFromFavorites(product)}
+          >
+            <DeleteOutlined style={{ color: styleVariable.secondaryColor }} />
+          </Popconfirm>
         </Col>
       </Row>
     </Col>

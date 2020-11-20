@@ -1,5 +1,5 @@
 import { Row, Input, Col, Button, Badge, Popconfirm, notification } from "antd";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../context/context";
 import RemoveSeveralProducts from "./RemoveSeveralProduct";
 import styleVariable from "../../styleVariable";
@@ -9,71 +9,30 @@ import {
   QuestionCircleOutlined,
   SmileOutlined,
 } from "@ant-design/icons";
-import { useEffect } from "react";
-import { set } from "lodash";
 
-const Addandremoveproduct = ({
-  product,
-  addNotification,
-  subBasket,
-  favorite,
-  productList,
-  setNum: setNumToProductCard,
-}) => {
+const Addandremoveproduct = ({ product, subBasket, favorite, productList }) => {
   const { basket } = useContext(AppContext);
-  const list = JSON.parse(localStorage.getItem("basket")) || [];
+  const { basketList } = basket;
   const { add, decrease } = basket;
   const [num, setNum] = useState(0);
+
   const addProduct = (e) => {
-    if (product.stockNumber === num) {
-      notification.open({
-        message: `Stock insuffisant`,
-        icon: <SmileOutlined style={{ color: "red" }} />,
-        duration: 1,
-      });
-      return;
-    }
-    add(product, num);
-    addNotification({
-      num: "1",
-      add: true,
-    });
-    setTimeout(function () {
-      addNotification(false);
-    }, 1500);
+    add(product);
     e.stopPropagation();
   };
   const removeProduct = (e) => {
-    const productInBasket = list.find((e) => e.id === product.id);
-    if (productInBasket && productInBasket.num > 0) {
-      addNotification({
-        num: "1",
-        remove: true,
-      });
-      setTimeout(function () {
-        addNotification(false);
-      }, 1500);
-    }
     e.stopPropagation();
-
     decrease(product);
   };
 
   useEffect(() => {
     setNum(
-      (list.find((p) => p.id === product.id) &&
-        list.find((p) => p.id === product.id).num) ||
+      (basketList &&
+        basketList.find((p) => p.id === product.id) &&
+        basketList.find((p) => p.id === product.id).num) ||
         0
     );
-
-    if (setNumToProductCard) {
-      setNumToProductCard(
-        (list.find((p) => p.id === product.id) &&
-          list.find((p) => p.id === product.id).num) ||
-          0
-      );
-    }
-  }, [basket.list]);
+  }, [basketList]);
 
   return (
     <Row>
@@ -81,8 +40,8 @@ const Addandremoveproduct = ({
         <Row align="middle" onClick={(e) => e.stopPropagation()}>
           <Col
             lg={subBasket ? 15 : !productList ? 14 : 23}
-            md={23}
-            sm={23}
+            md={22}
+            sm={15}
             xs={!productList ? 14 : 22}
           >
             <Row justify={productList && "center"} align="middle">
@@ -169,7 +128,7 @@ const Addandremoveproduct = ({
               lg={!productList ? 1 : 1}
               md={1}
               xs={!productList ? 3 : 2}
-              sm={1}
+              sm={4}
             >
               <Row align="middle" justify="center">
                 <RemoveSeveralProducts num={num} product={product} />
@@ -178,7 +137,7 @@ const Addandremoveproduct = ({
           )}
 
           {!productList && (
-            <Col lg={subBasket ? 6 : 9} md={22} sm={1} xs={6}>
+            <Col lg={subBasket ? 6 : 9} md={2} sm={4} xs={6}>
               <Row align="middle" justify="end">
                 <Badge
                   style={{

@@ -3,14 +3,16 @@ import { Col, Divider, Row, notification } from "antd";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import ProductCardResume from "./ProductCardResume";
 import styleVariable from "../../styleVariable";
-import { getTotalPrice } from "../../repository/product";
-import { checkAvaibalityOfProducts } from "../../repository/order";
+import {
+  getTotalPrice,
+  checkProductsAvaibality,
+} from "../../repository/product";
 import { SmileOutlined } from "@ant-design/icons";
 import _ from "lodash";
 import useCategory from "../../customHooks/categoryHook";
 import { upperCase } from "../../helpers/UpperCase";
 
-const OrderResume = ({ basketList, setBasketList }) => {
+const OrderResume = ({ basketList }) => {
   const [billsAddress, setBillsAddress] = useState();
   const [dropAddress, setDropAddress] = useState();
   const { categories, setCategories } = useCategory();
@@ -49,31 +51,10 @@ const OrderResume = ({ basketList, setBasketList }) => {
       }
     }
   };
-  const checkProductsAvaibality = async () => {
-    const copy = _.cloneDeep(basketList);
-    await Promise.all(
-      basketList.map(async (product) => {
-        const num = await checkAvaibalityOfProducts(product);
-        if (num < product.num) {
-          const indexOf = copy.indexOf(copy.find((p) => p.id === product.id));
-          copy.splice(indexOf, 1, { ...product, stockAvailable: num });
-          notification.open({
-            message:
-              "Votre panier a été mis à jour par rapport aux stocks disponibles",
-            icon: <SmileOutlined style={{ color: "red" }} />,
-          });
-        }
-      })
-    );
-    await setBasketList(copy);
-  };
 
-  useEffect(() => {
+  useEffect(async () => {
     getInitialAddressData();
-    checkProductsAvaibality();
   }, []);
-
-  console.log(categories.list);
 
   return (
     <Col>
@@ -198,16 +179,8 @@ const OrderResume = ({ basketList, setBasketList }) => {
                             return (
                               item.category === category.name && (
                                 <ProductCardResume
-                                  id={item.id}
-                                  productName={item.name}
-                                  productPrice={item.productPrice}
-                                  uid={item.uid}
-                                  num={item.num}
-                                  stockAvailable={
-                                    item.stockAvailable
-                                      ? item.stockAvailable
-                                      : null
-                                  }
+                                  key={item.id}
+                                  product={item}
                                 />
                               )
                             );

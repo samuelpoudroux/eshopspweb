@@ -6,21 +6,21 @@ import { SmileOutlined } from "@ant-design/icons";
 import useResponsive from "../../customHooks/responsiveHook";
 import Paiement from "../paiement/Paiement";
 import StickyBar from "../product/StickyBar";
+import { useContext } from "react";
+import { AppContext } from "../../context/context";
 
 const { Step } = Steps;
 
 const OrderResumeStepper = ({ history, match }) => {
   const { isMobile } = useResponsive();
   const [current, setCurrent] = useState(0);
-  const [basketList, setBasketList] = useState(
-    JSON.parse(localStorage.getItem("basket")) || []
-  );
+  const { basket } = useContext(AppContext);
+  const { basketList } = basket;
+
   const steps = [
     {
       title: "Récapitulatif commande",
-      content: (
-        <OrderResume basketList={basketList} setBasketList={setBasketList} />
-      ),
+      content: <OrderResume basketList={basketList} />,
     },
     {
       title: "Paiement",
@@ -29,7 +29,6 @@ const OrderResumeStepper = ({ history, match }) => {
           setCurrent={setCurrent}
           current={current}
           basketList={basketList}
-          setBasketList={setBasketList}
         />
       ),
     },

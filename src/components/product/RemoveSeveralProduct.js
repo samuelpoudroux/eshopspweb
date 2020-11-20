@@ -10,11 +10,11 @@ import styleVariable from "../../styleVariable";
 
 const RemoveSeveralProducts = ({ product }) => {
   const { basket } = useContext(AppContext);
-  const { decreaseProductsFromBasket } = basket;
-  const list = JSON.parse(localStorage.getItem("basket")) || [];
+  const { removeProductFromBasket } = basket;
+  const { basketList } = basket;
 
-  const removeProductsFromBasket = async () => {
-    await decreaseProductsFromBasket(product);
+  const removeAll = async () => {
+    await removeProductFromBasket(product);
     notification.open({
       message: `Tous les produis ${product.name} ont étés supprimés du panier}`,
       icon: <SmileOutlined style={{ color: styleVariable.secondaryColor }} />,
@@ -23,11 +23,11 @@ const RemoveSeveralProducts = ({ product }) => {
   };
   return (
     <>
-      {list.length > 0 && (
+      {basketList && basketList.length > 0 && (
         <Popconfirm
           title={`Souhaitez vous supprimer tous les produits ${product.name} du panier`}
           icon={<QuestionCircleOutlined style={{ color: "red" }} />}
-          onConfirm={() => removeProductsFromBasket()}
+          onConfirm={() => removeAll()}
         >
           <DeleteOutlined
             style={{ color: styleVariable.secondaryColor, fontSize: 20 }}

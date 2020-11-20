@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../context/context";
 import { Badge, Image } from "antd";
 import { withRouter } from "react-router";
@@ -32,14 +32,23 @@ const {
 } = process.env;
 
 const ProductCard = ({ product, history, large }) => {
-  const { globalSearch, favorites, products, appRef } = useContext(AppContext);
+  const { globalSearch, favorites, products, appRef, basket } = useContext(
+    AppContext
+  );
   const { isAdmin } = useIsAdmin();
   const { search } = globalSearch;
   const { isMobile } = useResponsive();
   const [num, setNum] = useState(0);
-  const { notification, addNotification, renderNotification } = useBasket();
   const { images } = useProductImages(product.uid);
-
+  const { basketList } = basket;
+  useEffect(() => {
+    setNum(
+      (basketList &&
+        basketList.find((p) => p.id === product.id) &&
+        basketList.find((p) => p.id === product.id).num) ||
+        0
+    );
+  }, [basketList]);
   const isFavorites =
     JSON.parse(localStorage.getItem("favorites")) &&
     JSON.parse(localStorage.getItem("favorites")).length > 0 &&
@@ -98,7 +107,6 @@ const ProductCard = ({ product, history, large }) => {
         marginTop: isMobile && 20,
         padding: 10,
       }}
-      key={product.id}
     >
       {newNess === 0 ? (
         <>
@@ -212,8 +220,6 @@ const ProductCard = ({ product, history, large }) => {
                 setNum={setNum}
                 productList
                 product={product}
-                notification={notification}
-                addNotification={addNotification}
               />
             </Row>
           </Col>

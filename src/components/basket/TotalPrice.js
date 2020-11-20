@@ -1,20 +1,27 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Badge, Popconfirm } from "antd";
 import { withRouter } from "react-router";
 import { getTotalPrice } from "../../repository/product";
 import { CreditCardOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import styleVariable from "../../styleVariable";
+import { AppContext } from "../../context/context";
 const TotalPrice = ({ history, setSubBasketVisible, notClickable }) => {
-  const basketList = JSON.parse(localStorage.getItem("basket"));
-  const totalPrices = useCallback(() => {
-    return getTotalPrice(basketList ? basketList : []);
+  const { basket } = useContext(AppContext);
+  const { basketList } = basket;
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const totalPrices = useCallback(async () => {
+    setTotalPrice(await getTotalPrice(basketList ? basketList : []));
   }, [basketList]);
-  const totalPrice = totalPrices();
 
   const goOrderResume = () => {
     history.push("/orderResume");
     setSubBasketVisible(false);
   };
+
+  useEffect(() => {
+    totalPrices();
+  }, [basketList]);
   return (
     <Popconfirm
       placement={"bottom"}

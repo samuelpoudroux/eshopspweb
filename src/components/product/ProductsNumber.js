@@ -1,19 +1,26 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getNumberOfProducts } from "../../repository/product";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge } from "antd";
 import styleVariable from "../../styleVariable";
+import { useContext } from "react";
+import { AppContext } from "../../context/context";
 
 const ProductsNumber = ({
   notClickable,
   setSubBasketVisible,
   subBasketVisible,
 }) => {
-  const basketList = JSON.parse(localStorage.getItem("basket")) || [];
-  const numOfProducts = useCallback(() => {
-    return getNumberOfProducts(basketList ? basketList : []);
+  const { basket } = useContext(AppContext);
+  const { basketList } = basket;
+  const [productNumber, setProductNumber] = useState(0);
+  const getProductNumber = useCallback(async () => {
+    setProductNumber(await getNumberOfProducts(basketList ? basketList : []));
   }, [basketList]);
-  const totalOfProducts = numOfProducts();
+
+  useEffect(() => {
+    getProductNumber();
+  }, [basketList]);
   return (
     <Badge
       style={{
@@ -23,14 +30,14 @@ const ProductsNumber = ({
         minWidth: "50px",
       }}
       offset={[23, -5]}
-      count={`${totalOfProducts}`}
+      count={`${productNumber}`}
       overflowCount={1000}
     >
       <ShoppingCartOutlined
         style={{
           fontSize: "20px",
           color:
-            totalOfProducts === 0 || notClickable
+            productNumber === 0 || notClickable
               ? styleVariable.mainColor
               : "white",
         }}

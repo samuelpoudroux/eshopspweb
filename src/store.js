@@ -10,7 +10,7 @@ import usePopup from "./customHooks/popupHook";
 // the global store we give acces to our hooks to all appplication by this global store through appcontext provider
 const GlobalStore = ({ children }) => {
   const {
-    userBasket,
+    basketList,
     addProductTobasket,
     decreaseProductFromBasket,
     removeAllProductsFromBasket,
@@ -51,7 +51,7 @@ const GlobalStore = ({ children }) => {
   const { auth, login, logout, register, userData } = useAuth();
   const store = {
     basket: {
-      list: userBasket,
+      basketList,
       add: addProductTobasket,
       decrease: decreaseProductFromBasket,
       removeAllProducts: removeAllProductsFromBasket,

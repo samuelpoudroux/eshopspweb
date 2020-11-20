@@ -9,7 +9,6 @@ import { AppContext } from "../../context/context";
 import { Unavailable } from "./Unavailable";
 
 const PopupProductCard = ({ product, history, orderEverSent }) => {
-  const { notification, addNotification, renderNotification } = useBasket();
   const { images } = useProductImages(product.uid);
   const { popup } = useContext(AppContext);
 
@@ -33,11 +32,7 @@ const PopupProductCard = ({ product, history, orderEverSent }) => {
       }}
       onClick={() => goToProductDetails()}
     >
-      <Unavailable
-        placement={{ top: 30, right: 10 }}
-        stockNumber={product.stockNumber}
-      />
-      <Row key={product.id} align="middle" style={{}}>
+      <Row key={product.id} align="middle">
         <Col lg={3} md={6} sm={6} xs={6}>
           {images && images.length > 0 && (
             <Image src={images[0].url} alt="image du produit" />
@@ -80,21 +75,21 @@ const PopupProductCard = ({ product, history, orderEverSent }) => {
         </Col>
       </Row>
 
-      <Row style={{ paddingTop: 20 }} align="middle" justify="space-between">
-        {!orderEverSent && (
-          <Addandremoveproduct
-            notification={notification}
-            addNotification={addNotification}
-            product={product}
-            subBasket
-          />
-        )}
-      </Row>
       <Row
-        justify={!orderEverSent ? "end" : "space-between"}
-        align="center"
-        style={{ padding: 10 }}
+        style={{ height: "60px", marginTop: 5 }}
+        align="middle"
+        justify="space-between"
       >
+        {!orderEverSent && <Addandremoveproduct product={product} subBasket />}
+      </Row>
+      <Row justify={!orderEverSent ? "start" : "space-between"} align="center">
+        <Col span={12} style={{ position: "relative" }}>
+          <Unavailable
+            placement={{ left: 0, bottom: 5, transform: "rotate(-5deg)" }}
+            stockNumber={product.stockNumber}
+            num={product.num}
+          />
+        </Col>
         {orderEverSent && <b>{product.num} Piéces</b>}
         <b>Sous Total: {product.num * product.productPrice}€</b>
       </Row>

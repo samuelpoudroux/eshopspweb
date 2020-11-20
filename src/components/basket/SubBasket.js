@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Row, Col, Drawer, Button } from "antd";
+import { Row, Col, Drawer, Button, notification } from "antd";
 import ProductsNumber from "../product/ProductsNumber";
 import TotalPrice from "./TotalPrice";
 import useResponsive from "../../customHooks/responsiveHook";
@@ -7,17 +7,22 @@ import PopupProductCard from "../product/PopupProductCard";
 import { withRouter } from "react-router";
 import styleVariable from "../../styleVariable";
 import CleanBasket from "./CleanBasket";
-import { getTotalPrice } from "../../repository/product";
+import {
+  checkProductsAvaibality,
+  getTotalPrice,
+} from "../../repository/product";
+
 import { AppContext } from "../../context/context";
 
 const SubBasket = ({ history }) => {
-  const list = JSON.parse(localStorage.getItem("basket")) || [];
-  const { isMobile } = useResponsive();
+  const { isMobile, isTabletOrMobile } = useResponsive();
   const user = JSON.parse(localStorage.getItem("users"))
     ? JSON.parse(localStorage.getItem("users"))
     : undefined;
-  const { popup } = useContext(AppContext);
+  const { popup, basket } = useContext(AppContext);
   const { subBasketVisible, setSubBasketVisible } = popup;
+  const { basketList } = basket;
+
   const drawerHeader = () => {
     return (
       <Row style={{ paddingTop: "2%" }}>
@@ -89,7 +94,7 @@ const SubBasket = ({ history }) => {
         title={drawerHeader()}
         closable={true}
         placement="right"
-        width={isMobile ? 330 : 900}
+        width={(isMobile && 330) || 900}
         onClose={() => setSubBasketVisible(false)}
         visible={subBasketVisible}
         height={"auto"}
@@ -110,15 +115,15 @@ const SubBasket = ({ history }) => {
             justify={isMobile && "center"}
             onTouchMove={(e) => e.stopPropagation()}
           >
-            {list && list.length > 0 ? (
-              list.map(
+            {basketList && basketList.length > 0 ? (
+              basketList.map(
                 (product) =>
-                  product.num !== 0 && (
+                  product.num >= 0 && (
                     <PopupProductCard
                       history={history}
                       key={product.id}
                       product={product}
-                      list={list}
+                      basketList={basketList}
                     />
                   )
               )
@@ -143,7 +148,7 @@ const SubBasket = ({ history }) => {
           >
             <Col lg={7} xs={24}>
               <Row justify={isMobile && "center"}>
-                <b>Total de mon panier: {getTotalPrice(list)}€</b>
+                <b>Total de mon panier: {getTotalPrice(basketList)}€</b>
               </Row>
             </Col>
             <Col lg={6} xs={24} style={{ marginTop: isMobile && 30 }}>
@@ -153,7 +158,7 @@ const SubBasket = ({ history }) => {
                     color: "white",
                     background: styleVariable.secondaryColor,
                   }}
-                  disabled={list.length === 0}
+                  // disabled={basketList.length === 0}
                   onClick={(e) => goToPaiement(e)}
                 >
                   Finaliser ma commande

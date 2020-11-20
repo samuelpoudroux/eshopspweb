@@ -20,7 +20,6 @@ import { AppContext } from "../../context/context";
 const ProductDetail = ({ match }) => {
   const [product, setProduct] = useState({});
   const { images } = useProductImages(product.uid);
-  const { notification, addNotification } = useBasket();
   const { isMobile, isTabletOrMobile } = useResponsive();
   const { favorites } = useContext(AppContext);
   const { id } = match.params;
@@ -123,12 +122,7 @@ const ProductDetail = ({ match }) => {
               </Row>
               <Row align="middle">
                 <Col span={19}>
-                  <Addandremoveproduct
-                    notification={notification}
-                    addNotification={addNotification}
-                    buttonPadding={10}
-                    product={product}
-                  />
+                  <Addandremoveproduct buttonPadding={10} product={product} />
                 </Col>
 
                 <Col span={5}>

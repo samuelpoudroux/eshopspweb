@@ -1,4 +1,5 @@
-import _ from "lodash";
+import _, { isArray } from "lodash";
+import { checkAvaibalityOfProducts } from "./order";
 
 // sort product from higher to lowest  price
 const sortProductsByHigher = (state) => {
@@ -52,7 +53,13 @@ const getNumberOfProducts = (basketList) => {
   const totalOfProducts =
     copy !== undefined &&
     copy.reduce((accumulateur, valeurCourante) => {
-      return accumulateur + valeurCourante.num;
+      let currentValue;
+      if (valeurCourante.num >= valeurCourante.stockNumber) {
+        currentValue = valeurCourante.stockNumber;
+      } else {
+        currentValue = valeurCourante.num;
+      }
+      return accumulateur + currentValue;
     }, num);
   return totalOfProducts;
 };
@@ -64,14 +71,32 @@ const getTotalPrice = (productList) => {
     copy !== undefined &&
     copy.reduce((accumulateur, valeurCourante) => {
       let currentValue;
-      if (valeurCourante.stockAvailable) {
-        currentValue = valeurCourante.stockAvailable;
+      if (valeurCourante.num >= valeurCourante.stockNumber) {
+        currentValue = valeurCourante.stockNumber;
       } else {
         currentValue = valeurCourante.num;
       }
       return accumulateur + currentValue * valeurCourante.productPrice;
     }, num);
   return totalPrice;
+};
+
+const checkProductsAvaibality = async (productList) => {
+  const copy = _.cloneDeep(productList);
+  Array.isArray(productList) &&
+    productList.length > 0 &&
+    (await Promise.all(
+      productList.map(async (product) => {
+        const stockNumber = await checkAvaibalityOfProducts(product);
+        const indexOf = copy.indexOf(copy.find((p) => p.id === product.id));
+        copy.splice(indexOf, 1, {
+          ...product,
+          stockNumber: stockNumber,
+          num: product.num > stockNumber ? stockNumber : product.num,
+        });
+      })
+    ));
+  return copy;
 };
 
 export {
@@ -81,4 +106,5 @@ export {
   getNumberOfProducts,
   getTotalPrice,
   sortProductsByMaxPrice,
+  checkProductsAvaibality,
 };
