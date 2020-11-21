@@ -37,12 +37,6 @@ const OrderResumeStepper = ({ history, match }) => {
     ? JSON.parse(localStorage.getItem("users"))
     : undefined;
 
-  useEffect(() => {
-    if (match.params.id) {
-      setCurrent(current + 1);
-    }
-  }, [match.params.id]);
-
   const redirectToLoginFormPaiement = async () => {
     if (!user) {
       history.push(`/login/orderResume`);

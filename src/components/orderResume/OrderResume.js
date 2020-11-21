@@ -52,7 +52,7 @@ const OrderResume = ({ basketList }) => {
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     getInitialAddressData();
   }, []);
 

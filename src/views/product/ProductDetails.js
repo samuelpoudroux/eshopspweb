@@ -144,7 +144,9 @@ const ProductDetail = ({ match }) => {
         >
           <Row>
             <ProductDetailsTabs
-              description={upperCase(product.longDescription)}
+              description={upperCase(product.description)}
+              formule={upperCase(product.formule)}
+              advice={upperCase(product.advice)}
             />
           </Row>
         </Col>

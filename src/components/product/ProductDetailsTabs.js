@@ -3,10 +3,16 @@ import { Tabs, Col, Tag } from "antd";
 import styleVariable from "../../styleVariable";
 import { upperCase } from "../../helpers/UpperCase";
 import useResponsive from "../../customHooks/responsiveHook";
+import {
+  PlusOutlined,
+  MessageOutlined,
+  MacCommandOutlined,
+  ExceptionOutlined,
+} from "@ant-design/icons";
 
 const { TabPane } = Tabs;
 
-const ProductDetailsTabs = ({ category, description }) => {
+const ProductDetailsTabs = ({ description, formule, advice }) => {
   const { isMobile } = useResponsive();
   return (
     <Tabs
@@ -18,24 +24,56 @@ const ProductDetailsTabs = ({ category, description }) => {
       }}
     >
       <TabPane
-        tab="Présentation"
+        tab={
+          <span>
+            <ExceptionOutlined
+              style={{ color: styleVariable.secondaryColor }}
+            />{" "}
+            Description
+          </span>
+        }
         key="1"
         style={{ padding: 20, paddingLeft: 0 }}
       >
-        <p>{description !== "undefined" && description}</p>{" "}
+        <div dangerouslySetInnerHTML={{ __html: description }} />
       </TabPane>
       <TabPane
-        tab="Proprieté et utilisation"
+        tab={
+          <span>
+            <MacCommandOutlined
+              style={{ color: styleVariable.secondaryColor }}
+            />{" "}
+            Compositions
+          </span>
+        }
         key="2"
         style={{ padding: 20, paddingLeft: 0 }}
       >
-        Content relatif au retour
+        <div dangerouslySetInnerHTML={{ __html: formule }} />
       </TabPane>
-      <TabPane tab="Livraison" key="3" style={{ padding: 20, paddingLeft: 0 }}>
-        Contenu relatif à la livraison
+      <TabPane
+        tab={
+          <span>
+            <PlusOutlined style={{ color: styleVariable.secondaryColor }} />{" "}
+            Conseils
+          </span>
+        }
+        key="3"
+        style={{ padding: 20, paddingLeft: 0 }}
+      >
+        <div dangerouslySetInnerHTML={{ __html: advice }} />
       </TabPane>
-      <TabPane tab="Retour" key="4" style={{ padding: 20, paddingLeft: 0 }}>
-        Content relatif au retour
+      <TabPane
+        tab={
+          <span>
+            <MessageOutlined style={{ color: styleVariable.secondaryColor }} />{" "}
+            Avis Clients
+          </span>
+        }
+        key="4"
+        style={{ padding: 20, paddingLeft: 0 }}
+      >
+        Avis Clients
       </TabPane>
     </Tabs>
   );

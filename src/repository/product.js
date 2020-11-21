@@ -92,7 +92,10 @@ const checkProductsAvaibality = async (productList) => {
         copy.splice(indexOf, 1, {
           ...product,
           stockNumber: stockNumber,
-          num: product.num > stockNumber ? stockNumber : product.num,
+          num:
+            product.num !== "produit supprimé" && product.num > stockNumber
+              ? stockNumber
+              : product.num,
         });
       })
     ));

@@ -122,7 +122,7 @@ const Login = ({ history, match }) => {
           >
             <Input
               onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
-              defaultValue={getDefaultValueLocalStorage("email", itemKey)}
+              initialValue={getDefaultValueLocalStorage("email", itemKey)}
               name="email"
               className="inputStyle"
               bordered={false}

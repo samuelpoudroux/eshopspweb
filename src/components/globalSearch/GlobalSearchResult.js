@@ -9,12 +9,7 @@ import CategoryCard from "../../views/categories/CategoryCard";
 
 const GlobalsearchResult = ({ state, history }) => {
   const items = [];
-  const { globalSearch } = useContext(AppContext);
-  const { search } = globalSearch;
 
-  const goToPage = (key, value) => {
-    search("");
-  };
   for (const [key, values] of Object.entries(state)) {
     if (Array.isArray(values) && values.length > 0) {
       items.push(
@@ -49,7 +44,6 @@ const GlobalsearchResult = ({ state, history }) => {
                       position: "relative",
                       cursor: "pointer",
                     }}
-                    onClick={() => goToPage(key, value)}
                   >
                     {value.name}
                   </Row>

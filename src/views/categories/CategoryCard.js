@@ -8,11 +8,13 @@ import { useState } from "react";
 import { withRouter } from "react-router";
 
 const CategoryCard = ({ history, id }) => {
-  const { appRef } = useContext(AppContext);
+  const { appRef, globalSearch } = useContext(AppContext);
   const [category, setCategory] = useState(undefined);
   const { REACT_APP_API_DOMAIN, REACT_APP_API_CATEGORIES } = process.env;
 
+  const { search } = globalSearch;
   const goToCategory = () => {
+    search("");
     scrollTop(appRef);
     history.push(`/categories/${category.name}`);
   };

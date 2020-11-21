@@ -107,7 +107,7 @@ const ContactForm = ({ history }) => {
                           onChange={(e) =>
                             setValuesLocalStorage(e.target, itemKey)
                           }
-                          defaultValue={getDefaultValueLocalStorage(
+                          initialValue={getDefaultValueLocalStorage(
                             "subject",
                             itemKey
                           )}
@@ -134,7 +134,7 @@ const ContactForm = ({ history }) => {
                           onChange={(e) =>
                             setValuesLocalStorage(e.target, itemKey)
                           }
-                          defaultValue={
+                          initialValue={
                             (user && user.lastName) ||
                             getDefaultValueLocalStorage("senderName", itemKey)
                           }
@@ -170,7 +170,7 @@ const ContactForm = ({ history }) => {
                           onChange={(e) =>
                             setValuesLocalStorage(e.target, itemKey)
                           }
-                          defaultValue={
+                          initialValue={
                             (user && user.email) ||
                             getDefaultValueLocalStorage("senderEmail", itemKey)
                           }
@@ -201,7 +201,7 @@ const ContactForm = ({ history }) => {
                           onChange={(e) =>
                             setValuesLocalStorage(e.target, itemKey)
                           }
-                          defaultValue={
+                          initialValue={
                             (user && user.phoneNumber) ||
                             getDefaultValueLocalStorage("senderPhone", itemKey)
                           }
@@ -227,7 +227,7 @@ const ContactForm = ({ history }) => {
                           onChange={(e) =>
                             setValuesLocalStorage(e.target, itemKey)
                           }
-                          defaultValue={getDefaultValueLocalStorage(
+                          initialValue={getDefaultValueLocalStorage(
                             "email",
                             itemKey
                           )}

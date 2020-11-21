@@ -56,7 +56,7 @@ const LogButton = ({ history, placement }) => {
                       }}
                     />
                   }
-                  onConfirm={() => logout()}
+                  onConfirm={() => logout(history)}
                 >
                   <Button>Se déconnecter</Button>
                 </Popconfirm>

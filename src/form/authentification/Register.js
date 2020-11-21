@@ -149,7 +149,7 @@ const Register = ({ history, match }) => {
               className="inputStyle"
               name="lastName"
               onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
-              defaultValue={getDefaultValueLocalStorage("lastName", itemKey)}
+              initialValue={getDefaultValueLocalStorage("lastName", itemKey)}
             />
           </Form.Item>
           <Form.Item
@@ -169,7 +169,7 @@ const Register = ({ history, match }) => {
               className="inputStyle"
               onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
               name="firstName"
-              defaultValue={getDefaultValueLocalStorage("firstName", itemKey)}
+              initialValue={getDefaultValueLocalStorage("firstName", itemKey)}
             />
           </Form.Item>
           <Form.Item
@@ -196,7 +196,7 @@ const Register = ({ history, match }) => {
               className="inputStyle"
               onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
               name="email"
-              defaultValue={getDefaultValueLocalStorage("email", itemKey)}
+              initialValue={getDefaultValueLocalStorage("email", itemKey)}
             />
           </Form.Item>
           <Form.Item
@@ -317,7 +317,7 @@ const Register = ({ history, match }) => {
               className="inputStyle"
               onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
               name="phoneNumber"
-              defaultValue={getDefaultValueLocalStorage("phoneNumber", {
+              initialValue={getDefaultValueLocalStorage("phoneNumber", {
                 itemKey,
               })}
             />

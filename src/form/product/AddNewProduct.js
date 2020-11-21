@@ -28,7 +28,9 @@ import {
 import TextArea from "antd/lib/input/TextArea";
 import styleVariable from "../../styleVariable";
 import useResponsive from "../../customHooks/responsiveHook";
-import { withRouter } from "react-router";
+import { useLocation, withRouter } from "react-router";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const { Option } = Select;
 const itemKey = "product";
@@ -43,6 +45,7 @@ const {
 const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
   const [categories, setCategories] = useState([]);
   const [files, setFiles] = useState([]);
+  const [initialValues, setInitialValues] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const { isMobile } = useResponsive();
@@ -65,10 +68,10 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
     );
   };
 
-  const beforeUploadManage = (file) => {
-    setFiles([...files, file]);
-    return false;
-  };
+  useEffect(() => {
+    setInitialValues(getInitialValue(itemKey));
+    return () => {};
+  }, []);
 
   const props = {
     beforeUpload: (file) => false,
@@ -191,7 +194,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
               name="basic"
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
-              initialValues={getInitialValue(itemKey)}
+              initialValues={initialValues}
             >
               <Col>
                 <Form.Item
@@ -210,7 +213,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     className="inputStyle"
                     onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                     name="name"
-                    defaultValue={getDefaultValueLocalStorage("name", itemKey)}
+                    initialValue={getDefaultValueLocalStorage("name", itemKey)}
                   />
                 </Form.Item>
                 <Form.Item
@@ -230,7 +233,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     min={0}
                     onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                     name="productPrice"
-                    defaultValue={getDefaultValueLocalStorage(
+                    initialValue={getDefaultValueLocalStorage(
                       "productPrice",
                       itemKey
                     )}
@@ -253,53 +256,57 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     min={0}
                     onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                     name="stockNumber"
-                    defaultValue={getDefaultValueLocalStorage(
+                    initialValue={getDefaultValueLocalStorage(
                       "stockNumber",
                       itemKey
                     )}
                   />
                 </Form.Item>
-                <Form.Item
-                  label="Longue description"
-                  name="longDescription"
-                  rules={[
-                    {
-                      required: true,
-                      min: 10,
-                      message: "Nom avec minimum 10 caractéres",
-                    },
-                  ]}
-                  hasFeedback
-                >
-                  <TextArea
-                    onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
-                    name="longDescription"
-                    defaultValue={getDefaultValueLocalStorage(
-                      "longDescription",
-                      itemKey
-                    )}
+                <Form.Item label="Description" name="description">
+                  <CKEditor
+                    editor={ClassicEditor}
+                    data={
+                      getDefaultValueLocalStorage("description", itemKey) ||
+                      null
+                    }
+                    onChange={(event, editor) => {
+                      const data = editor.getData();
+                      setValuesLocalStorage(
+                        { value: data, name: "description" },
+                        itemKey
+                      );
+                    }}
                   />
                 </Form.Item>
 
-                <Form.Item
-                  label="courte description"
-                  name="shortDescription"
-                  rules={[
-                    {
-                      required: true,
-                      min: 10,
-                      message: "Nom oligatoire avec minimum 10 caractéres",
-                    },
-                  ]}
-                  hasFeedback
-                >
-                  <TextArea
-                    onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
-                    name="shortDescription"
-                    defaultValue={getDefaultValueLocalStorage(
-                      "shortDescription",
-                      itemKey
-                    )}
+                <Form.Item label="Composition" name="formule">
+                  <CKEditor
+                    editor={ClassicEditor}
+                    data={
+                      getDefaultValueLocalStorage("formule", itemKey) || null
+                    }
+                    onChange={(event, editor) => {
+                      const data = editor.getData();
+                      setValuesLocalStorage(
+                        { value: data, name: "formule" },
+                        itemKey
+                      );
+                    }}
+                  />
+                </Form.Item>
+                <Form.Item label="Conseils" name="advice">
+                  <CKEditor
+                    editor={ClassicEditor}
+                    data={
+                      getDefaultValueLocalStorage("advice", itemKey) || null
+                    }
+                    onChange={(event, editor) => {
+                      const data = editor.getData();
+                      setValuesLocalStorage(
+                        { value: data, name: "advice" },
+                        itemKey
+                      );
+                    }}
                   />
                 </Form.Item>
 
@@ -348,7 +355,6 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                         Insérer des images
                       </Button>
                     </Upload>
-                    ,
                   </Form.Item>
                 </Form.Item>
 
