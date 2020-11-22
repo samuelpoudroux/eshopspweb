@@ -6,7 +6,7 @@ const usePopup = (props) => {
   const [subBasketVisible, setSubBasketVisible] = useState(false);
   const [menuIsOpened, setMenuIsOpened] = useState(false);
   const [chatActive, setChatActive] = useState(false);
-  const [addProduct, setAddProduct] = useState(false);
+  const [addProduct, setAddProduct] = useState(true);
   const [addCategory, setAddCategory] = useState(false);
 
   return {

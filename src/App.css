@@ -2,6 +2,7 @@
   --mainColor:#5a6165;
   --secondaryColor: #003d2e;
   --thirdColor: #89ba17;
+ 
 }
 
 
@@ -343,3 +344,18 @@ border: none !important
     .ant-image-preview-operations {
       background-color:var(--thirdColor);
     }
+
+
+    #description {
+      background-color: red;
+    }
+
+     #description  > h2 { color:green }
+     #description  > p { color:green }
+     #description  > ul { color:blue }
+
+     #description  strong  {color: purple}
+     
+     #formule  > h2 { color:green }
+     #formule  > p { color:green }
+     #formule  > ul { color:blue }

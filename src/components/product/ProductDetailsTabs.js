@@ -35,7 +35,10 @@ const ProductDetailsTabs = ({ description, formule, advice }) => {
         key="1"
         style={{ padding: 20, paddingLeft: 0 }}
       >
-        <div dangerouslySetInnerHTML={{ __html: description }} />
+        <div
+          id="description"
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
       </TabPane>
       <TabPane
         tab={
@@ -49,7 +52,7 @@ const ProductDetailsTabs = ({ description, formule, advice }) => {
         key="2"
         style={{ padding: 20, paddingLeft: 0 }}
       >
-        <div dangerouslySetInnerHTML={{ __html: formule }} />
+        <div id="formule" dangerouslySetInnerHTML={{ __html: formule }} />
       </TabPane>
       <TabPane
         tab={

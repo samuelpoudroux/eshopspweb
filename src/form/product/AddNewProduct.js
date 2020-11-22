@@ -25,12 +25,11 @@ import {
   UploadOutlined,
   CloseCircleOutlined,
 } from "@ant-design/icons";
-import TextArea from "antd/lib/input/TextArea";
 import styleVariable from "../../styleVariable";
 import useResponsive from "../../customHooks/responsiveHook";
-import { useLocation, withRouter } from "react-router";
+import { withRouter } from "react-router";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import classic from "@ckeditor/ckeditor5-build-classic";
 
 const { Option } = Select;
 const itemKey = "product";
@@ -41,6 +40,16 @@ const {
   REACT_APP_API_PRODUCT_ADD,
   REACT_APP_API_CATEGORIES,
 } = process.env;
+const config = {
+  toolbar: [
+    "heading",
+    "bold",
+    "italic",
+    "link",
+    "bulletedList",
+    "numberedList",
+  ],
+};
 
 const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
   const [categories, setCategories] = useState([]);
@@ -68,8 +77,12 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
     );
   };
 
+  console.log("categories", categories);
   useEffect(() => {
     setInitialValues(getInitialValue(itemKey));
+    Axios.get(
+      REACT_APP_API_DOMAIN + REACT_APP_API_CATEGORIES
+    ).then(({ data }) => setCategories(data));
     return () => {};
   }, []);
 
@@ -137,11 +150,6 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
     }
   };
 
-  useEffect(() => {
-    Axios.get(
-      REACT_APP_API_DOMAIN + REACT_APP_API_CATEGORIES
-    ).then(({ data }) => setCategories(data));
-  }, []);
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -264,7 +272,8 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                 </Form.Item>
                 <Form.Item label="Description" name="description">
                   <CKEditor
-                    editor={ClassicEditor}
+                    editor={classic}
+                    config={config}
                     data={
                       getDefaultValueLocalStorage("description", itemKey) ||
                       null
@@ -281,7 +290,8 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
 
                 <Form.Item label="Composition" name="formule">
                   <CKEditor
-                    editor={ClassicEditor}
+                    editor={classic}
+                    config={config}
                     data={
                       getDefaultValueLocalStorage("formule", itemKey) || null
                     }
@@ -296,7 +306,8 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                 </Form.Item>
                 <Form.Item label="Conseils" name="advice">
                   <CKEditor
-                    editor={ClassicEditor}
+                    editor={classic}
+                    config={config}
                     data={
                       getDefaultValueLocalStorage("advice", itemKey) || null
                     }
