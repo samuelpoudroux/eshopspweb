@@ -4,7 +4,6 @@ import {
   Form,
   Input,
   Button,
-  Checkbox,
   Row,
   Col,
   Spin,
@@ -15,7 +14,6 @@ import { AppContext } from "../../context/context";
 import styleVariable from "../../styleVariable";
 import StickyBar from "../../components/product/StickyBar";
 import scrollTop from "../../repository/scrollTop";
-import PageHeader from "../../components/PageHeader";
 import useResponsive from "../../customHooks/responsiveHook";
 import {
   getDefaultValueLocalStorage,

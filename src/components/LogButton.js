@@ -114,7 +114,7 @@ const LogButton = ({ history, placement }) => {
                     color: "white",
                   }}
                   icon={<UserOutlined />}
-                  onClick={() => goToAuth("login")}
+                  onClick={() => goToAuth("/login")}
                 >
                   Se connecter
                 </Button>
@@ -126,7 +126,7 @@ const LogButton = ({ history, placement }) => {
               <Row style={{ paddingTop: 4 }} justify="center">
                 <Button
                   style={{ width: "100%" }}
-                  onClick={() => goToAuth("register")}
+                  onClick={() => goToAuth("/register")}
                 >
                   Créer un compte
                 </Button>

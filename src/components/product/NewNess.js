@@ -18,7 +18,6 @@ const NewNess = ({ history }) => {
 
   const [newNess, setNewNess] = useState([]);
   const [copy, setCopy] = useState([]);
-
   useEffect(() => {
     const productIsNewNess = products.list.filter((e) => e.newNess === 1);
     setNewNess(productIsNewNess);
@@ -28,7 +27,7 @@ const NewNess = ({ history }) => {
     const newNessComponents = [];
     newNess.map((product) => {
       newNessComponents.push(
-        <Col xs={12} lg={8} md={10} xxl={3} key={product.id}>
+        <Col xs={12} lg={10} md={10} xxl={5} key={product.id}>
           <ProductCard productList product={product} />
         </Col>
       );

@@ -137,6 +137,7 @@ const OrderDetailsPopup = ({
       </Col>
     );
   };
+  console.log("productList", productList);
 
   return (
     <Drawer

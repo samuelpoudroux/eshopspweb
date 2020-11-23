@@ -43,7 +43,7 @@ const Routes = [
     component: ContactForm,
   },
   {
-    path: "/productDetails/:id",
+    path: "/productDetails/:name/:uid",
     component: ProductDetail,
   },
   {

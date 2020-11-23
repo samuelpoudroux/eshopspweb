@@ -44,8 +44,8 @@ const ProductCard = ({ product, history, large }) => {
   useEffect(() => {
     setNum(
       (basketList &&
-        basketList.find((p) => p.id === product.id) &&
-        basketList.find((p) => p.id === product.id).num) ||
+        basketList.find((p) => p.uid === product.uid) &&
+        basketList.find((p) => p.uid === product.uid).num) ||
         0
     );
   }, [basketList]);
@@ -53,12 +53,13 @@ const ProductCard = ({ product, history, large }) => {
     JSON.parse(localStorage.getItem("favorites")) &&
     JSON.parse(localStorage.getItem("favorites")).length > 0 &&
     JSON.parse(localStorage.getItem("favorites")).find(
-      (e) => e.id === product.id
+      (e) => e.uid === product.uid
     )
       ? true
       : false;
   const {
     id,
+    uid,
     name,
     notation,
     productPrice,
@@ -70,7 +71,7 @@ const ProductCard = ({ product, history, large }) => {
   const goToProductDetails = (e) => {
     search("");
     scrollTop(appRef);
-    history.push(`/productDetails/${id}`);
+    history.push(`/productDetails/${name}/${uid}`);
   };
 
   const addFavorites = () => {
@@ -85,7 +86,7 @@ const ProductCard = ({ product, history, large }) => {
       REACT_APP_API_DOMAIN +
         REACT_APP_API_PRODUCT +
         REACT_APP_API_PRODUCT_IS_NEWNESS +
-        id,
+        uid,
       { newNess: value },
       {
         headers: {
@@ -106,9 +107,12 @@ const ProductCard = ({ product, history, large }) => {
         margin: !isMobile && 20,
         marginTop: isMobile && 20,
         padding: 10,
+        textAlign: "center",
+        // border: "1px solid black",
       }}
+      className="productCard"
     >
-      {newNess === 0 ? (
+      {newNess === 0 && notation && (
         <>
           <StarFilled
             style={{
@@ -130,10 +134,11 @@ const ProductCard = ({ product, history, large }) => {
               color: "white",
             }}
           >
-            {(notation && `${notation}/5`) || `5/5`}
+            {notation && `${notation}/5`}
           </b>
         </>
-      ) : (
+      )}{" "}
+      {newNess !== 0 && (
         <>
           <NewNessIcon
             height={"50px"}
@@ -159,7 +164,6 @@ const ProductCard = ({ product, history, large }) => {
           </b>
         </>
       )}
-
       <Unavailable
         placement={{ top: 20, right: 10 }}
         stockNumber={stockNumber}
@@ -171,11 +175,15 @@ const ProductCard = ({ product, history, large }) => {
           style={{ height: "150px", paddingTop: 10 }}
         >
           {images && images.length > 0 && (
-            <Image
-              alt={`image du produit ${product.name}`}
-              src={`${images[0].url}`}
-              style={{ zIndex: 0 }}
-            />
+            <Col xxl={12} xs={20}>
+              <Image
+                alt={`image du produit ${product.name}`}
+                src={`${images[0].url}`}
+                height={"100%"}
+                width={"100%"}
+                style={{ zIndex: 0 }}
+              />
+            </Col>
           )}
         </Row>
         <Row style={{ paddingTop: 20, height: "40px" }} justify="center">
@@ -214,7 +222,7 @@ const ProductCard = ({ product, history, large }) => {
           justify="center"
           style={{ paddingTop: 5, height: "40px" }}
         >
-          <Col lg={24} md={24} sm={24} xs={24}>
+          <Col lg={12} md={12} sm={24} xs={15}>
             <Row align="middle" onClick={(e) => e.stopPropagation()}>
               <Addandremoveproduct
                 setNum={setNum}

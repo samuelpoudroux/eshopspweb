@@ -22,7 +22,7 @@ const Paiement = ({ current, setCurrent, basketList }) => {
         products: JSON.stringify(
           basketList.map((product) => {
             return {
-              id: product.id,
+              uid: product.uid,
               num: product.num,
             };
           })
@@ -40,7 +40,6 @@ const Paiement = ({ current, setCurrent, basketList }) => {
     }
   };
 
-  console.log("basket", getTotalPrice(basketList));
   return (
     <Col>
       <Row justify="center">

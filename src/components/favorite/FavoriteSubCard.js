@@ -20,7 +20,7 @@ export const FavoriteSubCard = ({
   const { images } = useProductImages(product.uid);
 
   const goToProductDetails = async () => {
-    history.push(`/productDetails/${product.id}`);
+    history.push(`/productDetails/${product.name}/${product.id}`);
     setFavoriteActive(false);
   };
 
@@ -87,7 +87,7 @@ export const FavoriteSubCard = ({
       </Row>
 
       <Row style={{ paddingTop: 15 }} justify="end" align="bottom">
-        <Col xl={24}>
+        <Col xl={2}>
           <Popconfirm
             title={`Souhaitez vous supprimer ce produit de vos coups de coeur`}
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}

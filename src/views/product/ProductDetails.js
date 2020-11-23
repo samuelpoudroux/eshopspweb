@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { Col, Row, Carousel, Image } from "antd";
+import { Col, Row, Carousel, Image, Spin } from "antd";
 import Addandremoveproduct from "../../components/product/AddAndRemoveProduct";
 import ProductDetailsTabs from "../../components/product/ProductDetailsTabs";
-import useBasket from "../../customHooks/basketHook";
 import {
   PaperClipOutlined,
   HeartFilled,
@@ -19,36 +18,46 @@ import { AppContext } from "../../context/context";
 
 const ProductDetail = ({ match }) => {
   const [product, setProduct] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const { images } = useProductImages(product.uid);
   const { isMobile, isTabletOrMobile } = useResponsive();
   const { favorites } = useContext(AppContext);
-  const { id } = match.params;
+  const { uid } = match.params;
   const { REACT_APP_API_DOMAIN, REACT_APP_API_PRODUCT } = process.env;
 
   const getProduct = async () => {
+    setIsLoading(true);
     const { data } = await axios.get(
-      REACT_APP_API_DOMAIN + REACT_APP_API_PRODUCT + `${id}`
+      REACT_APP_API_DOMAIN + REACT_APP_API_PRODUCT + `${uid}`
     );
     setProduct(data);
+    setIsLoading(false);
   };
 
   const isFavorites =
     JSON.parse(localStorage.getItem("favorites")) &&
     JSON.parse(localStorage.getItem("favorites")).length > 0 &&
     JSON.parse(localStorage.getItem("favorites")).find(
-      (e) => e.id === product.id
+      (e) => e.uid === product.uid
     )
       ? true
       : false;
 
   useEffect(() => {
     getProduct();
-  }, [id]);
+  }, [uid]);
 
   return (
     <Col span={24}>
       <StickyBar title={`${product.name && product.name.toUpperCase()}`} />
       <Row justify="center" style={{ padding: 20, paddingTop: 60 }}>
+        {isLoading && (
+          <Col span={24}>
+            <Row justify="center" align="middle">
+              <Spin />
+            </Row>
+          </Col>
+        )}
         <Col xxl={12} lg={12} md={12} xs={24}>
           <Row justify="center">
             <Col
@@ -99,7 +108,7 @@ const ProductDetail = ({ match }) => {
                 placement={{ top: 20, right: 10 }}
                 stockNumber={product.stockNumber}
               />
-              <Carousel autoplay style={{ padding: 40, marginTop: 50 }}>
+              <Carousel autoplay style={{ padding: 40, marginTop: 1 }}>
                 {images &&
                   images.length > 0 &&
                   images.map((image) => (
@@ -116,7 +125,7 @@ const ProductDetail = ({ match }) => {
               </Carousel>
 
               <Row justify="center" align="middle">
-                <h1 style={{ fontStyle: "italic" }}>
+                <h1 style={{ fontStyle: "italic", marginTop: 20 }}>
                   {product.name && upperCase(product.name)}
                 </h1>
               </Row>
@@ -142,13 +151,12 @@ const ProductDetail = ({ match }) => {
           className="productCard"
           style={{ marginTop: isTabletOrMobile && 40 }}
         >
-          <Row>
-            <ProductDetailsTabs
-              description={upperCase(product.description)}
-              formule={upperCase(product.formule)}
-              advice={upperCase(product.advice)}
-            />
-          </Row>
+          <ProductDetailsTabs
+            description={product.description}
+            formule={product.formule}
+            advice={product.advice}
+            uid={product.uid}
+          />
         </Col>
       </Row>
     </Col>

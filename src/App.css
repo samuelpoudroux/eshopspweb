@@ -111,14 +111,10 @@ outline: none !important;
   -webkit-border-radius:0px;
   border-radius:0px;
   }
-.testCard{
-  -webkit-box-shadow:inset 1px 1px 12px 1px#d2d6da;
-  -moz-box-shadow:inset 1px 1px 12px 1px#d2d6da;
-  box-shadow:inset 1px 1px 12px 1px#d2d6da;
-  -moz-border-radius:0px;
-  -webkit-border-radius:0px;
-  border-radius:0px;
-  }
+
+  
+
+  
 
 .detailCard{
   -webkit-box-shadow:inset 1px 1px 12px 1px#b5b8b8;
@@ -328,11 +324,6 @@ border: none !important
   
   }
 
-  /* .content {
-    background-image:url('./assets/backgroundTest.jpg');
-    background-size: 50%;
-    background-repeat: no-repeat;
-    background-position-y: 35%;  } */
 
     .ant-tabs-tab-active {
       border-bottom: var(--thirdColor) !important;
@@ -346,16 +337,23 @@ border: none !important
     }
 
 
-    #description {
-      background-color: red;
-    }
+  
 
-     #description  > h2 { color:green }
-     #description  > p { color:green }
-     #description  > ul { color:blue }
+     #description  > h2 { color :var(--secondaryColor)}
+     #description  >  p { color: var(--mainColor)}
+     #description  > ul { color: var(--thirdColor) }
 
-     #description  strong  {color: purple}
+     #description  strong  {color: var(--thirdColor)}
      
-     #formule  > h2 { color:green }
-     #formule  > p { color:green }
-     #formule  > ul { color:blue }
+     #formule  > h2 { color:var(--secondaryColor) }
+     #formule  > p { color: var(--mainColor)}
+     #formule  > ul { color: var(--thirdColor) }
+     #formule  strong { color: var(--thirdColor) }
+    
+     #advice  > h2 { color:var(--secondaryColor); margin-left: 0.5em; }
+     #advice  > p { color: var(--mainColor)}
+     #advice  strong { color: var(--thirdColor) }
+     ul {list-style: none}
+     li::before {content: "•"; color: var(--thirdColor);  display: inline-block; width: 1em;
+      margin-left: -1em; }
+

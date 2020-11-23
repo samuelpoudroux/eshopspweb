@@ -11,11 +11,10 @@ import { Unavailable } from "./Unavailable";
 const PopupProductCard = ({ product, history, orderEverSent }) => {
   const { images } = useProductImages(product.uid);
   const { popup } = useContext(AppContext);
-
   const { setSubBasketVisible } = popup;
 
   const goToProductDetails = async () => {
-    history.push(`/productDetails/${product.id}`);
+    history.push(`/productDetails/${product.name}/${product.uid}`);
     setSubBasketVisible(false);
   };
   return (

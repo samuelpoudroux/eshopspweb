@@ -14,7 +14,6 @@ export const checkAvaibalityOfProducts = async (product) => {
         REACT_APP_API_STOCK_NUMBER +
         product.uid
     );
-    console.log("toto", stockNumber);
     return stockNumber;
   } catch (error) {}
 };

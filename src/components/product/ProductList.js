@@ -70,7 +70,7 @@ const Productlist = () => {
               productList.length > 0 &&
               !products.notFound &&
               productList.map((product) => (
-                <Col xxl={4} lg={6} xs={17} md={7} key={product.id}>
+                <Col xxl={4} lg={6} xs={17} md={9} sm={9} key={product.id}>
                   <ProductCard product={product} />
                 </Col>
               ))}

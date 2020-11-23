@@ -1,7 +1,6 @@
-import React from "react";
-import { Tabs, Col, Tag } from "antd";
+import React, { useState } from "react";
+import { Tabs, Col, Tag, Row } from "antd";
 import styleVariable from "../../styleVariable";
-import { upperCase } from "../../helpers/UpperCase";
 import useResponsive from "../../customHooks/responsiveHook";
 import {
   PlusOutlined,
@@ -9,15 +8,19 @@ import {
   MacCommandOutlined,
   ExceptionOutlined,
 } from "@ant-design/icons";
+import { ProductNotation } from "./ProductNotation";
+import { CustomerNotations } from "./CustomerNotations";
 
 const { TabPane } = Tabs;
 
-const ProductDetailsTabs = ({ description, formule, advice }) => {
+const ProductDetailsTabs = ({ description, formule, advice, uid }) => {
+  const user = JSON.parse(localStorage.getItem("users"));
+  const [reload, setReload] = useState(false);
   const { isMobile } = useResponsive();
   return (
     <Tabs
-      defaultActiveKey="1"
-      style={{ width: " 100%", paddingLeft: 20 }}
+      defaultActiveKey="4"
+      style={{ width: " 100%", paddingLeft: 15 }}
       size="large"
       tabBarStyle={{
         color: styleVariable.mainColor,
@@ -36,6 +39,7 @@ const ProductDetailsTabs = ({ description, formule, advice }) => {
         style={{ padding: 20, paddingLeft: 0 }}
       >
         <div
+          style={{ padding: 20 }}
           id="description"
           dangerouslySetInnerHTML={{ __html: description }}
         />
@@ -52,7 +56,11 @@ const ProductDetailsTabs = ({ description, formule, advice }) => {
         key="2"
         style={{ padding: 20, paddingLeft: 0 }}
       >
-        <div id="formule" dangerouslySetInnerHTML={{ __html: formule }} />
+        <div
+          style={{ padding: 20 }}
+          id="formule"
+          dangerouslySetInnerHTML={{ __html: formule }}
+        />
       </TabPane>
       <TabPane
         tab={
@@ -64,7 +72,7 @@ const ProductDetailsTabs = ({ description, formule, advice }) => {
         key="3"
         style={{ padding: 20, paddingLeft: 0 }}
       >
-        <div dangerouslySetInnerHTML={{ __html: advice }} />
+        <div id="advice" dangerouslySetInnerHTML={{ __html: advice }} />
       </TabPane>
       <TabPane
         tab={
@@ -76,8 +84,39 @@ const ProductDetailsTabs = ({ description, formule, advice }) => {
         key="4"
         style={{ padding: 20, paddingLeft: 0 }}
       >
-        Avis Clients
+        <Col span={24}>
+          <h2 style={{ textAlign: "center" }}>Avis clients</h2>
+          <Row justify="center">
+            <CustomerNotations reload={reload} productId={uid} />
+          </Row>
+        </Col>
       </TabPane>
+      {user && user.userData && (
+        <TabPane
+          tab={
+            <span>
+              <MessageOutlined
+                style={{ color: styleVariable.secondaryColor }}
+              />{" "}
+              Donner son avis
+            </span>
+          }
+          key="5"
+          style={{ padding: 20, paddingLeft: 0 }}
+        >
+          <Col span={24}>
+            <h2 style={{ textAlign: "center" }}>Je donne mon avis</h2>
+            <Row justify="center">
+              <ProductNotation
+                productId={uid}
+                userId={user && user.userData.id}
+                setReload={setReload}
+                reload={reload}
+              />
+            </Row>
+          </Col>
+        </TabPane>
+      )}
     </Tabs>
   );
 };

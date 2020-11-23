@@ -56,6 +56,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
   const [files, setFiles] = useState([]);
   const [initialValues, setInitialValues] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [form] = Form.useForm();
 
   const { isMobile } = useResponsive();
   const drawerHeader = () => {
@@ -77,7 +78,6 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
     );
   };
 
-  console.log("categories", categories);
   useEffect(() => {
     setInitialValues(getInitialValue(itemKey));
     Axios.get(
@@ -200,6 +200,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
               enctype="multipart/form-data"
               style={{ marginTop: "3%", overflowY: "scroll" }}
               name="basic"
+              form={form}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
               initialValues={initialValues}
@@ -239,6 +240,8 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     className="inputStyle"
                     type="number"
                     min={0}
+                    step={0.01}
+                    lang="fr"
                     onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                     name="productPrice"
                     initialValue={getDefaultValueLocalStorage(
@@ -270,7 +273,14 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     )}
                   />
                 </Form.Item>
-                <Form.Item label="Description" name="description">
+                <Form.Item
+                  label="Description"
+                  name="description"
+                  initialValue={getDefaultValueLocalStorage(
+                    "description",
+                    itemKey
+                  )}
+                >
                   <CKEditor
                     editor={classic}
                     config={config}
@@ -280,6 +290,9 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     }
                     onChange={(event, editor) => {
                       const data = editor.getData();
+                      form.setFieldsValue({
+                        description: data,
+                      });
                       setValuesLocalStorage(
                         { value: data, name: "description" },
                         itemKey
@@ -288,7 +301,11 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                   />
                 </Form.Item>
 
-                <Form.Item label="Composition" name="formule">
+                <Form.Item
+                  label="Composition"
+                  name="formule"
+                  initialValue={getDefaultValueLocalStorage("formule", itemKey)}
+                >
                   <CKEditor
                     editor={classic}
                     config={config}
@@ -297,6 +314,9 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     }
                     onChange={(event, editor) => {
                       const data = editor.getData();
+                      form.setFieldsValue({
+                        formule: data,
+                      });
                       setValuesLocalStorage(
                         { value: data, name: "formule" },
                         itemKey
@@ -304,7 +324,11 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     }}
                   />
                 </Form.Item>
-                <Form.Item label="Conseils" name="advice">
+                <Form.Item
+                  label="Conseils"
+                  name="advice"
+                  initialValue={getDefaultValueLocalStorage("advice", itemKey)}
+                >
                   <CKEditor
                     editor={classic}
                     config={config}
@@ -313,6 +337,9 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     }
                     onChange={(event, editor) => {
                       const data = editor.getData();
+                      form.setFieldsValue({
+                        advice: data,
+                      });
                       setValuesLocalStorage(
                         { value: data, name: "advice" },
                         itemKey
