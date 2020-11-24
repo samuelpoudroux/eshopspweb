@@ -21,13 +21,6 @@ const useBasket = () => {
 
   const updatedBasketRelatedToProductsAvaibility = useCallback(async () => {
     const newBasket = await checkProductsAvaibality(basketList);
-    if (basketList.length > 0) {
-      notification.open({
-        message: "Panier mis à jour en fonction des disponibilités",
-        icon: <SmileOutlined style={{ color: "red" }} />,
-      });
-    }
-
     setBasketList(newBasket);
   }, [basketList]);
 
