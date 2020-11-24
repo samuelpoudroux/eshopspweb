@@ -240,7 +240,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     className="inputStyle"
                     type="number"
                     min={0}
-                    step={0.01}
+                    step={0.1}
                     lang="fr"
                     onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
                     name="productPrice"

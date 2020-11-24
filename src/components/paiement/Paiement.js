@@ -19,14 +19,12 @@ const Paiement = ({ current, setCurrent, basketList }) => {
 
     try {
       const body = {
-        products: JSON.stringify(
-          basketList.map((product) => {
-            return {
-              uid: product.uid,
-              num: product.num,
-            };
-          })
-        ),
+        products: basketList.map((product) => {
+          return {
+            uid: product.uid,
+            num: product.num,
+          };
+        }),
         userId: userData.id,
         orderDate,
         status: "ongoing",

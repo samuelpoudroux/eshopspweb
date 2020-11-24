@@ -112,10 +112,6 @@ outline: none !important;
   border-radius:0px;
   }
 
-  
-
-  
-
 .detailCard{
   -webkit-box-shadow:inset 1px 1px 12px 1px#b5b8b8;
   -moz-box-shadow:inset 1px 1px 12px 1px#b5b8b8;
@@ -240,7 +236,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+ -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 .steps-content {

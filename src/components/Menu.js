@@ -270,7 +270,7 @@ const NavBar = ({ history }) => {
             Gérer mon compte
           </Menu.Item>
         )}
-
+        {/*
         <Menu.Item
           key="generalCondition"
           icon={
@@ -324,7 +324,7 @@ const NavBar = ({ history }) => {
           style={{ marginTop: 20, fontSize: "1em" }}
         >
           Mentions légales
-        </Menu.Item>
+        </Menu.Item>*/}
       </Menu>
     </Drawer>
   );
