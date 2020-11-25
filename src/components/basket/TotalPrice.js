@@ -5,6 +5,7 @@ import { getTotalPrice } from "../../repository/product";
 import { CreditCardOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import styleVariable from "../../styleVariable";
 import { AppContext } from "../../context/context";
+
 const TotalPrice = ({ history, setSubBasketVisible, notClickable }) => {
   const { basket } = useContext(AppContext);
   const { basketList } = basket;

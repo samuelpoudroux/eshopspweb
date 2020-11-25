@@ -19,10 +19,10 @@ const { CheckableTag } = Tag;
 
 const SortProducts = ({ categoriesHandleChange, products }) => {
   const [selectedTags, setSelectedTags] = useState([]);
-  const { isMobile } = useResponsive();
   const [selectAllCategories, setSelectAllCategories] = useState(false);
   const [value, setValue] = useState(null);
   const { categories, setCategories } = useCategory();
+  const { isMobile } = useResponsive();
   const [items, setItems] = useState([
     {
       id: 1,
@@ -73,7 +73,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
 
   return (
     <Col span={24} style={{ padding: 15 }}>
-      <Row align="middle" justify="start" gutter={[8, 15]}>
+      <Row align="middle" justify="start" gutter={isMobile && [8, 15]}>
         <Col
           xl={{ span: 1 }}
           md={{ span: 1 }}
@@ -90,7 +90,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
         >
           <Select
             style={{ width: "100%" }}
-            className="productCard"
+            className="inputStyle"
             bordered={false}
             dropdownRender={(menu) => <div>{menu}</div>}
             onChange={(value) => selectHandleChange(value)}
@@ -113,7 +113,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
           xl={{ span: 3, offset: 1 }}
           lg={{ span: 3 }}
           md={{ span: 4 }}
-          xs={{ span: 12 }}
+          xs={{ span: 9 }}
         >
           <span style={{ color: styleVariable.secondaryColor }}>
             Budget maximum:{" "}
@@ -127,7 +127,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
           xs={10}
         >
           <Input
-            className="productCard"
+            className="inputStyle"
             bordered={false}
             type="number"
             min={0}
@@ -155,7 +155,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
           <Row justify="start">
             {categories.list.map((tag) => (
               <CheckableTag
-                className="productCard"
+                className="inputStyle"
                 style={{
                   width: "auto",
                 }}

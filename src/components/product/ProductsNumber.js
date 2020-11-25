@@ -31,7 +31,7 @@ const ProductsNumber = ({
       }}
       offset={[23, -5]}
       count={`${productNumber}`}
-      overflowCount={1000}
+      overflowCount={99}
     >
       <ShoppingCartOutlined
         style={{

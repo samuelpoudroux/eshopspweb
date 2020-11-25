@@ -28,12 +28,13 @@ const Productlist = () => {
       <PageHeader title={"NOS PRODUITS"} />
       <StickyBar title="NOS PRODUITS" />
       <Row
-        className="productCard"
         style={{
-          marginTop: 40,
+          marginTop: 20,
+          marginBottom: 20,
           position: "relative",
           zIndex: 1,
         }}
+        className="productCard"
       >
         <SortProducts
           categoriesHandleChange={categoriesHandleChange}

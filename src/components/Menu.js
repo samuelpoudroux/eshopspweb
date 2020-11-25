@@ -93,46 +93,54 @@ const NavBar = ({ history }) => {
           >
             {user && (
               <>
-                <Button
-                  style={{
-                    color: styleVariable.secondaryColor,
-                    background: "white",
-                  }}
-                  onClick={() => manageConnection()}
-                >
-                  {user && "Se deconnecter"}
-                </Button>
-                <Button
-                  style={{
-                    color: styleVariable.secondaryColor,
-                    background: "white",
-                  }}
-                  onClick={() => goToInformationManagement()}
-                >
-                  Gérer mon compte
-                </Button>
+                <Col span={12}>
+                  <Button
+                    style={{
+                      color: styleVariable.secondaryColor,
+                      background: "white",
+                    }}
+                    onClick={() => manageConnection()}
+                  >
+                    {user && "Se deconnecter"}
+                  </Button>
+                </Col>
+                <Col span={12}>
+                  <Button
+                    style={{
+                      color: styleVariable.secondaryColor,
+                      background: "white",
+                    }}
+                    onClick={() => goToInformationManagement()}
+                  >
+                    Gérer mon compte
+                  </Button>
+                </Col>
               </>
             )}
             {!user && (
               <>
-                <Button
-                  style={{
-                    color: styleVariable.secondaryColor,
-                    background: "white",
-                  }}
-                  onClick={() => manageConnection()}
-                >
-                  {(user && "Se deconnecter") || "Se connecter"}
-                </Button>
-                <Button
-                  style={{
-                    color: styleVariable.secondaryColor,
-                    background: "white",
-                  }}
-                  onClick={() => manageConnection("register")}
-                >
-                  Créer un compte
-                </Button>
+                <Col span={12}>
+                  <Button
+                    style={{
+                      color: styleVariable.secondaryColor,
+                      background: "white",
+                    }}
+                    onClick={() => manageConnection()}
+                  >
+                    {(user && "Se deconnecter") || "Se connecter"}
+                  </Button>
+                </Col>
+                <Col span={12}>
+                  <Button
+                    style={{
+                      color: styleVariable.secondaryColor,
+                      background: "white",
+                    }}
+                    onClick={() => manageConnection("register")}
+                  >
+                    Créer un compte
+                  </Button>
+                </Col>
               </>
             )}
           </Row>

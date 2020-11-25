@@ -24,10 +24,10 @@ const StickyBar = ({ title }) => {
       style={{
         position: "fixed",
         top: 0,
-        zIndex: 2,
+        zIndex: 3,
         padding: 18,
         width: "100%",
-        backgroundColor: styleVariable.secondaryColor,
+        backgroundColor: styleVariable.secondaryColor + "ce",
       }}
     >
       <Col xxl={1} xs={3}>

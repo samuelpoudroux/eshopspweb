@@ -86,8 +86,24 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
     return () => {};
   }, []);
 
+  const bytesToSize = (bytes) => {
+    var sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+    if (bytes == 0) return "0 Byte";
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + " " + sizes[i];
+  };
+
   const props = {
-    beforeUpload: (file) => false,
+    beforeUpload: (file) => {
+      if (file.size > 12881) {
+        message.error(
+          `l'image ${file.name} doit être inferieur à ${bytesToSize(12881)}`
+        );
+        throw "err";
+      } else {
+        return false;
+      }
+    },
 
     onChange(info) {
       setFiles([...files, ...info.fileList.map((file) => file.originFileObj)]);

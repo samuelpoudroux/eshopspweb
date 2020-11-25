@@ -21,7 +21,7 @@ const sortProductsByLowest = (state) => {
 
 // sort product related to categories selected on select
 const sortProductsByCategories = (state, categories) => {
-  const copy = _.cloneDeep(state.products);
+  const copy = _.cloneDeep(state.sortedProducts);
   let sortedProducts = [];
   categories.map((category) =>
     sortedProducts.push(
@@ -35,7 +35,7 @@ const sortProductsByCategories = (state, categories) => {
 };
 // sort product related to maxPrice
 const sortProductsByMaxPrice = (state, value) => {
-  const copy = _.cloneDeep(state.products);
+  const copy = _.cloneDeep(state.sortedProducts);
   let sortedProducts = [];
   sortedProducts.push(
     ...copy.filter((product) => product.productPrice <= value)
@@ -78,7 +78,7 @@ const getTotalPrice = (productList) => {
       }
       return accumulateur + currentValue * valeurCourante.productPrice;
     }, num);
-  return totalPrice;
+  return totalPrice.toFixed(2);
 };
 
 const checkProductsAvaibality = async (productList) => {
