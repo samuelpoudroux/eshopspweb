@@ -24,7 +24,7 @@ const Productlist = () => {
   }, [state]);
 
   return (
-    <Col span={24} style={{}}>
+    <Col span={24}>
       <PageHeader title={"NOS PRODUITS"} />
       <StickyBar title="NOS PRODUITS" />
       <Row

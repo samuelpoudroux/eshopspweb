@@ -168,7 +168,7 @@ const ProductCard = ({ product, history, large }) => {
         stockNumber={stockNumber}
       />
       <Col onClick={(e) => goToProductDetails(e)}>
-        <Row align="middle" justify="center" style={{ height: 150 }}>
+        <Row align="middle" justify="center" style={{ height: 200 }}>
           {images && images.length > 0 && (
             <Col xxl={16} xs={20}>
               <Image

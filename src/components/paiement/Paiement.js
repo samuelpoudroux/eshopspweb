@@ -20,7 +20,6 @@ const Paiement = ({ current, setCurrent, basketList }) => {
     let orderDate;
     orderDate = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
 
-    console.log(getTotalPrice(basketList));
     if (getTotalPrice(basketList) == 0.0) {
       return notification.open({
         message: "panier vide",

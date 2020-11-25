@@ -27,7 +27,7 @@ const NewNess = ({ history }) => {
     const newNessComponents = [];
     newNess.map((product) => {
       newNessComponents.push(
-        <Col xs={12} lg={10} md={10} xxl={5} key={product.id}>
+        <Col xs={18} lg={10} md={10} xxl={5} key={product.id}>
           <ProductCard productList product={product} />
         </Col>
       );
@@ -59,7 +59,7 @@ const NewNess = ({ history }) => {
             background: "#ref",
             borderRadius: "2px",
             borderRadius: "2px",
-            paddingBottom: 25,
+            paddingBottom: 5,
             marginTop: 10,
           }}
           onClick={(e) => e.stopPropagation()}
@@ -98,7 +98,11 @@ const NewNess = ({ history }) => {
       <Row justify="center">
         <Button
           onClick={() => goProductPage()}
-          style={{ background: styleVariable.secondaryColor, color: "white" }}
+          style={{
+            background: styleVariable.secondaryColor,
+            color: "white",
+            marginTop: 25,
+          }}
         >
           + de produits
         </Button>
