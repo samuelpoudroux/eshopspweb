@@ -95,14 +95,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
 
   const props = {
     beforeUpload: (file) => {
-      if (file.size > 12881) {
-        message.error(
-          `l'image ${file.name} doit être inferieur à ${bytesToSize(12881)}`
-        );
-        throw "err";
-      } else {
-        return false;
-      }
+      return false;
     },
 
     onChange(info) {
@@ -129,8 +122,8 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
     const formData = new FormData();
     files.forEach((file) => {
       delete file.originFileObj;
-      delete file.percent;
-      delete file.uid;
+      // delete file.percent;
+      // delete file.uid;
       formData.append("upload", file);
     });
     for (const [key, value] of Object.entries(values)) {
@@ -147,6 +140,7 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("jwtData")}`,
           },
+          // encoding: null,
         }
       );
 
