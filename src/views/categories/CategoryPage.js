@@ -95,7 +95,7 @@ const CategoryPage = ({ match }) => {
           !searchResult.active &&
           products.length > 0 &&
           products.map((product) => (
-            <Col xxl={4} xs={12} md={9}>
+            <Col xxl={4} xs={21} md={9}>
               <ProductCard product={product} />{" "}
             </Col>
           ))}
