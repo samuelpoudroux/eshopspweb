@@ -174,13 +174,14 @@ const ProductCard = ({ product, history, large }) => {
               <Image
                 alt={`image du produit ${product.name}`}
                 src={`${images[0].url}`}
-                width={"100%"}
+                width={100}
+                height={100}
                 style={{ zIndex: 0 }}
               />
             </Col>
           )}
         </Row>
-        <Row style={{ marginTop: 35, height: "40px" }} justify="center">
+        <Row style={{ height: "40px" }} justify="center">
           <b
             style={{
               color: styleVariable.secondaryColor,

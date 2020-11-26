@@ -6,6 +6,7 @@ import { Row, Col, Divider, Tag } from "antd";
 import styleVariable from "../../styleVariable";
 import { AppContext } from "../../context/context";
 import CategoryCard from "../../views/categories/CategoryCard";
+import ProductCard from "../product/ProductCard";
 
 const GlobalsearchResult = ({ state, history }) => {
   const items = [];
@@ -24,18 +25,21 @@ const GlobalsearchResult = ({ state, history }) => {
           </Row>
 
           <Row
-            gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
             style={{
-              paddingLeft: "4%",
-              paddingRight: "4%",
-              justifyContent: "space-evenly",
+              padding: "2%",
+              justifyContent: "center",
             }}
           >
             {values.map((value) => (
-              <Row key={value.id} justify="center" style={{ padding: "2%" }}>
+              <>
                 {key !== "products" && key !== "categories" && (
-                  <Row
-                    key={value.name}
+                  <Col
+                    xxl={4}
+                    lg={6}
+                    xs={17}
+                    md={9}
+                    sm={9}
+                    key={value.id}
                     style={{
                       boxShadow:
                         "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)",
@@ -46,11 +50,19 @@ const GlobalsearchResult = ({ state, history }) => {
                     }}
                   >
                     {value.name}
-                  </Row>
+                  </Col>
                 )}
-                {key === "products" && <Productcard product={value} />}
-                {key === "categories" && <CategoryCard id={value.id} />}
-              </Row>
+                {key === "products" && (
+                  <Col xxl={4} lg={6} xs={17} md={9} sm={9} key={value.id}>
+                    <ProductCard product={value} />
+                  </Col>
+                )}
+                {key === "categories" && (
+                  <Col xxl={4} lg={4} xs={17} md={9} sm={9} key={value.id}>
+                    <CategoryCard id={value.id} />
+                  </Col>
+                )}
+              </>
             ))}
           </Row>
           <Divider />

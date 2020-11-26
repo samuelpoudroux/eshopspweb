@@ -45,7 +45,7 @@ const CategoryCard = ({ history, id }) => {
       }}
       xs={24}
       md={12}
-      xxl={4}
+      xxl={24}
       onClick={() => goToCategory()}
     >
       <Row justify="center" align="middle">

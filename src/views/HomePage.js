@@ -33,10 +33,8 @@ const HomePage = ({ history }) => {
             QUI SOMMES-NOUS ?
           </h1>
           <Row justify="center">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum,
-            excepturi exercitationem nostrum quis eaque maiores itaque pariatur
-            quas provident ad est quisquam minus, libero esse non cupiditate,
-            consequatur nulla eos?
+            Entreprise dont l'objectif est de mettre a votre disposition des
+            produits maisons
           </Row>
         </Col>
 
@@ -73,7 +71,9 @@ const HomePage = ({ history }) => {
           <Row style={{ padding: 20 }} justify="center">
             {categories.list.length > 0 &&
               categories.list.map((category) => (
-                <CategoryCard id={category.id} />
+                <Col xs={24} md={12} xxl={4}>
+                  <CategoryCard id={category.id} />
+                </Col>
               ))}
           </Row>
         </Col>

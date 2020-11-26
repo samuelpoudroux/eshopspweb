@@ -121,9 +121,6 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
   const onFinish = async (values) => {
     const formData = new FormData();
     files.forEach((file) => {
-      delete file.originFileObj;
-      // delete file.percent;
-      // delete file.uid;
       formData.append("upload", file);
     });
     for (const [key, value] of Object.entries(values)) {
@@ -140,7 +137,6 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("jwtData")}`,
           },
-          // encoding: null,
         }
       );
 
@@ -279,6 +275,28 @@ const Loadnewproduct = ({ setAddProduct, addProduct, history }) => {
                     name="stockNumber"
                     initialValue={getDefaultValueLocalStorage(
                       "stockNumber",
+                      itemKey
+                    )}
+                  />
+                </Form.Item>
+                <Form.Item
+                  label="Petite description"
+                  name="shortDescription"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Merci d'indiquer une petite description",
+                    },
+                  ]}
+                  hasFeedback
+                >
+                  <Input
+                    className="inputStyle"
+                    min={0}
+                    onChange={(e) => setValuesLocalStorage(e.target, itemKey)}
+                    name="shortDescription"
+                    initialValue={getDefaultValueLocalStorage(
+                      "shortDescription",
                       itemKey
                     )}
                   />

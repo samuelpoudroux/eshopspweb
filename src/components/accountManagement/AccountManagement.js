@@ -26,7 +26,7 @@ const AccountManagement = ({ history }) => {
   return (
     <Col>
       <StickyBar title={` MES INFORMATIONS`} />
-      <Tabs defaultActiveKey="3" style={{ padding: 10 }}>
+      <Tabs defaultActiveKey="1" style={{ padding: 10 }}>
         <TabPane
           key="1"
           tab={
