@@ -55,6 +55,7 @@ const SortProducts = ({ categoriesHandleChange, products }) => {
     categoriesHandleChange(nextSelectedTags);
     setSelectedTags(nextSelectedTags);
   };
+  console.log("nexSelect", selectedTags);
 
   const selectAllCategoriesButtonHandle = (e) => {
     const { checked } = e.target;

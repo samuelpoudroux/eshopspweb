@@ -16,6 +16,7 @@ import NavBar from "./components/Menu";
 import styleVariable from "./styleVariable";
 import AddNewProduct from "./form/product/AddNewProduct";
 import AddCategory from "./form/category/AddCategory";
+import { MessengerChat } from "./components/MessengerChat";
 
 function App() {
   const { globalSearch, popup, appRef } = useContext(AppContext);
@@ -85,6 +86,7 @@ function App() {
               ref={botRef}
               style={{ paddingTop: 25, marginTop: isMobile && 20 }}
             >
+              <MessengerChat />
               {chatActive && (
                 <Col>
                   <Row justify="start" align="middle">

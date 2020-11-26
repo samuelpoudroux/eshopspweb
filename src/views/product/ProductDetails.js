@@ -117,6 +117,8 @@ const ProductDetail = ({ match }) => {
                         <Image
                           alt={`image du produit ${product.name}`}
                           src={`${image.url}`}
+                          height={250}
+                          width={250}
                           style={{ zIndex: 0 }}
                         />
                       </Row>

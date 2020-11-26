@@ -168,20 +168,20 @@ const ProductCard = ({ product, history, large }) => {
         stockNumber={stockNumber}
       />
       <Col onClick={(e) => goToProductDetails(e)}>
-        <Row align="middle" justify="center" style={{ height: 200 }}>
+        <Row align="middle" justify="center">
           {images && images.length > 0 && (
             <Col xxl={16} xs={20}>
               <Image
                 alt={`image du produit ${product.name}`}
                 src={`${images[0].url}`}
-                width={100}
-                height={100}
+                width={150}
+                height={150}
                 style={{ zIndex: 0 }}
               />
             </Col>
           )}
         </Row>
-        <Row style={{ height: "40px" }} justify="center">
+        <Row justify="center" style={{ paddingTop: 5 }}>
           <b
             style={{
               color: styleVariable.secondaryColor,

@@ -21,7 +21,7 @@ const sortProductsByLowest = (state) => {
 
 // sort product related to categories selected on select
 const sortProductsByCategories = (state, categories) => {
-  const copy = _.cloneDeep(state.sortedProducts);
+  const copy = _.cloneDeep(state.products);
   let sortedProducts = [];
   categories.map((category) =>
     sortedProducts.push(
