@@ -14,7 +14,12 @@ const Addandremoveproduct = ({ product, subBasket, favorite, productList }) => {
   const { basket } = useContext(AppContext);
   const { basketList } = basket;
   const { add, decrease } = basket;
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState(
+    (basketList &&
+      basketList.find((p) => p.id === product.id) &&
+      basketList.find((p) => p.id === product.id).num) ||
+      0
+  );
 
   const addProduct = (e) => {
     add(product);
@@ -26,13 +31,18 @@ const Addandremoveproduct = ({ product, subBasket, favorite, productList }) => {
   };
 
   useEffect(() => {
+    console.log(basketList);
     setNum(
       (basketList &&
         basketList.find((p) => p.id === product.id) &&
         basketList.find((p) => p.id === product.id).num) ||
         0
     );
-  }, [basketList]);
+  }, [
+    basketList &&
+      basketList.find((p) => p.id === product.id) &&
+      basketList.find((p) => p.id === product.id).num,
+  ]);
 
   return (
     <Row>
