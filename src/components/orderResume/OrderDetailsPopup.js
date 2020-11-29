@@ -57,8 +57,6 @@ const OrderDetailsPopup = ({
     console.log("Failed:", errorInfo);
   };
 
-  console.log("productList", productList);
-
   const getTotalOrderPrice = (productList) => {
     let num = 0;
     const copy = _.cloneDeep(productList);

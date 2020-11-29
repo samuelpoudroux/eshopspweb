@@ -47,7 +47,6 @@ const Paiement = ({ current, setCurrent, basketList, stripe }) => {
   const sendorder = async () => {
     let orderDate;
     orderDate = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
-
     if (getTotalPrice(basketList) == 0.0) {
       return notification.open({
         message: "panier vide",
