@@ -121,7 +121,7 @@ const SubBasket = ({ history }) => {
                   product.num >= 0 && (
                     <PopupProductCard
                       history={history}
-                      key={product.id}
+                      key={product.uid}
                       product={product}
                       basketList={basketList}
                     />

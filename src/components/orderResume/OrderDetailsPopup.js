@@ -13,9 +13,9 @@ import useResponsive from "../../customHooks/responsiveHook";
 import { withRouter } from "react-router";
 import styleVariable from "../../styleVariable";
 import PopupProductCard from "../product/PopupProductCard";
-import { getTotalPrice } from "../../repository/product";
 import Axios from "axios";
 import { getDateWithHours } from "../../helpers/Date";
+import _ from "lodash";
 
 import { SmileOutlined } from "@ant-design/icons";
 
@@ -55,6 +55,17 @@ const OrderDetailsPopup = ({
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  console.log("productList", productList);
+
+  const getTotalOrderPrice = (productList) => {
+    let num = 0;
+    const copy = _.cloneDeep(productList);
+    const totalPrice = copy.reduce((accumulateur, valeurCourante) => {
+      return accumulateur + valeurCourante.num * valeurCourante.productPrice;
+    }, num);
+    return totalPrice.toFixed(2);
   };
 
   const drawerHeader = () => {
@@ -137,7 +148,6 @@ const OrderDetailsPopup = ({
       </Col>
     );
   };
-  console.log("productList", productList);
 
   return (
     <Drawer
@@ -198,7 +208,7 @@ const OrderDetailsPopup = ({
         >
           <Col lg={8} xs={24}>
             <Row justify={isMobile && "center"}>
-              <b>Total de ma commande: {getTotalPrice(productList)}€</b>
+              <b>Total de ma commande: {getTotalOrderPrice(productList)}€</b>
             </Row>
           </Col>
           <Col lg={16} xs={24} style={{ marginTop: isMobile && 30 }}>

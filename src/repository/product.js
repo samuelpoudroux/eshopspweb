@@ -63,7 +63,6 @@ const getNumberOfProducts = (basketList) => {
     }, num);
   return totalOfProducts;
 };
-
 const getTotalPrice = (productList) => {
   const copy = productList !== null ? _.cloneDeep(productList) : [];
   let num = 0;

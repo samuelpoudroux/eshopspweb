@@ -17,6 +17,7 @@ const PopupProductCard = ({ product, history, orderEverSent }) => {
     history.push(`/productDetails/${product.name}/${product.uid}`);
     setSubBasketVisible(false);
   };
+
   return (
     <Col
       lg={8}
@@ -90,7 +91,7 @@ const PopupProductCard = ({ product, history, orderEverSent }) => {
           />
         </Col>
         {orderEverSent && <b>{product.num} Piéces</b>}
-        <b>Sous Total: {product.num * product.productPrice}€</b>
+        <b>Sous Total: {(product.num * product.productPrice).toFixed(2)}€</b>
       </Row>
     </Col>
   );

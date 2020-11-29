@@ -31,7 +31,6 @@ const Addandremoveproduct = ({ product, subBasket, favorite, productList }) => {
   };
 
   useEffect(() => {
-    console.log(basketList);
     setNum(
       (basketList &&
         basketList.find((p) => p.id === product.id) &&
