@@ -7,7 +7,6 @@ import { useState } from "react";
 import {
   ShoppingCartOutlined,
   QuestionCircleOutlined,
-  SmileOutlined,
 } from "@ant-design/icons";
 
 const Addandremoveproduct = ({ product, subBasket, favorite, productList }) => {
