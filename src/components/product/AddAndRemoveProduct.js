@@ -65,7 +65,7 @@ const Addandremoveproduct = ({ product, subBasket, favorite, productList }) => {
                 borderRadius: 8,
               }}
               disabled={
-                num === product.stockNumber + 1 || product.stockNumber === 0
+                num === product.stockNumber || product.stockNumber === 0
               }
               onClick={(e) => addProduct(e)}
             >
@@ -85,7 +85,7 @@ const Addandremoveproduct = ({ product, subBasket, favorite, productList }) => {
               min={0}
               value={num}
               disabled={
-                num === product.stockNumber + 1 || product.stockNumber === 0
+                num === product.stockNumber || product.stockNumber === 0
               }
             />
             {product.num === 1 && subBasket ? (

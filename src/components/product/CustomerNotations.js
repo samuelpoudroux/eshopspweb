@@ -52,6 +52,11 @@ export const CustomerNotations = ({ productId, userId, reload }) => {
       }}
     >
       {isLoading && <Spin />}
+      {notations.length === 0 && (
+        <Row justify="center">
+          <p>Pas d'avis déposé pour ce produit</p>
+        </Row>
+      )}
       {notations.map((notation) => {
         return (
           <Col className="productCard" style={{ padding: 20, marginTop: 5 }}>

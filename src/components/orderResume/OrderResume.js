@@ -157,6 +157,7 @@ const OrderResume = ({ basketList }) => {
                     (product) => product.category === category.name
                   ) && (
                     <Col
+                      key={category.id}
                       xxl={11}
                       xs={24}
                       style={{ margin: 20 }}

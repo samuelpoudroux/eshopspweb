@@ -71,7 +71,7 @@ const HomePage = ({ history }) => {
           <Row style={{ padding: 20 }} justify="center">
             {categories.list.length > 0 &&
               categories.list.map((category) => (
-                <Col xs={24} md={12} xxl={4}>
+                <Col xs={24} md={12} xxl={4} key={category.id}>
                   <CategoryCard id={category.id} />
                 </Col>
               ))}

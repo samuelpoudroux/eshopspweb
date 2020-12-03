@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { StripeProvider, Elements } from "react-stripe-elements";
 import { Steps, Button, message, Col, notification, Row } from "antd";
 import OrderResume from "./OrderResume";
 import styleVariable from "../../styleVariable";
@@ -27,15 +26,11 @@ const OrderResumeStepper = ({ history, match }) => {
     {
       title: "Paiement",
       content: (
-        <StripeProvider stripe={stripe}>
-          <Elements>
-            <Paiement
-              setCurrent={setCurrent}
-              current={current}
-              basketList={basketList}
-            />
-          </Elements>
-        </StripeProvider>
+        <Paiement
+          setCurrent={setCurrent}
+          current={current}
+          basketList={basketList}
+        />
       ),
     },
   ];
@@ -55,17 +50,6 @@ const OrderResumeStepper = ({ history, match }) => {
       setCurrent(current + 1);
     }
   };
-
-  useEffect(() => {
-    if (window.Stripe) {
-      setStripe(window.Stripe(process.env.REACT_APP_STRIPE_KEY));
-    } else {
-      document.querySelector("#stripe-js").addEventListener("load", () => {
-        // Create Stripe instance once Stripe.js loads
-        setStripe(window.Stripe(process.env.REACT_APP_STRIPE_KEY));
-      });
-    }
-  }, []);
 
   return (
     <Col span={24}>
