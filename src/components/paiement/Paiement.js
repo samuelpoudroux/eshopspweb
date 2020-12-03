@@ -29,7 +29,7 @@ const Paiement = ({ current, setCurrent, basketList, stripe }) => {
       purchase_units: [
         {
           amount: {
-            value: 0.1,
+            value: getTotalPrice(basketList),
           },
         },
       ],
