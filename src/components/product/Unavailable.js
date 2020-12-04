@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
 import styleVariable from "../../styleVariable";
 
-export const Unavailable = ({ stockNumber, num, placement, position }) => {
+const {
+  REACT_APP_API_DOMAIN,
+  REACT_APP_API_PRODUCT,
+  REACT_APP_API_STOCK_NUMBER,
+} = process.env;
+export const Unavailable = ({ uid, num, placement, position }) => {
+  const [stockNumber, setStockNumber] = useState(0);
+
+  const getStockNumber = async () => {
+    const { data } = await Axios.get(
+      REACT_APP_API_DOMAIN +
+        REACT_APP_API_PRODUCT +
+        REACT_APP_API_STOCK_NUMBER +
+        uid
+    );
+    setStockNumber(data);
+  };
+
+  useEffect(() => {
+    getStockNumber();
+  }, []);
+
   return (
     <div>
       {stockNumber === 0 && (

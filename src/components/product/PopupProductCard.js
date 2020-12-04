@@ -88,6 +88,7 @@ const PopupProductCard = ({ product, history, orderEverSent }) => {
             placement={{ left: 0, bottom: 5, transform: "rotate(-5deg)" }}
             stockNumber={product.stockNumber}
             num={product.num}
+            uid={product.uid}
           />
         </Col>
         {orderEverSent && <b>{product.num} Piéces</b>}

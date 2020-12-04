@@ -19,7 +19,7 @@ const ProductDetailsTabs = ({ description, formule, advice, uid }) => {
   const { isMobile } = useResponsive();
   return (
     <Tabs
-      defaultActiveKey="4"
+      defaultActiveKey="1"
       style={{ width: " 100%", paddingLeft: 15 }}
       size="large"
       tabBarStyle={{

@@ -51,6 +51,7 @@ const ProductCardResume = ({ product }) => {
           placement={{ top: -15, left: "40%", transform: "rotate(0deg)" }}
           stockNumber={stockNumber}
           num={num}
+          uid={uid}
         />
       </Col>
     </Col>

@@ -166,6 +166,7 @@ const ProductCard = ({ product, history, large }) => {
       <Unavailable
         placement={{ top: 20, right: 10 }}
         stockNumber={stockNumber}
+        uid={uid}
       />
       <Col onClick={(e) => goToProductDetails(e)}>
         <Row align="middle" justify="center">

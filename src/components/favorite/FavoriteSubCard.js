@@ -39,6 +39,7 @@ export const FavoriteSubCard = ({
       <Unavailable
         placement={{ top: 45, left: 10, transform: "rotate(-5deg)" }}
         stockNumber={product.stockNumber}
+        uid={product.uid}
       />
       <Row
         onClick={() => goToProductDetails()}

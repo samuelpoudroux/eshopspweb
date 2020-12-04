@@ -107,6 +107,7 @@ const ProductDetail = ({ match }) => {
               <Unavailable
                 placement={{ top: 20, right: 10 }}
                 stockNumber={product.stockNumber}
+                uid={product.uid}
               />
               <Carousel autoplay style={{ padding: 40, marginTop: 1 }}>
                 {images &&
