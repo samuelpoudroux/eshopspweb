@@ -101,7 +101,7 @@ const NavBar = ({ history }) => {
                     }}
                     onClick={() => manageConnection()}
                   >
-                    {user && "Se deconnecter"}
+                    {user && "Se déconnecter"}
                   </Button>
                 </Col>
                 <Col span={12}>

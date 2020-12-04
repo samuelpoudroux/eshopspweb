@@ -187,7 +187,7 @@ const Header = ({ history, botRef }) => {
                   color: "white",
                 }}
               >
-                VOS HUILES MAISONS
+                PROJET FICTIF
               </h1>
             </Row>
             <Row>

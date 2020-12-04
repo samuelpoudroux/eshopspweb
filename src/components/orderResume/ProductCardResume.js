@@ -29,7 +29,7 @@ const ProductCardResume = ({ product }) => {
             />
           )}
         </Col>
-        <Col xl={6} xs={6}>
+        <Col xl={6} xs={20}>
           <Row align="middle" justify="center">
             <b
               style={{

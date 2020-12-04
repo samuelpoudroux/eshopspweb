@@ -32,10 +32,7 @@ const HomePage = ({ history }) => {
             {" "}
             QUI SOMMES-NOUS ?
           </h1>
-          <Row justify="center">
-            Entreprise dont l'objectif est de mettre a votre disposition des
-            produits maisons
-          </Row>
+          <Row justify="center">Description</Row>
         </Col>
 
         {isMobile && (
