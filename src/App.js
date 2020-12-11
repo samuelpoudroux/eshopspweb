@@ -4,7 +4,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import Routes from "./routes";
 import { AppContext } from "./context/context";
 import Header from "./components/Header";
-import GlobalSearchResult from "./components//globalSearch/GlobalSearchResult";
+import GlobalSearchResult from "./components/globalSearch/GlobalSearchResult";
 import SubBasket from "./components/basket/SubBasket";
 import { Col, Row } from "antd";
 import ProtectedRoute from "./ProtectedRoutes";

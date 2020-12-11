@@ -141,6 +141,8 @@ const ProductCard = ({ product, history, large }) => {
       {newNess !== 0 && (
         <>
           <NewNessIcon
+            height={50}
+            width={50}
             style={{
               position: "absolute",
               top: 1,
